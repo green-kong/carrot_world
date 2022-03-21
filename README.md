@@ -210,12 +210,11 @@
 
 ### category
 
-insert into category (c_code,c_name) values (lab,노트북 & 주변기기)
-
 c_code VARCHAR(6) NOT NULL PK
 c_name VARCHAR(16) NOT NULL
 
-<ul id = auction >
+<!-- insert into category (c_code,c_name) values (lab,노트북 & 주변기기) -->
+<!-- <ul id = auction >
 <li class= "category_btn">
 <p>
 {{category.c_name}}
@@ -240,7 +239,7 @@ const sql = SELECT
 b_id, subject,date,price,userAlias, img1 from ${type}
 WHERE c_code = ${category}
 JOIN user ON board.u_id = user.u_id
-JOIN s_img ON board.b_id = s_img.b_id
+JOIN s_img ON board.b_id = s_img.b_id -->
 
 # 업무분담
 
