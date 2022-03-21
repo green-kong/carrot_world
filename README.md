@@ -198,45 +198,17 @@
 - img4 VARCHAR(255)
 - img5 VARCHAR(255)
 
-### - reviews
+### qa
 
-- re_id INT PK AI
-- category VARCHAR(6) NOT NULL
-  - clo(의류)
-  - acc(잡화)
-  - elc(가전)
-  - fur(가구)
-  - pet(반려동물)
-- subject(판매제목) VARCHAR(64) NOT NULL
-- u_id(판매자) INT NOT NULL
-- content VARCHAR(255) NOT NULL
-- like(찜) INT default 0
-- report(신고) INT default 0
+- q_id
+- u_id
+- subject
+- content
 
-### - review_reply
+### q_reply
 
-- re_id [ref: > reviews.re_id] NOT NULL
-- u_id [ref: > user.u_id] NOT NULL
-- content VARCHAR(128) NOT NULL
-
-### - re_likes(중고거래 찜)
-
-- u_id INT [ref: > user.u_id]
-- re_id INT [ref: > re_items.re_id]
-
-### - re_report(중고거래 신고)
-
-- u_id INT [ref: > user.u_id]
-- re_id INT [ref: > re_items.re_id]
-
-### - re_img
-
-- re_id INT [ref: > re_items.re_id]
-- img1 VARCHAR(255)
-- img2 VARCHAR(255)
-- img3 VARCHAR(255)
-- img4 VARCHAR(255)
-- img5 VARCHAR(255)
+- q_id
+- content
 
 # 업무분담
 
