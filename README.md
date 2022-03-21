@@ -111,6 +111,7 @@
 - userPw VARCHAR(255)
 - userAlias VARCHAR(32)
 - userMobile VARCHAR(22)
+- point INT default 0
 
 ### - sell_items
 
