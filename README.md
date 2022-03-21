@@ -131,6 +131,7 @@
 - like(찜) INT default 0
 - report(신고) INT default 0
 - isSold(거래중,완료) TINYINT(1)
+- date timestamp NOT NULL
 
 ### - s_tag(중고거래 해시태그)
 
@@ -179,6 +180,7 @@
 - report(신고) INT default 0
 - isSold(거래중,완료) TINYINT(1)
 - period(경매기간) INT(1)
+- date timestamp NOT NULL
 
 ### - au_likes(중고거래 찜)
 
@@ -201,15 +203,17 @@
 
 ### qa
 
-- q_id
-- u_id
-- subject
-- content
+- q_id INT PK AI
+- u_id INT NOT NULL
+- subject VARCHAR(64)
+- content VARCHAR(255)
+- date timestamp NOT NULL
 
 ### q_reply
 
-- q_id
-- content
+- q_id INT NOT NULL
+- content VARCHAR(64)
+- date timestamp NOT NULL
 
 # 업무분담
 
