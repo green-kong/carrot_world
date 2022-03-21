@@ -116,7 +116,7 @@
 ### - sell_items
 
 - s_id INT PK AI
-- category VARCHAR(6) NOT NULL
+- c_code VARCHAR(6) NOT NULL
   - clo(의류)
   - acc(잡화)
   - elc(가전)
@@ -164,7 +164,7 @@
 ### - auction (경매)
 
 - au_id PK AI
-- category VARCHAR(6) NOT NULL
+- c_code VARCHAR(6) NOT NULL
   - clo(의류)
   - acc(잡화)
   - elc(가전)
@@ -177,17 +177,10 @@
 - how(직거래,택배) TINYINT(1)
 - location(희망거래장소) VARCHAR(32)
 - like(찜) INT default 0
-- report(신고) INT default 0
-- isSold(거래중,완료) TINYINT(1)
-- period(경매기간) INT(1)
+- period(경매기간) timestamp NOT NULL
 - date timestamp NOT NULL
 
-### - au_likes(중고거래 찜)
-
-- u_id INT [ref: > user.u_id]
-- au_id INT [ref: > au_items.au_id]
-
-### - au_report(중고거래 신고)
+### - au_likes(경매 찜)
 
 - u_id INT [ref: > user.u_id]
 - au_id INT [ref: > au_items.au_id]
@@ -215,7 +208,98 @@
 - content VARCHAR(64)
 - date timestamp NOT NULL
 
+### category
+
+insert into category (c_code,c_name) values (lab,노트북 & 주변기기)
+
+c_code VARCHAR(6) NOT NULL PK
+c_name VARCHAR(16) NOT NULL
+
+<ul id = auction >
+<li class= "category_btn">
+<p>
+{{category.c_name}}
+</p>
+<input type='hidden' value='{{c_code}}' >
+</li>
+
+function categoryClickHandler (e)
+{
+const type = e.target.parentNode.parentNode.id???
+const category = e.target.parentNode.querySelector('input').value
+const body = {
+type,
+category
+}
+const result = axios(url,body)
+}
+const categoryBtnList = document.querySelectorAll('.category_btn')
+categoryBtnList.forEach((v)=>v.addEventListener('click',categoryClickHandler))
+
+const sql = SELECT
+b_id, subject,date,price,userAlias, img1 from ${type}
+WHERE c_code = ${category}
+JOIN user ON board.u_id = user.u_id
+JOIN s_img ON board.b_id = s_img.b_id
+
 # 업무분담
+
+기능개발
+
+- 퍼블리싱
+
+  - 메인페이지 지금 당장 안중요해(로그인/회원가입)
+
+    - about 페이지
+    - 맨마지막에 로그인 회원가입
+
+  - /home
+
+    - 헤더
+      - 로고, 검색(sel/opt)
+    - 사이드바
+      - 사용자 정보 ( 판매중인 물품, 채팅 알림(채팅a태그), 포인트, 사용자이름, 프사, 찜한물품 갯수)
+      - 게시판 카테고리 (중고거래(의류,잡화,반려동물,가구,가전), 경매거래(의류,잡화,반려동물,가구,가전))
+      - 고객센터
+        - 1:1 문의
+    - 컨텐츠 부분
+      - home List(인기매물 8개,카테고리별 4개씩)
+      - 카테고리별 리스트
+      - 경매 리스트( 경매마감 까지 얼마나남았는지 보여주는 UI 필요함)
+      - 중고거래 등록 페이지
+      - 경매거래 등록 페이지
+      - 중고거래 확인 페이지
+      - 경매거래 확인 페이지
+      - 1:1 문의글 등록페이지
+      - 1:1 문의글 확인페이지 ( 댓글 )
+
+  - 사용자 정보 페이지
+
+    - 회원가입하고 똑같이 만들고 밑에 버튼만 바꿔주면 됨
+
+  - 관리자 페이지
+
+    - 통계
+    - 게시글 목록
+      - 카테고리
+    - 회원목록
+
+    - 카테고리 추가/수정/삭제
+      관리자
+      카테고리 이름 노트북&주변기기/
+      카테고리 코드 lab
+
+### 동훈
+
+Git 관리
+
+### 연정
+
+DB 관리
+
+### 화섭
+
+DB 관리
 
 # 변수정리
 
