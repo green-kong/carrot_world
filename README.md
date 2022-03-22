@@ -131,6 +131,8 @@
 
 - :4000/api/home/auc/pet -> 경매 반려동물용품 목록 20개
 
+- :4000/api/home/write -> 거래등록
+
 #### admin
 
 - :4000/api/admin/login -> 관리자 로그인
@@ -151,12 +153,19 @@
 #### qa
 
 - :4000/api/qa/list -> 1:1 문의글 목록
+
 - :4000/api/qa/write -> 1:1 문의글 작성
+
 - :4000/api/qa/edit -> 1:1 문의글 수정
+
 - :4000/api/qa/delete -> 1:1 문의글 삭제
+
 - :4000/api/qa/view -> 1:1 문의글 보기 + 댓글내용까지 자기가 쓴글 아니면 못들어가게
+
 - :4000/api/qa/reply/write -> 댓글 쓰기
+
 - :4000/api/qa/reply/update -> 댓글 수정
+
 - :4000/api/qa/reply/delete -> 댓글삭제
 
 - / (로그인, 회원가입)
@@ -336,34 +345,6 @@
 
 c_code VARCHAR(6) NOT NULL PK
 c_name VARCHAR(16) NOT NULL
-
-<!-- insert into category (c_code,c_name) values (lab,노트북 & 주변기기) -->
-<!-- <ul id = auction >
-<li class= "category_btn">
-<p>
-{{category.c_name}}
-</p>
-<input typeㅇ='hidden' value='{{c_code}}' >
-</li>
-
-function categoryClickHandler (e)
-{
-const type = e.target.parentNode.parentNode.id???
-const category = e.target.parentNode.querySelector('input').value
-const body = {
-type,
-category
-}
-const result = axios(url,body)
-}
-const categoryBtnList = document.querySelectorAll('.category_btn')
-categoryBtnList.forEach((v)=>v.addEventListener('click',categoryClickHandler))
-
-const sql = SELECT
-b_id, subject,date,price,userAlias, img1 from ${type}
-WHERE c_code = ${category}
-JOIN user ON board.u_id = user.u_id
-JOIN s_img ON board.b_id = s_img.b_id -->
 
 # 업무분담
 
