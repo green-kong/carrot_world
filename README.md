@@ -35,6 +35,130 @@
 
 # API 설계
 
+### front
+
+- :3000/ -> 메인페이지, 회원가입, 로그인
+
+- :3000/home ->
+
+  1. 홈메인
+  2. 사이드바 메뉴 클릭 시 -> 해당 데이터 보여줌(axios)
+  3. 사이드바 유저정보 (판매중 물품, 내정보보기, 채팅알림, 로그아웃 버튼) 페이지 이동
+  4. 상단헤더 -> 검색기능(axios)
+  5. 판매물품 등록(sel/opt 경매로 || 일반거래)
+
+- :3000/user/profile 내가 올린 게시글, 내 글 보기, 댓글 수, 찜 목록,( 정보수정 또는 회원탈퇴 )
+
+- :3000/user/board/edit -> 내 글 수정 페이지
+
+- :3000/user/update 정보수정, 회원탈퇴
+
+- :3000/chat ->
+  좌측에 대화목록 클릭 시
+  우측에 채팅방 내용 보여짐(axios)
+
+- :3000/qa/list -> 1:1 문의 목록
+
+- :3000/qa/view -> 1:1 문의글 확인 페이지
+
+- :3000/qa/write -> 1:1 문의글 작성 페이지
+
+- :3000/qa/edit -> 1:1 문의글 수정
+
+- :3000/admin -> 관리자 로그인페이지
+
+- :3000/admin/user -> 관리자 회원관리 페이지
+
+- :3000/admin/board -> 관리자 전체 게시글 페이지(select/option 카테고리별 볼수잇게끔)
+
+- :3000/admin/board/sell -> 관리자 중고거래 게시글 페이지
+
+- :3000/admin/board/auction -> 관리자 경매 게시글 페이지
+
+- :3000/admin/category -> 관리자 카테고리 추가/수정/삭제 페이지
+
+- :3000/admin/statistic -> 관리자 통계 페이지
+
+### back
+
+#### user
+
+- :4000/api/user/login -> 로그인
+
+- :4000/api/user/logout -> 로그아웃
+
+- :4000/api/user/join -> 회원가입
+
+- :4000/api/user/kakao -> 카카오로그인
+
+- :4000/api/user/naver -> 네이버로그인
+
+- :4000/api/user/google -> 구글로그인
+
+- :4000/api/user/update -> 회원정보수정
+
+- :4000/api/user/quit -> 회원탈퇴
+
+- :4000/api/user/board/edit -> 내 글 수정
+
+- :4000/api/user/board/delete -> 내 글 삭제
+
+#### home
+
+- :4000/api/home/ -> 찜많은 순 데이터 8개, 카테고리별로 4개씩
+
+- :4000/api/home/sell -> 중고거래 전체 목록 최근등록순으로 순으로 처음에는 20개
+
+- :4000/api/home/sell/clo -> 중고거래 의류 목록 20개
+
+- :4000/api/home/sell/acc -> 중고거래 잡화 목록 20개
+
+- :4000/api/home/sell/fur -> 중고거래 가구 목록 20개
+
+- :4000/api/home/sell/elc -> 중고거래 가전 목록 20개
+
+- :4000/api/home/sell/pet -> 중고거래 반려동물용품 목록 20개
+
+- :4000/api/home/auc -> 경매 전체 목록 최근등록순으로 순으로 처음에는 20개
+
+- :4000/api/home/auc/clo -> 경매 의류 목록 20개
+
+- :4000/api/home/auc/acc -> 경매 잡화 목록 20개
+
+- :4000/api/home/auc/fur -> 경매 가구 목록 20개
+
+- :4000/api/home/auc/elc -> 경매 가전 목록 20개
+
+- :4000/api/home/auc/pet -> 경매 반려동물용품 목록 20개
+
+#### admin
+
+- :4000/api/admin/login -> 관리자 로그인
+
+- :4000/api/admin/statistic ->
+
+  1. 카테고리별 활성도
+  2. 게시물이 제일 많은 카테고리
+  3. 게시물을 제일 많이 등록한 회원
+  4. 거래완료가 가장 많은 회원
+  5. 포인트 가장 많은 회원
+
+- :4000/api/admin/board -> 전체 게시글 목록
+  => 카테고리 별 게시글 목록은 /api/home 사용
+
+- :4000/api/admin/user -> 전체 유저 목록
+
+#### qa
+
+- :4000/api/qa/list -> 1:1 문의글 목록
+- :4000/api/qa/write -> 1:1 문의글 작성
+- :4000/api/qa/edit -> 1:1 문의글 수정
+- :4000/api/qa/delete -> 1:1 문의글 삭제
+- :4000/api/qa/view -> 1:1 문의글 보기 + 댓글내용까지 자기가 쓴글 아니면 못들어가게
+- :4000/api/qa/reply/write -> 댓글 쓰기
+- :4000/api/qa/reply/update -> 댓글 수정
+- :4000/api/qa/reply/delete -> 댓글삭제
+
 - / (로그인, 회원가입)
 
   1. 로그인
@@ -219,7 +343,7 @@ c_name VARCHAR(16) NOT NULL
 <p>
 {{category.c_name}}
 </p>
-<input type='hidden' value='{{c_code}}' >
+<input typeㅇ='hidden' value='{{c_code}}' >
 </li>
 
 function categoryClickHandler (e)
