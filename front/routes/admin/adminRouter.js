@@ -6,4 +6,6 @@ const router = express.Router();
 
 router.get('/login', adminControll.login);
 
+router.get('/statistics', adminControll.statistics);
+
 module.exports = router;

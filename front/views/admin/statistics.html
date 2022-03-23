@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/admin/statistics.css" />
+    <script
+      src="https://kit.fontawesome.com/cbc296ae57.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div id="wrap">
+      <div id="header">
+        <img src="/img/LOGO.png" alt="" />
+      </div>
+      <nav>
+        <ul>
+          <li><a href="/admin/statistics/">통계</a></li>
+          <li><a href="/admin/board/">게시판관리</a></li>
+          <li><a href="/admin/user/">회원관리</a></li>
+        </ul>
+      </nav>
+      <div id="content_container">
+        <div id="category_activity">
+          <p>카테고리별 활성도</p>
+          <div id="graph">chart.js로 구현할거임</div>
+        </div>
+        <div id="mid_content">
+          <div id="popular_posting" class="statistic_box">
+            <p>찜 많은 판매 글</p>
+            <table class="statistic">
+              <tr>
+                <td>일반거래</td>
+                <td>강아지 산책용 하네스 팝니다</td>
+                <td><i class="far fa-heart"></i>26</td>
+                <td>03-22</td>
+              </tr>
+              <tr>
+                <td>경매</td>
+                <td>행거</td>
+                <td><i class="far fa-heart"></i>18</td>
+                <td>03-19</td>
+              </tr>
+              <tr>
+                <td>일반거래</td>
+                <td>에어프라이ㅓ</td>
+                <td><i class="far fa-heart"></i>16</td>
+                <td>03-22</td>
+              </tr>
+              <tr>
+                <td>일반거래</td>
+                <td>강아지 산책용 하네스 팝니다</td>
+                <td><i class="far fa-heart"></i>26</td>
+                <td>03-22</td>
+              </tr>
+              <tr>
+                <td>일반거래</td>
+                <td>강아지 산책용 하네스 팝니다</td>
+                <td><i class="far fa-heart"></i>26</td>
+                <td>03-22</td>
+              </tr>
+            </table>
+          </div>
+          <div id="popular_category" class="statistic_box">
+            <p>게시글이 많은 카테고리</p>
+            <table class="statistic">
+              <tr>
+                <td>일반거래</td>
+                <td>의류</td>
+                <td>137개</td>
+              </tr>
+              <tr>
+                <td>경매</td>
+                <td>가구</td>
+                <td>124개</td>
+              </tr>
+              <tr>
+                <td>일반거래</td>
+                <td>의류</td>
+                <td>137개</td>
+              </tr>
+              <tr>
+                <td>일반거래</td>
+                <td>의류</td>
+                <td>137개</td>
+              </tr>
+              <tr>
+                <td>일반거래</td>
+                <td>의류</td>
+                <td>137개</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div id="bottom_content">
+          <div id="popular_user" class="statistic_box">
+            <p>판매왕</p>
+            <table class="statistic">
+              <tr>
+                <th>닉네임</th>
+                <th>전체 판매글</th>
+                <th>판매완료</th>
+              </tr>
+              <tbody>
+                <tr>
+                  <td>kong</td>
+                  <td>126</td>
+                  <td>76</td>
+                </tr>
+                <tr>
+                  <td>hwaseob</td>
+                  <td>180</td>
+                  <td>66</td>
+                </tr>
+                <tr>
+                  <td>yeongjeong</td>
+                  <td>70</td>
+                  <td>58</td>
+                </tr>
+                <tr>
+                  <td>donghun</td>
+                  <td>50</td>
+                  <td>49</td>
+                </tr>
+                <tr>
+                  <td>ingoo</td>
+                  <td>30</td>
+                  <td>15</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="point_user" class="statistic_box">
+            <p>포인트 왕</p>
+            <table class="statistic">
+              <tr>
+                <th>닉네임</th>
+                <th>포인트</th>
+              </tr>
+              <tbody>
+                <tr>
+                  <td>kong</td>
+                  <td>126</td>
+                </tr>
+                <tr>
+                  <td>hwaseob</td>
+                  <td>66</td>
+                </tr>
+                <tr>
+                  <td>yeongjeong</td>
+                  <td>58</td>
+                </tr>
+                <tr>
+                  <td>donghun</td>
+                  <td>49</td>
+                </tr>
+                <tr>
+                  <td>ingoo</td>
+                  <td>15</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
