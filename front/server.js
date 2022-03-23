@@ -17,4 +17,4 @@ app.use(express.static('public'));
 
 app.use(router);
 
-app.listen(3001);
+app.listen(3000);
