@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/qa/write.css" />
+  </head>
+  <body>
+    <div id="wrap">
+      <div id="header">
+        <h1 id="logo">
+          <a href="/">
+            <img src="/img/admin/LOGO.png" alt="" />
+          </a>
+        </h1>
+      </div>
+      <div id="board_top">1:1 게시판</div>
+      <form action="/board/write" method="POST" id="write_form">
+        <div id="subject_container">
+          <div class="write_column">제목</div>
+          <div class="write_input_wrap">
+            <input type="text" name="subject" maxlength="32" />
+          </div>
+        </div>
+        <div id="content_container">
+          <div class="write_column">내용</div>
+          <div class="write_input_wrap">
+            <textarea
+              name="content"
+              id="write_content"
+              cols="30"
+              rows="10"
+            ></textarea>
+          </div>
+        </div>
+        <div id="author_container">
+          <div class="write_column">작성자</div>
+          <div class="write_input_wrap">
+            <input
+              type="text"
+              name="author"
+              disabled
+              id="author"
+              value="{{user.alias}}"
+            />
+          </div>
+        </div>
+        <div id="btn_container">
+          <button type="submit" id="write_post_btn">작성 완료</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
