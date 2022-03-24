@@ -40,24 +40,34 @@ a {
 }
 
 nav > ul {
-  height: 100%;
   display: flex;
-  align-items: flex-end;
 }
 
 nav > ul > li {
   margin-left: 20px;
+}
+
+#nav > ul {
+  height: 100%;
+  display: flex;
+  justify-content: right;
+}
+
+#nav > ul > li {
+  margin-left: 20px;
   height: 25px;
   line-height: 25px;
+  font-size: 14px;
   border-bottom: 2px solid black;
 }
 
-nav > ul > li:hover {
-  border-color: #4d47c3;
+#nav > ul > li:hover {
+  border-color: #8700c5;
 }
 
-nav > ul > li > a:hover {
-  color: #4d47c3;
+#nav > ul > li > a:hover {
+  color: #8700c5;
+  font-weight: 600;
 }
 
 #content {
@@ -70,7 +80,7 @@ nav > ul > li > a:hover {
 table {
   border-collapse: collapse;
   width: 100%;
-  margin-top: 25px;
+  margin-top: 15px;
   margin-bottom: 25px;
 }
 
