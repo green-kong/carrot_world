@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/qa/view.css" />
+  </head>
+  <body>
+    <div id="wrap">
+      <div id="header">
+        <h1 id="logo">
+          <a href="/">
+            <img src="/img/admin/LOGO.png" alt="" />
+          </a>
+        </h1>
+      </div>
+      <div id="board_top">1:1 게시판</div>
+      <div id="content">
+        <div id="title">
+          <p>질문있습니다.</p>
+          <span>kong</span>
+          <span>22-03-24</span>
+          <span>조회수 1</span>
+        </div>
+        <div id="main_content">맥북 구매했는데 벽돌이 왔어요 어뜨케 하죠?</div>
+        <div id="btn_container">
+          <a href="/qa/list">글목록</a>
+          <div id="right_btn_container">
+            <a href="/qa/edit/">수정하기</a>
+            <a href="/qa/delete">삭제하기</a>
+          </div>
+        </div>
+      </div>
+      <div id="reply_container">
+        <div id="reply_input">
+          <div id="sub_con_input">
+            <input type="hidden" id="linkedPosting" value="{{result._id}}" />
+            <input type="text" id="reply_author" value="운영자" readonly />
+            <textarea
+              name="replyContent"
+              id="reply_content"
+              cols="30"
+              rows="10"
+              maxlength="120"
+            ></textarea>
+          </div>
+          <button id="reply_btn">댓글등록</button>
+        </div>
+        <div id="reply_list_header">
+          <p id="reply_title">댓글</p>
+          <p id="reply_count">1개</p>
+        </div>
+        <div id="reply_wrap">
+          <ul class="reply_list">
+            <li>
+              <span>운영자</span>
+              <span>22-03-24</span>
+              <div>확인 후 연락 드리겠습니다</div>
+              <span class="reply_edit_btn reply_btn">
+                <input type="hidden" value="{{reply._id}}" />
+                수정
+              </span>
+              <span class="reply_del_btn reply_btn">
+                삭제
+                <input type="hidden" value="{{reply._id}}" />
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
