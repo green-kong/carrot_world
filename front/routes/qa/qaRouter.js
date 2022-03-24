@@ -8,4 +8,8 @@ router.get('/list', qaController.list);
 
 router.get('/write', qaController.write);
 
+router.get('/view', qaController.view);
+
+router.get('/edit', qaController.edit);
+
 module.exports = router;
