@@ -14,7 +14,7 @@
 </head>
 <body>
     <header>
-        <h1><img src="../../public/img/Carrot World 1.png"></h1>
+        <a href="/"><img src="../../public/img/Carrot World 1.png"></a>
     </header>
     <section>
         <form method="post" action="http://localhost:4000/api/home/write" enctype="multipart/form-data" id="write_form">
@@ -35,12 +35,20 @@
                     <span>경매 진행일</span>
                     <select id="bid_date" name="bid_date">
                         <option>선택</option>
+                        <option value="3">3일</option>
+                        <option value="5">5일</option>
+                        <option value="7">7일</option>
                     </select>
                 </div>
                 <div id="product_type_wrap">
                     <span>카테고리</span>
                     <select id="product_type" name="product_type">
                         <option>선택</option>
+                        <option value="clo">의류</option>
+                        <option value="acc">잡화</option>
+                        <option value="fur">가구</option>
+                        <option value="elc">가전</option>
+                        <option value="pet">반려동물</option>
                     </select>
                 </div>
             </div>
