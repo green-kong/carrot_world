@@ -9,3 +9,7 @@ exports.statistics = (req, res) => {
 exports.board = (req, res) => {
   res.render('admin/board.html');
 };
+
+exports.user = (req, res) => {
+  res.render('admin/user.html');
+};

@@ -10,4 +10,6 @@ router.get('/statistics', adminControll.statistics);
 
 router.get('/board', adminControll.board);
 
+router.get('/user', adminControll.user);
+
 module.exports = router;
