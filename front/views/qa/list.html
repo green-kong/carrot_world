@@ -1,145 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/qa/list.css" />
-  </head>
-  <body>
-    <div id="wrap">
-      <div id="header">
-        <h1 id="logo">
-          <a href="/">
-            <img src="/img/admin/LOGO.png" alt="" />
-          </a>
-        </h1>
-      </div>
-      <div id="board_top">1:1 게시판</div>
-        <table>
-          <tr id="category">
-            <td id="_id">번호</td>
-            <td id="subject">제목</td>
-            <td id="author">작성자</td>
-            <td id="date">등록일</td>
-          </tr>
-          <tr>
-            <td>10</td>
-            <td class="subject_align">
-              <a href="#">질문 있습니다</a>
-            </td>
-            <td>kong</td>
-            <td>22-03-24</td>
-          </tr>
-          <tr>
-            <td>10</td>
-            <td class="subject_align">
-              <a href="#">질문 있습니다</a>
-            </td>
-            <td>kong</td>
-            <td>22-03-24</td>
-          </tr>
-          <tr>
-            <td>10</td>
-            <td class="subject_align">
-              <a href="#">질문 있습니다</a>
-            </td>
-            <td>kong</td>
-            <td>22-03-24</td>
-          </tr>
-          <tr>
-            <td>10</td>
-            <td class="subject_align">
-              <a href="#">질문 있습니다</a>
-            </td>
-            <td>kong</td>
-            <td>22-03-24</td>
-          </tr>
-          <tr>
-            <td>10</td>
-            <td class="subject_align">
-              <a href="#">질문 있습니다</a>
-            </td>
-            <td>kong</td>
-            <td>22-03-24</td>
-          </tr>
-          <tr>
-            <td>10</td>
-            <td class="subject_align">
-              <a href="#">질문 있습니다</a>
-            </td>
-            <td>kong</td>
-            <td>22-03-24</td>
-          </tr>
-          <tr>
-            <td>10</td>
-            <td class="subject_align">
-              <a href="#">질문 있습니다</a>
-            </td>
-            <td>kong</td>
-            <td>22-03-24</td>
-          </tr>
-          <tr>
-            <td>10</td>
-            <td class="subject_align">
-              <a href="#">질문 있습니다</a>
-            </td>
-            <td>kong</td>
-            <td>22-03-24</td>
-          </tr>
-          <tr>
-            <td>10</td>
-            <td class="subject_align">
-              <a href="#">질문 있습니다</a>
-            </td>
-            <td>kong</td>
-            <td>22-03-24</td>
-          </tr>
-          <tr>
-            <td>10</td>
-            <td class="subject_align">
-              <a href="#">질문 있습니다</a>
-            </td>
-            <td>kong</td>
-            <td>22-03-24</td>
-          </tr>
-        </table>
-
-        <div id="btn_container">
-          <a href="/qa/write" id="write_btn">글쓰기</a>
-        </div>
-        <ul id="pagenation">
-          <li><a href="#">&lt;</a></li>
-          <li>
-            <a href="/qa/list?page=1" class="page_num">
-              1
-            </a>
-          </li>
-          <li>
-            <a href="/qa/list?page=2" class="page_num">
-              2
-            </a>
-          </li>
-          <li>
-            <a href="/qa/list?page=3" class="page_num">
-              3
-            </a>
-          </li>
-          <li>
-            <a href="/qa/list?page=4" class="page_num">
-              4
-            </a>
-          </li>
-          <li>
-            <a href="/qa/list?page=5" class="page_num">
-              5
-            </a>
-          </li>
-          <li><a href="#">&gt;</a></li>
-        </ul>
-      </div>
-      <div style="display: none" id="cur_page">{{page}}</div>
-    </div>
-  </body>
-</html>
+{% extends "../template/_layout.html" %}
+<!--  -->
+{% block css %}
+<link rel="stylesheet" href="/css/qa/list.css" />
+{% endblock %}
+<!--  -->
+{% block content %}
+<div id="board_top">1:1 게시판</div>
+<table>
+  <tr id="category">
+    <td id="_id">번호</td>
+    <td id="subject">제목</td>
+    <td id="author">작성자</td>
+    <td id="date">등록일</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td class="subject_align">
+      <a href="#">질문 있습니다</a>
+    </td>
+    <td>kong</td>
+    <td>22-03-24</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td class="subject_align">
+      <a href="#">질문 있습니다</a>
+    </td>
+    <td>kong</td>
+    <td>22-03-24</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td class="subject_align">
+      <a href="#">질문 있습니다</a>
+    </td>
+    <td>kong</td>
+    <td>22-03-24</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td class="subject_align">
+      <a href="#">질문 있습니다</a>
+    </td>
+    <td>kong</td>
+    <td>22-03-24</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td class="subject_align">
+      <a href="#">질문 있습니다</a>
+    </td>
+    <td>kong</td>
+    <td>22-03-24</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td class="subject_align">
+      <a href="#">질문 있습니다</a>
+    </td>
+    <td>kong</td>
+    <td>22-03-24</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td class="subject_align">
+      <a href="#">질문 있습니다</a>
+    </td>
+    <td>kong</td>
+    <td>22-03-24</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td class="subject_align">
+      <a href="#">질문 있습니다</a>
+    </td>
+    <td>kong</td>
+    <td>22-03-24</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td class="subject_align">
+      <a href="#">질문 있습니다</a>
+    </td>
+    <td>kong</td>
+    <td>22-03-24</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td class="subject_align">
+      <a href="#">질문 있습니다</a>
+    </td>
+    <td>kong</td>
+    <td>22-03-24</td>
+  </tr>
+</table>
+<div id="btn_container">
+  <a href="/qa/write" id="write_btn">글쓰기</a>
+</div>
+<ul id="pagenation">
+  <li><a href="#">&lt;</a></li>
+  <li>
+    <a href="/qa/list?page=1" class="page_num"> 1 </a>
+  </li>
+  <li>
+    <a href="/qa/list?page=2" class="page_num"> 2 </a>
+  </li>
+  <li>
+    <a href="/qa/list?page=3" class="page_num"> 3 </a>
+  </li>
+  <li>
+    <a href="/qa/list?page=4" class="page_num"> 4 </a>
+  </li>
+  <li>
+    <a href="/qa/list?page=5" class="page_num"> 5 </a>
+  </li>
+  <li><a href="#">&gt;</a></li>
+</ul>
+{% endblock %}
