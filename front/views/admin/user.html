@@ -1,165 +1,147 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/admin/user.css" />
-    <script
-      src="https://kit.fontawesome.com/cbc296ae57.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
-    <div id="wrap">
-      <div id="header">
-        <h1 id="logo">
-          <a href="/">
-            <img src="/img/LOGO.png" alt="" />
-          </a>
-        </h1>
-        <nav>
-          <ul>
-            <li><a href="/admin/statistics/">통계</a></li>
-            <li><a href="/admin/board/">게시판관리</a></li>
-            <li><a href="/admin/user/">회원관리</a></li>
-          </ul>
-        </nav>
-      </div>
-
-      <div id="content">
-        <table>
-          <tr>
-            <th>아이디</th>
-            <th>가입방법</th>
-            <th>닉네임</th>
-            <th>이메일</th>
-            <th>핸드폰</th>
-            <th>판매게시글</th>
-            <th>판매진행중</th>
-            <th>판매완료</th>
-            <th>수정</th>
-          </tr>
-          <tr>
-            <td>kong1234</td>
-            <td>로컬</td>
-            <td>큰완두콩</td>
-            <td>ahdjd5@gmail.com</td>
-            <td>010-7749-8300</td>
-            <td>125</td>
-            <td>110</td>
-            <td>15</td>
-            <td><i class="fas fa-user-edit"></i></td>
-          </tr>
-          <tr>
-            <td>kong1234</td>
-            <td>로컬</td>
-            <td>큰완두콩</td>
-            <td>ahdjd5@gmail.com</td>
-            <td>010-7749-8300</td>
-            <td>125</td>
-            <td>110</td>
-            <td>15</td>
-            <td><i class="fas fa-user-edit"></i></td>
-          </tr>
-          <tr>
-            <td>kong1234</td>
-            <td>로컬</td>
-            <td>큰완두콩</td>
-            <td>ahdjd5@gmail.com</td>
-            <td>010-7749-8300</td>
-            <td>125</td>
-            <td>110</td>
-            <td>15</td>
-            <td><i class="fas fa-user-edit"></i></td>
-          </tr>
-          <tr>
-            <td>kong1234</td>
-            <td>로컬</td>
-            <td>큰완두콩</td>
-            <td>ahdjd5@gmail.com</td>
-            <td>010-7749-8300</td>
-            <td>125</td>
-            <td>110</td>
-            <td>15</td>
-            <td><i class="fas fa-user-edit"></i></td>
-          </tr>
-          <tr>
-            <td>kong1234</td>
-            <td>로컬</td>
-            <td>큰완두콩</td>
-            <td>ahdjd5@gmail.com</td>
-            <td>010-7749-8300</td>
-            <td>125</td>
-            <td>110</td>
-            <td>15</td>
-            <td><i class="fas fa-user-edit"></i></td>
-          </tr>
-          <tr>
-            <td>kong1234</td>
-            <td>로컬</td>
-            <td>큰완두콩</td>
-            <td>ahdjd5@gmail.com</td>
-            <td>010-7749-8300</td>
-            <td>125</td>
-            <td>110</td>
-            <td>15</td>
-            <td><i class="fas fa-user-edit"></i></td>
-          </tr>
-          <tr>
-            <td>kong1234</td>
-            <td>로컬</td>
-            <td>큰완두콩</td>
-            <td>ahdjd5@gmail.com</td>
-            <td>010-7749-8300</td>
-            <td>125</td>
-            <td>110</td>
-            <td>15</td>
-            <td><i class="fas fa-user-edit"></i></td>
-          </tr>
-          <tr>
-            <td>kong1234</td>
-            <td>로컬</td>
-            <td>큰완두콩</td>
-            <td>ahdjd5@gmail.com</td>
-            <td>010-7749-8300</td>
-            <td>125</td>
-            <td>110</td>
-            <td>15</td>
-            <td><i class="fas fa-user-edit"></i></td>
-          </tr>
-          <tr>
-            <td>kong1234</td>
-            <td>로컬</td>
-            <td>큰완두콩</td>
-            <td>ahdjd5@gmail.com</td>
-            <td>010-7749-8300</td>
-            <td>125</td>
-            <td>110</td>
-            <td>15</td>
-            <td><i class="fas fa-user-edit"></i></td>
-          </tr>
-          <tr>
-            <td>kong1234</td>
-            <td>로컬</td>
-            <td>큰완두콩</td>
-            <td>ahdjd5@gmail.com</td>
-            <td>010-7749-8300</td>
-            <td>125</td>
-            <td>110</td>
-            <td>15</td>
-            <td><i class="fas fa-user-edit"></i></td>
-          </tr>
-        </table>
-        <ul id="page_list">
-          <li><a href="">1</a></li>
-          <li><a href="">2</a></li>
-          <li><a href="">3</a></li>
-          <li><a href="">4</a></li>
-          <li><a href="">5</a></li>
-        </ul>
-      </div>
-    </div>
-  </body>
-</html>
+{% extends '../template/_layout.html' %}
+<!--  -->
+{% block css %}
+<link rel="stylesheet" href="/css/admin/user.css" />
+{% endblock %}
+<!--  -->
+{% block content %}
+<div id="content">
+  <div id="nav">
+    <ul>
+      <li><a href="/admin/statistics/">통계</a></li>
+      <li><a href="/admin/board/">게시판관리</a></li>
+      <li><a href="/admin/user/">회원관리</a></li>
+    </ul>
+  </div>
+  <table>
+    <tr>
+      <th>아이디</th>
+      <th>가입방법</th>
+      <th>닉네임</th>
+      <th>이메일</th>
+      <th>핸드폰</th>
+      <th>판매게시글</th>
+      <th>판매진행중</th>
+      <th>판매완료</th>
+      <th>수정</th>
+    </tr>
+    <tr>
+      <td>kong1234</td>
+      <td>로컬</td>
+      <td>큰완두콩</td>
+      <td>ahdjd5@gmail.com</td>
+      <td>010-7749-8300</td>
+      <td>125</td>
+      <td>110</td>
+      <td>15</td>
+      <td><i class="fas fa-user-edit"></i></td>
+    </tr>
+    <tr>
+      <td>kong1234</td>
+      <td>로컬</td>
+      <td>큰완두콩</td>
+      <td>ahdjd5@gmail.com</td>
+      <td>010-7749-8300</td>
+      <td>125</td>
+      <td>110</td>
+      <td>15</td>
+      <td><i class="fas fa-user-edit"></i></td>
+    </tr>
+    <tr>
+      <td>kong1234</td>
+      <td>로컬</td>
+      <td>큰완두콩</td>
+      <td>ahdjd5@gmail.com</td>
+      <td>010-7749-8300</td>
+      <td>125</td>
+      <td>110</td>
+      <td>15</td>
+      <td><i class="fas fa-user-edit"></i></td>
+    </tr>
+    <tr>
+      <td>kong1234</td>
+      <td>로컬</td>
+      <td>큰완두콩</td>
+      <td>ahdjd5@gmail.com</td>
+      <td>010-7749-8300</td>
+      <td>125</td>
+      <td>110</td>
+      <td>15</td>
+      <td><i class="fas fa-user-edit"></i></td>
+    </tr>
+    <tr>
+      <td>kong1234</td>
+      <td>로컬</td>
+      <td>큰완두콩</td>
+      <td>ahdjd5@gmail.com</td>
+      <td>010-7749-8300</td>
+      <td>125</td>
+      <td>110</td>
+      <td>15</td>
+      <td><i class="fas fa-user-edit"></i></td>
+    </tr>
+    <tr>
+      <td>kong1234</td>
+      <td>로컬</td>
+      <td>큰완두콩</td>
+      <td>ahdjd5@gmail.com</td>
+      <td>010-7749-8300</td>
+      <td>125</td>
+      <td>110</td>
+      <td>15</td>
+      <td><i class="fas fa-user-edit"></i></td>
+    </tr>
+    <tr>
+      <td>kong1234</td>
+      <td>로컬</td>
+      <td>큰완두콩</td>
+      <td>ahdjd5@gmail.com</td>
+      <td>010-7749-8300</td>
+      <td>125</td>
+      <td>110</td>
+      <td>15</td>
+      <td><i class="fas fa-user-edit"></i></td>
+    </tr>
+    <tr>
+      <td>kong1234</td>
+      <td>로컬</td>
+      <td>큰완두콩</td>
+      <td>ahdjd5@gmail.com</td>
+      <td>010-7749-8300</td>
+      <td>125</td>
+      <td>110</td>
+      <td>15</td>
+      <td><i class="fas fa-user-edit"></i></td>
+    </tr>
+    <tr>
+      <td>kong1234</td>
+      <td>로컬</td>
+      <td>큰완두콩</td>
+      <td>ahdjd5@gmail.com</td>
+      <td>010-7749-8300</td>
+      <td>125</td>
+      <td>110</td>
+      <td>15</td>
+      <td><i class="fas fa-user-edit"></i></td>
+    </tr>
+    <tr>
+      <td>kong1234</td>
+      <td>로컬</td>
+      <td>큰완두콩</td>
+      <td>ahdjd5@gmail.com</td>
+      <td>010-7749-8300</td>
+      <td>125</td>
+      <td>110</td>
+      <td>15</td>
+      <td><i class="fas fa-user-edit"></i></td>
+    </tr>
+  </table>
+  <ul id="page_list">
+    <li><a href="">1</a></li>
+    <li><a href="">2</a></li>
+    <li><a href="">3</a></li>
+    <li><a href="">4</a></li>
+    <li><a href="">5</a></li>
+  </ul>
+</div>
+{% endblock %}
