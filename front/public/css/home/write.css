@@ -30,6 +30,13 @@ header {
   text-align: center;
 }
 
+header a,
+img {
+  height: 80%;
+  padding-top: 15px;
+  box-sizing: border-box;
+}
+
 section {
   background-color: var(--background2);
   width: 100%;
