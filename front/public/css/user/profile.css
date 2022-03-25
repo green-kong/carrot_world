@@ -1,0 +1,161 @@
+#user_info {
+  width: 1000px;
+  height: 320px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  margin-bottom: 100px;
+  margin-top: 30px;
+}
+
+#profile_img {
+  width: 300px;
+  border-radius: 50%;
+  background-color: grey;
+}
+
+#txt_info {
+  width: 65%;
+}
+
+#info_title {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  border-bottom: 3px solid #bebaff;
+  margin-bottom: 10px;
+}
+
+#info_title > p {
+  font-size: 27px;
+  font-weight: 600;
+  height: 40px;
+  line-height: 40px;
+}
+
+#profile_edit_btn {
+  width: 100px;
+  height: 40px;
+  background-color: #4d47c3;
+  color: white;
+  margin-bottom: 5px;
+  text-align: center;
+  line-height: 40px;
+  border: 2px solid #4d47c3;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+#profile_edit_btn:hover {
+  background-color: #fff;
+  color: #4d47c3;
+}
+
+#info_list > li {
+  font-size: 18px;
+  margin-bottom: 13px;
+}
+
+#info_list > li > i {
+  margin-right: 8px;
+}
+
+.fa-envelope {
+  color: rgb(128, 214, 248);
+}
+
+.fa-phone {
+  color: rgb(0, 199, 10);
+}
+
+.fa-box {
+  color: rgb(250, 143, 82);
+}
+
+.fa-cart-plus {
+  color: rgb(138, 24, 148);
+}
+
+.fa-heart {
+  color: red;
+}
+
+#list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#list > ul {
+  width: 1000px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#list > ul > li {
+  width: 25%;
+  height: 40px;
+  font-size: 20px;
+  line-height: 40px;
+  text-align: center;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+  color: rgb(151, 151, 151);
+  cursor: pointer;
+}
+
+#list > ul > li.selected {
+  border-bottom: none;
+  color: #4d47c3;
+  font-weight: 600;
+}
+
+#list > ul > li:last-child {
+  border-right: 1px solid black;
+}
+
+#list > ul > li:hover {
+  background-color: #ececec;
+}
+
+#selected_data {
+  width: 1000px;
+  margin-bottom: 50px;
+  margin-top: 15px;
+}
+
+table {
+  background-color: white;
+  width: 100%;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+th {
+  font-weight: 400;
+  text-align: left;
+  background-color: #d9d7ff;
+}
+
+th,
+td {
+  height: 40px;
+  padding-left: 10px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+th:nth-child(1),
+td:nth-child(1) {
+  text-align: left;
+}
+
+td {
+  border-bottom: 1px solid #ececec;
+}
+
+td:last-child {
+  text-align: center;
+}
