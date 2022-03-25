@@ -1,0 +1,89 @@
+{% extends "../template/_layout.html"%}
+<!--  -->
+{% block css %}
+<link rel="stylesheet" href="/css/user/profile.css" />
+{% endblock %}
+<!--  -->
+{% block content %}
+<div id="user_info">
+  <div id="profile_img">
+    <img src="" alt="" />
+  </div>
+  <div id="txt_info">
+    <div id="info_title">
+      <p>내 프로필</p>
+      <a href="#" id="profile_edit_btn"> 정보수정 </a>
+    </div>
+    <ul id="info_list">
+      <li><i class="fa-solid fa-envelope"></i>이메일 : ahdjd5@gmail.com</li>
+      <li><i class="fa-solid fa-user"></i>닉네임 : 큰완두콩</li>
+      <li><i class="fa-solid fa-phone"></i>전화번호 : 010-7749-8300</li>
+      <li><i class="fa-solid fa-box"></i>판매중상품 : 18개</li>
+      <li><i class="fa-solid fa-cart-plus"></i>판매된상품 : 16개</li>
+      <li><i class="fa-solid fa-box"></i>게시중 경매 : 1개</li>
+      <li><i class="fa-solid fa-cart-plus"></i>완료된 경매 : 2개</li>
+      <li><i class="fa-regular fa-heart"></i>찜 눌린 횟수 : 10개</li>
+    </ul>
+  </div>
+</div>
+<div id="list">
+  <ul>
+    <li class="selected">판매상품</li>
+    <li>경매상품</li>
+    <li>찜목록</li>
+    <li>1:1 문의글</li>
+  </ul>
+  <div id="selected_data">
+    <table>
+      <tr>
+        <th>제목</th>
+        <th>가격</th>
+        <th>날짜</th>
+        <th>판매여부</th>
+      </tr>
+      <tr>
+        <td>강아지 산책용 하네스 팝니다ㄴ</td>
+        <td>10,000원</td>
+        <td>22-03-14</td>
+        <td>O</td>
+      </tr>
+      <tr>
+        <td>강아지 산책용 하네스 팝니다ㄴ</td>
+        <td>10,000원</td>
+        <td>22-03-14</td>
+        <td>O</td>
+      </tr>
+      <tr>
+        <td>강아지 산책용 하네스 팝니다ㄴ</td>
+        <td>10,000원</td>
+        <td>22-03-14</td>
+        <td>O</td>
+      </tr>
+      <tr>
+        <td>강아지 산책용 하네스 팝니다ㄴ</td>
+        <td>10,000원</td>
+        <td>22-03-14</td>
+        <td>O</td>
+      </tr>
+      <tr>
+        <td>강아지 산책용 하네스 팝니다ㄴ</td>
+        <td>10,000원</td>
+        <td>22-03-14</td>
+        <td>O</td>
+      </tr>
+      <tr>
+        <td>강아지 산책용 하네스 팝니다ㄴ</td>
+        <td>10,000원</td>
+        <td>22-03-14</td>
+        <td>O</td>
+      </tr>
+      <tr>
+        <td>강아지 산책용 하네스 팝니다ㄴ</td>
+        <td>10,000원</td>
+        <td>22-03-14</td>
+        <td>O</td>
+      </tr>
+    </table>
+  </div>
+</div>
+{% endblock %}
