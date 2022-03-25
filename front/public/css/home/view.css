@@ -7,7 +7,7 @@
   --background3: #eaecff;
   --accent-color: #bebbf5;
   --accent-color2: #4d47c3;
-  --alert-color: rgb(243, 53, 6);
+  --alert-color: #ff5858;
 }
 
 * {
@@ -18,6 +18,7 @@
 
 button {
   border: none;
+  cursor: pointer;
 }
 
 ul,
@@ -44,7 +45,12 @@ a {
 }
 
 #header > #logo {
-  padding: 15px 0 0 15px;
+  padding: 15px 0 0 35px;
+}
+
+#header > #logo > a > img {
+  display: inline-block;
+  width: 60%;
 }
 
 #header > #search_bar {
@@ -64,6 +70,10 @@ a {
   border: 1px solid #bababa;
 }
 
+#search_category:focus {
+  outline: none;
+}
+
 #header > #search_bar > #search {
   width: 690px;
   height: 33px;
@@ -73,20 +83,24 @@ a {
   font-size: 20px;
   background-image: url(/front/public/img/home/search_icon.png);
   background-repeat: no-repeat;
-  background-position: right 10px bottom;
+  background-position: right 10px bottom 5px;
   background-size: 30px;
+  padding: 5px 0px 5px 20px;
+}
+
+#search:focus {
+  outline: none;
 }
 
 #sell_register {
   width: 224px;
   height: 48px;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 48px;
-  color: #ffffff;
-  background: #4d47c3;
+  font-size: 24px;
+  line-height: 30px;
+  color: var(--accent-color2);
+  background-color: var(--accent-color);
   box-sizing: border-box;
-  border: 3px #4d47c3 solid;
+  border: solid 3px var(--accent-color2);
   border-radius: 19px;
 }
 
@@ -104,7 +118,6 @@ a {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
   width: 15%;
   height: 800px;
 }
@@ -131,6 +144,7 @@ a {
 
 #side_bar > #profile_box > #user_profile {
   display: flex;
+  align-items: center;
 }
 
 #profile_img_box {
@@ -159,12 +173,14 @@ a {
   padding: 10px 1px 0 2px;
 }
 
-#user_logout {
+#user_logout > a {
   background: #a7a3ff;
   border-radius: 8px;
+  display: inline-block;
   padding: 2px 2px 4px 2px;
-  width: 150px;
+  width: 140px;
   height: 20px;
+  font-size: 14px;
   text-align: center;
   color: #4d47c3;
 }
@@ -186,6 +202,10 @@ a {
   color: #4d47c3;
 }
 
+#sell_list {
+  margin-top: 10px;
+}
+
 .listname {
   padding: 7px 25%;
   font-size: 18px;
@@ -204,7 +224,6 @@ a {
 #bid_category {
   display: flex;
   flex-direction: row;
-
   align-items: center;
   width: 100px;
   padding: 16px 40px;
@@ -215,11 +234,16 @@ a {
   color: #4d47c3;
 }
 
+#bid_list {
+  margin-top: 10px;
+}
+
+/* view page 시작 */
+
 #content {
   padding: 25px 0 0 25px;
   box-sizing: border-box;
   width: 85%;
-  height: 1100px;
   background: #f2f1f6;
   border-radius: 32px 0px 0px 0px;
 }
@@ -231,95 +255,209 @@ a {
   border-radius: 32px 0px 0px 0px;
 }
 
-#sell_ranking {
+#content_view {
+  padding: 25px 0 0 25px;
+  box-sizing: border-box;
+}
+
+#prod_intro {
   display: flex;
-  justify-content: space-between;
-  padding: 0 30px 0 35px;
-  box-sizing: border-box;
+  height: 500px;
 }
 
-#sell_board_name {
-  padding: 20px 0 0 23px;
-  font-size: 25px;
-  font-weight: bold;
+#prod_slider {
+  width: 48%;
+  height: 100%;
+  background-color: #4d47c3;
 }
 
-.ranking_list {
-  padding: 0px;
-  margin-top: 0px;
-  box-sizing: border-box;
-  width: 240px;
-  height: 320px;
-  background: #ffffff;
-  box-shadow: 0px 4px 28px rgba(35, 29, 106, 0.1);
-  overflow: hidden;
-  border-radius: 12px;
-}
-
-.item_img {
+#slider_wrap {
   width: 100%;
   height: 100%;
-}
-
-#item_info {
-  padding-top: 5px;
-}
-
-.item_name {
-  font-size: 20px;
-  font-weight: bold;
-  margin: 0 0 0 10px;
-}
-
-.item_information {
-  display: flex;
-  justify-content: space-between;
-
-  margin: 0 15px 15px 10px;
-}
-
-.item_value {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.upload_date {
-  padding-top: 2px;
-  font-size: 15px;
-  color: gray;
-}
-
-#bid_ranking {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 30px 0 35px;
-  box-sizing: border-box;
-}
-
-#bid_board_name {
-  padding: 50px 0 0 23px;
-  box-sizing: border-box;
-  font-size: 25px;
-  font-weight: bold;
-}
-
-.rank {
   position: relative;
-  width: 240px;
-  height: 230px;
 }
 
-.auction_count {
+#slide_btn {
   position: absolute;
-  bottom: 0px;
-  width: 240px;
-  height: 30px;
-  font-size: 18px;
-  line-height: 30px;
-  text-align: right;
-  font-weight: 600;
-  padding-right: 20px;
+  top: 40%;
+  width: 100%;
+  height: 20%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#prod_img_list {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+
+.prod_img img {
+  display: inline-block;
+  height: 100%;
+  width: 548px;
+}
+
+#left_btn,
+#right_btn {
+  background-color: transparent;
+  font-size: 45px;
+  margin: 0 15px;
+  color: var(--stroke-color);
+}
+
+#prod_summary {
+  width: 52%;
+  padding: 25px;
   box-sizing: border-box;
-  background: rgba(0, 0, 0, 0.4);
-  color: white;
+}
+
+#view_subject {
+  font-size: 24px;
+  padding: 10px 0;
+}
+
+#sell_price {
+  padding: 10px 0;
+  box-sizing: border-box;
+  border-bottom: solid 1px var(--stroke-color);
+}
+
+#price_num {
+  font-size: 40px;
+  font-weight: 500;
+}
+
+#sell_price span:nth-child(2) {
+  font-size: 28px;
+}
+
+#view_status {
+  padding: 10px 0;
+  font-size: 18px;
+  color: var(--textSub-color);
+}
+
+#view_status span {
+  margin-right: 5px;
+}
+
+#view_status span::after {
+  padding-left: 10px;
+  content: '|';
+}
+
+#view_status #time::after {
+  content: '';
+}
+
+#detail_list {
+  padding: 10px 0;
+  height: 157px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.details {
+  padding: 5px 0;
+  font-size: 18px;
+}
+
+.details span:nth-child(1) {
+  padding-right: 10px;
+}
+
+#tag a {
+  margin-right: 5px;
+}
+
+#btn_wrap {
+  width: 100%;
+  margin-top: 10px;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.like_btn {
+  width: 48%;
+  height: 100%;
+  background-color: var(--alert-color);
+  color: var(--background1);
+  font-size: 20px;
+}
+
+/* 찜하기 클릭했을 때 색 바뀌게끔 css 처리 */
+.click {
+  background-color: var(--textSub-color);
+}
+
+#contact_btn {
+  width: 48%;
+  height: 100%;
+  background-color: var(--accent-color2);
+  color: var(--background1);
+  font-size: 20px;
+}
+
+#prod_detail_wrap {
+  width: 100%;
+  padding: 25px 0px;
+  margin-top: 20px;
+  max-height: 500px;
+}
+
+#prod_detail {
+  margin-top: 15px;
+  font-size: 18px;
+}
+
+#related_lineup_wrap {
+  width: 100%;
+  padding: 20px 0;
+}
+
+#related_item_lineup {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.related_item {
+  width: 17%;
+  border-radius: 12px;
+  box-shadow: 3px 5px 10px var(--stroke-color);
+  overflow: hidden;
+  background-color: var(--background1);
+}
+
+.related_item a {
+  height: 100%;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.related_item a > .item_pic {
+  width: 100%;
+  height: 192px;
+}
+
+.item_subject {
+  font-size: 24px;
+  font-weight: 500;
+  color: black;
+  margin-top: 5px;
+}
+
+.item_price {
+  font-size: 22px;
+  font-weight: 500;
+  color: black;
+  margin: 5px 0;
 }
