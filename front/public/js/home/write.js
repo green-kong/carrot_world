@@ -13,7 +13,7 @@ function writeFormCheck(e) {
     alert('제목을 입력해주세요.');
   }
 
-  if (isNa(dealPrice)) {
+  if (isNaN(dealPrice)) {
     e.preventDefault();
     alert('가격에는 숫자만 입력 가능합니다.');
   }
