@@ -10,8 +10,10 @@ exports.write = async (req, res) => {
     dealZone,
     productDetail,
     tag,
+    bidHour,
+    bidMin,
   } = req.body;
-
+  console.log(req.body);
   const tagList = tag
     .replace(/(\s*)/g, '')
     .split('#')
@@ -33,15 +35,28 @@ exports.write = async (req, res) => {
              )`;
       prepare = [productType, subject, 1, dealPrice, productDetail, dealZone];
     } else {
-      const bidStart = new Date();
-      bidStart.setDate(bidStart.getDate() + bidDate);
+      const date = new Date();
+      date.setDate(date.getDate() + Number(bidDate));
+      const y = date.getFullYear();
+      const m = date.getMonth();
+      const d = date.getDate();
+      const bidStart = new Date(y, m, d, bidHour, bidMin);
+      console.log(y, m, d, bidHour, bidMin);
       boardtype = 'au';
       sql = `INSERT INTO auction(
-             c_code,subject,u_id,price,content,location,date,startDate
+             c_code,subject,u_id,price,content,location,startDate,date
              )VALUES(
-             ?,?,?,?,?,?,now(),?
+             ?,?,?,?,?,?,?,now()
              )`;
-      prepare = [];
+      prepare = [
+        productType,
+        subject,
+        1,
+        dealPrice,
+        productDetail,
+        dealZone,
+        bidStart,
+      ];
     }
     const [result] = await conn.query(sql, prepare);
     const idx = result.insertId;
@@ -65,11 +80,6 @@ exports.write = async (req, res) => {
     console.log(err);
   } finally {
     conn.release();
+    res.redirect('http://localhost:3000/home');
   }
 };
-
-const bidStart = new Date();
-bidStart.setDate(bidStart.getDate() + 1);
-const y = bidStart.getFullYear();
-const m = bidStart.getMonth();
-const d = bidStart.getDate();
