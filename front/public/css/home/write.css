@@ -53,9 +53,10 @@ section {
 }
 
 #option_container {
+  width: 99%;
   margin-bottom: 40px;
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
 }
 
 #option_container span {
@@ -64,7 +65,7 @@ section {
 }
 
 #option_container select {
-  width: 100px;
+  width: 90px;
   height: 36px;
   font-size: 18px;
   border: solid 1px var(--stroke-color);
@@ -76,11 +77,11 @@ section {
 }
 
 #deal_way_wrap {
-  width: 25%;
+  width: 20%;
 }
 
 #deal_date_wrap {
-  width: 25%;
+  width: 20%;
   visibility: hidden;
 }
 
@@ -89,7 +90,15 @@ section {
 }
 
 #product_type_wrap {
-  width: 25%;
+  width: 20%;
+}
+
+#deal_time_wrap {
+  visibility: hidden;
+}
+
+#deal_time_wrap.bidon {
+  visibility: visible;
 }
 
 #option2_container {

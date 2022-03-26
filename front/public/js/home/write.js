@@ -90,12 +90,15 @@ imgUploadBox.addEventListener('drop', uploadDrop);
 function checkDealWay() {
   const dealWay = document.querySelector('#deal_way').value;
   const dealDateWrap = document.querySelector('#deal_date_wrap');
+  const dealTimeWrap = document.querySelector('#deal_time_wrap');
 
   if (dealWay === 'bid') {
     dealDateWrap.classList.add('bidon');
+    dealTimeWrap.classList.add('bidon');
   }
 
   if (dealWay === 'sell') {
     dealDateWrap.classList.remove('bidon');
+    dealTimeWrap.classList.remove('bidon');
   }
 }
