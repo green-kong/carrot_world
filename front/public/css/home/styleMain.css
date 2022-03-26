@@ -75,6 +75,7 @@ a {
   box-sizing: border-box;
   border: 3px #4d47c3 solid;
   border-radius: 19px;
+  text-align: center;
 }
 
 #sell_register:hover {
