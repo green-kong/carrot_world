@@ -5,11 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link
-      href="../../public/css/home/view.css"
-      rel="stylesheet"
-      type="text/css"
-    />
+    <link href="/css/home/auction.css" rel="stylesheet" type="text/css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -26,7 +22,7 @@
     <div id="wrap">
       <div id="header">
         <h1 id="logo">
-          <a href="/home"><img src="../../public/img/home/Logo.png" /></a>
+          <a href="/home"><img src="/img/home/Logo.png" /></a>
         </h1>
         <div id="search_bar">
           <select id="search_category">
@@ -43,10 +39,7 @@
           <div id="profile_box">
             <div id="user_profile">
               <ul id="profile_img_box">
-                <img
-                  src="/front/public/img/home/profile.PNG"
-                  id="profile_img"
-                />
+                <img src="/img/home/profile.PNG" id="profile_img" />
               </ul>
               <ul id="profile_rightbox">
                 <li id="call_user">판매자 님</li>
@@ -69,7 +62,7 @@
           <div id="sell_board">
             <p id="sell_category">
               <img
-                src="/front/public/img/home/category_img1.png"
+                src="/img/home/category_img1.png"
                 style="width: 25px; height: auto"
               />중고거래
             </p>
@@ -84,7 +77,7 @@
           <div id="bid_board">
             <p id="bid_category">
               <img
-                src="/front/public/img/home/category_img1.png"
+                src="/img/home/category_img1.png"
                 style="width: 25px; height: auto"
               />경매
             </p>
@@ -114,19 +107,19 @@
                     </div>
                     <ul id="prod_img_list">
                       <li class="prod_img">
-                        <img src="../../public/img/home/item4.PNG" />
+                        <img src="/img/home/item4.PNG" />
                       </li>
                       <li class="prod_img">
-                        <img src="../../public/img/home/item4.PNG" />
+                        <img src="/img/home/item4.PNG" />
                       </li>
                       <li class="prod_img">
-                        <img src="../../public/img/home/item4.PNG" />
+                        <img src="/img/home/item4.PNG" />
                       </li>
                       <li class="prod_img">
-                        <img src="../../public/img/home/item4.PNG" />
+                        <img src="/img/home/item4.PNG" />
                       </li>
                       <li class="prod_img">
-                        <img src="../../public/img/home/item4.PNG" />
+                        <img src="/img/home/item4.PNG" />
                       </li>
                     </ul>
                   </div>
@@ -136,14 +129,13 @@
                     강아지 산책용 하네스 이쁘고 튼튼해용
                   </h1>
                   <div id="sell_price">
+                    <p>현재 입찰가</p>
                     <span id="price_num">10,000</span>
                     <span>원</span>
                   </div>
                   <div id="view_status">
                     <i class="fa-solid fa-heart"></i>
                     <span id="like_num">3</span>
-                    <i class="fa-solid fa-eye"></i>
-                    <span id="hit_num">54</span>
                     <i class="fa-solid fa-clock"></i>
                     <span id="time">5일 전</span>
                   </div>
@@ -171,11 +163,14 @@
                       </span>
                     </li>
                   </ul>
+                  <span id="bid_wrap">
+                    입찰가격 : <input type="text" id="bid_price" />원</span
+                  >
                   <div id="btn_wrap">
                     <button class="like_btn" type="submit">
                       <i class="fa-solid fa-heart"> 찜하기</i>
                     </button>
-                    <button id="contact_btn" type="submit">1:1 연락</button>
+                    <button id="bid_btn" type="nutton">입찰하기</button>
                   </div>
                 </article>
               </section>
@@ -198,50 +193,35 @@
                 <ul id="related_item_lineup">
                   <li class="related_item">
                     <a href="#">
-                      <img
-                        class="item_pic"
-                        src="../../public/img/home/item4.PNG"
-                      />
+                      <img class="item_pic" src="/img/home/item4.PNG" />
                       <span class="item_subject">에어프라이어</span>
                       <span class="item_price">30,000 원</span>
                     </a>
                   </li>
                   <li class="related_item">
                     <a href="#">
-                      <img
-                        class="item_pic"
-                        src="../../public/img/home/item4.PNG"
-                      />
+                      <img class="item_pic" src="/img/home/item4.PNG" />
                       <span class="item_subject">에어프라이어</span>
                       <span class="item_price">30,000 원</span>
                     </a>
                   </li>
                   <li class="related_item">
                     <a href="#">
-                      <img
-                        class="item_pic"
-                        src="../../public/img/home/item4.PNG"
-                      />
+                      <img class="item_pic" src="/img/home/item4.PNG" />
                       <span class="item_subject">에어프라이어</span>
                       <span class="item_price">30,000 원</span>
                     </a>
                   </li>
                   <li class="related_item">
                     <a href="#">
-                      <img
-                        class="item_pic"
-                        src="../../public/img/home/item4.PNG"
-                      />
+                      <img class="item_pic" src="/img/home/item4.PNG" />
                       <span class="item_subject">에어프라이어</span>
                       <span class="item_price">30,000 원</span>
                     </a>
                   </li>
                   <li class="related_item">
                     <a href="#">
-                      <img
-                        class="item_pic"
-                        src="../../public/img/home/item4.PNG"
-                      />
+                      <img class="item_pic" src="/img/home/item4.PNG" />
                       <span class="item_subject">에어프라이어</span>
                       <span class="item_price">30,000 원</span>
                     </a>
@@ -253,5 +233,6 @@
         </div>
       </div>
     </div>
+    <script src="/js/socket.js" type="module"></script>
   </body>
 </html>
