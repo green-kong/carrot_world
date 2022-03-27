@@ -195,6 +195,7 @@ a {
   padding: 7px 25%;
   font-size: 18px;
   color: gray;
+  cursor: pointer;
 }
 
 .listname:hover {
