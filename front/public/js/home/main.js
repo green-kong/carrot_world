@@ -1,4 +1,4 @@
-async function init() {
+export default async function init() {
   const url = 'http://localhost:4000/api/home/';
   const response = await axios.post(url);
   if (response.status === 200) {
@@ -56,5 +56,3 @@ async function init() {
     contentFrame.innerHTML = homeMainTem;
   }
 }
-
-init();
