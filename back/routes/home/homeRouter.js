@@ -6,6 +6,8 @@ const homeControll = require('./home.controller.js');
 
 const router = express.Router();
 
+router.post('/', homeControll.main);
+
 router.post('/write', upload.array('productImg'), homeControll.write);
 
 module.exports = router;
