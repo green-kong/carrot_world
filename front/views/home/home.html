@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="/css/home/styleMain.css" type="text/css" />
-    <script type="text/javascript"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="/js/home/main.js" defer></script>
   </head>
   <body>
     <div id="wrap">
@@ -22,7 +23,10 @@
             <option value="sell">중고거래</option>
             <option value="auction">경매</option>
           </select>
-          <input type="text" id="search" autocomplete="off" />
+          <div id="search">
+            <input type="text" autocomplete="off" />
+            <span></span>
+          </div>
           <a id="sell_register" href="/home/write">판매물품 등록</a>
         </div>
       </div>
@@ -56,13 +60,7 @@
                 style="width: 25px; height: auto"
               />중고거래
             </p>
-            <ul id="sell_list">
-              <li class="listname"><a href="#">의류</a></li>
-              <li class="listname"><a href="#">잡화</a></li>
-              <li class="listname"><a href="#">가구</a></li>
-              <li class="listname"><a href="#">가전</a></li>
-              <li class="listname"><a href="#">반려동물</a></li>
-            </ul>
+            <ul id="sell_list"></ul>
           </div>
           <div id="bid_board">
             <p id="bid_category">
@@ -71,130 +69,134 @@
                 style="width: 25px; height: auto"
               />경매
             </p>
-            <ul id="bid_list">
-              <li class="listname"><a href="#">의류</a></li>
-              <li class="listname"><a href="#">잡화</a></li>
-              <li class="listname"><a href="#">가구</a></li>
-              <li class="listname"><a href="#">가전</a></li>
-              <li class="listname"><a href="#">반려동물</a></li>
-            </ul>
+            <ul id="bid_list"></ul>
           </div>
         </div>
         <div id="content">
-          <div id="content_frame">
-            <div id="hot_sell_board">
-              <p id="sell_board_name">중고 인기매물</p>
-              <ul id="sell_ranking">
-                <li class="ranking_list">
-                  <div class="rank">
-                    <img src="/img/home/item.PNG" class="item_img" />
-                  </div>
-                  <ul class="item_info">
-                    <li class="item_name">장난감 총</li>
-                    <ul class="item_information">
-                      <li class="item_value">20,000원</li>
-                      <li class="upload_date">22-03-24</li>
-                    </ul>
-                  </ul>
-                </li>
-                <li class="ranking_list">
-                  <div class="rank">
-                    <img src="/img/home/item2.PNG" class="item_img" />
-                  </div>
-                  <ul class="item_info">
-                    <li class="item_name">자전거</li>
-                    <ul class="item_information">
-                      <li class="item_value">320,000원</li>
-                      <li class="upload_date">22-03-04</li>
-                    </ul>
-                  </ul>
-                </li>
-                <li class="ranking_list">
-                  <div class="rank">
-                    <img src="/img/home/item3.PNG" class="item_img" />
-                  </div>
-                  <ul class="item_info">
-                    <li class="item_name">맥심 커피믹스</li>
-                    <ul class="item_information">
-                      <li class="item_value">30,000원</li>
-                      <li class="upload_date">22-03-09</li>
-                    </ul>
-                  </ul>
-                </li>
-                <li class="ranking_list">
-                  <div class="rank">
-                    <img src="/img/home/item4.PNG" class="item_img" />
-                  </div>
-                  <ul class="item_info">
-                    <li class="item_name">테팔 청소기</li>
-                    <ul class="item_information">
-                      <li class="item_value">200,000원</li>
-                      <li class="upload_date">22-03-31</li>
-                    </ul>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-            <div id="hot_bid_board">
-              <p id="bid_board_name">경매 인기매물</p>
-              <ul id="bid_ranking">
-                <li class="ranking_list">
-                  <div class="rank">
-                    <img src="/img/home/item7.PNG" class="item_img" />
-                    <div class="auction_count">경매마감 D-3</div>
-                  </div>
-                  <ul class="item_info">
-                    <li class="item_name">그래픽카드</li>
-                    <ul class="item_information">
-                      <li class="item_value">1,800,000원</li>
-                      <li class="upload_date">22-03-24</li>
-                    </ul>
-                  </ul>
-                </li>
-                <li class="ranking_list">
-                  <div class="rank">
-                    <img src="/img/home/item6.PNG" class="item_img" />
-                    <div class="auction_count">경매마감 D-2</div>
-                  </div>
-                  <ul class="item_info">
-                    <li class="item_name">아이폰 13</li>
-                    <ul class="item_information">
-                      <li class="item_value">1,200,000원</li>
-                      <li class="upload_date">22-03-24</li>
-                    </ul>
-                  </ul>
-                </li>
-                <li class="ranking_list">
-                  <div class="rank">
-                    <img src="/img/home/item7.PNG" class="item_img" />
-                    <div class="auction_count">경매마감 D-4</div>
-                  </div>
-                  <ul class="item_info">
-                    <li class="item_name">보라카이 항공권</li>
-                    <ul class="item_information">
-                      <li class="item_value">800,000원</li>
-                      <li class="upload_date">22-03-24</li>
-                    </ul>
-                  </ul>
-                </li>
-                <li class="ranking_list">
-                  <div class="rank">
-                    <img src="/img/home/item8.PNG" class="item_img" />
-                    <div class="auction_count">경매마감 D-7</div>
-                  </div>
-                  <ul class="item_info">
-                    <li class="item_name">맥북 에어</li>
-                    <ul class="item_information">
-                      <li class="item_value">1,200,000원</li>
-                      <li class="upload_date">22-03-24</li>
-                    </ul>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
+          <div id="content_frame"></div>
         </div>
       </div>
     </div>
   </body>
 </html>
+
+<!-- category template -->
+<template id="category_tem">
+  <li class="listname">의류</li>
+</template>
+<!-- category template done -->
+
+<!-- home/main template -->
+<template id="home_main_tem">
+  <div id="hot_sell_board">
+    <p id="sell_board_name">중고 인기매물</p>
+    <ul id="sell_ranking">
+      <li class="ranking_list">
+        <div class="rank">
+          <img src="/img/home/item.PNG" class="item_img" />
+        </div>
+        <ul class="item_info">
+          <li class="item_name">장난감 총</li>
+          <ul class="item_information">
+            <li class="item_value">20,000원</li>
+            <li class="upload_date">22-03-24</li>
+          </ul>
+        </ul>
+      </li>
+      <li class="ranking_list">
+        <div class="rank">
+          <img src="/img/home/item2.PNG" class="item_img" />
+        </div>
+        <ul class="item_info">
+          <li class="item_name">자전거</li>
+          <ul class="item_information">
+            <li class="item_value">320,000원</li>
+            <li class="upload_date">22-03-04</li>
+          </ul>
+        </ul>
+      </li>
+      <li class="ranking_list">
+        <div class="rank">
+          <img src="/img/home/item3.PNG" class="item_img" />
+        </div>
+        <ul class="item_info">
+          <li class="item_name">맥심 커피믹스</li>
+          <ul class="item_information">
+            <li class="item_value">30,000원</li>
+            <li class="upload_date">22-03-09</li>
+          </ul>
+        </ul>
+      </li>
+      <li class="ranking_list">
+        <div class="rank">
+          <img src="/img/home/item4.PNG" class="item_img" />
+        </div>
+        <ul class="item_info">
+          <li class="item_name">테팔 청소기</li>
+          <ul class="item_information">
+            <li class="item_value">200,000원</li>
+            <li class="upload_date">22-03-31</li>
+          </ul>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div id="hot_bid_board">
+    <p id="bid_board_name">경매 인기매물</p>
+    <ul id="bid_ranking">
+      <li class="ranking_list">
+        <div class="rank">
+          <img src="/img/home/item7.PNG" class="item_img" />
+          <div class="auction_count">경매마감 D-3</div>
+        </div>
+        <ul class="item_info">
+          <li class="item_name">그래픽카드</li>
+          <ul class="item_information">
+            <li class="item_value">1,800,000원</li>
+            <li class="upload_date">22-03-24</li>
+          </ul>
+        </ul>
+      </li>
+      <li class="ranking_list">
+        <div class="rank">
+          <img src="/img/home/item6.PNG" class="item_img" />
+          <div class="auction_count">경매마감 D-2</div>
+        </div>
+        <ul class="item_info">
+          <li class="item_name">아이폰 13</li>
+          <ul class="item_information">
+            <li class="item_value">1,200,000원</li>
+            <li class="upload_date">22-03-24</li>
+          </ul>
+        </ul>
+      </li>
+      <li class="ranking_list">
+        <div class="rank">
+          <img src="/img/home/item7.PNG" class="item_img" />
+          <div class="auction_count">경매마감 D-4</div>
+        </div>
+        <ul class="item_info">
+          <li class="item_name">보라카이 항공권</li>
+          <ul class="item_information">
+            <li class="item_value">800,000원</li>
+            <li class="upload_date">22-03-24</li>
+          </ul>
+        </ul>
+      </li>
+      <li class="ranking_list">
+        <div class="rank">
+          <img src="/img/home/item8.PNG" class="item_img" />
+          <div class="auction_count">경매마감 D-7</div>
+        </div>
+        <ul class="item_info">
+          <li class="item_name">맥북 에어</li>
+          <ul class="item_information">
+            <li class="item_value">1,200,000원</li>
+            <li class="upload_date">22-03-24</li>
+          </ul>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</template>
+<!-- home/mian template done -->

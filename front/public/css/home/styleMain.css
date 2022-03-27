@@ -58,9 +58,27 @@ a {
   border: 1px solid #ffffff;
   border-radius: 26px;
   font-size: 20px;
-  background-image: url(/front/public/img/home/search_icon.png);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+#search > input {
+  background-color: #dddddd;
+  border: none;
+  height: 30px;
+  width: 600px;
+  outline: none;
+  font-size: 18px;
+}
+#search > span {
+  cursor: pointer;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image: url(/img/home/search_icon.png);
   background-repeat: no-repeat;
-  background-position: right 10px bottom;
   background-size: 30px;
 }
 
@@ -102,7 +120,6 @@ a {
   margin: 10px;
   box-sizing: border-box;
   width: 180px;
-  height: 400px;
   background: #f2f1f6;
   border-radius: 8px;
 }
@@ -180,7 +197,7 @@ a {
   color: gray;
 }
 
-.listname:hover > a {
+.listname:hover {
   color: #4d47c3;
   font-weight: 600;
 }
