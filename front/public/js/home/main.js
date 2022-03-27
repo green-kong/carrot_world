@@ -1,3 +1,5 @@
+import clickCategory from './category.js';
+
 export default async function init() {
   const url = 'http://localhost:4000/api/home/';
   const response = await axios.post(url);
@@ -54,5 +56,7 @@ export default async function init() {
       .replace('{sellList}', sell);
 
     contentFrame.innerHTML = homeMainTem;
+
+    clickCategory();
   }
 }
