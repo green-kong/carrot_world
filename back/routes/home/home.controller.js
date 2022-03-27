@@ -25,8 +25,8 @@ exports.main = async (req, res) => {
                      GROUP BY s_img.img,sell_board.s_id
                      ORDER BY rand()
                      LIMIT 8`;
-    const [sellList] = await conn.query(sellSql);
-    const result = { categoryList, auctionList, sellList };
+    const [sellBoardList] = await conn.query(sellSql);
+    const result = { categoryList, auctionList, sellBoardList };
     res.send(result);
   } catch (err) {
     console.log(err);
