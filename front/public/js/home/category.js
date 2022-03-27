@@ -5,7 +5,7 @@ export default async function clictCategory() {
     const { way } = e.target.parentNode.dataset;
     const { code } = e.target.dataset;
 
-    const url = 'http://localhost:4000/api/home/list';
+    const url = 'http://localhost:4000/api/home/list?page=1';
     const body = { way, code };
 
     const response = axios.post(url, body);

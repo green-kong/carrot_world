@@ -121,3 +121,43 @@ exports.write = async (req, res) => {
     res.redirect('http://localhost:3000/home');
   }
 };
+
+exports.list = async (req, res) => {
+  const { way, code } = req.body;
+  const page = Number(req.query.page);
+  const conn = await pool.getConnection();
+  let sql;
+  if (way === 'sell') {
+    sql = `SELECT 
+           subject, img, 
+           FORMAT(price,0) AS price, 
+           DATE_FORMAT(date,'%y-%m-%d') AS date
+           FROM sell_board
+           JOIN s_img
+           ON sell_board.s_id = s_img.s_id
+           WHERE c_code ='${code}'
+           GROUP BY s_img.img,sell_board.s_id
+           LIMIT ${(page - 1) * 32}, 32`;
+  } else {
+    sql = `SELECT 
+           subject, img, 
+           FORMAT(price,0) AS price, 
+           DATE_FORMAT(date,'%y-%m-%d') AS date, 
+           DATEDIFF(startDate,date) AS bidStart 
+           FROM auction
+           JOIN au_img
+           ON auction.au_id = au_img.au_id
+           WHERE c_code = '${code}'
+           GROUP BY au_img.img,auction.au_id
+           LIMIT ${(page - 1) * 32}, 32`;
+  }
+  try {
+    console.log(sql);
+    const [result] = await conn.query(sql);
+    res.send(result);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('err');
+  } finally {
+  }
+};
