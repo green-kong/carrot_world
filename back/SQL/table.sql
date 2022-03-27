@@ -1,6 +1,8 @@
 CREATE DATABASE carrot_world
 USE carrot_world
 
+alter database carrot_world default character set UTF8;
+
 CREATE TABLE `user` (
   `u_id` INT AUTO_INCREMENT,
   `userEmail` VARCHAR(64),

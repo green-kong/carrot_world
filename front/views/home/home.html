@@ -89,74 +89,14 @@
 <!-- home/main template -->
 <template id="home_main_tem">
   <div id="hot_sell_board">
-    <p id="sell_board_name">중고 인기매물</p>
-    <ul id="sell_ranking">
-      <li class="ranking_list">
-        <div class="rank">
-          <img src="/img/home/item.PNG" class="item_img" />
-        </div>
-        <ul class="item_info">
-          <li class="item_name">장난감 총</li>
-          <ul class="item_information">
-            <li class="item_value">20,000원</li>
-            <li class="upload_date">22-03-24</li>
-          </ul>
-        </ul>
-      </li>
-      <li class="ranking_list">
-        <div class="rank">
-          <img src="/img/home/item2.PNG" class="item_img" />
-        </div>
-        <ul class="item_info">
-          <li class="item_name">자전거</li>
-          <ul class="item_information">
-            <li class="item_value">320,000원</li>
-            <li class="upload_date">22-03-04</li>
-          </ul>
-        </ul>
-      </li>
-      <li class="ranking_list">
-        <div class="rank">
-          <img src="/img/home/item3.PNG" class="item_img" />
-        </div>
-        <ul class="item_info">
-          <li class="item_name">맥심 커피믹스</li>
-          <ul class="item_information">
-            <li class="item_value">30,000원</li>
-            <li class="upload_date">22-03-09</li>
-          </ul>
-        </ul>
-      </li>
-      <li class="ranking_list">
-        <div class="rank">
-          <img src="/img/home/item4.PNG" class="item_img" />
-        </div>
-        <ul class="item_info">
-          <li class="item_name">테팔 청소기</li>
-          <ul class="item_information">
-            <li class="item_value">200,000원</li>
-            <li class="upload_date">22-03-31</li>
-          </ul>
-        </ul>
-      </li>
+    <p id="sell_board_name">경매 인기매물</p>
+    <ul id="bid_ranking">
+      {auctionList}
     </ul>
   </div>
   <div id="hot_bid_board">
-    <p id="bid_board_name">경매 인기매물</p>
-    <ul id="bid_ranking">
-      <li class="ranking_list">
-        <div class="rank">
-          <img src="/img/home/item7.PNG" class="item_img" />
-          <div class="auction_count">경매마감 D-3</div>
-        </div>
-        <ul class="item_info">
-          <li class="item_name">그래픽카드</li>
-          <ul class="item_information">
-            <li class="item_value">1,800,000원</li>
-            <li class="upload_date">22-03-24</li>
-          </ul>
-        </ul>
-      </li>
+    <p id="bid_board_name">중고거래 인기매물</p>
+    <ul id="sell_ranking">
       <li class="ranking_list">
         <div class="rank">
           <img src="/img/home/item6.PNG" class="item_img" />
@@ -200,3 +140,36 @@
   </div>
 </template>
 <!-- home/mian template done -->
+
+<!-- sell template -->
+<li class="ranking_list">
+  <div class="rank">
+    <img src="/img/home/item4.PNG" class="item_img" />
+  </div>
+  <ul class="item_info">
+    <li class="item_name">테팔 청소기</li>
+    <ul class="item_information">
+      <li class="item_value">200,000원</li>
+      <li class="upload_date">22-03-31</li>
+    </ul>
+  </ul>
+</li>
+<!-- sell template done -->
+
+<!-- auction template -->
+<template id="main_auction_list">
+  <li class="ranking_list">
+    <div class="rank">
+      <img src="http://localhost:4000/upload/{img}" class="item_img" />
+      <div class="auction_count">경매시작 D-{bidStart}</div>
+    </div>
+    <ul class="item_info">
+      <li class="item_name">{subject}</li>
+      <ul class="item_information">
+        <li class="item_value">{price}</li>
+        <li class="upload_date">{date}</li>
+      </ul>
+    </ul>
+  </li>
+</template>
+<!-- auction template done  -->
