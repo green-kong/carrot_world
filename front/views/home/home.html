@@ -89,13 +89,13 @@
 <!-- home/main template -->
 <template id="home_main_tem">
   <div id="hot_sell_board">
-    <p id="sell_board_name">경매 인기매물</p>
+    <p id="bid_board_name">경매 인기매물</p>
     <ul id="bid_ranking">
       {auctionList}
     </ul>
   </div>
   <div id="hot_bid_board">
-    <p id="bid_board_name">중고거래 인기매물</p>
+    <p id="sell_board_name">중고거래 인기매물</p>
     <ul id="sell_ranking">
       <li class="ranking_list">
         <div class="rank">
@@ -166,7 +166,7 @@
     <ul class="item_info">
       <li class="item_name">{subject}</li>
       <ul class="item_information">
-        <li class="item_value">{price}</li>
+        <li class="item_value">{price}<span class="won">원</span></li>
         <li class="upload_date">{date}</li>
       </ul>
     </ul>
