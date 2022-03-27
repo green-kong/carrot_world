@@ -12,7 +12,9 @@ exports.main = async (req, res) => {
                         FROM auction
                         JOIN au_img
                         ON auction.au_id = au_img.au_id
-                        GROUP BY au_img.img,auction.au_id`;
+                        GROUP BY au_img.img,auction.au_id
+                        ORDER BY rand()
+                        LIMIT 8`;
     const [auctionList] = await conn.query(auctionSql);
     const result = { categoryList, auctionList };
     res.send(result);
