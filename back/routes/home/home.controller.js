@@ -147,12 +147,11 @@ exports.list = async (req, res) => {
            FROM auction
            JOIN au_img
            ON auction.au_id = au_img.au_id
-           WHERE c_code = '${code}'
+           WHERE c_code='${code}'
            GROUP BY au_img.img,auction.au_id
            LIMIT ${(page - 1) * 32}, 32`;
   }
   try {
-    console.log(sql);
     const [result] = await conn.query(sql);
     res.send(result);
   } catch (err) {

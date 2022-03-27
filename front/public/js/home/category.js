@@ -8,7 +8,7 @@ export default async function clictCategory() {
     const url = 'http://localhost:4000/api/home/list?page=1';
     const body = { way, code };
 
-    const response = axios.post(url, body);
+    const response = await axios.post(url, body);
   }
 
   categoryList.forEach((v) => {
