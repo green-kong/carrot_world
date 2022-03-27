@@ -1,5 +1,18 @@
 const { pool } = require('../../model/db/db.js');
 
+exports.main = async (req, res) => {
+  const conn = await pool.getConnection();
+  try {
+    const sql = 'select * from category';
+    const [categoryList] = await conn.query(sql);
+    res.send(categoryList);
+  } catch (err) {
+    res.status(500).send('err');
+  } finally {
+    conn.release();
+  }
+};
+
 exports.write = async (req, res) => {
   const {
     subject,
