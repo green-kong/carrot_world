@@ -235,21 +235,6 @@ a {
   border-radius: 32px 0px 0px 0px;
 }
 
-#sell_ranking {
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-  padding: 0 30px 0 35px;
-  box-sizing: border-box;
-}
-
-#sell_board_name {
-  padding: 20px 0 0 23px;
-  font-size: 25px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
 .ranking_list {
   box-sizing: border-box;
   width: calc(25% - 35px);
@@ -306,7 +291,7 @@ a {
   color: gray;
 }
 
-#bid_ranking {
+.item_list_contaier {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
@@ -314,7 +299,7 @@ a {
   box-sizing: border-box;
 }
 
-#bid_board_name {
+.board_name {
   padding: 50px 0 0 23px;
   box-sizing: border-box;
   font-size: 25px;

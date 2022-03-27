@@ -10,4 +10,6 @@ router.post('/', homeControll.main);
 
 router.post('/write', upload.array('productImg'), homeControll.write);
 
+router.post('/list', homeControll.list);
+
 module.exports = router;

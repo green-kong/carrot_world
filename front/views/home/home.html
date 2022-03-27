@@ -88,22 +88,22 @@
 
 <!-- home/main template -->
 <template id="home_main_tem">
-  <div id="hot_sell_board">
-    <p id="bid_board_name">경매 인기매물</p>
-    <ul id="bid_ranking">
+  <div>
+    <p class="board_name">경매 인기매물</p>
+    <ul class="item_list_contaier">
       {auctionList}
     </ul>
   </div>
-  <div id="hot_bid_board">
-    <p id="sell_board_name">중고거래 인기매물</p>
-    <ul id="sell_ranking">
+  <div>
+    <p class="board_name">중고거래 인기매물</p>
+    <ul class="item_list_contaier">
       {sellList}
     </ul>
   </div>
 </template>
 <!-- home/mian template done -->
 
-<!-- sell template -->
+<!-- main sell template -->
 <template id="main_sell_list">
   <li class="ranking_list">
     <div class="rank">
@@ -118,9 +118,9 @@
     </ul>
   </li>
 </template>
-<!-- sell template done -->
+<!-- main sell template done -->
 
-<!-- auction template -->
+<!-- main auction template -->
 <template id="main_auction_list">
   <li class="ranking_list">
     <div class="rank">
@@ -136,4 +136,15 @@
     </ul>
   </li>
 </template>
-<!-- auction template done  -->
+<!-- main auction template done -->
+
+<!-- list item conater template -->
+<template id="item_list_template">
+  <div>
+    <p class="board_name">{way} &gt; {category}</p>
+    <ul class="item_list_contaier">
+      {itemList}
+    </ul>
+  </div>
+</template>
+<!-- list item conater template done-->
