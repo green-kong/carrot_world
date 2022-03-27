@@ -6,8 +6,9 @@ exports.main = async (req, res) => {
     const categorySql = 'SELECT * FROM category';
     const [categoryList] = await conn.query(categorySql);
     const auctionSql = `SELECT 
-                        subject, img, price, 
-                        DATE_FORMAT(date,'%Y-%m-%d') AS date, 
+                        subject, img, 
+                        FORMAT(price,0) AS price, 
+                        DATE_FORMAT(date,'%y-%m-%d') AS date, 
                         DATEDIFF(startDate,date) AS bidStart 
                         FROM auction
                         JOIN au_img
@@ -17,8 +18,9 @@ exports.main = async (req, res) => {
                         LIMIT 8`;
     const [auctionList] = await conn.query(auctionSql);
     const sellSql = `SELECT 
-                     subject, img, price, 
-                     DATE_FORMAT(date,'%Y-%m-%d') AS date
+                     subject, img, 
+                     FORMAT(price,0) AS price, 
+                     DATE_FORMAT(date,'%y-%m-%d') AS date
                      FROM sell_board
                      JOIN s_img
                      ON sell_board.s_id = s_img.s_id
