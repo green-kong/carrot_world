@@ -3,10 +3,21 @@ const { pool } = require('../../model/db/db.js');
 exports.main = async (req, res) => {
   const conn = await pool.getConnection();
   try {
-    const sql = 'select * from category';
-    const [categoryList] = await conn.query(sql);
-    res.send(categoryList);
+    const categorySql = 'SELECT * FROM category';
+    const [categoryList] = await conn.query(categorySql);
+    const auctionSql = `SELECT 
+                        subject, img, price, 
+                        DATE_FORMAT(date,'%Y-%m-%d') AS date, 
+                        DATEDIFF(startDate,date) AS bidStart 
+                        FROM auction
+                        JOIN au_img
+                        ON auction.au_id = au_img.au_id
+                        GROUP BY au_img.img,auction.au_id`;
+    const [auctionList] = await conn.query(auctionSql);
+    const result = { categoryList, auctionList };
+    res.send(result);
   } catch (err) {
+    console.log(err);
     res.status(500).send('err');
   } finally {
     conn.release();
