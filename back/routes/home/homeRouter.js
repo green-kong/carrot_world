@@ -12,4 +12,6 @@ router.post('/write', upload.array('productImg'), homeControll.write);
 
 router.post('/list', homeControll.list);
 
+router.post('/search', homeControll.search);
+
 module.exports = router;

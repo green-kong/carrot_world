@@ -19,13 +19,13 @@
         </h1>
         <div id="search_bar">
           <select id="search_category" placeholder="전체">
-            <option value="전체">전체</option>
+            <option value="all">전체</option>
             <option value="sell">중고거래</option>
             <option value="auction">경매</option>
           </select>
           <div id="search">
-            <input type="text" autocomplete="off" />
-            <span></span>
+            <input type="text" autocomplete="off" id="search_input" />
+            <span id="search_btn"></span>
           </div>
           <a id="sell_register" href="/home/write">판매물품 등록</a>
         </div>
@@ -142,6 +142,34 @@
 <template id="item_list_template">
   <div>
     <p class="board_name">{way} &gt; {category}</p>
+    <ul class="item_list_contaier">
+      {itemList}
+    </ul>
+  </div>
+</template>
+<!-- list item conater template done-->
+
+<!-- home/search all template -->
+<template id="home_search_all_tem">
+  <div>
+    <p class="board_name">경매 내 '{keyword}' 검색결과</p>
+    <ul class="item_list_contaier">
+      {auctionList}
+    </ul>
+  </div>
+  <div>
+    <p class="board_name">중고거래 내 '{keyword}' 검색결과</p>
+    <ul class="item_list_contaier">
+      {sellList}
+    </ul>
+  </div>
+</template>
+<!-- home/search all template done -->
+
+<!-- list item conater template -->
+<template id="search_item_list_template">
+  <div>
+    <p class="board_name">{way} 내 '{keyword}' 검색결과</p>
     <ul class="item_list_contaier">
       {itemList}
     </ul>
