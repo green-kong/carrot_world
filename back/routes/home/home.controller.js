@@ -137,7 +137,7 @@ exports.list = async (req, res) => {
            ON sell_board.s_id = s_img.s_id
            WHERE c_code ='${code}'
            GROUP BY s_img.img,sell_board.s_id
-           LIMIT ${(page - 1) * 32}, 32`;
+           LIMIT ${(page - 1) * 16}, 16`;
   } else {
     sql = `SELECT 
            subject, img, 
@@ -149,11 +149,60 @@ exports.list = async (req, res) => {
            ON auction.au_id = au_img.au_id
            WHERE c_code='${code}'
            GROUP BY au_img.img,auction.au_id
-           LIMIT ${(page - 1) * 32}, 32`;
+           LIMIT ${(page - 1) * 16}, 16`;
   }
   try {
     const [result] = await conn.query(sql);
     res.send(result);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('err');
+  } finally {
+    conn.release();
+  }
+};
+
+exports.search = async (req, res) => {
+  const { way, keyword } = req.body;
+  const limit = way === 'all' ? 8 : 16;
+  console.log(way);
+  const auctionSql = `SELECT 
+                      subject, img, 
+                      FORMAT(price,0) AS price, 
+                      DATE_FORMAT(date,'%y-%m-%d') AS date, 
+                      DATEDIFF(startDate,date) AS bidStart 
+                      FROM auction
+                      JOIN au_img
+                      ON auction.au_id = au_img.au_id
+                      WHERE subject like '%${keyword}%'
+                      GROUP BY au_img.img,auction.au_id
+                      ORDER BY rand()
+                      LIMIT ${limit}`;
+  const sellSql = `SELECT 
+                   subject, img, 
+                   FORMAT(price,0) AS price, 
+                   DATE_FORMAT(date,'%y-%m-%d') AS date
+                   FROM sell_board
+                   JOIN s_img
+                   ON sell_board.s_id = s_img.s_id
+                   WHERE subject like '%${keyword}%'
+                   GROUP BY s_img.img,sell_board.s_id
+                   ORDER BY rand()
+                   LIMIT ${limit}`;
+
+  const conn = await pool.getConnection();
+  try {
+    if (way === 'all') {
+      const [auctionList] = await conn.query(auctionSql);
+      const [sellList] = await conn.query(sellSql);
+      res.send({ auctionList, sellList });
+    } else if (way === 'auction') {
+      const [auctionList] = await conn.query(auctionSql);
+      res.send({ auctionList });
+    } else if (way === 'sell') {
+      const [sellList] = await conn.query(sellSql);
+      res.send({ sellList });
+    }
   } catch (err) {
     console.log(err);
     res.status(500).send('err');
