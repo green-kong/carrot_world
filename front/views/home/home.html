@@ -148,3 +148,31 @@
   </div>
 </template>
 <!-- list item conater template done-->
+
+<!-- home/search all template -->
+<template id="home_search_all_tem">
+  <div>
+    <p class="board_name">경매 내 '{keyword}' 검색결과</p>
+    <ul class="item_list_contaier">
+      {auctionList}
+    </ul>
+  </div>
+  <div>
+    <p class="board_name">중고거래 내 '{keyword}' 검색결과</p>
+    <ul class="item_list_contaier">
+      {sellList}
+    </ul>
+  </div>
+</template>
+<!-- home/search all template done -->
+
+<!-- list item conater template -->
+<template id="search_item_list_template">
+  <div>
+    <p class="board_name">{way} 내 '{keyword}' 검색결과</p>
+    <ul class="item_list_contaier">
+      {itemList}
+    </ul>
+  </div>
+</template>
+<!-- list item conater template done-->
