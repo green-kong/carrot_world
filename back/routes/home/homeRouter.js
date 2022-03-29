@@ -14,4 +14,6 @@ router.post('/list', homeControll.list);
 
 router.post('/search', homeControll.search);
 
+router.post('/view', homeControll.view);
+
 module.exports = router;

@@ -216,3 +216,78 @@ exports.search = async (req, res) => {
     conn.release();
   }
 };
+
+exports.view = async (req, res) => {
+  const { table, idx } = req.body;
+
+  const imgTable = table === 'auction' ? 'au_img' : 's_img';
+  const tagTable = table === 'auction' ? 'au_tag' : 's_tag';
+  const imgIdx = table === 'auction' ? 'au_id' : 's_id';
+
+  const sellItemSql = `SELECT 
+                        sell_board.s_id AS s_id,
+                        c_name, subject, sell_board.u_id,
+                        FORMAT(price,0) AS price,
+                        content, how, location, likes, report, isSold,
+                        DATE_FORMAT(date,'%y-%m-%d') AS date
+                        FROM sell_board
+                        JOIN category
+                        ON sell_board.c_code = category.c_code
+                        WHERE s_id = '${idx}'`;
+  const auItemSql = `SELECT * FROM auction WHERE s_id = ${idx}`;
+
+  const imgSql = `SELECT * FROM ${imgTable} WHERE ${imgIdx}=${idx}`;
+  const tagSql = `SELECT  * FROM ${tagTable} WHERE ${imgIdx}=${idx}`;
+  const conn = await pool.getConnection();
+  try {
+    if (table === 'sell_board') {
+      const [[itemResult]] = await conn.query(sellItemSql);
+      const [imgList] = await conn.query(imgSql);
+      const [tagList] = await conn.query(tagSql);
+      const recommendPrepare = tagList.map((v) => v.tag);
+      let recSqlIn = '';
+      recommendPrepare.forEach((v, i, t) => {
+        if (i === t.length - 1) {
+          recSqlIn += '?';
+        } else {
+          recSqlIn += '?,';
+        }
+      });
+      const recommendSql = `SELECT s_id FROM ${tagTable} 
+                            WHERE tag IN (${recSqlIn})
+                            AND s_id != ${idx}
+                            GROUP BY s_tag.s_id
+                            ORDER BY rand()
+                            LIMIT 5`;
+      const [recommendList] = await conn.query(recommendSql, recommendPrepare);
+      const recItemsIdx = recommendList.map((v) => v.s_id);
+      recItemsIdx.forEach((v, i, t) => {
+        recSqlIn = '';
+        if (i === t.length - 1) {
+          recSqlIn += '?';
+        } else {
+          recSqlIn += '?,';
+        }
+      });
+      const recSql = `SELECT
+                      sell_board.s_id,c_name,
+                      sell_board.c_code AS c_code,
+                      subject, s_img.img,FORMAT(price,0) AS price
+                      FROM sell_board
+                      JOIN s_img
+                      ON s_img.s_id = sell_board.s_id
+                      JOIN category
+                      ON sell_board.c_code = category.c_code
+                      WHERE sell_board.s_id IN (${recSqlIn})
+                      GROUP BY sell_board.s_id,s_img.img
+                      `;
+      const [recList] = await conn.query(recSql, recItemsIdx);
+      console.log(recList);
+      res.send({ itemResult, imgList, tagList, recList });
+    }
+  } catch (err) {
+    console.log(err);
+  } finally {
+    conn.release();
+  }
+};
