@@ -245,6 +245,11 @@ a {
   box-shadow: 0px 4px 28px rgba(35, 29, 106, 0.1);
   overflow: hidden;
   border-radius: 12px;
+  cursor: pointer;
+}
+
+.ranking_list:hover .item_img {
+  transform: scale(1.1);
 }
 
 .ranking_list:nth-child(4n + 0) {
@@ -254,6 +259,7 @@ a {
 .item_img {
   width: 100%;
   height: 100%;
+  transition: 300ms all ease-in;
 }
 
 .item_info {
@@ -311,6 +317,7 @@ a {
   position: relative;
   width: 240px;
   height: 230px;
+  overflow: hidden;
 }
 
 .auction_count {
