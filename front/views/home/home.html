@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="/css/home/styleMain.css" type="text/css" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="module" src="/js/home/index.js" defer></script>
+    <script
+      src="https://kit.fontawesome.com/cbc296ae57.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <div id="wrap">
@@ -180,3 +184,99 @@
   </div>
 </template>
 <!-- list item conater template done-->
+
+<!-- view template -->
+<template id="view_template">
+  <link rel="stylesheet" href="/css/home/view.css" />
+  <section id="prod_intro">
+    <article id="prod_slider">
+      <div id="slider_wrap">
+        <div id="slide_btn">
+          <button id="left_btn">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <button id="right_btn">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+        <ul id="prod_img_list">
+          {imgList}
+        </ul>
+      </div>
+    </article>
+    <article id="prod_summary">
+      <h1 id="view_subject">{subject}</h1>
+      <div id="sell_price">
+        <span id="price_num">{price}</span>
+        <span>원</span>
+      </div>
+      <div id="view_status">
+        <i class="fa-solid fa-heart"></i>
+        <span id="like_num">{like}</span>
+        <i class="fa-solid fa-clock"></i>
+        <span id="time">{date}</span>
+      </div>
+      <ul id="detail_list">
+        <li class="details">
+          <span>카테고리 :</span>
+          <span id="i_category">{c_name}</span>
+        </li>
+        <li class="details">
+          <span>거래방식 :</span>
+          <span id="i_how">{how}</span>
+        </li>
+        <li class="details">
+          <span>거래지역 :</span>
+          <span id="i_where">{location}</span>
+        </li>
+        <li class="details">
+          <span>태그 :</span>
+          <span id="tag"> {tagList} </span>
+        </li>
+      </ul>
+      <div id="btn_wrap">
+        <button class="like_btn" type="submit">
+          <i class="fa-solid fa-heart"> 찜하기</i>
+        </button>
+        <button id="contact_btn" type="submit">1:1 연락</button>
+      </div>
+    </article>
+  </section>
+  <section id="prod_detail_wrap">
+    <h2>제품 설명</h2>
+    <article id="prod_detail">{content}</article>
+  </section>
+  <footer id="related_lineup_wrap">
+    <h2>관련 상품</h2>
+    <ul id="related_item_lineup">
+      {recommendList}
+    </ul>
+  </footer>
+</template>
+<!-- view template done -->
+
+<!-- view img templat -->
+<template id="view_img_template">
+  <li class="prod_img">
+    <img src="http://localhost:4000/upload/{img}" />
+  </li>
+</template>
+<!-- view img tmeplat done -->
+
+<!-- view tag template -->
+<template id="view_tag_template">
+  <a href="#">#{tag}</a>
+</template>
+<!-- view tag template done -->
+
+<!-- recommend item list template -->
+<template id="view_recommend_template">
+  <li class="related_item">
+    <a href="#">
+      <img class="item_pic" src="http://localhost:4000/upload/{img}" />
+      <span class="item_subject">에어프라이어</span>
+      <span class="item_price">30,000 원</span>
+    </a>
+  </li>
+</template>
+<!-- recommend item list template done -->
