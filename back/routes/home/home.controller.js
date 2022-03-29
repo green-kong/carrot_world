@@ -260,16 +260,19 @@ exports.view = async (req, res) => {
                             ORDER BY rand()
                             LIMIT 5`;
       const [recommendList] = await conn.query(recommendSql, recommendPrepare);
-      const recItemsIdx = recommendList.map((v) => v.s_id);
-      recItemsIdx.forEach((v, i, t) => {
-        recSqlIn = '';
-        if (i === t.length - 1) {
-          recSqlIn += '?';
-        } else {
-          recSqlIn += '?,';
-        }
-      });
-      const recSql = `SELECT
+      if (recommendList.length === 0) {
+        res.send({ itemResult, imgList, tagList });
+      } else {
+        const recItemsIdx = recommendList.map((v) => v.s_id);
+        recItemsIdx.forEach((v, i, t) => {
+          recSqlIn = '';
+          if (i === t.length - 1) {
+            recSqlIn += '?';
+          } else {
+            recSqlIn += '?,';
+          }
+        });
+        const recSql = `SELECT
                       sell_board.s_id,c_name,
                       sell_board.c_code AS c_code,
                       subject, s_img.img,FORMAT(price,0) AS price
@@ -281,9 +284,9 @@ exports.view = async (req, res) => {
                       WHERE sell_board.s_id IN (${recSqlIn})
                       GROUP BY sell_board.s_id,s_img.img
                       `;
-      const [recList] = await conn.query(recSql, recItemsIdx);
-      console.log(recList);
-      res.send({ itemResult, imgList, tagList, recList });
+        const [recList] = await conn.query(recSql, recItemsIdx);
+        res.send({ itemResult, imgList, tagList, recList });
+      }
     }
   } catch (err) {
     console.log(err);
