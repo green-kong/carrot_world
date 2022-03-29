@@ -16,7 +16,10 @@ const routes = {
 
 function router() {
   const hashValue = window.location.hash.replace('#', '').split('/')[0];
-
+  if (hashValue === '') {
+    init();
+    return;
+  }
   (routes[hashValue] || routes.notFound)();
 }
 
