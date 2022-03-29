@@ -188,70 +188,72 @@
 <!-- view template -->
 <template id="view_template">
   <link rel="stylesheet" href="/css/home/view.css" />
-  <section id="prod_intro">
-    <article id="prod_slider">
-      <div id="slider_wrap">
-        <div id="slide_btn">
-          <button id="left_btn">
-            <i class="fa-solid fa-chevron-left"></i>
-          </button>
-          <button id="right_btn">
-            <i class="fa-solid fa-chevron-right"></i>
-          </button>
+  <div id="view_wrap">
+    <section id="prod_intro">
+      <article id="prod_slider">
+        <div id="slider_wrap">
+          <div id="slide_btn">
+            <button id="left_btn">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button id="right_btn">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+          <ul id="prod_img_list">
+            {imgList}
+          </ul>
         </div>
-        <ul id="prod_img_list">
-          {imgList}
+      </article>
+      <article id="prod_summary">
+        <h1 id="view_subject">{subject}</h1>
+        <div id="sell_price">
+          <span id="price_num">{price}</span>
+          <span>원</span>
+        </div>
+        <div id="view_status">
+          <i class="fa-solid fa-heart"></i>
+          <span id="like_num">{like}</span>
+          <i class="fa-solid fa-clock"></i>
+          <span id="time">{date}</span>
+        </div>
+        <ul id="detail_list">
+          <li class="details">
+            <span>카테고리 :</span>
+            <span id="i_category">{c_name}</span>
+          </li>
+          <li class="details">
+            <span>거래방식 :</span>
+            <span id="i_how">{how}</span>
+          </li>
+          <li class="details">
+            <span>거래지역 :</span>
+            <span id="i_where">{location}</span>
+          </li>
+          <li class="details">
+            <span>태그 :</span>
+            <span id="tag"> {tagList} </span>
+          </li>
         </ul>
-      </div>
-    </article>
-    <article id="prod_summary">
-      <h1 id="view_subject">{subject}</h1>
-      <div id="sell_price">
-        <span id="price_num">{price}</span>
-        <span>원</span>
-      </div>
-      <div id="view_status">
-        <i class="fa-solid fa-heart"></i>
-        <span id="like_num">{like}</span>
-        <i class="fa-solid fa-clock"></i>
-        <span id="time">{date}</span>
-      </div>
-      <ul id="detail_list">
-        <li class="details">
-          <span>카테고리 :</span>
-          <span id="i_category">{c_name}</span>
-        </li>
-        <li class="details">
-          <span>거래방식 :</span>
-          <span id="i_how">{how}</span>
-        </li>
-        <li class="details">
-          <span>거래지역 :</span>
-          <span id="i_where">{location}</span>
-        </li>
-        <li class="details">
-          <span>태그 :</span>
-          <span id="tag"> {tagList} </span>
-        </li>
+        <div id="btn_wrap">
+          <button class="like_btn" type="submit">
+            <i class="fa-solid fa-heart"> 찜하기</i>
+          </button>
+          <button id="contact_btn" type="submit">1:1 연락</button>
+        </div>
+      </article>
+    </section>
+    <section id="prod_detail_wrap">
+      <h2>제품 설명</h2>
+      <article id="prod_detail">{content}</article>
+    </section>
+    <footer id="related_lineup_wrap">
+      <h2>관련 상품</h2>
+      <ul id="related_item_lineup">
+        {recommendList}
       </ul>
-      <div id="btn_wrap">
-        <button class="like_btn" type="submit">
-          <i class="fa-solid fa-heart"> 찜하기</i>
-        </button>
-        <button id="contact_btn" type="submit">1:1 연락</button>
-      </div>
-    </article>
-  </section>
-  <section id="prod_detail_wrap">
-    <h2>제품 설명</h2>
-    <article id="prod_detail">{content}</article>
-  </section>
-  <footer id="related_lineup_wrap">
-    <h2>관련 상품</h2>
-    <ul id="related_item_lineup">
-      {recommendList}
-    </ul>
-  </footer>
+    </footer>
+  </div>
 </template>
 <!-- view template done -->
 
