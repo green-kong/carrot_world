@@ -1,3 +1,5 @@
+import itemClickEvent from '../view.js';
+
 export default async function drawSearch() {
   const [, way, tmp] = window.location.hash.replace('#', '').split('/');
   const keyword = decodeURIComponent(tmp);
@@ -23,6 +25,7 @@ export default async function drawSearch() {
         return (
           acc +
           auctionCon
+            .replace('{au_id}', cur.au_id)
             .replace('{img}', cur.img)
             .replace('{bidStart}', cur.bidStart)
             .replace('{subject}', cur.subject)
@@ -35,6 +38,7 @@ export default async function drawSearch() {
         return (
           acc +
           sellCon
+            .replace('{s_id}', cur.s_id)
             .replace('{img}', cur.img)
             .replace('{bidStart}', cur.bidStart)
             .replace('{subject}', cur.subject)
@@ -53,6 +57,7 @@ export default async function drawSearch() {
         return (
           acc +
           auctionCon
+            .replace('{au_id}', cur.au_id)
             .replace('{img}', cur.img)
             .replace('{bidStart}', cur.bidStart)
             .replace('{subject}', cur.subject)
@@ -72,8 +77,8 @@ export default async function drawSearch() {
         return (
           acc +
           sellCon
+            .replace('{s_id}', cur.s_id)
             .replace('{img}', cur.img)
-            .replace('{bidStart}', cur.bidStart)
             .replace('{subject}', cur.subject)
             .replace('{price}', cur.price)
             .replace('{date}', cur.date)
@@ -86,6 +91,7 @@ export default async function drawSearch() {
         .replace('{itemList}', sell);
     }
     contentFrame.innerHTML = result;
+    itemClickEvent();
   } else {
     alert('죄송합니다 잠시후 다시 시도해 주세요.');
   }

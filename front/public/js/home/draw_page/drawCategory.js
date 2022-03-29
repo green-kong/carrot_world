@@ -1,3 +1,5 @@
+import itemClickEvent from '../view.js';
+
 export default async function drawCategory() {
   const [, way, code, tmp] = window.location.hash.replace('#', '').split('/');
   const category = decodeURIComponent(tmp);
@@ -16,6 +18,7 @@ export default async function drawCategory() {
       return (
         acc +
         sellTemp
+          .replace('{s_id}', cur.s_id)
           .replace('{img}', cur.img)
           .replace('{bidStart}', cur.bidStart)
           .replace('{subject}', cur.subject)
@@ -29,6 +32,7 @@ export default async function drawCategory() {
       return (
         acc +
         auctionTemp
+          .replace('{au_id}', cur.au_id)
           .replace('{img}', cur.img)
           .replace('{bidStart}', cur.bidStart)
           .replace('{subject}', cur.subject)
@@ -45,4 +49,5 @@ export default async function drawCategory() {
 
   const contentFrame = document.querySelector('#content_frame');
   contentFrame.innerHTML = result;
+  itemClickEvent();
 }

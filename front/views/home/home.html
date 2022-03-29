@@ -106,6 +106,8 @@
 <!-- main sell template -->
 <template id="main_sell_list">
   <li class="ranking_list">
+    <input class="table" type="hidden" value="sell_board" />
+    <input class="idx" type="hidden" value="{s_id}" />
     <div class="rank">
       <img src="http://localhost:4000/upload/{img}" class="item_img" />
     </div>
@@ -123,6 +125,8 @@
 <!-- main auction template -->
 <template id="main_auction_list">
   <li class="ranking_list">
+    <input class="table" type="hidden" value="auction" />
+    <input class="idx" type="hidden" value="{au_id}" />
     <div class="rank">
       <img src="http://localhost:4000/upload/{img}" class="item_img" />
       <div class="auction_count">경매시작 D-{bidStart}</div>

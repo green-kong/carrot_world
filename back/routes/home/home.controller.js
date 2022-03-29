@@ -6,7 +6,8 @@ exports.main = async (req, res) => {
     const categorySql = 'SELECT * FROM category';
     const [categoryList] = await conn.query(categorySql);
     const auctionSql = `SELECT 
-                        subject, img, 
+                        auction.au_id AS au_id
+                        ,subject, img, 
                         FORMAT(price,0) AS price, 
                         DATE_FORMAT(date,'%y-%m-%d') AS date, 
                         DATEDIFF(startDate,date) AS bidStart 
@@ -18,7 +19,8 @@ exports.main = async (req, res) => {
                         LIMIT 8`;
     const [auctionList] = await conn.query(auctionSql);
     const sellSql = `SELECT 
-                     subject, img, 
+                     sell_board.s_id AS s_id
+                     ,subject, img, 
                      FORMAT(price,0) AS price, 
                      DATE_FORMAT(date,'%y-%m-%d') AS date
                      FROM sell_board
@@ -129,6 +131,7 @@ exports.list = async (req, res) => {
   let sql;
   if (way === 'sell') {
     sql = `SELECT 
+           sell_board.s_id AS s_id,
            subject, img, 
            FORMAT(price,0) AS price, 
            DATE_FORMAT(date,'%y-%m-%d') AS date
@@ -140,6 +143,7 @@ exports.list = async (req, res) => {
            LIMIT ${(page - 1) * 16}, 16`;
   } else {
     sql = `SELECT 
+            auction.au_id AS au_id,
            subject, img, 
            FORMAT(price,0) AS price, 
            DATE_FORMAT(date,'%y-%m-%d') AS date, 
@@ -167,6 +171,7 @@ exports.search = async (req, res) => {
   const limit = way === 'all' ? 8 : 16;
   console.log(way);
   const auctionSql = `SELECT 
+                       auction.au_id AS au_id,
                       subject, img, 
                       FORMAT(price,0) AS price, 
                       DATE_FORMAT(date,'%y-%m-%d') AS date, 
@@ -179,6 +184,7 @@ exports.search = async (req, res) => {
                       ORDER BY rand()
                       LIMIT ${limit}`;
   const sellSql = `SELECT 
+                   sell_board.s_id AS s_id,
                    subject, img, 
                    FORMAT(price,0) AS price, 
                    DATE_FORMAT(date,'%y-%m-%d') AS date

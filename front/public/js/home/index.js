@@ -1,5 +1,6 @@
-import init from './main.js';
 import searchEvent from './search.js';
+
+import init from './main.js';
 import drawSearch from './draw_page/drawSearch.js';
 import drawNotFound from './draw_page/drawNotFound.js';
 import drawCategory from './draw_page/drawCategory.js';
