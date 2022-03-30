@@ -6,7 +6,6 @@ export default async function drawView() {
 
   const response = await axios.post(url, body);
   if (response.status === 200) {
-    console.log(response.data);
     const { imgList, itemResult, tagList, recList } = response.data;
 
     const contentFrame = document.querySelector('#content_frame');

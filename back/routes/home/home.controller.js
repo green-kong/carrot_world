@@ -351,3 +351,54 @@ exports.view = async (req, res) => {
     conn.release();
   }
 };
+
+exports.tag = async (req, res) => {
+  const { table, tag, tagTable } = req.body;
+  const idx = table === 'auction' ? 'au_id' : 's_id';
+  const tagSql = `SELECT * from ${tagTable} WHERE tag = '${tag}'`;
+  const conn = await pool.getConnection();
+  try {
+    const [tagTmp] = await conn.query(tagSql);
+    const idxList = tagTmp.map((v) => v[idx]);
+    let sqlIn = '';
+    idxList.forEach((v, i, t) => {
+      if (i === t.length - 1) {
+        sqlIn += '?';
+      } else {
+        sqlIn += '?,';
+      }
+    });
+    let resultSql;
+    if (table === 'sell_board') {
+      resultSql = `SELECT 
+                  sell_board.s_id AS s_id,
+                  subject, img, 
+                  FORMAT(price,0) AS price, 
+                  DATE_FORMAT(date,'%y-%m-%d') AS date
+                  FROM sell_board
+                  JOIN s_img
+                  ON sell_board.s_id = s_img.s_id
+                  WHERE sell_board.s_id IN (${sqlIn})
+                  GROUP BY s_img.img,sell_board.s_id`;
+    } else {
+      resultSql = `SELECT 
+                  auction.au_id AS au_id,
+                  subject, img, 
+                  FORMAT(price,0) AS price, 
+                  DATE_FORMAT(date,'%y-%m-%d') AS date, 
+                  DATEDIFF(startDate,date) AS bidStart 
+                  FROM auction
+                  JOIN au_img
+                  ON auction.au_id = au_img.au_id
+                  WHERE auction.au_id IN (${sqlIn})
+                  GROUP BY au_img.img,auction.au_id
+                  `;
+    }
+    const [result] = await conn.query(resultSql, idxList);
+    res.send(result);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    conn.release();
+  }
+};

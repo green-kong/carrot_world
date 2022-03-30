@@ -1,4 +1,4 @@
-const enlargeThumbnail = (e) => {
+const moveView = (e) => {
   const target = e.target.closest('.ranking_list');
 
   const table = target.querySelector('.table').value;
@@ -11,6 +11,6 @@ export default function itemClicEvent() {
   const itemListCon = document.querySelectorAll('.item_list_contaier');
 
   itemListCon.forEach((v) => {
-    v.addEventListener('click', enlargeThumbnail);
+    v.addEventListener('click', moveView);
   });
 }
