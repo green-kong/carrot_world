@@ -1,3 +1,6 @@
+import activeLike from '../like.js';
+import drawLike from './drawLike.js';
+
 export default async function drawView() {
   const [, table, idx] = window.location.hash.replace('#', '').split('/');
 
@@ -95,4 +98,7 @@ export default async function drawView() {
       contactBtn.textContent = '입찰하기';
     }
   }
+
+  activeLike();
+  drawLike();
 }

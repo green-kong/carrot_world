@@ -18,4 +18,6 @@ router.post('/view', homeControll.view);
 
 router.post('/tag', homeControll.tag);
 
+router.post('/like', homeControll.like);
+
 module.exports = router;

@@ -402,3 +402,45 @@ exports.tag = async (req, res) => {
     conn.release();
   }
 };
+
+exports.like = async (req, res) => {
+  const { table, itemIdx, userIdx } = req.body;
+  const likeTable = table === 'auction' ? 'au_likes' : 's_likes';
+  const itemColumn = table === 'auction' ? 'au_id' : 's_id';
+  const checkSql = `SELECT * FROM ${likeTable}
+                    WHERE ${itemColumn}=${itemIdx} 
+                    AND u_id=${userIdx}`;
+  const conn = await pool.getConnection();
+  try {
+    const [[checkResult]] = await conn.query(checkSql);
+    if (checkResult === undefined) {
+      const insertSql = `INSERT INTO ${likeTable} 
+                        (${itemColumn},u_id)
+                        VALUES
+                        (${itemIdx},${userIdx})`;
+      const plusUpdateSql = `UPDATE ${table}
+                            SET likes = likes+1
+                            WHERE ${itemColumn}=${itemIdx}`;
+      await conn.query(insertSql);
+      await conn.query(plusUpdateSql);
+    } else {
+      const deletSql = `DELETE FROM ${likeTable} 
+                        WHERE ${itemColumn}=${itemIdx} 
+                        AND u_id=${userIdx}`;
+      const minusUpdateSql = `UPDATE ${table}
+                            SET likes = likes-1
+                            WHERE ${itemColumn}=${itemIdx}`;
+      await conn.query(deletSql);
+      await conn.query(minusUpdateSql);
+    }
+    const resultSql = `SELECT likes FROM ${table} 
+                      WHERE ${itemColumn}=${itemIdx}`;
+    const [[result]] = await conn.query(resultSql);
+    res.send(result);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('false');
+  } finally {
+    conn.release();
+  }
+};
