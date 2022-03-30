@@ -27,7 +27,7 @@ router.post('/login', async (req, res) => {
         userEmail: result[0].userEmail,
       };
       const token = makeToken(payload);
-      res.cookie('Access_token', token, { maxAge: 1000 * 60 * 10 });
+      res.cookie('Access_token', token, { maxAge: 1000 * 60 * 60 });
       res.send(
         alertmove('http://localhost:3000/home', '로그인에 성공하였습니다.')
       );
