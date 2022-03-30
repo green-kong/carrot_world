@@ -157,6 +157,7 @@
   background-color: var(--textSub-color);
   color: var(--background1);
   font-size: 20px;
+  cursor: pointer;
 }
 
 /* 찜하기 클릭했을 때 색 바뀌게끔 css 처리 */
