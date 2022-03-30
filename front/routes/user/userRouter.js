@@ -13,7 +13,7 @@ function loginMiddleware(req, res) {
 router.get('/login', unauth, loginMiddleware);
 
 router.get('/join', (req, res) => {
-  res.render('/join.html');
+  res.render('user/join.html');
 });
 
 router.get('/profile', userControll.profile);

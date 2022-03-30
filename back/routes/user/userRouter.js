@@ -66,4 +66,17 @@ router.post('/auth', async (req, res) => {
   res.send(result);
 });
 
+router.post('/join', async (req, res) => {
+  const { userEmail, userPW, userAlias, userMobile } = req.body;
+  const conn = await pool.getConnection();
+  const sql = `INSERT INTO user (userEmail, userPW, userAlias, userMobile) VALUES ('${userEmail}', '${userPW}', '${userAlias}', '${userMobile}')`;
+  const [result] = await conn.query(sql);
+  console.log(result);
+  res.send(
+    alertmove(
+      'http://localhost:3000/user/login',
+      `${userAlias}님 회원가입을 축하합니다. 로그인을 해주세요`
+    )
+  );
+});
 module.exports = router;
