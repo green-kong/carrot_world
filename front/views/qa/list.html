@@ -13,86 +13,16 @@
     <td id="author">작성자</td>
     <td id="date">등록일</td>
   </tr>
+  {% for item in listData %}
   <tr>
-    <td>10</td>
+    <td>{{item.q_id}}</td>
     <td class="subject_align">
-      <a href="#">질문 있습니다</a>
+      <a href="/qa/view?idx={{item.q_id}}">{{item.subject}}</a>
     </td>
-    <td>kong</td>
-    <td>22-03-24</td>
+    <td>{{item.userAlias}}</td>
+    <td>{{item.date}}</td>
   </tr>
-  <tr>
-    <td>10</td>
-    <td class="subject_align">
-      <a href="#">질문 있습니다</a>
-    </td>
-    <td>kong</td>
-    <td>22-03-24</td>
-  </tr>
-  <tr>
-    <td>10</td>
-    <td class="subject_align">
-      <a href="#">질문 있습니다</a>
-    </td>
-    <td>kong</td>
-    <td>22-03-24</td>
-  </tr>
-  <tr>
-    <td>10</td>
-    <td class="subject_align">
-      <a href="#">질문 있습니다</a>
-    </td>
-    <td>kong</td>
-    <td>22-03-24</td>
-  </tr>
-  <tr>
-    <td>10</td>
-    <td class="subject_align">
-      <a href="#">질문 있습니다</a>
-    </td>
-    <td>kong</td>
-    <td>22-03-24</td>
-  </tr>
-  <tr>
-    <td>10</td>
-    <td class="subject_align">
-      <a href="#">질문 있습니다</a>
-    </td>
-    <td>kong</td>
-    <td>22-03-24</td>
-  </tr>
-  <tr>
-    <td>10</td>
-    <td class="subject_align">
-      <a href="#">질문 있습니다</a>
-    </td>
-    <td>kong</td>
-    <td>22-03-24</td>
-  </tr>
-  <tr>
-    <td>10</td>
-    <td class="subject_align">
-      <a href="#">질문 있습니다</a>
-    </td>
-    <td>kong</td>
-    <td>22-03-24</td>
-  </tr>
-  <tr>
-    <td>10</td>
-    <td class="subject_align">
-      <a href="#">질문 있습니다</a>
-    </td>
-    <td>kong</td>
-    <td>22-03-24</td>
-  </tr>
-  <tr>
-    <td>10</td>
-    <td class="subject_align">
-      <a href="#">질문 있습니다</a>
-    </td>
-    <td>kong</td>
-    <td>22-03-24</td>
-  </tr>
+  {% endfor %}
 </table>
 <div id="btn_container">
   <a href="/qa/write" id="write_btn">글쓰기</a>

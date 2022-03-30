@@ -5,7 +5,8 @@ exports.write = async (req, res) => {
   const conn = await pool.getConnection();
   try {
     const writeSql = `INSERT INTO qa(u_id, subject, content, date
-      ) VALUES((SELECT u_id FROM user WHERE userAlias = '${author}'),'${subject}', '${content}', now())`;
+                      ) VALUES((SELECT u_id FROM user
+                        WHERE userAlias = '${author}'),'${subject}', '${content}', now())`;
     const [result] = await conn.query(writeSql);
     const response = {
       result: {
@@ -43,10 +44,70 @@ exports.view = async (req, res) => {
   }
 };
 
-exports.list = (req, res) => {};
+exports.list = async (req, res) => {
+  try {
+    const { page } = req.query;
+    const upperData = page * 10 - 9;
+    console.log(upperData);
+    const listSql = `SELECT qa.q_id, qa.subject,
+                      user.userAlias,
+                      DATE_FORMAT(qa.date, '%y-%m-%d') AS date
+                      FROM qa
+                      JOIN user
+                      ON qa.u_id = user.u_id
+                      ORDER BY q_id DESC
+                      LIMIT ${upperData}, 10`;
+    const [result] = await pool.execute(listSql);
+    const countSql = `SELECT count(q_id) as totalQty FROM qa`;
+    const [[{ totalQty }]] = await pool.execute(countSql);
+    const response = {
+      result,
+      totalQty,
+    };
+    res.send(response);
+  } catch (err) {
+    console.log(err.message);
+  }
+};
 
-exports.edit = (req, res) => {};
-exports.delete = (req, res) => {};
+exports.delete = async (req, res) => {
+  const { idx } = req.query;
+  try {
+    const sql = `DELETE FROM qa WHERE q_id = ${idx}`;
+    const [result] = await pool.execute(sql);
+    res.send(result);
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+exports.edit = async (req, res) => {
+  const { idx } = req.query;
+  try {
+    const editSql = `SELECT qa.q_id, qa.subject, qa.content, 
+                      user.userAlias
+                      FROM qa 
+                      JOIN user 
+                      ON qa.u_id = user.u_id 
+                      WHERE q_id = '${idx}'`;
+    const [[result]] = await pool.execute(editSql);
+    res.send(result);
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+exports.editPost = async (req, res) => {
+  const { q_id, subject, content } = req.body;
+  try {
+    const editPostSql = `UPDATE qa SET subject=?, content=?, date=now() WHERE q_id = ${q_id}`;
+    const prepare = [subject, content];
+    const [result] = await pool.execute(editPostSql, prepare);
+    res.send(result);
+  } catch (err) {
+    console.log(err.message);
+  }
+};
 
 exports.replyWrite = (req, res) => {};
 exports.replyUpdate = (req, res) => {};
