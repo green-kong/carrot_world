@@ -234,7 +234,17 @@ exports.view = async (req, res) => {
                         JOIN category
                         ON sell_board.c_code = category.c_code
                         WHERE s_id = '${idx}'`;
-  const auItemSql = `SELECT * FROM auction WHERE s_id = ${idx}`;
+  const auItemSql = `SELECT 
+                        auction.au_id AS au_id,
+                        c_name, subject, auction.u_id,
+                        FORMAT(price,0) AS price,
+                        content, how, location, likes, isSold,
+                        DATE_FORMAT(date,'%y-%m-%d') AS date,
+                        DATEDIFF(startDate,now()) AS bidStart
+                        FROM auction
+                        JOIN category
+                        ON auction.c_code = category.c_code
+                        WHERE au_id = '${idx}'`;
 
   const imgSql = `SELECT * FROM ${imgTable} WHERE ${imgIdx}=${idx}`;
   const tagSql = `SELECT  * FROM ${tagTable} WHERE ${imgIdx}=${idx}`;
@@ -285,6 +295,55 @@ exports.view = async (req, res) => {
                       GROUP BY sell_board.s_id,s_img.img
                       `;
         const [recList] = await conn.query(recSql, recItemsIdx);
+        res.send({ itemResult, imgList, tagList, recList });
+      }
+    } else {
+      const [[itemResult]] = await conn.query(auItemSql);
+      const [imgList] = await conn.query(imgSql);
+      const [tagList] = await conn.query(tagSql);
+      const recommendPrepare = tagList.map((v) => v.tag);
+      let recSqlIn = '';
+      recommendPrepare.forEach((v, i, t) => {
+        if (i === t.length - 1) {
+          recSqlIn += '?';
+        } else {
+          recSqlIn += '?,';
+        }
+      });
+      const recommendSql = `SELECT au_id FROM ${tagTable} 
+                            WHERE tag IN (${recSqlIn})
+                            AND au_id != ${idx}
+                            GROUP BY au_tag.au_id
+                            ORDER BY rand()
+                            LIMIT 5`;
+      const [recommendList] = await conn.query(recommendSql, recommendPrepare);
+      if (recommendList.length === 0) {
+        res.send({ itemResult, imgList, tagList });
+      } else {
+        const recItemsIdx = recommendList.map((v) => v.au_id);
+        recItemsIdx.forEach((v, i, t) => {
+          recSqlIn = '';
+          if (i === t.length - 1) {
+            recSqlIn += '?';
+          } else {
+            recSqlIn += '?,';
+          }
+        });
+        console.log(recSqlIn);
+        const recSql = `SELECT
+                      auction.au_id,c_name,
+                      auction.c_code AS c_code,
+                      subject, au_img.img,FORMAT(price,0) AS price
+                      FROM auction
+                      JOIN au_img
+                      ON au_img.au_id = auction.au_id
+                      JOIN category
+                      ON auction.c_code = category.c_code
+                      WHERE auction.au_id IN (${recSqlIn})
+                      GROUP BY auction.au_id,au_img.img
+                      `;
+        const [recList] = await conn.query(recSql, recItemsIdx);
+        console.log(recList);
         res.send({ itemResult, imgList, tagList, recList });
       }
     }
