@@ -3,7 +3,9 @@
 {% block css %}
 <link rel="stylesheet" href="/css/qa/view.css" />
 {% endblock %}
-<!--  -->
+{% block js %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+{% endblock %}
 {% block content %}
 <div id="board_top">1:1 게시판</div>
 <div id="content">
@@ -27,13 +29,7 @@
     <div id="sub_con_input">
       <input type="hidden" id="linkedPosting" value="{{result._id}}" />
       <input type="text" id="reply_author" value="운영자" readonly />
-      <textarea
-        name="replyContent"
-        id="reply_content"
-        cols="30"
-        rows="10"
-        maxlength="120"
-      ></textarea>
+      <textarea name="replyContent" id="reply_content" cols="30" rows="10" maxlength="120"></textarea>
     </div>
     <button id="reply_btn">댓글등록</button>
   </div>

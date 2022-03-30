@@ -1,5 +1,7 @@
 exports.write = (req, res) => {
-  res.render('qa/write.html');
+  const { userResult } = req.user;
+  delete userResult.userPW;
+  res.render('qa/write.html', { user: userResult });
 };
 
 exports.list = (req, res) => {
