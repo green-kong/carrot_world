@@ -6,6 +6,7 @@ export default async function drawView() {
 
   const response = await axios.post(url, body);
   if (response.status === 200) {
+    console.log(response.data);
     const { imgList, itemResult, tagList, recList } = response.data;
 
     const contentFrame = document.querySelector('#content_frame');
@@ -86,5 +87,11 @@ export default async function drawView() {
         .replace('{recommendList}', recResult);
     }
     contentFrame.innerHTML = result;
+    const bidInput = document.querySelector('#bid_input');
+    const contactBtn = document.querySelector('#contact_btn');
+    if (table === 'auction') {
+      bidInput.setAttribute('type', 'text');
+      contactBtn.textContent = '입찰하기';
+    }
   }
 }
