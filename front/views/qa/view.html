@@ -10,12 +10,12 @@
 <div id="board_top">1:1 게시판</div>
 <div id="content">
   <div id="title">
-    <p>질문있습니다.</p>
-    <span>kong</span>
-    <span>22-03-24</span>
-    <span>조회수 1</span>
+    <p>{{viewData.subject}}</p>
+    <span>{{viewData.userAlias}}</span>
+    <span>{{viewData.date}}</span>
+    <span>조회수 {{viewData.hit}}</span>
   </div>
-  <div id="main_content">맥북 구매했는데 벽돌이 왔어요 어뜨케 하죠?</div>
+  <div id="main_content">{{viewData.content}}</div>
   <div id="btn_container">
     <a href="/qa/list">글목록</a>
     <div id="right_btn_container">

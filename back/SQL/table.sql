@@ -83,7 +83,8 @@ CREATE TABLE `qa` (
   `u_id` INT NOT NULL,
   `subject` VARCHAR(64),
   `content` VARCHAR(255),
-  `date` timestamp NOT NULL
+  `date` timestamp NOT NULL,
+  `hit` INT DEFAULT 0
 );
 
 CREATE TABLE `q_reply` (
