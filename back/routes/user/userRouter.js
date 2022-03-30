@@ -46,24 +46,30 @@ router.post('/auth', async (req, res) => {
   const { u_id } = req.body;
   const conn = await pool.getConnection();
   const sql = `SELECT * FROM user WHERE u_id='${u_id}'`;
-  const [[userResult]] = await conn.query(sql);
   const slikeSql = `SELECT * FROM s_likes WHERE u_id='${u_id}'`;
-  const [slikeTmp] = await conn.query(slikeSql);
-  const slikeResult = slikeTmp.map((v) => v.s_id);
   const aulikeSql = `SELECT * FROM au_likes WHERE u_id='${u_id}'`;
-  const [aulikeTmp] = await conn.query(aulikeSql);
-  const aulikeResult = aulikeTmp.map((v) => v.au_id);
   const chatSql = 'SELECT * FROM chat';
-  const [chatTmp] = await conn.query(chatSql);
-  const chatResult = [];
-  chatTmp.forEach((v) => {
-    v.members.split(',');
-    if (v.members.includes(u_id)) {
-      chatResult.push(v.c_id);
-    }
-  });
-  const result = { userResult, slikeResult, aulikeResult, chatResult };
-  res.send(result);
+  try {
+    const [[userResult]] = await conn.query(sql);
+    const [slikeTmp] = await conn.query(slikeSql);
+    const slikeResult = slikeTmp.map((v) => v.s_id);
+    const [aulikeTmp] = await conn.query(aulikeSql);
+    const aulikeResult = aulikeTmp.map((v) => v.au_id);
+    const [chatTmp] = await conn.query(chatSql);
+    const chatResult = [];
+    chatTmp.forEach((v) => {
+      v.members.split(',');
+      if (v.members.includes(u_id)) {
+        chatResult.push(v.c_id);
+      }
+    });
+    const result = { userResult, slikeResult, aulikeResult, chatResult };
+    res.send(result);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    conn.release();
+  }
 });
 
 module.exports = router;
