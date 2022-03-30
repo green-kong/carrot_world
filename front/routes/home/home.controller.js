@@ -1,5 +1,6 @@
 exports.home = (req, res) => {
-  res.render('home/home.html');
+  const { userResult, totalCount } = req.user;
+  res.render('home/home.html', { userResult, totalCount });
 };
 
 exports.write = (req, res) => {

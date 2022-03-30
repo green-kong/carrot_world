@@ -42,16 +42,16 @@
                 <img src="/img/home/profile.PNG" id="profile_img" />
               </ul>
               <ul id="profile_rightbox">
-                <li id="call_user">판매자 님</li>
+                <li id="call_user">{{userResult.userAlias}} 님</li>
                 <li id="show_profile">
                   <a href="/user/profile">내 정보 보기</a>
                 </li>
               </ul>
             </div>
             <ul id="profile_centerbox">
-              <li id="my_point">Point : 123 pt</li>
+              <li id="my_point">Point : {{userResult.point}} pt</li>
               <ul>
-                <li id="sell_item">판매중인 물품 : 1개</li>
+                <li id="sell_item">판매중인 물품 : {{totalCount}}개</li>
                 <li id="new_chat">새로운 채팅 : 1개</li>
               </ul>
               <li id="user_logout">로그아웃</li>
