@@ -274,8 +274,8 @@ exports.view = async (req, res) => {
         res.send({ itemResult, imgList, tagList });
       } else {
         const recItemsIdx = recommendList.map((v) => v.s_id);
+        recSqlIn = '';
         recItemsIdx.forEach((v, i, t) => {
-          recSqlIn = '';
           if (i === t.length - 1) {
             recSqlIn += '?';
           } else {
@@ -321,15 +321,14 @@ exports.view = async (req, res) => {
         res.send({ itemResult, imgList, tagList });
       } else {
         const recItemsIdx = recommendList.map((v) => v.au_id);
+        recSqlIn = '';
         recItemsIdx.forEach((v, i, t) => {
-          recSqlIn = '';
           if (i === t.length - 1) {
             recSqlIn += '?';
           } else {
             recSqlIn += '?,';
           }
         });
-        console.log(recSqlIn);
         const recSql = `SELECT
                       auction.au_id,c_name,
                       auction.c_code AS c_code,
@@ -343,7 +342,6 @@ exports.view = async (req, res) => {
                       GROUP BY auction.au_id,au_img.img
                       `;
         const [recList] = await conn.query(recSql, recItemsIdx);
-        console.log(recList);
         res.send({ itemResult, imgList, tagList, recList });
       }
     }
