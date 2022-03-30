@@ -26,7 +26,9 @@ export default async function drawView() {
     }, '');
 
     const tagResult = tagList.reduce((acc, cur) => {
-      return acc + viewTagTemp.replace('{tag}', cur.tag);
+      return (
+        acc + viewTagTemp.replace(/{tag}/g, cur.tag).replace('{table}', table)
+      );
     }, '');
 
     let recResult = '연관된 물품이 없습니다.';
