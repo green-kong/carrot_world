@@ -18,6 +18,7 @@ router.get('/join', (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
+  res.clearCookie('Access_token');
   res.send(alertmove('http://localhost:3000', '로그아웃 되었습니다.'));
 });
 
