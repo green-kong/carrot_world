@@ -5,6 +5,7 @@ const router = express.Router();
 const { pool } = require('../../model/db/db.js');
 const alertmove = require('../../utils/user/alertmove.js');
 const { makeToken } = require('../../utils/user/jwt.js');
+const auth = require('../../../front/middlewares/user/auth.js');
 
 router.post('/login', async (req, res) => {
   const { userEmail, userPW } = req.body;
@@ -65,6 +66,27 @@ router.post('/auth', async (req, res) => {
     });
     const result = { userResult, slikeResult, aulikeResult, chatResult };
     res.send(result);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    conn.release();
+  }
+});
+
+router.post('/profile/edit', auth, async (req, res) => {
+  const { userEmail, userAlias, userMobile } = req.body;
+  const conn = await pool.getConnection();
+  const sql = `UPDATE user 
+               SET userEmail='${userEmail}', userAlias='${userAlias}', userMobile='${userMobile}'
+               WHERE userEmail='${userEmail}'`;
+  try {
+    await conn.query(sql);
+    res.send(
+      alertmove(
+        'http://localhost:3000/user/profile',
+        '회원정보 수정이 완료되었습니다.'
+      )
+    );
   } catch (err) {
     console.log(err);
   } finally {
