@@ -26,7 +26,7 @@ exports.view = async (req, res) => {
   const { idx } = req.query;
   const conn = await pool.getConnection();
   try {
-    const viewSql = `SELECT qa.q_id, qa.subject, qa.content, 
+    const viewSql = `SELECT qa.u_id, qa.q_id, qa.subject, qa.content, 
                       DATE_FORMAT(qa.date, '%y-%m-%d') AS date, qa.hit,
                       user.userAlias
                       FROM qa 
@@ -67,7 +67,7 @@ exports.view = async (req, res) => {
 exports.list = async (req, res) => {
   try {
     const { page } = req.query;
-    const upperData = page * 10 - 9;
+    const upperData = page * 10 - 10;
     console.log(upperData);
     const listSql = `SELECT qa.q_id, qa.subject,
                       user.userAlias,
@@ -93,6 +93,13 @@ exports.list = async (req, res) => {
 exports.delete = async (req, res) => {
   const { idx } = req.query;
   try {
+    const countSql = `SELECT COUNT(qr_id) as qrQty FROM q_reply WHERE q_id = ${idx}`;
+    const [[{ qrQty }]] = await pool.execute(countSql);
+
+    if (qrQty > 0) {
+      const deleteReplySql = `DELETE FROM q_reply WHERE q_id = ${idx}`;
+      await pool.execute(deleteReplySql);
+    }
     const sql = `DELETE FROM qa WHERE q_id = ${idx}`;
     const [result] = await pool.execute(sql);
     res.send(result);
@@ -130,27 +137,17 @@ exports.editPost = async (req, res) => {
 };
 
 exports.replyWrite = async (req, res) => {
-  const { content, q_id } = req.body;
+  const { content, q_id, replyAuthor } = req.body;
   const conn = await pool.getConnection();
   const recordSql = `INSERT INTO q_reply(q_id,content,date) VALUES(${q_id},'${content}',now())`;
-  const bringSql = `SELECT qr.qr_id, qa.q_id, qr.content,
-  DATE_FORMAT(qr.date, '%y-%m-%d %H:%i') as date,
-  user.userAlias 
-  FROM q_reply qr 
-  JOIN qa 
-  ON qr.q_id = qa.q_id 
-  JOIN user 
-  ON user.u_id = qa.u_id 
-  WHERE qr.q_id = ${q_id}`;
+  const bringSql = `SELECT qr_id, q_id, content, DATE_FORMAT(date, '%y-%m-%d %H:%i') as date FROM q_reply WHERE q_id = ${q_id}`;
   try {
     const [isRecorded] = await conn.query(recordSql);
     const [recordedData] = await conn.query(bringSql);
-    console.log(recordedData);
     const response = {
       rows: isRecorded.affectedRows,
       record: recordedData,
     };
-    console.log(response);
     res.status(200).send(response);
   } catch (err) {
     console.log(err.message);
@@ -162,7 +159,6 @@ exports.replyWrite = async (req, res) => {
 
 exports.replyDelete = async (req, res) => {
   const { qr_id } = req.body;
-  console.log(qr_id);
   const deleteSql = `DELETE FROM q_reply WHERE qr_id=${qr_id}`;
   const conn = await pool.getConnection();
   try {
@@ -180,5 +176,5 @@ exports.replyDelete = async (req, res) => {
 
 exports.replyUpdate = (req, res) => {
   const { qr_id } = req.body;
-  console.log(qr_id);
+  const updateSql = `UPDATE q_reply SET `;
 };
