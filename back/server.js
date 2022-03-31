@@ -17,14 +17,7 @@ const io = require('socket.io')(server, {
 });
 
 const router = require('./routes/index.js');
-
-io.on('connection', (socket) => {
-  console.log('연결?');
-
-  socket.on('auction', (req) => {
-    io.emit('auctionSrv', { ...req });
-  });
-});
+require('./bidSocket.js')(io);
 
 app.use(cors(corsOpt));
 app.use(express.json());
