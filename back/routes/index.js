@@ -2,8 +2,13 @@ const express = require('express');
 
 const router = express.Router();
 
-const homeControll = require('./home/home.controller.js');
 
-router.use('/home', homeControll.auction);
+const homeRouter = require('./home/homeRouter.js');
+
+const userRouter = require('./user/userRouter.js');
+
+router.use('/home', homeRouter);
+
+router.use('/user', userRouter);
 
 module.exports = router;
