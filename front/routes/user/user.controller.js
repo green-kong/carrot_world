@@ -1,4 +1,5 @@
 exports.profile = (req, res) => {
-  console.log(req.user);
-  res.render('user/profile.html');
+  const { userEmail, userAlias, userMobile } = req.user.userResult;
+
+  res.render('user/profile.html', { userEmail, userAlias, userMobile });
 };
