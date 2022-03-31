@@ -38,7 +38,7 @@ exports.view = async (req, res) => {
     const hitSql = `UPDATE qa SET hit = hit + 1 WHERE q_id = ${idx}`;
     await conn.query(hitSql);
 
-    const replySql = `SELECT qa.q_id, qr.content,
+    const replySql = `SELECT qr.qr_id, qa.q_id, qr.content,
                       DATE_FORMAT(qr.date, '%y-%m-%d %H:%i') as date,
                       user.userAlias 
                       FROM q_reply qr 
@@ -133,7 +133,7 @@ exports.replyWrite = async (req, res) => {
   const { content, q_id } = req.body;
   const conn = await pool.getConnection();
   const recordSql = `INSERT INTO q_reply(q_id,content,date) VALUES(${q_id},'${content}',now())`;
-  const bringSql = `SELECT qa.q_id, qr.content,
+  const bringSql = `SELECT qr.qr_id, qa.q_id, qr.content,
   DATE_FORMAT(qr.date, '%y-%m-%d %H:%i') as date,
   user.userAlias 
   FROM q_reply qr 
@@ -159,5 +159,26 @@ exports.replyWrite = async (req, res) => {
     conn.release();
   }
 };
-exports.replyUpdate = (req, res) => {};
-exports.replyDelete = (req, res) => {};
+
+exports.replyDelete = async (req, res) => {
+  const { qr_id } = req.body;
+  console.log(qr_id);
+  const deleteSql = `DELETE FROM q_reply WHERE qr_id=${qr_id}`;
+  const conn = await pool.getConnection();
+  try {
+    const [result] = await conn.query(deleteSql);
+    const response = {
+      isDeleted: result.affectedRows,
+    };
+    res.status(200).send(response);
+  } catch (err) {
+    res.status(400).send('댓글 삭제 실패');
+  } finally {
+    conn.release();
+  }
+};
+
+exports.replyUpdate = (req, res) => {
+  const { qr_id } = req.body;
+  console.log(qr_id);
+};
