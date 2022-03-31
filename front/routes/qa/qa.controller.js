@@ -9,12 +9,17 @@ exports.write = (req, res) => {
 
 exports.view = async (req, res) => {
   const { idx } = req.query;
+  const { u_id: loginUser, userAlias } = req.user.userResult;
   const url = `http://localhost:4000/api/qa/view?idx=${idx}`;
   const response = await axios.post(url, {
     withCredentials: true,
   });
   const { qaData, replyData } = response.data;
-  res.render('qa/view.html', { qaData, replyData });
+  if (qaData.u_id === loginUser || loginUser === 7) {
+    res.render('qa/view.html', { qaData, replyData, userAlias });
+  } else {
+    res.send(alertmove('/qa/list', '해당 글 작성자만 접근 가능합니다.'));
+  }
 };
 
 exports.list = async (req, res) => {
@@ -30,6 +35,7 @@ exports.list = async (req, res) => {
   const { totalQty } = response.data;
   const totalPage = Math.ceil(totalQty / 10);
   const totalPager = Math.ceil(totalPage / 5);
+  console.log(totalPager);
   res.render('qa/list.html', { listData });
 };
 

@@ -44,6 +44,7 @@ async function addReply() {
 }
 
 replyList.addEventListener('click', delReply);
+replyList.addEventListener('click', updateReply);
 
 async function delReply(e) {
   const qr_id = e.target.dataset.id;
@@ -57,4 +58,12 @@ async function delReply(e) {
   } else {
     alert('댓글 삭제 오류, 다시 시도해주세요');
   }
+}
+
+async function updateReply(e) {
+  const qr_id = e.target.dataset.id;
+  const contentInput = e.target.querySelector('div');
+  console.log(contentInput);
+  // const url = `http://localhost:4000/api/qa/reply/update`;
+  // const body = { qr_id };
 }

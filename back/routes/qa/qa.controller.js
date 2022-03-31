@@ -38,15 +38,7 @@ exports.view = async (req, res) => {
     const hitSql = `UPDATE qa SET hit = hit + 1 WHERE q_id = ${idx}`;
     await conn.query(hitSql);
 
-    const replySql = `SELECT qr.qr_id, qa.q_id, qr.content,
-                      DATE_FORMAT(qr.date, '%y-%m-%d %H:%i') as date,
-                      user.userAlias 
-                      FROM q_reply qr 
-                      JOIN qa 
-                      ON qr.q_id = qa.q_id 
-                      JOIN user 
-                      ON user.u_id = qa.u_id 
-                      WHERE qr.q_id = ${idx}`;
+    const replySql = `SELECT qr_id, q_id, content, DATE_FORMAT(date, '%y-%m-%d %H:%i') as date FROM q_reply WHERE q_id = ${idx}`;
     let [replyData] = await conn.query(replySql);
     if (replyData === undefined) {
       replyData = 'no reply';
@@ -147,6 +139,7 @@ exports.replyWrite = async (req, res) => {
     const response = {
       rows: isRecorded.affectedRows,
       record: recordedData,
+      author: replyAuthor,
     };
     res.status(200).send(response);
   } catch (err) {
@@ -176,5 +169,5 @@ exports.replyDelete = async (req, res) => {
 
 exports.replyUpdate = (req, res) => {
   const { qr_id } = req.body;
-  const updateSql = `UPDATE q_reply SET `;
+  const updateSql = `UPDATE q_reply SET  `;
 };
