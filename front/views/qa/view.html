@@ -41,15 +41,15 @@
   <div id="reply_wrap">
     <ul class="reply_list">
       {% for item in replyData %}
-      <li>
+      <li data-id="{{item.qr_id}}">
         <span>{{item.userAlias}}</span>
         <span>{{item.date}}</span>
         <div>{{item.content}}</div>
-        <span class="reply_edit_btn reply_btn">
+        <span class="reply_edit_btn reply_btn" data-id="{{item.qr_id}}">
           <input type="hidden" value="{{item.qr_id}}" />
           수정
         </span>
-        <span class="reply_del_btn reply_btn">
+        <span class="reply_del_btn reply_btn" data-id="{{item.qr_id}}">
           삭제
           <input type="hidden" value="{{item.qr_id}}" />
         </span>
