@@ -80,7 +80,14 @@ export default async function drawView() {
           );
         }, '');
       }
-
+      let bidStart;
+      if (itemResult.bidStart === 0) {
+        bidStart = 'D-day';
+      } else if (itemResult.bidStart < 0) {
+        bidStart = '경매 종료';
+      } else {
+        bidStart = `D-${itemResult.bidStart}`;
+      }
       result = viewTemp
         .replace('{infoList}', bidInfo)
         .replace('{imgList}', imgResult)
@@ -93,7 +100,9 @@ export default async function drawView() {
         .replace('{tagList}', tagResult)
         .replace('{content}', itemResult.content)
         .replace('{c_name}', itemResult.c_name)
-        .replace('{recommendList}', recResult);
+        .replace('{recommendList}', recResult)
+        .replace('{startDate}', itemResult.startDate)
+        .replace('{bidStart}', bidStart);
     }
     contentFrame.innerHTML = result;
     const bidBtn = document.querySelector('.bid_btn');

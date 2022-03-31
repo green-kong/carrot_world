@@ -333,6 +333,7 @@
       <span class="like_num">{like}</span>
       <i class="fa-solid fa-clock"></i>
       <span class="time">{date}</span>
+      <input type="hidden" value="{startDate}" />
     </div>
     <div class="detail">
       <ul class="detail_content detail_time">
@@ -362,7 +363,7 @@
               ></path>
             </g>
           </svg>
-          <span id="bid-timer-label" class="bid-timer__label">5:00</span>
+          <span id="bid-timer-label" class="bid-timer__label">{bidStart}</span>
         </div>
       </ul>
       <ul class="detail_content detail_list">
