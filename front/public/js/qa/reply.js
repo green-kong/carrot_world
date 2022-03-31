@@ -1,6 +1,3 @@
-const res = require('express/lib/response');
-
-const replyTemp = document.querySelector('#reply').innerHTML;
 const replyInput = document.querySelector('#reply_content');
 const replyBtn = document.querySelector('#reply_btn');
 const replyList = document.querySelector('.reply_list');
@@ -15,23 +12,29 @@ replyInput.addEventListener('keypress', (e) => {
 async function addReply() {
   const q_id = document.querySelector('#linkedPosting').value;
   const content = replyInput.value;
+  const replyAuthor = document.querySelector('#reply_author').value;
   try {
     if (content === '') throw new Error('no contents');
-    const body = { content, q_id };
+    const body = { content, q_id, replyAuthor };
     const url = 'http://localhost:4000/api/qa/reply/write';
     const response = await axios.post(url, body);
-    const { record } = response.data;
-    console.log(record);
+    const { record, author } = response.data;
+    const latest = record[record.length - 1];
+    const { qr_id, date } = latest;
     if (response.data.rows === 1 && response.status === 200) {
-      const replyGroup = record.reduce((acc, cur) => {
-        const temp = replyTemp
-          .replace('{userAlias}', cur.userAlias)
-          .replace('{date}', cur.date)
-          .replace('{content}', cur.content)
-          .replace('{qr_id}', cur.qr_id);
-        return acc + temp;
-      }, '');
-      replyList.innerHTML = replyGroup;
+      const itemLi = document.createElement('li');
+      itemLi.setAttribute('data-id', qr_id);
+      itemLi.innerHTML = `
+        <span>${replyAuthor}</span>
+        <span>${date}</span>
+        <div>${content}</div>
+        <span class="reply_edit_btn reply_btn" data-id=${qr_id}>
+          <input type="hidden" value="${qr_id}" />수정
+        </span>
+        <span class="reply_del_btn reply_btn" data-id=${qr_id}>
+          삭제<input type="hidden" value="${qr_id}" />
+        </span>`;
+      replyList.appendChild(itemLi);
       replyInput.value = '';
     }
   } catch (err) {
@@ -40,29 +43,18 @@ async function addReply() {
   }
 }
 
-const replyEditBtn = document.querySelectorAll('.reply_edit_btn');
-const replyDelBtn = document.querySelectorAll('.reply_del_btn');
-
-replyEditBtn.forEach((v) => v.addEventListener('click', updateReply));
-replyDelBtn.forEach((v) => v.addEventListener('click', delReply));
+replyList.addEventListener('click', delReply);
 
 async function delReply(e) {
-  const qr_id = e.target.querySelector('input[type=hidden]').value;
+  const qr_id = e.target.dataset.id;
   const url = `http://localhost:4000/api/qa/reply/delete`;
   const body = { qr_id };
   const response = await axios.post(url, body);
   const { isDeleted } = response.data;
   if (isDeleted === 1 && response.status === 200) {
-    const targetReply = e.target.parentNode;
-    replyList.removeChild(targetReply);
+    const deleteItem = document.querySelector(`li[data-id='${qr_id}']`);
+    deleteItem.remove();
   } else {
     alert('댓글 삭제 오류, 다시 시도해주세요');
   }
-}
-
-async function updateReply(e) {
-  const qr_id = e.target.querySelector('input[type=hidden]').value;
-  const url = `http://localhost:4000/api/qa/reply/update`;
-  const body = { qr_id };
-  const response = await axios.post(url, body);
 }

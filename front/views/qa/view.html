@@ -29,7 +29,7 @@
   <div id="reply_input">
     <div id="sub_con_input">
       <input type="hidden" id="linkedPosting" value="{{qaData.q_id}}" />
-      <input type="text" id="reply_author" value="운영자" readonly />
+      <input type="text" id="reply_author" value="{{userAlias}}" readonly />
       <textarea name="replyContent" id="reply_content" cols="30" rows="10" maxlength="120"></textarea>
     </div>
     <button id="reply_btn">댓글등록</button>
@@ -55,21 +55,6 @@
         </span>
       </li>
       {% endfor %}
-      <template id="reply">
-        <li>
-          <span>{userAlias}</span>
-          <span>{date}</span>
-          <div>{content}</div>
-          <span class="reply_edit_btn reply_btn">
-            <input type="hidden" value="{qr_id}" />
-            수정
-          </span>
-          <span class="reply_del_btn reply_btn">
-            삭제
-            <input type="hidden" value="{qr_id}" />
-          </span>
-        </li>
-      </template>
     </ul>
   </div>
 </div>
