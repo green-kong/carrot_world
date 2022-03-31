@@ -1,26 +1,32 @@
 import { io } from 'https://cdn.socket.io/4.3.2/socket.io.esm.min.js';
 
+let socket;
+
 export default function auctionSocket() {
-  const [, , idx] = window.location.hash.replace('#', '').split('/');
-  const socket = io('http://localhost:4000/bid');
-  socket.emit('idx', idx);
-
-  const bidBtn = document.querySelector('.bid_btn');
-  const priceNum = document.querySelector('#price_num');
-
-  socket.on('bidResult', (req) => {
-    const { bidPrice } = req;
-    priceNum.innerHTML = bidPrice;
+  console.log('hash changed');
+  const [view, auction, idx] = window.location.hash.replace('#', '').split('/');
+  if (view !== 'view' || auction !== 'auction') {
+    return;
+  }
+  socket = io('http://localhost:4000/bid');
+  socket.on('connect', () => {
+    console.log('client socket 연결', socket.id);
   });
 
-  const clickHandler = () => {
-    const bidPrice = document.querySelector('#bid_input').value;
-    const userIdx = document.querySelector('#u_id').value;
+  socket.emit('idx', idx);
 
-    const bidData = { bidPrice, userIdx };
-
-    socket.emit('bid', bidData);
-  };
-
-  bidBtn.addEventListener('click', clickHandler);
+  socket.on('bidResult', (req) => {
+    const { userAlias, price } = req;
+    const priceSpan = document.querySelector('#price_num');
+    priceSpan.innerHTML = price;
+  });
 }
+
+export const clickHandler = () => {
+  const bidPrice = document.querySelector('#bid_input').value;
+  const userIdx = document.querySelector('#u_id').value;
+
+  const bidData = { bidPrice, userIdx };
+
+  socket.emit('bid', bidData);
+};

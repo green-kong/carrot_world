@@ -1,6 +1,6 @@
 import activeLike from '../like.js';
 import drawLike from './drawLike.js';
-import auctionSocket from '../auctionSocket.js';
+import { clickHandler } from '../auctionSocket.js';
 
 export default async function drawView() {
   const [, table, idx] = window.location.hash.replace('#', '').split('/');
@@ -99,12 +99,13 @@ export default async function drawView() {
       contactBtn.textContent = '입찰하기';
       contactBtn.classList.remove('contact_btn');
       contactBtn.classList.add('bid_btn');
+      contactBtn.addEventListener('click', () => {
+        console.log('입찰버튼 click');
+        clickHandler();
+      });
     }
   }
 
   activeLike();
   drawLike();
-  if (table === 'auction') {
-    auctionSocket();
-  }
 }
