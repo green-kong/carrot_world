@@ -24,6 +24,8 @@ export default async function drawView() {
       '#au_view_recommend_template'
     ).innerHTML;
 
+    const sellInfo = document.querySelector('#sell_view_info_tem').innerHTML;
+    const bidInfo = document.querySelector('#bid_view_info_tem').innerHTML;
     const imgResult = imgList.reduce((acc, cur) => {
       return acc + viewImgTemp.replace('{img}', cur.img);
     }, '');
@@ -50,8 +52,8 @@ export default async function drawView() {
           );
         }, '');
       }
-
       result = viewTemp
+        .replace('{infoList}', sellInfo)
         .replace('{imgList}', imgResult)
         .replace('{subject}', itemResult.subject)
         .replace('{price}', itemResult.price)
@@ -79,6 +81,7 @@ export default async function drawView() {
       }
 
       result = viewTemp
+        .replace('{infoList}', bidInfo)
         .replace('{imgList}', imgResult)
         .replace('{subject}', itemResult.subject)
         .replace('{price}', itemResult.price)
@@ -92,14 +95,9 @@ export default async function drawView() {
         .replace('{recommendList}', recResult);
     }
     contentFrame.innerHTML = result;
-    const bidInput = document.querySelector('#bid_input');
-    const contactBtn = document.querySelector('.contact_btn');
+    const bidBtn = document.querySelector('.bid_btn');
     if (table === 'auction') {
-      bidInput.setAttribute('type', 'text');
-      contactBtn.textContent = '입찰하기';
-      contactBtn.classList.remove('contact_btn');
-      contactBtn.classList.add('bid_btn');
-      contactBtn.addEventListener('click', () => {
+      bidBtn.addEventListener('click', () => {
         console.log('입찰버튼 click');
         clickHandler();
       });
