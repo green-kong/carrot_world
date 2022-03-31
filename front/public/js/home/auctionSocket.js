@@ -17,7 +17,10 @@ export default function auctionSocket() {
 
   socket.on('bidResult', (req) => {
     const { userAlias, price } = req;
+    console.log(req);
     const priceSpan = document.querySelector('.price_num');
+    const bidName = document.querySelector('.bid_name');
+    bidName.innerHTML = userAlias;
     priceSpan.innerHTML = price;
   });
 }

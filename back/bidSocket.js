@@ -13,7 +13,6 @@ const bidSocket = (io) => {
       });
 
       socket.on('bid', async (bidData) => {
-        console.log('입찰 데이터 전송 client -> server', bidData);
         const { bidPrice, userIdx } = bidData;
         const conn = await pool.getConnection();
         try {

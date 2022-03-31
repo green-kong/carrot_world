@@ -8,7 +8,7 @@ async function likeClickHandler(e) {
   const response = await axios.post(url, body);
   const { likes } = response.data;
 
-  const like = document.querySelector('#like_num');
+  const like = document.querySelector('.like_num');
   like.innerHTML = likes;
 
   const auLikeList = document.querySelector('#au_likes');

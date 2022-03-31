@@ -1,6 +1,7 @@
 import activeLike from '../like.js';
 import drawLike from './drawLike.js';
 import { clickHandler } from '../auctionSocket.js';
+import startTimer from '../bidTimer.js';
 
 export default async function drawView() {
   const [, table, idx] = window.location.hash.replace('#', '').split('/');
@@ -97,6 +98,11 @@ export default async function drawView() {
     contentFrame.innerHTML = result;
     const bidBtn = document.querySelector('.bid_btn');
     if (table === 'auction') {
+      const timerId = startTimer();
+      window.addEventListener('hashchange', () => {
+        console.log('check');
+        clearInterval(timerId);
+      });
       bidBtn.addEventListener('click', () => {
         console.log('입찰버튼 click');
         clickHandler();
