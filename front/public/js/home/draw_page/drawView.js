@@ -1,5 +1,6 @@
 import activeLike from '../like.js';
 import drawLike from './drawLike.js';
+import auctionSocket from '../auctionSocket.js';
 
 export default async function drawView() {
   const [, table, idx] = window.location.hash.replace('#', '').split('/');
@@ -92,13 +93,18 @@ export default async function drawView() {
     }
     contentFrame.innerHTML = result;
     const bidInput = document.querySelector('#bid_input');
-    const contactBtn = document.querySelector('#contact_btn');
+    const contactBtn = document.querySelector('.contact_btn');
     if (table === 'auction') {
       bidInput.setAttribute('type', 'text');
       contactBtn.textContent = '입찰하기';
+      contactBtn.classList.remove('contact_btn');
+      contactBtn.classList.add('bid_btn');
     }
   }
 
   activeLike();
   drawLike();
+  if (table === 'auction') {
+    auctionSocket();
+  }
 }

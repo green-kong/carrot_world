@@ -165,7 +165,15 @@
   background-color: var(--alert-color);
 }
 
-#contact_btn {
+.contact_btn {
+  width: 48%;
+  height: 100%;
+  background-color: var(--accent-color2);
+  color: var(--background1);
+  font-size: 20px;
+}
+
+.bid_btn {
   width: 48%;
   height: 100%;
   background-color: var(--accent-color2);
