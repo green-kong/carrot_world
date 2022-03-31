@@ -38,7 +38,15 @@ exports.view = async (req, res) => {
     const hitSql = `UPDATE qa SET hit = hit + 1 WHERE q_id = ${idx}`;
     await conn.query(hitSql);
 
-    const replySql = `SELECT qa.q_id, qr.content, DATE_FORMAT(qr.date, '%y-%m-%d') as date, user.userAlias FROM q_reply qr JOIN qa ON qr.q_id = qa.q_id JOIN user ON user.u_id = qa.u_id WHERE qr.q_id = ${idx}`;
+    const replySql = `SELECT qa.q_id, qr.content,
+                      DATE_FORMAT(qr.date, '%y-%m-%d %H:%i') as date,
+                      user.userAlias 
+                      FROM q_reply qr 
+                      JOIN qa 
+                      ON qr.q_id = qa.q_id 
+                      JOIN user 
+                      ON user.u_id = qa.u_id 
+                      WHERE qr.q_id = ${idx}`;
     let [replyData] = await conn.query(replySql);
     if (replyData === undefined) {
       replyData = 'no reply';
@@ -50,6 +58,7 @@ exports.view = async (req, res) => {
     res.send(result);
   } catch (err) {
     console.log('게시글보기 오류:', err.message);
+    res.status(400).send('error msg 띄우기');
   } finally {
     conn.release();
   }
@@ -122,14 +131,26 @@ exports.editPost = async (req, res) => {
 
 exports.replyWrite = async (req, res) => {
   const { content, q_id } = req.body;
-  const recordSql = `INSERT INTO q_reply(q_id,content,date) VALUES(${q_id},'${content}',now())`;
-
   const conn = await pool.getConnection();
+  const recordSql = `INSERT INTO q_reply(q_id,content,date) VALUES(${q_id},'${content}',now())`;
+  const bringSql = `SELECT qa.q_id, qr.content,
+  DATE_FORMAT(qr.date, '%y-%m-%d %H:%i') as date,
+  user.userAlias 
+  FROM q_reply qr 
+  JOIN qa 
+  ON qr.q_id = qa.q_id 
+  JOIN user 
+  ON user.u_id = qa.u_id 
+  WHERE qr.q_id = ${q_id}`;
   try {
-    const [result] = await conn.query(recordSql);
+    const [isRecorded] = await conn.query(recordSql);
+    const [recordedData] = await conn.query(bringSql);
+    console.log(recordedData);
     const response = {
-      rows: result.affectedRows,
+      rows: isRecorded.affectedRows,
+      record: recordedData,
     };
+    console.log(response);
     res.status(200).send(response);
   } catch (err) {
     console.log(err.message);
