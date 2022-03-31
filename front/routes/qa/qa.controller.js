@@ -13,8 +13,8 @@ exports.view = async (req, res) => {
   const response = await axios.post(url, {
     withCredentials: true,
   });
-  const viewData = response.data;
-  res.render('qa/view.html', { viewData });
+  const { qaData, replyData } = response.data;
+  res.render('qa/view.html', { qaData, replyData });
 };
 
 exports.list = async (req, res) => {

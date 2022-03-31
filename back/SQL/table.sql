@@ -88,6 +88,7 @@ CREATE TABLE `qa` (
 );
 
 CREATE TABLE `q_reply` (
+  `qr_id` INT PRIMARY KEY AUTO_INCREMENT,
   `q_id` INT NOT NULL,
   `content` VARCHAR(64),
   `date` timestamp NOT NULL
