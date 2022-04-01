@@ -73,16 +73,16 @@ router.post('/auth', async (req, res) => {
   }
 });
 
-// router.post('/profile/userDelete', auth, async (req, res) => {
-//   const { userEmail, userPW } = req.user.userResult;
-//   console.log(req.user.userResult)
-//   const conn = await pool.getConnection();
-//   const sql = `DELETE FROM user
-//                   WHERE userEmail='${userEmail}'
-//                   and userPW='${userPW}'`;
-//   const result = await conn.query(sql);
-//   console.log(result);
-//   res.clearCookie('Access_token');
-//   res.send(alertmove('http://localhost:3000', '회원탈퇴가 완료되었습니다'));
-
+router.get('/quit', async (req, res) => {
+  const { userEmail } = req.body;
+  console.log(req.body);
+  const conn = await pool.getConnection();
+  const sql = `DELETE FROM user
+                  WHERE userEmail='${userEmail}'`;
+  const result = await conn.query(sql);
+  console.log(result);
+  res.send(
+    alertmove('http://localhost:3000/user/logout', '회원탈퇴가 완료되었습니다')
+  );
+});
 module.exports = router;
