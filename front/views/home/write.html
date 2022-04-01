@@ -21,7 +21,7 @@
     </div>
     <div id="option_container">
       <div id="deal_way_wrap">
-        <span>희망 거래 방식</span>
+        <span>판매 방법</span>
         <select id="deal_way" name="dealWay" onchange="checkDealWay()">
           <option value="sell">일반거래</option>
           <option value="bid">경매</option>
@@ -30,7 +30,6 @@
       <div id="product_type_wrap">
         <span>카테고리</span>
         <select id="product_type" name="productType">
-          <option>선택</option>
           {% for data in result %}
           <option value="{{data.c_code}}">{{data.c_name}}</option>
           {% endfor %}
@@ -81,6 +80,13 @@
           <option value="50">50분</option>
         </select>
       </div>
+    </div>
+    <div id="deal_how">
+      <span>거래방법</span>
+      <select name="how" id="how">
+        <option value="1">직거래</option>
+        <option value="0">택배</option>
+      </select>
     </div>
     <div id="option2_container">
       <div id="deal_price_wrap">
