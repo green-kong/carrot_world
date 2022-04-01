@@ -18,8 +18,8 @@ router.get('/join', (req, res) => {
 
 router.get('/profile', userControll.profile);
 
-router.get('/profile/delete', (req, res) => {
-  res.render('user/delete.html');
+router.get('/profile/edit', (req, res) => {
+  res.render('user/edit.html');
 });
 
 module.exports = router;

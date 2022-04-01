@@ -9,7 +9,7 @@
   <ul>
     <li>
       <label for="userEmail">이메일</label>
-      <input type="text" id="userEmail" name="userEmail" value={{userEmail}}>
+      <input type="text" id="userEmail" name="userEmail" maxlength="32" value={{userEmail}} >
     </li>
     <li>
       <label for="userPW">비밀번호</label>
@@ -34,7 +34,7 @@
 
   </ul>
   <button type="submit">정보수정</button>
-  <a href="http://localhost:3000/user/profile/delete">회원탈퇴</a>
+  <a id="userDelete" href="/user/userDelete">회원탈퇴</a>
 </form>
 <!--  -->
 
