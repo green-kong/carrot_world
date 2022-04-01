@@ -30,11 +30,9 @@
         <span>카테고리</span>
         <select id="product_type" name="productType">
           <option>선택</option>
-          <option value="clo">의류</option>
-          <option value="acc">잡화</option>
-          <option value="fur">가구</option>
-          <option value="elc">가전</option>
-          <option value="pet">반려동물</option>
+          {% for data in result %}
+          <option value="{{data.c_code}}">{{data.c_name}}</option>
+          {% endfor %}
         </select>
       </div>
       <div id="deal_date_wrap">

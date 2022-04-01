@@ -452,3 +452,16 @@ exports.like = async (req, res) => {
     conn.release();
   }
 };
+
+exports.category = async (req, res) => {
+  const conn = await pool.getConnection();
+  const sql = 'SELECT * FROM category';
+  try {
+    const [result] = await conn.query(sql);
+    res.send(result);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    conn.release();
+  }
+};
