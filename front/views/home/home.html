@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <link rel="stylesheet" href="/css/home/styleMain.css" type="text/css" />
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script type="module" src="/js/home/index.js" defer></script>
-</head>
-
-<body>
-  <div id="wrap">
-    <div id="header">
-      <h1 id="logo">
-        <a href="/home#main/"><img src="/img/home/Logo.png" style="width: 160px; height: 80px" /></a>
-      </h1>
-      <div id="search_bar">
-        <select id="search_category" placeholder="전체">
-          <option value="all">전체</option>
-          <option value="sell">중고거래</option>
-          <option value="auction">경매</option>
-        </select>
-        <div id="search">
-          <input type="text" autocomplete="off" id="search_input" />
-          <span id="search_btn"></span>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/home/styleMain.css" type="text/css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="module" src="/js/home/index.js" defer></script>
+    <script
+      src="https://kit.fontawesome.com/cbc296ae57.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div id="wrap">
+      <div id="header">
+        <h1 id="logo">
+          <a href="/home#main/"
+            ><img src="/img/home/Logo.png" style="width: 160px; height: 80px"
+          /></a>
+        </h1>
+        <div id="search_bar">
+          <select id="search_category" placeholder="전체">
+            <option value="all">전체</option>
+            <option value="sell">중고거래</option>
+            <option value="auction">경매</option>
+          </select>
+          <div id="search">
+            <input type="text" autocomplete="off" id="search_input" />
+            <span id="search_btn"></span>
+          </div>
+          <a id="sell_register" href="/home/write">판매물품 등록</a>
         </div>
-        <a id="sell_register" href="/home/write">판매물품 등록</a>
       </div>
       <div id="container">
         <div id="side_bar">
@@ -56,37 +60,31 @@
               <li id="user_logout">로그아웃</li>
             </ul>
           </div>
-          <ul id="profile_centerbox">
-            <li id="my_point">Point : 123 pt</li>
-            <ul>
-              <li id="sell_item">판매중인 물품 : 1개</li>
-              <li id="new_chat">새로운 채팅 : 1개</li>
-            </ul>
-            <form method="get" action="http://localhost:3000/user/logout">
-              <li id="user_logout"><a href="http://localhost:3000/user/logout">로그아웃</a></li>
-            </form>
-          </ul>
+          <div id="sell_board">
+            <p id="sell_category">
+              <img
+                src="/img/home/category_img1.png"
+                style="width: 25px; height: auto"
+              />중고거래
+            </p>
+            <ul id="sell_list" data-way="sell"></ul>
+          </div>
+          <div id="bid_board">
+            <p id="bid_category">
+              <img
+                src="/img/home/category_img1.png"
+                style="width: 25px; height: auto"
+              />경매
+            </p>
+            <ul id="bid_list" data-way="bid"></ul>
+          </div>
         </div>
-        <div id="sell_board">
-          <p id="sell_category">
-            <img src="/img/home/category_img1.png" style="width: 25px; height: auto" />중고거래
-          </p>
-          <ul id="sell_list" data-way="sell"></ul>
+        <div id="content">
+          <div id="content_frame"></div>
         </div>
-        <div id="bid_board">
-          <p id="bid_category">
-            <img src="/img/home/category_img1.png" style="width: 25px; height: auto" />경매
-          </p>
-          <ul id="bid_list" data-way="bid"></ul>
-        </div>
-      </div>
-      <div id="content">
-        <div id="content_frame"></div>
       </div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>
 
 <!-- category template -->
@@ -396,4 +394,4 @@
     </div>
   </article>
 </template>
-<!-- bid view info -->
+<!— bid view info —>

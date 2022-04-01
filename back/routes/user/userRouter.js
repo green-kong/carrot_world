@@ -87,29 +87,15 @@ router.post('/auth', async (req, res) => {
 
 router.post('/quit', async (req, res) => {
   const { userEmail } = req.body;
-  console.log(req.body);
   const conn = await pool.getConnection();
   const sql = `DELETE FROM user
                   WHERE userEmail='${userEmail}'`;
   try {
-    const result = await conn.query(sql);
-    console.log(result);
-    res.send(
-      alertmove(
-        'http://localhost:3000/user/logout',
-        '회원탈퇴가 완료되었습니다'
-      )
-    );
+    await conn.query(sql);
+    res.send('Success');
   } catch (err) {
     console.log(err);
-    res
-      .status(500)
-      .send(
-        alertmove(
-          'http://localhost:3000/user/profile/edit',
-          '잠시 후에 다시 시도해주세요'
-        )
-      );
+    res.status(500).send('Fail');
   } finally {
     conn.release();
   }
@@ -128,6 +114,7 @@ router.post('/join', async (req, res) => {
       `${userAlias}님 회원가입을 축하합니다. 로그인을 해주세요`
     )
   );
+});
 
 router.post('/profile/edit', async (req, res) => {
   const { userEmail, userAlias, userMobile } = req.body;

@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 async function checkBtnClick() {
   const emailInput = document.querySelector('#userEmail');
   const emailMsg = document.querySelector('#emailMsg');
