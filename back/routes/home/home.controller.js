@@ -8,26 +8,26 @@ exports.main = async (req, res) => {
     const [categoryList] = await conn.query(categorySql);
     const auctionSql = `SELECT 
                         auction.au_id AS au_id
-                        ,subject, img, 
+                        ,subject, ANY_VALUE(img) AS img,
                         FORMAT(price,0) AS price, 
                         DATE_FORMAT(date,'%y-%m-%d') AS date, 
                         DATEDIFF(startDate,date) AS bidStart 
                         FROM auction
                         JOIN au_img
                         ON auction.au_id = au_img.au_id
-                        GROUP BY au_img.img,auction.au_id
+                        GROUP BY auction.au_id
                         ORDER BY rand()
                         LIMIT 8`;
     const [auctionList] = await conn.query(auctionSql);
     const sellSql = `SELECT 
                      sell_board.s_id AS s_id
-                     ,subject, img, 
+                     ,subject, ANY_VALUE(img) AS img, 
                      FORMAT(price,0) AS price, 
                      DATE_FORMAT(date,'%y-%m-%d') AS date
                      FROM sell_board
                      JOIN s_img
                      ON sell_board.s_id = s_img.s_id
-                     GROUP BY s_img.img,sell_board.s_id
+                     GROUP BY sell_board.s_id
                      ORDER BY rand()
                      LIMIT 8`;
     const [sellBoardList] = await conn.query(sellSql);
@@ -133,19 +133,19 @@ exports.list = async (req, res) => {
   if (way === 'sell') {
     sql = `SELECT 
            sell_board.s_id AS s_id,
-           subject, img, 
+           subject, ANY_VALUE(img) AS img, 
            FORMAT(price,0) AS price, 
            DATE_FORMAT(date,'%y-%m-%d') AS date
            FROM sell_board
            JOIN s_img
            ON sell_board.s_id = s_img.s_id
            WHERE c_code ='${code}'
-           GROUP BY s_img.img,sell_board.s_id
+           GROUP BY sell_board.s_id
            LIMIT ${(page - 1) * 16}, 16`;
   } else {
     sql = `SELECT 
             auction.au_id AS au_id,
-           subject, img, 
+           subject, ANY_VALUE(img) AS img, 
            FORMAT(price,0) AS price, 
            DATE_FORMAT(date,'%y-%m-%d') AS date, 
            DATEDIFF(startDate,date) AS bidStart 
@@ -153,7 +153,7 @@ exports.list = async (req, res) => {
            JOIN au_img
            ON auction.au_id = au_img.au_id
            WHERE c_code='${code}'
-           GROUP BY au_img.img,auction.au_id
+           GROUP BY auction.au_id
            LIMIT ${(page - 1) * 16}, 16`;
   }
   try {
@@ -169,11 +169,10 @@ exports.list = async (req, res) => {
 
 exports.search = async (req, res) => {
   const { way, keyword } = req.body;
-  const limit = way === 'all' ? 8 : 16;
-  console.log(way);
+  const limit = way === 'all' ? 16 : 0;
   const auctionSql = `SELECT 
                        auction.au_id AS au_id,
-                      subject, img, 
+                      subject, ANY_VALUE(img) AS img, 
                       FORMAT(price,0) AS price, 
                       DATE_FORMAT(date,'%y-%m-%d') AS date, 
                       DATEDIFF(startDate,date) AS bidStart 
@@ -181,19 +180,19 @@ exports.search = async (req, res) => {
                       JOIN au_img
                       ON auction.au_id = au_img.au_id
                       WHERE subject like '%${keyword}%'
-                      GROUP BY au_img.img,auction.au_id
+                      GROUP BY auction.au_id
                       ORDER BY rand()
                       LIMIT ${limit}`;
   const sellSql = `SELECT 
                    sell_board.s_id AS s_id,
-                   subject, img, 
+                   subject, ANY_VALUE(img) AS img, 
                    FORMAT(price,0) AS price, 
                    DATE_FORMAT(date,'%y-%m-%d') AS date
                    FROM sell_board
                    JOIN s_img
                    ON sell_board.s_id = s_img.s_id
                    WHERE subject like '%${keyword}%'
-                   GROUP BY s_img.img,sell_board.s_id
+                   GROUP BY sell_board.s_id
                    ORDER BY rand()
                    LIMIT ${limit}`;
 
@@ -287,14 +286,15 @@ exports.view = async (req, res) => {
         const recSql = `SELECT
                       sell_board.s_id,c_name,
                       sell_board.c_code AS c_code,
-                      subject, s_img.img,FORMAT(price,0) AS price
+                      subject, FORMAT(price,0) AS price,
+                      ANY_VALUE(img) AS img 
                       FROM sell_board
                       JOIN s_img
                       ON s_img.s_id = sell_board.s_id
                       JOIN category
                       ON sell_board.c_code = category.c_code
                       WHERE sell_board.s_id IN (${recSqlIn})
-                      GROUP BY sell_board.s_id,s_img.img
+                      GROUP BY sell_board.s_id
                       `;
         const [recList] = await conn.query(recSql, recItemsIdx);
         res.send({ itemResult, imgList, tagList, recList });
@@ -334,14 +334,15 @@ exports.view = async (req, res) => {
         const recSql = `SELECT
                       auction.au_id,c_name,
                       auction.c_code AS c_code,
-                      subject, au_img.img,FORMAT(price,0) AS price
+                      subject, FORMAT(price,0) AS price,
+                      ANY_VALUE(img) AS img
                       FROM auction
                       JOIN au_img
                       ON au_img.au_id = auction.au_id
                       JOIN category
                       ON auction.c_code = category.c_code
                       WHERE auction.au_id IN (${recSqlIn})
-                      GROUP BY auction.au_id,au_img.img
+                      GROUP BY auction.au_id
                       `;
         const [recList] = await conn.query(recSql, recItemsIdx);
         res.send({ itemResult, imgList, tagList, recList });
@@ -374,18 +375,18 @@ exports.tag = async (req, res) => {
     if (table === 'sell_board') {
       resultSql = `SELECT 
                   sell_board.s_id AS s_id,
-                  subject, img, 
+                  subject, ANY_VALUE(img) AS img, 
                   FORMAT(price,0) AS price, 
                   DATE_FORMAT(date,'%y-%m-%d') AS date
                   FROM sell_board
                   JOIN s_img
                   ON sell_board.s_id = s_img.s_id
                   WHERE sell_board.s_id IN (${sqlIn})
-                  GROUP BY s_img.img,sell_board.s_id`;
+                  GROUP BY sell_board.s_id`;
     } else {
       resultSql = `SELECT 
                   auction.au_id AS au_id,
-                  subject, img, 
+                  subject, ANY_VALUE(img) AS img, 
                   FORMAT(price,0) AS price, 
                   DATE_FORMAT(date,'%y-%m-%d') AS date, 
                   DATEDIFF(startDate,date) AS bidStart 
@@ -393,7 +394,7 @@ exports.tag = async (req, res) => {
                   JOIN au_img
                   ON auction.au_id = au_img.au_id
                   WHERE auction.au_id IN (${sqlIn})
-                  GROUP BY au_img.img,auction.au_id
+                  GROUP BY auction.au_id
                   `;
     }
     const [result] = await conn.query(resultSql, idxList);
