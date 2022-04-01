@@ -1,4 +1,5 @@
 import clickCategory from './category.js';
+import itemClickEvent from './view.js';
 
 export default async function init() {
   const url = 'http://localhost:4000/api/home/';
@@ -29,6 +30,7 @@ export default async function init() {
       return (
         acc +
         mainAuctionListTem
+          .replace('{au_id}', cur.au_id)
           .replace('{img}', cur.img)
           .replace('{bidStart}', cur.bidStart)
           .replace('{subject}', cur.subject)
@@ -41,6 +43,7 @@ export default async function init() {
       return (
         acc +
         mainSellListTem
+          .replace('{s_id}', cur.s_id)
           .replace('{img}', cur.img)
           .replace('{bidStart}', cur.bidStart)
           .replace('{subject}', cur.subject)
@@ -58,5 +61,6 @@ export default async function init() {
     contentFrame.innerHTML = homeMainTem;
 
     clickCategory();
+    itemClickEvent();
   }
 }

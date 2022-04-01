@@ -6,5 +6,5 @@ const user = process.env.DB_USER || 'dev_kong';
 const password = process.env.DB_PASSWORD || 'qwer1234';
 const database = process.env.DB_DATABASE || 'home';
 
-const config = { host, user, password, database };
+const config = { host, user, password, database, connectionLimit: 5 };
 exports.pool = mysql.createPool(config);

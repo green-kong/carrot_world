@@ -221,18 +221,20 @@ a {
 }
 
 #content {
-  padding: 25px 0 0 25px;
+  padding: 25px 25px 0 25px;
   box-sizing: border-box;
   width: 85%;
   background: #f2f1f6;
-  border-radius: 32px 0px 0px 0px;
+  border-radius: 30px 30px 0px 0px;
+  min-height: calc(100vh - 100px);
 }
 
 #content > #content_frame {
   width: 100%;
   height: 100%;
   background: #ffffff;
-  border-radius: 32px 0px 0px 0px;
+  box-sizing: border-box;
+  border-radius: 15px 15px 0px 0px;
 }
 
 .ranking_list {
@@ -245,6 +247,11 @@ a {
   box-shadow: 0px 4px 28px rgba(35, 29, 106, 0.1);
   overflow: hidden;
   border-radius: 12px;
+  cursor: pointer;
+}
+
+.ranking_list:hover .item_img {
+  transform: scale(1.1);
 }
 
 .ranking_list:nth-child(4n + 0) {
@@ -254,6 +261,7 @@ a {
 .item_img {
   width: 100%;
   height: 100%;
+  transition: 300ms all ease-in;
 }
 
 .item_info {
@@ -311,6 +319,7 @@ a {
   position: relative;
   width: 240px;
   height: 230px;
+  overflow: hidden;
 }
 
 .auction_count {

@@ -16,7 +16,6 @@ async function auth(req, res, next) {
       const body = { u_id: payload.u_id };
       const response = await axios.post(url, body);
       req.user = { ...response.data };
-      console.log(response.data);
       next();
     } catch (err) {
       res.clearCookie('Access_token');
