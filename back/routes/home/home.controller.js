@@ -133,11 +133,13 @@ exports.write = async (req, res) => {
                     SET point=point+10
                     WHERE u_id =${userIdx}`;
     await conn.query(userSql);
+    const table = dealWay === 'sell' ? 'sell_board' : 'auction';
+    res.redirect(`http://localhost:3000/home#view/${table}/${idx}`);
   } catch (err) {
     console.log(err);
+    res.redirect('http://localhost:3000/home');
   } finally {
     conn.release();
-    res.redirect('http://localhost:3000/home');
   }
 };
 
