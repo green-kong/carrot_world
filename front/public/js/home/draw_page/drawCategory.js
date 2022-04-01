@@ -29,12 +29,20 @@ export default async function drawCategory() {
   } else {
     const auctionTemp = document.querySelector('#main_auction_list').innerHTML;
     items = itemList.reduce((acc, cur) => {
+      let bidStart;
+      if (cur.bidStart === 0) {
+        bidStart = '경매시작 D-day';
+      } else if (cur.bidStart > 0) {
+        bidStart = `경매시작 D-${cur.bidStart}`;
+      } else if (cur.bidStart < 0) {
+        bidStart = '경매종료';
+      }
       return (
         acc +
         auctionTemp
           .replace('{au_id}', cur.au_id)
           .replace('{img}', cur.img)
-          .replace('{bidStart}', cur.bidStart)
+          .replace('{bidStart}', bidStart)
           .replace('{subject}', cur.subject)
           .replace('{price}', cur.price)
           .replace('{date}', cur.date)
