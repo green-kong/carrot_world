@@ -37,6 +37,7 @@
   width: 100%;
   height: 100%;
   position: relative;
+  overflow: hidden;
 }
 
 #slide_btn {
@@ -46,12 +47,12 @@
   height: 20%;
   display: flex;
   justify-content: space-between;
+  z-index: 10;
 }
 
 #prod_img_list {
   display: flex;
   height: 100%;
-  overflow: hidden;
 }
 
 .prod_img img {
@@ -63,9 +64,10 @@
 #left_btn,
 #right_btn {
   background-color: transparent;
+  opacity: 0.5;
   font-size: 45px;
   margin: 0 15px;
-  color: var(--stroke-color);
+  color: black;
 }
 
 .prod_summary {
