@@ -80,6 +80,7 @@ export default async function drawView() {
           );
         }, '');
       }
+      // itemResult.bidStart;
       let bidStart;
       if (itemResult.bidStart === 0) {
         bidStart = 'D-day';
@@ -88,6 +89,7 @@ export default async function drawView() {
       } else {
         bidStart = `D-${itemResult.bidStart}`;
       }
+
       result = viewTemp
         .replace('{infoList}', bidInfo)
         .replace('{imgList}', imgResult)
@@ -107,15 +109,32 @@ export default async function drawView() {
     contentFrame.innerHTML = result;
     const bidBtn = document.querySelector('.bid_btn');
     if (table === 'auction') {
-      const timerId = startTimer();
-      window.addEventListener('hashchange', () => {
-        console.log('check');
-        clearInterval(timerId);
-      });
-      bidBtn.addEventListener('click', () => {
-        console.log('입찰버튼 click');
-        clickHandler();
-      });
+      const now = new Date();
+      const startDate = new Date(itemResult.startDate);
+      const endTime = new Date(
+        startDate.getFullYear(),
+        startDate.getMonth(),
+        startDate.getDate(),
+        startDate.getHours(),
+        startDate.getMinutes() + 5
+      );
+
+      if (startDate < now && now < endTime) {
+        const secDiff = Math.floor((endTime.getTime() - now.getTime()) / 1000);
+        const timerId = startTimer(secDiff);
+
+        window.addEventListener('hashchange', () => {
+          clearInterval(timerId);
+        });
+
+        bidBtn.addEventListener('click', () => {
+          clickHandler();
+        });
+      } else {
+        bidBtn.addEventListener('click', () => {
+          alert('경매가 진행 중이지 않습니다.');
+        });
+      }
     }
   }
 
