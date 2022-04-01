@@ -1,7 +1,10 @@
+require('dotenv').config();
+
 const express = require('express');
 
 const router = express.Router();
 
+const bcrypt = require('bcrypt');
 const { pool } = require('../../model/db/db.js');
 const alertmove = require('../../utils/user/alertmove.js');
 const { makeToken } = require('../../utils/user/jwt.js');
@@ -10,7 +13,7 @@ const auth = require('../../../front/middlewares/user/auth.js');
 router.post('/login', async (req, res) => {
   const { userEmail, userPW } = req.body;
   const conn = await pool.getConnection();
-  const sql = `SELECT * FROM user WHERE userEmail = '${userEmail}' and userPW='${userPW}'`;
+  const sql = `SELECT * FROM user WHERE userEmail = '${userEmail}'`;
 
   try {
     const [result] = await conn.query(sql);
@@ -23,6 +26,15 @@ router.post('/login', async (req, res) => {
         )
       );
     } else {
+      const encodedPassword = result[0].userPW;
+      console.log(encodedPassword, 'encoded');
+      bcrypt.compare(userPW, encodedPassword, (err, same) => {
+        if (err) {
+          console.log(err, 'err');
+        } else {
+          console.log(same, 'same');
+        }
+      });
       const payload = {
         u_id: result[0].u_id,
         userEmail: result[0].userEmail,
@@ -102,6 +114,20 @@ router.post('/quit', async (req, res) => {
     conn.release();
   }
 });
+
+router.post('/join', async (req, res) => {
+  const { userEmail, userPW, userAlias, userMobile } = req.body;
+  const conn = await pool.getConnection();
+  const encryptedPW = await bcrypt.hash(userPW, 10);
+  const sql = `INSERT INTO user (userEmail, userPW, userAlias, userMobile) 
+  VALUES ('${userEmail}', '${encryptedPW}', '${userAlias}', '${userMobile}')`;
+  await conn.query(sql);
+  res.send(
+    alertmove(
+      'http://localhost:3000/user/login',
+      `${userAlias}님 회원가입을 축하합니다. 로그인을 해주세요`
+    )
+  );
 
 router.post('/profile/edit', async (req, res) => {
   const { userEmail, userAlias, userMobile } = req.body;
