@@ -44,6 +44,7 @@ exports.main = async (req, res) => {
 
 exports.write = async (req, res) => {
   const {
+    userIdx,
     subject,
     dealWay,
     bidDate,
@@ -77,7 +78,14 @@ exports.write = async (req, res) => {
              )VALUES(
              ?,?,?,?,?,?,now()
              )`;
-      prepare = [productType, subject, 1, dealPrice, productDetail, dealZone];
+      prepare = [
+        productType,
+        subject,
+        userIdx,
+        dealPrice,
+        productDetail,
+        dealZone,
+      ];
     } else {
       const date = new Date();
       date.setDate(date.getDate() + Number(bidDate));
@@ -95,7 +103,7 @@ exports.write = async (req, res) => {
       prepare = [
         productType,
         subject,
-        1,
+        userIdx,
         dealPrice,
         productDetail,
         dealZone,
@@ -120,6 +128,11 @@ exports.write = async (req, res) => {
                         ('${idx}','${v}')`;
       await conn.query(imgSql);
     });
+
+    const userSql = `UPDATE user 
+                    SET point=point+10
+                    WHERE u_id =${userIdx}`;
+    await conn.query(userSql);
   } catch (err) {
     console.log(err);
   } finally {
