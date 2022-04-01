@@ -85,4 +85,26 @@ router.get('/quit', async (req, res) => {
     alertmove('http://localhost:3000/user/logout', '회원탈퇴가 완료되었습니다')
   );
 });
+
+router.post('/profile/edit', async (req, res) => {
+  const { userEmail, userAlias, userMobile } = req.body;
+  const conn = await pool.getConnection();
+  const sql = `UPDATE user 
+               SET userEmail='${userEmail}', userAlias='${userAlias}', userMobile='${userMobile}'
+               WHERE userEmail='${userEmail}'`;
+  try {
+    await conn.query(sql);
+    res.send(
+      alertmove(
+        'http://localhost:3000/user/profile',
+        '회원정보 수정이 완료되었습니다.'
+      )
+    );
+  } catch (err) {
+    console.log(err);
+  } finally {
+    conn.release();
+  }
+});
+
 module.exports = router;

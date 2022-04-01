@@ -1,4 +1,5 @@
 const { pool } = require('../../model/db/db.js');
+exports.auction = (req, res) => {};
 
 exports.main = async (req, res) => {
   const conn = await pool.getConnection();
@@ -239,7 +240,8 @@ exports.view = async (req, res) => {
                         c_name, subject, auction.u_id,
                         FORMAT(price,0) AS price,
                         content, how, location, likes, isSold,
-                        DATE_FORMAT(date,'%y-%m-%d') AS date,
+                        DATE_FORMAT(startDate, '경매 시작일 %y-%m-%d %H시 %i분') AS date,
+                        startDate,
                         DATEDIFF(startDate,now()) AS bidStart
                         FROM auction
                         JOIN category

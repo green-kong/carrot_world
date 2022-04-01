@@ -208,49 +208,7 @@
           </ul>
         </div>
       </article>
-      <article id="prod_summary">
-        <h1 id="view_subject">{subject}</h1>
-        <div id="sell_price">
-          <span id="price_num">{price}</span>
-          <span>원</span>
-        </div>
-        <div id="view_status">
-          <i class="fa-solid fa-heart"></i>
-          <span id="like_num">{like}</span>
-          <i class="fa-solid fa-clock"></i>
-          <span id="time">{date}</span>
-        </div>
-        <ul id="detail_list">
-          <li class="details">
-            <span>카테고리 :</span>
-            <span id="i_category">{c_name}</span>
-          </li>
-          <li class="details">
-            <span>거래방식 :</span>
-            <span id="i_how">{how}</span>
-          </li>
-          <li class="details">
-            <span>거래지역 :</span>
-            <span id="i_where">{location}</span>
-          </li>
-          <li class="details">
-            <span>태그 :</span>
-            <span id="tag"> {tagList} </span>
-          </li>
-        </ul>
-        <input
-          type="hidden"
-          id="bid_input"
-          name="bid_input"
-          placeholder="입찰하실 금액을 입력 후 입찰하기 버튼을 눌러주세요"
-        />
-        <div id="btn_wrap">
-          <button class="like_btn" type="submit">
-            <i class="fa-solid fa-heart"> 찜하기</i>
-          </button>
-          <button id="contact_btn" type="submit">1:1 연락</button>
-        </div>
-      </article>
+      {infoList}
     </section>
     <section id="prod_detail_wrap">
       <h2>제품 설명</h2>
@@ -303,3 +261,137 @@
   </li>
 </template>
 <!-- recommend item list template done -->
+
+<!--sell view info  -->
+<template id="sell_view_info_tem">
+  <article class="prod_summary">
+    <h1 class="view_subject">{subject}</h1>
+    <div class="sell_price">
+      <span class="price_num">{price}</span>
+      <span>원</span>
+    </div>
+    <div class="view_status">
+      <i class="fa-solid fa-heart"></i>
+      <span class="like_num">{like}</span>
+      <i class="fa-solid fa-clock"></i>
+      <span class="time">{date}</span>
+    </div>
+    <ul class="detail_list">
+      <li class="details">
+        <span>카테고리 :</span>
+        <span class="i_category">{c_name}</span>
+      </li>
+      <li class="details">
+        <span>거래방식 :</span>
+        <span class="i_how">{how}</span>
+      </li>
+      <li class="details">
+        <span>거래지역 :</span>
+        <span class="i_where">{location}</span>
+      </li>
+      <li class="details">
+        <span>태그 :</span>
+        <span class="tag"> {tagList} </span>
+      </li>
+    </ul>
+    <div class="btn_wrap">
+      <button class="like_btn" type="submit">
+        <i class="fa-solid fa-heart"> 찜하기</i>
+      </button>
+      <button class="contact_btn" type="submit">1:1 연락</button>
+    </div>
+  </article>
+</template>
+<!-- sell view info -->
+
+<!--bid view info  -->
+<template id="bid_view_info_tem">
+  <article class="prod_summary bid">
+    <h1 class="view_subject">{subject}</h1>
+    <div class="sell_price">
+      <span class="price_num">{price}</span>
+      <span>원</span>
+      <div class="bid_info">
+        <label for="bid_input" class="label"
+          ><i class="fa-solid fa-money-bill-1-wave"></i>입찰금액</label
+        >
+        <input
+          type="text"
+          id="bid_input"
+          class="bid_input"
+          name="bid_input"
+          placeholder="입찰가 입력 후 버튼 클릭"
+        />
+        <span class="label"
+          ><i class="fa-solid fa-medal"></i>최고금액 입찰자</span
+        >
+        <span class="bid_name">큰완두콩</span>
+      </div>
+    </div>
+    <div class="view_status">
+      <i class="fa-solid fa-heart"></i>
+      <span class="like_num">{like}</span>
+      <i class="fa-solid fa-clock"></i>
+      <span class="time">{date}</span>
+      <input type="hidden" value="{startDate}" class="start_date" />
+    </div>
+    <div class="detail">
+      <ul class="detail_content detail_time">
+        <div class="bid-timer">
+          <svg
+            class="bid-timer__svg"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g class="bid-timer__circle">
+              <circle
+                class="bid-timer__path-elapsed"
+                cx="50"
+                cy="50"
+                r="45"
+              ></circle>
+              <path
+                id="bid-timer-path-remaining"
+                stroke-dasharray="283"
+                class="bid-timer__path-remaining green"
+                d="
+          M 50, 50
+          m -45, 0
+          a 45,45 0 1,0 90,0
+          a 45,45 0 1,0 -90,0
+        "
+              ></path>
+            </g>
+          </svg>
+          <span id="bid-timer-label" class="bid-timer__label">{bidStart}</span>
+        </div>
+      </ul>
+      <ul class="detail_content detail_list">
+        <li class="details">
+          <span>카테고리 :</span>
+          <span class="i_category">{c_name}</span>
+        </li>
+        <li class="details">
+          <span>거래방식 :</span>
+          <span class="i_how">{how}</span>
+        </li>
+        <li class="details">
+          <span>거래지역 :</span>
+          <span class="i_where">{location}</span>
+        </li>
+      </ul>
+    </div>
+    <div class="details">
+      <span>태그 :</span>
+      <span class="tag"> {tagList} </span>
+    </div>
+
+    <div class="btn_wrap">
+      <button class="like_btn" type="submit">
+        <i class="fa-solid fa-heart"> 찜하기</i>
+      </button>
+      <button class="bid_btn" type="submit">입찰하기</button>
+    </div>
+  </article>
+</template>
+<!-- bid view info -->
