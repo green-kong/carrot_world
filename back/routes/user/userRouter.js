@@ -8,6 +8,7 @@ const bcrypt = require('bcrypt');
 const { pool } = require('../../model/db/db.js');
 const alertmove = require('../../utils/user/alertmove.js');
 const { makeToken } = require('../../utils/user/jwt.js');
+const auth = require('../../../front/middlewares/user/auth.js');
 
 router.post('/login', async (req, res) => {
   const { userEmail, userPW } = req.body;
@@ -84,6 +85,21 @@ router.post('/auth', async (req, res) => {
   }
 });
 
+router.post('/quit', async (req, res) => {
+  const { userEmail } = req.body;
+  const conn = await pool.getConnection();
+  const sql = `DELETE FROM user
+                  WHERE userEmail='${userEmail}'`;
+  try {
+    await conn.query(sql);
+    res.send('Success');
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Fail');
+  } finally {
+    conn.release();
+  }
+});
 
 router.post('/join', async (req, res) => {
   const { userEmail, userPW, userAlias, userMobile } = req.body;
@@ -98,6 +114,7 @@ router.post('/join', async (req, res) => {
       `${userAlias}님 회원가입을 축하합니다. 로그인을 해주세요`
     )
   );
+});
 
 router.post('/profile/edit', async (req, res) => {
   const { userEmail, userAlias, userMobile } = req.body;
