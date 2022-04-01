@@ -4,6 +4,7 @@ const userControll = require('./user.controller.js');
 
 const router = express.Router();
 
+const auth = require('../../middlewares/user/auth.js');
 const unauth = require('../../middlewares/user/unauth.js');
 const alertmove = require('../../utils/user/alertmove.js');
 
@@ -23,5 +24,10 @@ router.get('/logout', (req, res) => {
 });
 
 router.get('/profile', userControll.profile);
+
+router.get('/profile/edit', auth, (req, res) => {
+  const { userEmail, userAlias, userMobile } = req.user.userResult;
+  res.render('user/edit.html', { userEmail, userAlias, userMobile });
+});
 
 module.exports = router;

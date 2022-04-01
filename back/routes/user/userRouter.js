@@ -84,6 +84,7 @@ router.post('/auth', async (req, res) => {
   }
 });
 
+
 router.post('/join', async (req, res) => {
   const { userEmail, userPW, userAlias, userMobile } = req.body;
   const conn = await pool.getConnection();
@@ -91,13 +92,32 @@ router.post('/join', async (req, res) => {
   const sql = `INSERT INTO user (userEmail, userPW, userAlias, userMobile) 
   VALUES ('${userEmail}', '${encryptedPW}', '${userAlias}', '${userMobile}')`;
   await conn.query(sql);
-
   res.send(
     alertmove(
       'http://localhost:3000/user/login',
       `${userAlias}님 회원가입을 축하합니다. 로그인을 해주세요`
     )
   );
+
+router.post('/profile/edit', async (req, res) => {
+  const { userEmail, userAlias, userMobile } = req.body;
+  const conn = await pool.getConnection();
+  const sql = `UPDATE user 
+               SET userEmail='${userEmail}', userAlias='${userAlias}', userMobile='${userMobile}'
+               WHERE userEmail='${userEmail}'`;
+  try {
+    await conn.query(sql);
+    res.send(
+      alertmove(
+        'http://localhost:3000/user/profile',
+        '회원정보 수정이 완료되었습니다.'
+      )
+    );
+  } catch (err) {
+    console.log(err);
+  } finally {
+    conn.release();
+  }
 });
 
 module.exports = router;
