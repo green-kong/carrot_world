@@ -1,5 +1,8 @@
 import activeLike from '../like.js';
 import drawLike from './drawLike.js';
+import { clickHandler } from '../auctionSocket.js';
+import startTimer from '../bidTimer.js';
+import viewSlide from '../viewSlide.js';
 
 export default async function drawView() {
   const [, table, idx] = window.location.hash.replace('#', '').split('/');
@@ -23,6 +26,8 @@ export default async function drawView() {
       '#au_view_recommend_template'
     ).innerHTML;
 
+    const sellInfo = document.querySelector('#sell_view_info_tem').innerHTML;
+    const bidInfo = document.querySelector('#bid_view_info_tem').innerHTML;
     const imgResult = imgList.reduce((acc, cur) => {
       return acc + viewImgTemp.replace('{img}', cur.img);
     }, '');
@@ -49,8 +54,8 @@ export default async function drawView() {
           );
         }, '');
       }
-
       result = viewTemp
+        .replace('{infoList}', sellInfo)
         .replace('{imgList}', imgResult)
         .replace('{subject}', itemResult.subject)
         .replace('{price}', itemResult.price)
@@ -76,8 +81,18 @@ export default async function drawView() {
           );
         }, '');
       }
+      // itemResult.bidStart;
+      let bidStart;
+      if (itemResult.bidStart === 0) {
+        bidStart = 'D-day';
+      } else if (itemResult.bidStart < 0) {
+        bidStart = '경매 종료';
+      } else {
+        bidStart = `D-${itemResult.bidStart}`;
+      }
 
       result = viewTemp
+        .replace('{infoList}', bidInfo)
         .replace('{imgList}', imgResult)
         .replace('{subject}', itemResult.subject)
         .replace('{price}', itemResult.price)
@@ -88,17 +103,43 @@ export default async function drawView() {
         .replace('{tagList}', tagResult)
         .replace('{content}', itemResult.content)
         .replace('{c_name}', itemResult.c_name)
-        .replace('{recommendList}', recResult);
+        .replace('{recommendList}', recResult)
+        .replace('{startDate}', itemResult.startDate)
+        .replace('{bidStart}', bidStart);
     }
     contentFrame.innerHTML = result;
-    const bidInput = document.querySelector('#bid_input');
-    const contactBtn = document.querySelector('#contact_btn');
+    const bidBtn = document.querySelector('.bid_btn');
     if (table === 'auction') {
-      bidInput.setAttribute('type', 'text');
-      contactBtn.textContent = '입찰하기';
+      const now = new Date();
+      const startDate = new Date(itemResult.startDate);
+      const endTime = new Date(
+        startDate.getFullYear(),
+        startDate.getMonth(),
+        startDate.getDate(),
+        startDate.getHours(),
+        startDate.getMinutes() + 5
+      );
+
+      if (startDate < now && now < endTime) {
+        const secDiff = Math.floor((endTime.getTime() - now.getTime()) / 1000);
+        const timerId = startTimer(secDiff);
+
+        window.addEventListener('hashchange', () => {
+          clearInterval(timerId);
+        });
+
+        bidBtn.addEventListener('click', () => {
+          clickHandler();
+        });
+      } else {
+        bidBtn.addEventListener('click', () => {
+          alert('경매가 진행 중이지 않습니다.');
+        });
+      }
     }
   }
 
   activeLike();
   drawLike();
+  viewSlide();
 }

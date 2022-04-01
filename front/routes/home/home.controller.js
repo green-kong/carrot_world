@@ -11,3 +11,7 @@ exports.home = (req, res) => {
 exports.write = (req, res) => {
   res.render('home/write.html');
 };
+
+exports.auction = (req, res) => {
+  res.render('home/auction.html');
+};

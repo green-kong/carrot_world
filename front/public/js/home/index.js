@@ -1,5 +1,7 @@
 import searchEvent from './search.js';
 
+import auctionSocket from './auctionSocket.js';
+
 import init from './main.js';
 import drawSearch from './draw_page/drawSearch.js';
 import drawNotFound from './draw_page/drawNotFound.js';
@@ -29,3 +31,4 @@ function router() {
 }
 
 window.addEventListener('hashchange', router);
+window.addEventListener('hashchange', auctionSocket);
