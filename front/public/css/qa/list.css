@@ -10,6 +10,10 @@
   background-size: contain;
 }
 
+a {
+  cursor: pointer;
+}
+
 table {
   width: 1000px;
   margin: 20px auto;
@@ -75,7 +79,7 @@ td {
 }
 
 #pagenation {
-  width: 140px;
+  width: 180px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -83,9 +87,16 @@ td {
   margin-bottom: 30px;
 }
 
+#paging {
+  text-align: center;
+}
+.page_num {
+  margin: 0 5px;
+}
+
 .emphasis {
   font-size: 18px;
   font-weight: 900;
   color: #4d47c3;
-  border-bottom: 1px solid #4d47c3;
+  padding-left: 3px;
 }

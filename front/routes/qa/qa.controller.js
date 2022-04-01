@@ -9,13 +9,13 @@ exports.write = (req, res) => {
 
 exports.view = async (req, res) => {
   const { idx } = req.query;
-  const { u_id: loginUser, userAlias } = req.user.userResult;
+  const { u_id: loginUser, userAlias, isAdmin } = req.user.userResult;
   const url = `http://localhost:4000/api/qa/view?idx=${idx}`;
   const response = await axios.post(url, {
     withCredentials: true,
   });
   const { qaData, replyData } = response.data;
-  if (qaData.u_id === loginUser || loginUser === 7) {
+  if (qaData.u_id === loginUser || isAdmin === 1) {
     res.render('qa/view.html', { qaData, replyData, userAlias });
   } else {
     res.send(alertmove('/qa/list', '해당 글 작성자만 접근 가능합니다.'));
@@ -27,16 +27,19 @@ exports.list = async (req, res) => {
   if (page === undefined) {
     page = 1;
   }
-  const url = `http://localhost:4000/api/qa/list?page=${page}`;
-  const response = await axios.post(url, {
-    withCredentials: true,
-  });
-  const { result: listData } = response.data;
-  const { totalQty } = response.data;
-  const totalPage = Math.ceil(totalQty / 10);
-  const totalPager = Math.ceil(totalPage / 5);
-  console.log(totalPager);
-  res.render('qa/list.html', { listData });
+  try {
+    const url = `http://localhost:4000/api/qa/list?page=${page}`;
+    const response = await axios.post(url);
+    if (response.status >= 500 || response.data.err)
+      throw new Error('페이지 오류');
+    const { result: listData } = response.data;
+    const forPager = Math.ceil(page / 5);
+    page = Number(page);
+    res.render('qa/list.html', { listData, page, forPager });
+  } catch (err) {
+    console.log(err.message);
+    res.send(alertmove('/qa/list?page=1', '존재하지 않는 페이지입니다'));
+  }
 };
 
 exports.delete = async (req, res) => {

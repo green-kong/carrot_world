@@ -63,27 +63,38 @@ exports.view = async (req, res) => {
 };
 
 exports.list = async (req, res) => {
+  let response;
   try {
     const { page } = req.query;
     const upperData = page * 10 - 10;
     console.log(upperData);
-    const listSql = `SELECT qa.q_id, qa.subject,
-                      user.userAlias,
-                      DATE_FORMAT(qa.date, '%y-%m-%d') AS date
-                      FROM qa
-                      JOIN user
-                      ON qa.u_id = user.u_id
-                      ORDER BY q_id DESC
-                      LIMIT ${upperData}, 10`;
-    const [result] = await pool.execute(listSql);
     const countSql = `SELECT count(q_id) as totalQty FROM qa`;
     const [[{ totalQty }]] = await pool.execute(countSql);
-    const response = {
-      result,
-      totalQty,
-    };
-    res.send(response);
+    if (upperData < 0) {
+      throw new Error('페이지 오류');
+    } else if (upperData > totalQty) {
+      throw new Error('페이지 오류');
+    } else {
+      const listSql = `SELECT qa.q_id, qa.subject,
+      user.userAlias,
+      DATE_FORMAT(qa.date, '%y-%m-%d') AS date
+      FROM qa
+      JOIN user
+      ON qa.u_id = user.u_id
+      ORDER BY q_id DESC
+      LIMIT ${upperData}, 10`;
+      const [result] = await pool.execute(listSql);
+      response = {
+        result,
+        totalQty,
+      };
+      res.send(response);
+    }
   } catch (err) {
+    response = {
+      err: 'pageError',
+    };
+    res.status(500).send(response);
     console.log(err.message);
   }
 };
