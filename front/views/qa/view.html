@@ -42,8 +42,8 @@
     <ul class="reply_list">
       {% for item in replyData %}
       <li data-id="{{item.qr_id}}">
-        <span>{{item.userAlias}}</span>
-        <span>{{item.date}}</span>
+        <span class="user_alias">{{item.userAlias}}</span>
+        <span class="reply_date">{{item.date}}</span>
         <div>{{item.content}}</div>
         <span class="reply_edit_btn reply_btn" data-id="{{item.qr_id}}">
           <input type="hidden" value="{{item.qr_id}}" />

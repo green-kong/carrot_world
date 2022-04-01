@@ -137,7 +137,9 @@ exports.editPost = async (req, res) => {
 exports.replyWrite = async (req, res) => {
   const { content, q_id, replyAuthor } = req.body;
   const conn = await pool.getConnection();
-  const recordSql = `INSERT INTO q_reply(q_id,content,date,u_id) VALUES(${q_id},'${content}',now(),(SELECT u_id FROM user WHERE userAlias = '${replyAuthor}'))`;
+  const recordSql = `INSERT INTO q_reply(q_id,content,date,u_id) 
+                     VALUES(${q_id},'${content}',now(),
+                     (SELECT u_id FROM user WHERE userAlias = '${replyAuthor}'))`;
   const bringSql = `SELECT qr.qr_id, qr.q_id, qr.content,
                     DATE_FORMAT(qr.date, '%y-%m-%d %H:%i') as date,
                     user.userAlias
@@ -178,7 +180,23 @@ exports.replyDelete = async (req, res) => {
   }
 };
 
-exports.replyUpdate = (req, res) => {
-  const { qr_id } = req.body;
-  const updateSql = `UPDATE q_reply SET  `;
+exports.replyUpdate = async (req, res) => {
+  const { qr_id, changedReply } = req.body;
+  const conn = await pool.getConnection();
+  const updateSql = `UPDATE q_reply SET content = '${changedReply}', date = now() WHERE qr_id = ${qr_id}`;
+  const bringSql = `SELECT content, DATE_FORMAT(date, '%y-%m-%d %H:%i') as date 
+                    FROM q_reply WHERE qr_id = ${qr_id}`;
+  try {
+    const [isUpdated] = await conn.query(updateSql);
+    const [[changedData]] = await conn.query(bringSql);
+    const response = {
+      isUpdated: isUpdated.affectedRows,
+      changedData,
+    };
+    res.status(200).send(response);
+  } catch (err) {
+    console.log(err.message);
+  } finally {
+    conn.release();
+  }
 };
