@@ -33,3 +33,4 @@ function router() {
 window.addEventListener('hashchange', router);
 window.addEventListener('DOMContentLoaded', router);
 window.addEventListener('hashchange', auctionSocket);
+window.addEventListener('DOMContentLoaded', auctionSocket);
