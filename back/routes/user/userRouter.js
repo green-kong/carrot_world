@@ -73,17 +73,34 @@ router.post('/auth', async (req, res) => {
   }
 });
 
-router.get('/quit', async (req, res) => {
+router.post('/quit', async (req, res) => {
   const { userEmail } = req.body;
   console.log(req.body);
   const conn = await pool.getConnection();
   const sql = `DELETE FROM user
                   WHERE userEmail='${userEmail}'`;
-  const result = await conn.query(sql);
-  console.log(result);
-  res.send(
-    alertmove('http://localhost:3000/user/logout', '회원탈퇴가 완료되었습니다')
-  );
+  try {
+    const result = await conn.query(sql);
+    console.log(result);
+    res.send(
+      alertmove(
+        'http://localhost:3000/user/logout',
+        '회원탈퇴가 완료되었습니다'
+      )
+    );
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .send(
+        alertmove(
+          'http://localhost:3000/user/profile/edit',
+          '잠시 후에 다시 시도해주세요'
+        )
+      );
+  } finally {
+    conn.release();
+  }
 });
 
 router.post('/profile/edit', async (req, res) => {
