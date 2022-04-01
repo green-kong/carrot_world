@@ -18,14 +18,15 @@ async function addReply() {
     const body = { content, q_id, replyAuthor };
     const url = 'http://localhost:4000/api/qa/reply/write';
     const response = await axios.post(url, body);
-    const { record, author } = response.data;
+    const { record } = response.data;
     const latest = record[record.length - 1];
-    const { qr_id, date } = latest;
+    const { qr_id, date, userAlias } = latest;
+    console.log(latest);
     if (response.data.rows === 1 && response.status === 200) {
       const itemLi = document.createElement('li');
       itemLi.setAttribute('data-id', qr_id);
       itemLi.innerHTML = `
-        <span>${replyAuthor}</span>
+        <span>${userAlias}</span>
         <span>${date}</span>
         <div>${content}</div>
         <span class="reply_edit_btn reply_btn" data-id=${qr_id}>

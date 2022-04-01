@@ -38,7 +38,13 @@ exports.view = async (req, res) => {
     const hitSql = `UPDATE qa SET hit = hit + 1 WHERE q_id = ${idx}`;
     await conn.query(hitSql);
 
-    const replySql = `SELECT qr_id, q_id, content, DATE_FORMAT(date, '%y-%m-%d %H:%i') as date FROM q_reply WHERE q_id = ${idx}`;
+    const replySql = `SELECT qr.qr_id, qr.q_id, qr.content,
+                    DATE_FORMAT(qr.date, '%y-%m-%d %H:%i') as date,
+                    user.userAlias
+                    FROM q_reply qr
+                    JOIN user
+                    ON qr.u_id = user.u_id
+                    WHERE q_id = ${idx}`;
     let [replyData] = await conn.query(replySql);
     if (replyData === undefined) {
       replyData = 'no reply';
@@ -131,15 +137,20 @@ exports.editPost = async (req, res) => {
 exports.replyWrite = async (req, res) => {
   const { content, q_id, replyAuthor } = req.body;
   const conn = await pool.getConnection();
-  const recordSql = `INSERT INTO q_reply(q_id,content,date) VALUES(${q_id},'${content}',now())`;
-  const bringSql = `SELECT qr_id, q_id, content, DATE_FORMAT(date, '%y-%m-%d %H:%i') as date FROM q_reply WHERE q_id = ${q_id}`;
+  const recordSql = `INSERT INTO q_reply(q_id,content,date,u_id) VALUES(${q_id},'${content}',now(),(SELECT u_id FROM user WHERE userAlias = '${replyAuthor}'))`;
+  const bringSql = `SELECT qr.qr_id, qr.q_id, qr.content,
+                    DATE_FORMAT(qr.date, '%y-%m-%d %H:%i') as date,
+                    user.userAlias
+                    FROM q_reply qr
+                    JOIN user
+                    ON qr.u_id = user.u_id
+                    WHERE q_id = ${q_id}`;
   try {
     const [isRecorded] = await conn.query(recordSql);
     const [recordedData] = await conn.query(bringSql);
     const response = {
       rows: isRecorded.affectedRows,
       record: recordedData,
-      author: replyAuthor,
     };
     res.status(200).send(response);
   } catch (err) {
