@@ -1,12 +1,11 @@
 const { pool } = require('../../model/db/db.js');
 
 exports.write = async (req, res) => {
-  const { subject, content, author } = req.body;
+  const { subject, content, u_id } = req.body;
   const conn = await pool.getConnection();
   try {
     const writeSql = `INSERT INTO qa(u_id, subject, content, date
-                      ) VALUES((SELECT u_id FROM user
-                        WHERE userAlias = '${author}'),'${subject}', '${content}', now())`;
+                      ) VALUES(${u_id}, '${subject}', '${content}', now())`;
     const [result] = await conn.query(writeSql);
     const response = {
       result: {

@@ -4,7 +4,7 @@ writeForm.addEventListener('submit', writeQna);
 
 async function writeQna(e) {
   e.preventDefault();
-  const { subject, content, author } = e.target;
+  const { subject, content, author, u_id } = e.target;
   if (subject.value === '' || content.value === '') {
     return alert('제목 및 내용을 채워주세요');
   }
@@ -13,6 +13,7 @@ async function writeQna(e) {
     subject: subject.value,
     content: content.value,
     author: author.value,
+    u_id: u_id.value,
   };
   const response = await axios.post(url, body, {
     withCredentials: true,
