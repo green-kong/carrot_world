@@ -59,7 +59,9 @@ exports.write = async (req, res) => {
   const tagList = tag
     .replace(/(\s*)/g, '')
     .split('#')
-    .filter((v) => v !== '');
+    .filter((v) => v !== '')
+    .filter((_, i) => i < 5)
+    .map((v) => v.split('', 8).join(''));
 
   const fileList = req.files.map((v) => v.filename);
 
