@@ -427,7 +427,7 @@ exports.tag = async (req, res) => {
 };
 
 exports.like = async (req, res) => {
-  const { table, itemIdx, userIdx } = req.body;
+  const { table, itemIdx, userIdx, author } = req.body;
   const likeTable = table === 'auction' ? 'au_likes' : 's_likes';
   const itemColumn = table === 'auction' ? 'au_id' : 's_id';
   const checkSql = `SELECT * FROM ${likeTable}
@@ -444,8 +444,12 @@ exports.like = async (req, res) => {
       const plusUpdateSql = `UPDATE ${table}
                             SET likes = likes+1
                             WHERE ${itemColumn}=${itemIdx}`;
+      const authorPointSql = `UPDATE user 
+                              SET point=point+3
+                              WHERE u_id=${author}`;
       await conn.query(insertSql);
       await conn.query(plusUpdateSql);
+      await conn.query(authorPointSql);
     } else {
       const deletSql = `DELETE FROM ${likeTable} 
                         WHERE ${itemColumn}=${itemIdx} 
@@ -453,8 +457,12 @@ exports.like = async (req, res) => {
       const minusUpdateSql = `UPDATE ${table}
                             SET likes = likes-1
                             WHERE ${itemColumn}=${itemIdx}`;
+      const authorPointSql = `UPDATE user 
+                              SET point=point-3
+                              WHERE u_id=${author}`;
       await conn.query(deletSql);
       await conn.query(minusUpdateSql);
+      await conn.query(authorPointSql);
     }
     const resultSql = `SELECT likes FROM ${table} 
                       WHERE ${itemColumn}=${itemIdx}`;

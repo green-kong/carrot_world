@@ -30,7 +30,6 @@ function moveNext() {
 
 export default function viewSlide() {
   totalImg = document.querySelectorAll('.prod_img').length;
-  console.log(CUR_PAGE);
   const prevBtn = document.querySelector('#left_btn');
   const nxtBtn = document.querySelector('#right_btn');
 

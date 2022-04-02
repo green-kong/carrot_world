@@ -13,7 +13,6 @@ export default async function drawView() {
   const response = await axios.post(url, body);
   if (response.status === 200) {
     const { imgList, itemResult, tagList, recList } = response.data;
-    console.log(recList);
 
     const contentFrame = document.querySelector('#content_frame');
 
@@ -56,6 +55,7 @@ export default async function drawView() {
         }, '');
       }
       result = viewTemp
+        .replace('{author}', itemResult.u_id)
         .replace('{infoList}', sellInfo)
         .replace('{imgList}', imgResult)
         .replace('{subject}', itemResult.subject)
@@ -93,6 +93,7 @@ export default async function drawView() {
       }
 
       result = viewTemp
+        .replace('{author}', itemResult.u_id)
         .replace('{infoList}', bidInfo)
         .replace('{imgList}', imgResult)
         .replace('{subject}', itemResult.subject)
