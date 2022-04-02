@@ -9,14 +9,14 @@ exports.write = (req, res) => {
 
 exports.view = async (req, res) => {
   const { idx } = req.query;
-  const { u_id: loginUser, userAlias, isAdmin } = req.user.userResult;
+  const { u_id, userAlias, isAdmin } = req.user.userResult;
   const url = `http://localhost:4000/api/qa/view?idx=${idx}`;
   const response = await axios.post(url, {
     withCredentials: true,
   });
   const { qaData, replyData } = response.data;
-  if (qaData.u_id === loginUser || isAdmin === 1) {
-    res.render('qa/view.html', { qaData, replyData, userAlias });
+  if (qaData.u_id === u_id || isAdmin === 1) {
+    res.render('qa/view.html', { qaData, replyData, userAlias, u_id });
   } else {
     res.send(alertmove('/qa/list', '해당 글 작성자만 접근 가능합니다.'));
   }

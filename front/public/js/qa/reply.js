@@ -9,13 +9,13 @@ replyInput.addEventListener('keypress', (e) => {
   }
 });
 
-async function addReply() {
+async function addReply(e) {
+  const u_id = document.querySelector('#u_id').value;
   const q_id = document.querySelector('#linkedPosting').value;
   const content = replyInput.value;
-  const replyAuthor = document.querySelector('#reply_author').value;
   try {
     if (content === '') throw new Error('no contents');
-    const body = { content, q_id, replyAuthor };
+    const body = { content, q_id, u_id };
     const url = 'http://localhost:4000/api/qa/reply/write';
     const response = await axios.post(url, body);
     const { record } = response.data;
@@ -25,7 +25,7 @@ async function addReply() {
     if (response.data.rows === 1 && response.status === 200) {
       const itemLi = document.createElement('li');
       itemLi.setAttribute('data-id', qr_id);
-      itemLi.innerHTML = `
+      itemLi.innerHTML = ` 
         <span class="user_alias">${userAlias}</span>
         <span class="reply_date">${date}</span>
         <div>${content}</div>
@@ -37,6 +37,7 @@ async function addReply() {
         </span>`;
       replyList.appendChild(itemLi);
       replyInput.value = '';
+      itemLi.scrollIntoView;
     }
   } catch (err) {
     console.log(err.message);
@@ -93,7 +94,10 @@ async function updateReply(e) {
   const qr_id = e.target.dataset.id;
   const textArea = e.target.parentNode.querySelector('#reply_content');
   const changedReply = textArea.value;
-
+  if (changedReply === '') {
+    alert('내용을 입력해주세요');
+    return;
+  }
   const url = `http://localhost:4000/api/qa/reply/update`;
   const body = { qr_id, changedReply };
   const response = await axios.post(url, body);
