@@ -1,3 +1,8 @@
+#content_container {
+  width: 1200px;
+  margin: 0 auto;
+}
+
 #nav > ul {
   height: 100%;
   display: flex;
@@ -33,10 +38,7 @@
 #graph {
   margin: 0 auto;
   margin-top: 20px;
-  width: 1350px;
-  height: 350px;
-  border-left: 1px solid #cbcbcb;
-  border-bottom: 1px solid #cbcbcb;
+  width: 90%;
 }
 
 #mid_content {
