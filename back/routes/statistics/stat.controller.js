@@ -3,7 +3,13 @@ const { pool } = require('../../model/db/db.js');
 exports.graph = async (req, res) => {
   const conn = await pool.getConnection();
   const categorySql = 'SELECT * FROM category';
-  const select = `ROUND(count(case when c_code = '{c_code}' and isSold='1' then 1 end)/count(case when c_code = '{c_code}' then 1 end)*100) AS '{table}/{c_name}'`;
+  const select = `ROUND(
+                    COUNT(
+                      CASE WHEN c_code = '{c_code}' AND isSold='1' THEN 1 END)/
+                    COUNT(
+                      CASE WHEN c_code = '{c_code}' THEN 1 END)
+                    *100)
+                    AS '{table}/{c_name}'`;
   try {
     const [categoryList] = await conn.query(categorySql);
     const auction = categoryList.reduce((acc, cur, i, t) => {
