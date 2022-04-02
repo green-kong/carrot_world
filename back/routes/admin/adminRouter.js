@@ -12,11 +12,9 @@ const { nextTick } = require('process');
 
 router.post('/login', async (req, res) => {
   const { userEmail, userPW } = req.body;
-  console.log(req.body);
   const conn = await pool.getConnection();
   const sql = `SELECT * FROM user WHERE userEmail = '${userEmail}'and userPW='${userPW}'`;
   const sql2 = `SELECT * FROM user WHERE userEmail='${userEmail}' and isAdmin=1`;
-  console.log(sql);
   try {
     const [result] = await conn.query(sql);
 
@@ -29,7 +27,6 @@ router.post('/login', async (req, res) => {
       );
     } else {
       const [result2] = await conn.query(sql2);
-      console.log(result2);
       if (result2.length === 0) {
         res.send(
           alertmove(
