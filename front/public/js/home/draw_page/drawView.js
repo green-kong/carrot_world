@@ -13,6 +13,7 @@ export default async function drawView() {
   const response = await axios.post(url, body);
   if (response.status === 200) {
     const { imgList, itemResult, tagList, recList } = response.data;
+    console.log(recList);
 
     const contentFrame = document.querySelector('#content_frame');
 
@@ -41,7 +42,7 @@ export default async function drawView() {
     let recResult = '연관된 물품이 없습니다.';
     let result;
     if (table === 'sell_board') {
-      if (recList !== undefined) {
+      if (recList !== undefined && recList.length !== 0) {
         recResult = recList.reduce((acc, cur) => {
           return (
             acc +
@@ -68,7 +69,7 @@ export default async function drawView() {
         .replace('{c_name}', itemResult.c_name)
         .replace('{recommendList}', recResult);
     } else {
-      if (recList !== undefined) {
+      if (recList !== undefined && recList.length !== 0) {
         recResult = recList.reduce((acc, cur) => {
           return (
             acc +
@@ -81,7 +82,7 @@ export default async function drawView() {
           );
         }, '');
       }
-      // itemResult.bidStart;
+
       let bidStart;
       if (itemResult.bidStart === 0) {
         bidStart = 'D-day';
