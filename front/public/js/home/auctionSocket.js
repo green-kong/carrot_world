@@ -3,7 +3,6 @@ import { io } from 'https://cdn.socket.io/4.3.2/socket.io.esm.min.js';
 let socket;
 
 export default function auctionSocket() {
-  console.log('hash changed');
   const [view, auction, idx] = window.location.hash.replace('#', '').split('/');
   if (view !== 'view' || auction !== 'auction') {
     return;

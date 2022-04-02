@@ -1,9 +1,10 @@
 async function likeClickHandler(e) {
   const [, table, itemIdx] = window.location.hash.replace('#', '').split('/');
   const userIdx = document.querySelector('#u_id').value;
+  const author = document.querySelector('#author').value;
 
   const url = 'http://localhost:4000/api/home/like';
-  const body = { table, itemIdx, userIdx };
+  const body = { table, itemIdx, userIdx, author };
 
   const response = await axios.post(url, body);
   const { likes } = response.data;

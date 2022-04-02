@@ -20,4 +20,6 @@ router.post('/tag', homeControll.tag);
 
 router.post('/like', homeControll.like);
 
+router.post('/category', homeControll.category);
+
 module.exports = router;

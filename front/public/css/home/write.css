@@ -32,7 +32,7 @@ section {
 }
 
 #subject_container {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 #subject_container > span {
@@ -54,7 +54,7 @@ section {
 
 #option_container {
   width: 99%;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
 }
@@ -78,6 +78,24 @@ section {
 
 #deal_way_wrap {
   width: 20%;
+}
+
+#deal_how > span {
+  margin-right: 20px;
+}
+
+#deal_how {
+  font-weight: 500;
+  width: 20%;
+  margin-bottom: 20px;
+}
+
+#deal_how > select {
+  width: 90px;
+  height: 36px;
+  font-size: 18px;
+  border: solid 1px var(--stroke-color);
+  margin-left: 10px;
 }
 
 #deal_date_wrap {

@@ -14,13 +14,14 @@
     enctype="multipart/form-data"
     id="write_form"
   >
+    <input type="hidden" value="{{userIdx}}" name="userIdx" />
     <div id="subject_container">
       <span>제목</span>
-      <input type="text" name="subject" id="subject" maxlength="64" />
+      <input type="text" name="subject" id="subject" maxlength="64" required />
     </div>
     <div id="option_container">
       <div id="deal_way_wrap">
-        <span>희망 거래 방식</span>
+        <span>판매 방법</span>
         <select id="deal_way" name="dealWay" onchange="checkDealWay()">
           <option value="sell">일반거래</option>
           <option value="bid">경매</option>
@@ -29,12 +30,9 @@
       <div id="product_type_wrap">
         <span>카테고리</span>
         <select id="product_type" name="productType">
-          <option>선택</option>
-          <option value="clo">의류</option>
-          <option value="acc">잡화</option>
-          <option value="fur">가구</option>
-          <option value="elc">가전</option>
-          <option value="pet">반려동물</option>
+          {% for data in result %}
+          <option value="{{data.c_code}}">{{data.c_name}}</option>
+          {% endfor %}
         </select>
       </div>
       <div id="deal_date_wrap">
@@ -83,14 +81,21 @@
         </select>
       </div>
     </div>
+    <div id="deal_how">
+      <span>거래방법</span>
+      <select name="how" id="how">
+        <option value="1">직거래</option>
+        <option value="0">택배</option>
+      </select>
+    </div>
     <div id="option2_container">
       <div id="deal_price_wrap">
         <span>가격(경매 시 시작 입찰가)</span>
-        <input type="text" name="dealPrice" id="deal_price" />
+        <input type="text" name="dealPrice" id="deal_price" required />
       </div>
       <div id="deal_zone_wrap">
         <span>희망거래 지역</span>
-        <input type="text" name="dealZone" id="deal_zone" />
+        <input type="text" name="dealZone" id="deal_zone" required />
       </div>
     </div>
     <div id="content_container">
@@ -99,6 +104,7 @@
         name="productDetail"
         rows="30"
         placeholder="빠르고 정확한 거래를 위해 자세하게 적어주세요"
+        required
       ></textarea>
     </div>
     <div id="img_container">
@@ -109,7 +115,9 @@
           name="productImg"
           id="img_upload_btn"
           onchange="makeThumbnail(this)"
+          accept="image/png, image/jpeg, image/jpg"
           multiple
+          required
         />
         <p><i class="fa-solid fa-arrow-up-from-bracket"></i></p>
         <p>클릭 또는 드래그로 이미지첨부</p>
@@ -129,6 +137,7 @@
         name="tag"
         id="hash_tag"
         placeholder="#예시#해시#태그#입력"
+        required
       />
     </div>
     <div id="btn_container">

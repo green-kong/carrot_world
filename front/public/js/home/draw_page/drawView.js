@@ -41,7 +41,7 @@ export default async function drawView() {
     let recResult = '연관된 물품이 없습니다.';
     let result;
     if (table === 'sell_board') {
-      if (recList !== undefined) {
+      if (recList !== undefined && recList.length !== 0) {
         recResult = recList.reduce((acc, cur) => {
           return (
             acc +
@@ -55,6 +55,7 @@ export default async function drawView() {
         }, '');
       }
       result = viewTemp
+        .replace('{author}', itemResult.u_id)
         .replace('{infoList}', sellInfo)
         .replace('{imgList}', imgResult)
         .replace('{subject}', itemResult.subject)
@@ -68,7 +69,7 @@ export default async function drawView() {
         .replace('{c_name}', itemResult.c_name)
         .replace('{recommendList}', recResult);
     } else {
-      if (recList !== undefined) {
+      if (recList !== undefined && recList.length !== 0) {
         recResult = recList.reduce((acc, cur) => {
           return (
             acc +
@@ -81,7 +82,7 @@ export default async function drawView() {
           );
         }, '');
       }
-      // itemResult.bidStart;
+
       let bidStart;
       if (itemResult.bidStart === 0) {
         bidStart = 'D-day';
@@ -92,6 +93,7 @@ export default async function drawView() {
       }
 
       result = viewTemp
+        .replace('{author}', itemResult.u_id)
         .replace('{infoList}', bidInfo)
         .replace('{imgList}', imgResult)
         .replace('{subject}', itemResult.subject)
