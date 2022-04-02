@@ -1,0 +1,48 @@
+{% extends "../template/_layout.html"%}
+<!--  -->
+{% block css %}
+<!--  -->
+{% endblock %}
+<!--  -->
+{% block js %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="/js/user/quit.js" defer></script>
+{% endblock %}
+<!--  -->
+
+{% block content %}
+<form method="post" action="http://localhost:4000/api/user/profile/edit">
+  <ul>
+    <li>
+      <label for="userEmail">이메일</label>
+      <input type="text" id="userEmail" name="userEmail" maxlength="64" value="{{userEmail}}" >
+    </li>
+    <li>
+      <label for="userPW">비밀번호</label>
+      <input type="password" id="userPW" name="userPW" maxlength="16">
+    </li>
+    <li>
+      <label for="userPWCheck">비밀번호확인</label>
+      <input type="password" id="userPWCheck" name="userPWCheck" maxlength="16">
+    </li>
+    <li>
+      <label for="userAlias">닉네임</label>
+      <input type="text" id="userAlias" name="userAlias" value="{{userAlias}}" maxlength="8">
+    </li>
+    <li>
+      <label for="userMobile">핸드폰번호</label>
+      <input type="text" id="userMobile" name="userMobile" value="{{userMobile}}"maxlength="13">
+    </li>
+    <!-- <li>
+      <label for="userPicture">프로필사진</label>
+      <input type="image">
+    </li> -->
+
+  </ul>
+  <button type="submit">정보수정</button>
+  <button type="button" id="quit_btn">회원탈퇴</button>
+  <!-- js로 회원탈퇴에 addeventlistener 걸고 자바스크립트 파일을 만들어야됨. -->
+</form>
+<!--  -->
+
+{% endblock %}

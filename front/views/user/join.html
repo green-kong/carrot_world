@@ -6,10 +6,38 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="/js/user/index.js" type="module" defer></script>
 </head>
 
 <body>
-  회원가입 화면입니다
+  <form method="post" action="http://localhost:4000/api/user/join">
+    <ul>
+      <li>
+        <label for="userEmail">이메일</label>
+        <input type="text" id="userEmail" name="userEmail" maxlength="64">
+        <input type="button" id="idCheckButton" value="중복체크">
+        <p id="emailMsg"></p>
+      </li>
+      <li>
+        <label for="userPW">비밀번호</label>
+        <input type="password" id="userPW" name="userPW" maxlength="16">
+      </li>
+      <li>
+        <label for="userPW">비밀번호확인</label>
+        <input type="password" id="userPWCheck" name="userPWCheck" maxlength="16">
+      </li>
+      <li>
+        <label for="userAlias">닉네임</label>
+        <input type="text" id="userAlias" name="userAlias" maxlength="8">
+      </li>
+      <li>
+        <label for="userMobile">핸드폰번호</label>
+        <input type="text" id="userMobile" name="userMobile" maxlength="13">
+      </li>
+    </ul>
+    <button type="submit">가입버튼</button>
+  </form>
 </body>
 
 </html>

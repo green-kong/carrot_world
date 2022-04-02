@@ -1,8 +1,13 @@
-import init from './main.js';
 import searchEvent from './search.js';
+
+import auctionSocket from './auctionSocket.js';
+
+import init from './main.js';
 import drawSearch from './draw_page/drawSearch.js';
 import drawNotFound from './draw_page/drawNotFound.js';
 import drawCategory from './draw_page/drawCategory.js';
+import drawView from './draw_page/drawView.js';
+import drawTag from './draw_page/drawTag.js';
 
 init();
 searchEvent();
@@ -12,6 +17,8 @@ const routes = {
   search: drawSearch,
   notFound: drawNotFound,
   category: drawCategory,
+  view: drawView,
+  tag: drawTag,
 };
 
 function router() {
@@ -24,3 +31,6 @@ function router() {
 }
 
 window.addEventListener('hashchange', router);
+window.addEventListener('DOMContentLoaded', router);
+window.addEventListener('hashchange', auctionSocket);
+window.addEventListener('DOMContentLoaded', auctionSocket);

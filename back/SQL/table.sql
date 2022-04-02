@@ -23,7 +23,7 @@ CREATE TABLE `sell_board` (
   `content` VARCHAR(255) NOT NULL,
   `how` TINYINT(1),
   `location` VARCHAR(32),
-  `like` INT DEFAULT 0,
+  `likes` INT DEFAULT 0,
   `report` INT DEFAULT 0,
   `isSold` TINYINT(1),
   `date` timestamp NOT NULL
@@ -59,8 +59,9 @@ CREATE TABLE `auction` (
   `how` TINYINT(1),
   `location` VARCHAR(32),
   `like` INT DEFAULT 0,
-  `period` timestamp NOT NULL,
-  `date` timestamp NOT NULL
+  `date` timestamp NOT NULL,
+  `startDate` timestamp NOT NULL,
+  `isSold` TINYINT(1) NOT NULL DEFAULT 0
 );
 
 CREATE TABLE `au_likes` (

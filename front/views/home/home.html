@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="/css/home/styleMain.css" type="text/css" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="module" src="/js/home/index.js" defer></script>
+    <script
+      src="https://kit.fontawesome.com/cbc296ae57.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <div id="wrap">
@@ -38,23 +42,26 @@
                 <img src="/img/home/profile.PNG" id="profile_img" />
               </ul>
               <ul id="profile_rightbox">
-                <li id="call_user">판매자 님</li>
+                <li id="call_user">{{userResult.userAlias}} 님</li>
                 <li id="show_profile">
                   <a href="/user/profile">내 정보 보기</a>
                 </li>
               </ul>
             </div>
             <ul id="profile_centerbox">
-              <li id="my_point">Point : 123 pt</li>
+              <input type="hidden" value="{{userResult.u_id}}" id="u_id" />
+              <input type="hidden" value="{{aulikeResult}}" id="au_likes" />
+              <input type="hidden" value="{{slikeResult}}" id="s_likes" />
+              <li id="my_point">Point : {{userResult.point}} pt</li>
               <ul>
-                <li id="sell_item">판매중인 물품 : 1개</li>
-                <li id="new_chat">새로운 채팅 : 1개</li>
+                <li id="sell_item">판매중인 물품 : {{totalCount}}개</li>
+                <li id="new_chat"><a href="/chat">채팅 바로 가기</a></li>
               </ul>
               <li id="user_logout">로그아웃</li>
             </ul>
           </div>
-          <div id="sell_board">
-            <p id="sell_category">
+          <div class="category_wrap">
+            <p class="category_title">
               <img
                 src="/img/home/category_img1.png"
                 style="width: 25px; height: auto"
@@ -62,14 +69,25 @@
             </p>
             <ul id="sell_list" data-way="sell"></ul>
           </div>
-          <div id="bid_board">
-            <p id="bid_category">
+          <div class="category_wrap">
+            <p class="category_title">
               <img
                 src="/img/home/category_img1.png"
                 style="width: 25px; height: auto"
               />경매
             </p>
             <ul id="bid_list" data-way="bid"></ul>
+          </div>
+          <div class="category_wrap">
+            <p class="category_title">
+              <img
+                src="/img/home/category_img1.png"
+                style="width: 25px; height: auto"
+              />경매
+            </p>
+            <ul id="client_list" data-way="bid">
+              <a class="listname" href="/qa/list">1:1 문의</a>
+            </ul>
           </div>
         </div>
         <div id="content">
@@ -106,6 +124,8 @@
 <!-- main sell template -->
 <template id="main_sell_list">
   <li class="ranking_list">
+    <input class="table" type="hidden" value="sell_board" />
+    <input class="idx" type="hidden" value="{s_id}" />
     <div class="rank">
       <img src="http://localhost:4000/upload/{img}" class="item_img" />
     </div>
@@ -123,9 +143,11 @@
 <!-- main auction template -->
 <template id="main_auction_list">
   <li class="ranking_list">
+    <input class="table" type="hidden" value="auction" />
+    <input class="idx" type="hidden" value="{au_id}" />
     <div class="rank">
       <img src="http://localhost:4000/upload/{img}" class="item_img" />
-      <div class="auction_count">경매시작 D-{bidStart}</div>
+      <div class="auction_count">{bidStart}</div>
     </div>
     <ul class="item_info">
       <li class="item_name">{subject}</li>
@@ -176,3 +198,213 @@
   </div>
 </template>
 <!-- list item conater template done-->
+
+<!-- view template -->
+<template id="view_template">
+  <input type="hidden" value="{author}" id="author" />
+  <link rel="stylesheet" href="/css/home/view.css" />
+  <div id="view_wrap">
+    <section id="prod_intro">
+      <article id="prod_slider">
+        <div id="slider_wrap">
+          <div id="slide_btn">
+            <button id="left_btn">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button id="right_btn">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+          <ul id="prod_img_list">
+            {imgList}
+          </ul>
+        </div>
+      </article>
+      {infoList}
+    </section>
+    <section id="prod_detail_wrap">
+      <h2>제품 설명</h2>
+      <article id="prod_detail">{content}</article>
+    </section>
+    <footer id="related_lineup_wrap">
+      <h2>관련 상품</h2>
+      <ul id="related_item_lineup">
+        {recommendList}
+      </ul>
+    </footer>
+  </div>
+</template>
+<!-- view template done -->
+
+<!-- view img templat -->
+<template id="view_img_template">
+  <li class="prod_img">
+    <img src="http://localhost:4000/upload/{img}" />
+  </li>
+</template>
+<!-- view img tmeplat done -->
+
+<!-- view tag template -->
+<template id="view_tag_template">
+  <a href="#tag/{table}/{tag}">#{tag}</a>
+</template>
+<!-- view tag template done -->
+
+<!-- recommend item list template -->
+<template id="view_recommend_template">
+  <li class="related_item">
+    <a href="#view/{table}/{s_id}">
+      <img class="item_pic" src="http://localhost:4000/upload/{img}" />
+      <span class="item_subject">{subject}</span>
+      <span class="item_price">{price} 원</span>
+    </a>
+  </li>
+</template>
+<!-- recommend item list template done -->
+
+<!-- auction recommend item list template -->
+<template id="au_view_recommend_template">
+  <li class="related_item">
+    <a href="#view/{table}/{au_id}">
+      <img class="item_pic" src="http://localhost:4000/upload/{img}" />
+      <span class="item_subject">{subject}</span>
+      <span class="item_price">{price} 원</span>
+    </a>
+  </li>
+</template>
+<!-- recommend item list template done -->
+
+<!--sell view info  -->
+<template id="sell_view_info_tem">
+  <article class="prod_summary">
+    <h1 class="view_subject">{subject}</h1>
+    <div class="sell_price">
+      <span class="price_num">{price}</span>
+      <span>원</span>
+    </div>
+    <div class="view_status">
+      <i class="fa-solid fa-heart"></i>
+      <span class="like_num">{like}</span>
+      <i class="fa-solid fa-clock"></i>
+      <span class="time">{date}</span>
+    </div>
+    <ul class="detail_list">
+      <li class="details">
+        <span>카테고리 :</span>
+        <span class="i_category">{c_name}</span>
+      </li>
+      <li class="details">
+        <span>거래방식 :</span>
+        <span class="i_how">{how}</span>
+      </li>
+      <li class="details">
+        <span>거래지역 :</span>
+        <span class="i_where">{location}</span>
+      </li>
+      <li class="details">
+        <span>태그 :</span>
+        <span class="tag"> {tagList} </span>
+      </li>
+    </ul>
+    <div class="btn_wrap">
+      <button class="like_btn" type="submit">
+        <i class="fa-solid fa-heart"> 찜하기</i>
+      </button>
+      <button class="contact_btn" type="submit">1:1 연락</button>
+    </div>
+  </article>
+</template>
+<!-- sell view info -->
+
+<!--bid view info  -->
+<template id="bid_view_info_tem">
+  <article class="prod_summary bid">
+    <h1 class="view_subject">{subject}</h1>
+    <div class="sell_price">
+      <span class="price_num">{price}</span>
+      <span>원</span>
+      <div class="bid_info">
+        <label for="bid_input" class="label"
+          ><i class="fa-solid fa-money-bill-1-wave"></i>입찰금액</label
+        >
+        <input
+          type="text"
+          id="bid_input"
+          class="bid_input"
+          name="bid_input"
+          placeholder="입찰가 입력 후 버튼 클릭"
+        />
+        <span class="label"
+          ><i class="fa-solid fa-medal"></i>최고금액 입찰자</span
+        >
+        <span class="bid_name">{winner}</span>
+        <input type="hidden" value="{bid_mem}" id="winner_idx" />
+      </div>
+    </div>
+    <div class="view_status">
+      <i class="fa-solid fa-heart"></i>
+      <span class="like_num">{like}</span>
+      <i class="fa-solid fa-clock"></i>
+      <span class="time">{date}</span>
+      <input type="hidden" value="{startDate}" class="start_date" />
+    </div>
+    <div class="detail">
+      <ul class="detail_content detail_time">
+        <div class="bid-timer">
+          <svg
+            class="bid-timer__svg"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g class="bid-timer__circle">
+              <circle
+                class="bid-timer__path-elapsed"
+                cx="50"
+                cy="50"
+                r="45"
+              ></circle>
+              <path
+                id="bid-timer-path-remaining"
+                stroke-dasharray="283"
+                class="bid-timer__path-remaining green"
+                d="
+          M 50, 50
+          m -45, 0
+          a 45,45 0 1,0 90,0
+          a 45,45 0 1,0 -90,0
+        "
+              ></path>
+            </g>
+          </svg>
+          <span id="bid-timer-label" class="bid-timer__label">{bidStart}</span>
+        </div>
+      </ul>
+      <ul class="detail_content detail_list">
+        <li class="details">
+          <span>카테고리 :</span>
+          <span class="i_category">{c_name}</span>
+        </li>
+        <li class="details">
+          <span>거래방식 :</span>
+          <span class="i_how">{how}</span>
+        </li>
+        <li class="details">
+          <span>거래지역 :</span>
+          <span class="i_where">{location}</span>
+        </li>
+      </ul>
+    </div>
+    <div class="details">
+      <span>태그 :</span>
+      <span class="tag"> {tagList} </span>
+    </div>
+
+    <div class="btn_wrap">
+      <button class="like_btn" type="submit">
+        <i class="fa-solid fa-heart"> 찜하기</i>
+      </button>
+      <button class="bid_btn" type="submit">입찰하기</button>
+    </div>
+  </article>
+</template>
+<!— bid view info —>

@@ -1,208 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="../../public/css/home/view.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/01a7db640b.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link href="../../public/css/home/view.css" rel="stylesheet" type="text/css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap"
-    rel="stylesheet">
-  <script src="https://kit.fontawesome.com/01a7db640b.js" crossorigin="anonymous"></script>
-</head>
-
-<body>
-  <div id="wrap">
-    <div id="header">
-      <h1 id="logo"><a href="/home"><img src="../../public/img/home/Logo.png"></a>
-      </h1>
-      <div id="search_bar">
-        <select id="search_category">
-          <option value="전체">전체</option>
-          <option value="sell">중고거래</option>
-          <option value="auction">경매</option>
-        </select>
-        <input type="text" id="search" autocomplete="off">
-        <button id="sell_register">판매물품 등록</button>
-      </div>
-    </div>
-    <div id="container">
-      <div id="side_bar">
-        <div id="profile_box">
-          <div id="user_profile">
-            <ul id="profile_img_box">
-              <img src="/front/public/img/home/profile.PNG" id="profile_img">
-            </ul>
-            <ul id="profile_rightbox">
-              <li id="call_user"> 판매자 님</li>
-              <li id="show_profile"><a href="/user/profile">내 정보 보기</a></li>
-            </ul>
-          </div>
-          <ul id="profile_centerbox">
-            <li id="my_point">Point : 123 pt</li>
-            <ul>
-              <li id="sell_item">판매중인 물품 : 1개</li>
-              <li id="new_chat">새로운 채팅 : 1개</li>
-            </ul>
-            <li id="user_logout"><a href="http://localhost:4000/api/user/logout">로그아웃</a></li>
-          </ul>
-        </div>
-        <div id="sell_board">
-          <p id="sell_category"><img src="/front/public/img/home/category_img1.png"
-              style="width:25px; height: auto;">중고거래</p>
-          <ul id="sell_list">
-            <li class="listname"><a href="#">의류</a></li>
-            <li class="listname"><a href="#">잡화</a></li>
-            <li class="listname"><a href="#">가구</a></li>
-            <li class="listname"><a href="#">가전</a></li>
-            <li class="listname"><a href="#">반려동물</a></li>
-          </ul>
-        </div>
-        <div id="bid_board">
-          <p id="bid_category"><img src="/front/public/img/home/category_img1.png" style="width:25px; height: auto;">경매
-          </p>
-          <ul id="bid_list">
-            <li class="listname"><a href="#">의류</a></li>
-            <li class="listname"><a href="#">잡화</a></li>
-            <li class="listname"><a href="#">가구</a></li>
-            <li class="listname"><a href="#">가전</a></li>
-            <li class="listname"><a href="#">반려동물</a></li>
-          </ul>
+  <body>
+    <div id="wrap">
+      <div id="header">
+        <h1 id="logo">
+          <a href="/home"><img src="../../public/img/home/Logo.png" /></a>
+        </h1>
+        <div id="search_bar">
+          <select id="search_category">
+            <option value="전체">전체</option>
+            <option value="sell">중고거래</option>
+            <option value="auction">경매</option>
+          </select>
+          <input type="text" id="search" autocomplete="off" />
+          <button id="sell_register">판매물품 등록</button>
         </div>
       </div>
-      <div id="content">
-        <div id="content_frame">
-          <!-- view page 시작 -->
-          <div id="content_view">
-            <section id="prod_intro">
-              <article id="prod_slider">
-                <div id="slider_wrap">
-                  <div id="slide_btn">
-                    <button id="left_btn"><i class="fa-solid fa-chevron-left"></i></button>
-                    <button id="right_btn"><i class="fa-solid fa-chevron-right"></i></button>
-                  </div>
-                  <ul id="prod_img_list">
-                    <li class="prod_img">
-                      <img src="../../public/img/home/item4.PNG">
-                    </li>
-                    <li class="prod_img">
-                      <img src="../../public/img/home/item4.PNG">
-                    </li>
-                    <li class="prod_img">
-                      <img src="../../public/img/home/item4.PNG">
-                    </li>
-                    <li class="prod_img">
-                      <img src="../../public/img/home/item4.PNG">
-                    </li>
-                    <li class="prod_img">
-                      <img src="../../public/img/home/item4.PNG">
-                    </li>
-                  </ul>
-                </div>
-              </article>
-              <article id="prod_summary">
-                <h1 id="view_subject">강아지 산책용 하네스 이쁘고 튼튼해용</h1>
-                <div id="sell_price">
-                  <span id="price_num">10,000</span>
-                  <span>원</span>
-                </div>
-                <div id="view_status">
-                  <i class="fa-solid fa-heart"></i>
-                  <span id="like_num">3</span>
-                  <i class="fa-solid fa-eye"></i>
-                  <span id="hit_num">54</span>
-                  <i class="fa-solid fa-clock"></i>
-                  <span id="time">5일 전</span>
-                </div>
-                <ul id="detail_list">
-                  <li class="details">
-                    <span>카테고리 :</span>
-                    <span id="i_category">애완용품</span>
-                  </li>
-                  <li class="details">
-                    <span>거래방식 :</span>
-                    <span id="i_how">직거래</span>
-                  </li>
-                  <li class="details">
-                    <span>거래지역 :</span>
-                    <span id="i_where">부산</span>
-                  </li>
-                  <li class="details">
-                    <span>태그 :</span>
-                    <span id="tag">
-                      <a href="#">#강아지</a>
-                      <a href="#">#산책</a>
-                      <a href="#">#하네스</a>
-                      <a href="#">#멍뭉이</a>
-                      <a href="#">#애완용품</a>
-                    </span>
-                  </li>
-                </ul>
-                <div id="btn_wrap">
-                  <button class="like_btn" type="submit">
-                    <i class="fa-solid fa-heart"> 찜하기</i>
-                  </button>
-                  <button id="contact_btn" type="submit">1:1 연락</button>
-                </div>
-              </article>
-            </section>
-            <section id="prod_detail_wrap">
-              <h2>제품 설명</h2>
-              <article id="prod_detail">저희 멍뭉이가 뽀시래기였을 때 썼던 하네스입니다.
-                지금은 자라기도 많이 자라고 살도 쪄서 사용이 불가해서 판매합니다.
-                소형견 사이즈 하네스에요
-                소형견 사이즈 하네스에요소형견 사이즈 하네스에요소형견 사이즈 하네스에요소형견 사이즈 하네스에요소형견 사이즈 하네스에요소형견 사이즈 하네스에요소형견 사이즈 하네스에요소형견 사이즈소형견
-                사이즈 하네스에요소형견 사이즈 하네스에요소형견 사이즈 하네스에요소형견 사이즈 하네스에요소형견 사이즈 하네스에요소형견
-              </article>
-            </section>
-            <footer id="related_lineup_wrap">
-              <h2>관련 상품</h2>
-              <ul id="related_item_lineup">
-                <li class="related_item">
-                  <a href="#">
-                    <img class="item_pic" src="../../public/img/home/item4.PNG">
-                    <span class="item_subject">에어프라이어</span>
-                    <span class="item_price">30,000 원</span>
-                  </a>
-                </li>
-                <li class="related_item">
-                  <a href="#">
-                    <img class="item_pic" src="../../public/img/home/item4.PNG">
-                    <span class="item_subject">에어프라이어</span>
-                    <span class="item_price">30,000 원</span>
-                  </a>
-                </li>
-                <li class="related_item">
-                  <a href="#">
-                    <img class="item_pic" src="../../public/img/home/item4.PNG">
-                    <span class="item_subject">에어프라이어</span>
-                    <span class="item_price">30,000 원</span>
-                  </a>
-                </li>
-                <li class="related_item">
-                  <a href="#">
-                    <img class="item_pic" src="../../public/img/home/item4.PNG">
-                    <span class="item_subject">에어프라이어</span>
-                    <span class="item_price">30,000 원</span>
-                  </a>
-                </li>
-                <li class="related_item">
-                  <a href="#">
-                    <img class="item_pic" src="../../public/img/home/item4.PNG">
-                    <span class="item_subject">에어프라이어</span>
-                    <span class="item_price">30,000 원</span>
-                  </a>
+      <div id="container">
+        <div id="side_bar">
+          <div id="profile_box">
+            <div id="user_profile">
+              <ul id="profile_img_box">
+                <img
+                  src="/front/public/img/home/profile.PNG"
+                  id="profile_img"
+                />
+              </ul>
+              <ul id="profile_rightbox">
+                <li id="call_user">판매자 님</li>
+                <li id="show_profile">
+                  <a href="/user/profile">내 정보 보기</a>
                 </li>
               </ul>
-            </footer>
+            </div>
+            <ul id="profile_centerbox">
+              <li id="my_point">Point : 123 pt</li>
+              <ul>
+                <li id="sell_item">판매중인 물품 : 1개</li>
+                <li id="new_chat">새로운 채팅 : 1개</li>
+              </ul>
+              <li id="user_logout">
+                <a href="http://localhost:4000/api/user/logout">로그아웃</a>
+              </li>
+            </ul>
+          </div>
+          <div id="sell_board">
+            <p id="sell_category">
+              <img
+                src="/front/public/img/home/category_img1.png"
+                style="width: 25px; height: auto"
+              />중고거래
+            </p>
+            <ul id="sell_list">
+              <li class="listname"><a href="#">의류</a></li>
+              <li class="listname"><a href="#">잡화</a></li>
+              <li class="listname"><a href="#">가구</a></li>
+              <li class="listname"><a href="#">가전</a></li>
+              <li class="listname"><a href="#">반려동물</a></li>
+            </ul>
+          </div>
+          <div id="bid_board">
+            <p id="bid_category">
+              <img
+                src="/front/public/img/home/category_img1.png"
+                style="width: 25px; height: auto"
+              />경매
+            </p>
+            <ul id="bid_list">
+              <li class="listname"><a href="#">의류</a></li>
+              <li class="listname"><a href="#">잡화</a></li>
+              <li class="listname"><a href="#">가구</a></li>
+              <li class="listname"><a href="#">가전</a></li>
+              <li class="listname"><a href="#">반려동물</a></li>
+            </ul>
+          </div>
+        </div>
+        <div id="content">
+          <div id="content_frame">
+            <!-- view page 시작 -->
+            <div id="content_view">
+              <section id="prod_intro">
+                <article id="prod_slider">
+                  <div id="slider_wrap">
+                    <div id="slide_btn">
+                      <button id="left_btn">
+                        <i class="fa-solid fa-chevron-left"></i>
+                      </button>
+                      <button id="right_btn">
+                        <i class="fa-solid fa-chevron-right"></i>
+                      </button>
+                    </div>
+                    <ul id="prod_img_list">
+                      <li class="prod_img">
+                        <img src="../../public/img/home/item4.PNG" />
+                      </li>
+                      <li class="prod_img">
+                        <img src="../../public/img/home/item4.PNG" />
+                      </li>
+                      <li class="prod_img">
+                        <img src="../../public/img/home/item4.PNG" />
+                      </li>
+                      <li class="prod_img">
+                        <img src="../../public/img/home/item4.PNG" />
+                      </li>
+                      <li class="prod_img">
+                        <img src="../../public/img/home/item4.PNG" />
+                      </li>
+                    </ul>
+                  </div>
+                </article>
+                <article id="prod_summary">
+                  <h1 id="view_subject">
+                    강아지 산책용 하네스 이쁘고 튼튼해용
+                  </h1>
+                  <div id="sell_price">
+                    <span id="price_num">10,000</span>
+                    <span>원</span>
+                  </div>
+                  <div id="view_status">
+                    <i class="fa-solid fa-heart"></i>
+                    <span id="like_num">3</span>
+                    <i class="fa-solid fa-eye"></i>
+                    <span id="hit_num">54</span>
+                    <i class="fa-solid fa-clock"></i>
+                    <span id="time">5일 전</span>
+                  </div>
+                  <ul id="detail_list">
+                    <li class="details">
+                      <span>카테고리 :</span>
+                      <span id="i_category">애완용품</span>
+                    </li>
+                    <li class="details">
+                      <span>거래방식 :</span>
+                      <span id="i_how">직거래</span>
+                    </li>
+                    <li class="details">
+                      <span>거래지역 :</span>
+                      <span id="i_where">부산</span>
+                    </li>
+                    <li class="details">
+                      <span>태그 :</span>
+                      <span id="tag">
+                        <a href="#">#강아지</a>
+                        <a href="#">#산책</a>
+                        <a href="#">#하네스</a>
+                        <a href="#">#멍뭉이</a>
+                        <a href="#">#애완용품</a>
+                      </span>
+                    </li>
+                  </ul>
+                  <div id="btn_wrap">
+                    <button class="like_btn" type="submit">
+                      <i class="fa-solid fa-heart"> 찜하기</i>
+                    </button>
+                    <button id="contact_btn" type="submit">1:1 연락</button>
+                  </div>
+                </article>
+              </section>
+              <section id="prod_detail_wrap">
+                <h2>제품 설명</h2>
+                <article id="prod_detail">
+                  저희 멍뭉이가 뽀시래기였을 때 썼던 하네스입니다. 지금은
+                  자라기도 많이 자라고 살도 쪄서 사용이 불가해서 판매합니다.
+                  소형견 사이즈 하네스에요 소형견 사이즈 하네스에요소형견 사이즈
+                  하네스에요소형견 사이즈 하네스에요소형견 사이즈
+                  하네스에요소형견 사이즈 하네스에요소형견 사이즈
+                  하네스에요소형견 사이즈 하네스에요소형견 사이즈소형견 사이즈
+                  하네스에요소형견 사이즈 하네스에요소형견 사이즈
+                  하네스에요소형견 사이즈 하네스에요소형견 사이즈
+                  하네스에요소형견
+                </article>
+              </section>
+              <footer id="related_lineup_wrap">
+                <h2>관련 상품</h2>
+                <ul id="related_item_lineup">
+                  <li class="related_item">
+                    <a href="#">
+                      <img
+                        class="item_pic"
+                        src="../../public/img/home/item4.PNG"
+                      />
+                      <span class="item_subject">에어프라이어</span>
+                      <span class="item_price">30,000 원</span>
+                    </a>
+                  </li>
+                  <li class="related_item">
+                    <a href="#">
+                      <img
+                        class="item_pic"
+                        src="../../public/img/home/item4.PNG"
+                      />
+                      <span class="item_subject">에어프라이어</span>
+                      <span class="item_price">30,000 원</span>
+                    </a>
+                  </li>
+                  <li class="related_item">
+                    <a href="#">
+                      <img
+                        class="item_pic"
+                        src="../../public/img/home/item4.PNG"
+                      />
+                      <span class="item_subject">에어프라이어</span>
+                      <span class="item_price">30,000 원</span>
+                    </a>
+                  </li>
+                  <li class="related_item">
+                    <a href="#">
+                      <img
+                        class="item_pic"
+                        src="../../public/img/home/item4.PNG"
+                      />
+                      <span class="item_subject">에어프라이어</span>
+                      <span class="item_price">30,000 원</span>
+                    </a>
+                  </li>
+                  <li class="related_item">
+                    <a href="#">
+                      <img
+                        class="item_pic"
+                        src="../../public/img/home/item4.PNG"
+                      />
+                      <span class="item_subject">에어프라이어</span>
+                      <span class="item_price">30,000 원</span>
+                    </a>
+                  </li>
+                </ul>
+              </footer>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>
