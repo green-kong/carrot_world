@@ -37,7 +37,7 @@ async function addReply(e) {
         </span>`;
       replyList.appendChild(itemLi);
       replyInput.value = '';
-      itemLi.scrollIntoView;
+      itemLi.scrollIntoView({ behavior: 'smooth' });
     }
   } catch (err) {
     console.log(err.message);
