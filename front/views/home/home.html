@@ -55,13 +55,13 @@
               <li id="my_point">Point : {{userResult.point}} pt</li>
               <ul>
                 <li id="sell_item">판매중인 물품 : {{totalCount}}개</li>
-                <li id="new_chat">새로운 채팅 : 1개</li>
+                <li id="new_chat"><a href="/chat">채팅 바로 가기</a></li>
               </ul>
               <li id="user_logout">로그아웃</li>
             </ul>
           </div>
-          <div id="sell_board">
-            <p id="sell_category">
+          <div class="category_wrap">
+            <p class="category_title">
               <img
                 src="/img/home/category_img1.png"
                 style="width: 25px; height: auto"
@@ -69,14 +69,25 @@
             </p>
             <ul id="sell_list" data-way="sell"></ul>
           </div>
-          <div id="bid_board">
-            <p id="bid_category">
+          <div class="category_wrap">
+            <p class="category_title">
               <img
                 src="/img/home/category_img1.png"
                 style="width: 25px; height: auto"
               />경매
             </p>
             <ul id="bid_list" data-way="bid"></ul>
+          </div>
+          <div class="category_wrap">
+            <p class="category_title">
+              <img
+                src="/img/home/category_img1.png"
+                style="width: 25px; height: auto"
+              />경매
+            </p>
+            <ul id="client_list" data-way="bid">
+              <a class="listname" href="/qa/list">1:1 문의</a>
+            </ul>
           </div>
         </div>
         <div id="content">
