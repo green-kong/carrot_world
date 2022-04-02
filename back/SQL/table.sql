@@ -130,6 +130,6 @@ ALTER TABLE `au_tag` ADD FOREIGN KEY (`au_id`) REFERENCES `auction` (`au_id`) ON
 
 ALTER TABLE `qa` ADD FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`)ON DELETE CASCADE;
 
-ALTER TABLE `q_reply` ADD FOREIGN KEY (`q_id`) REFERENCES `qa` (`q_id`)ON DELETE CASCADE;
+ALTER TABLE `q_reply` ADD CONSTRAINT FOREIGN KEY (`q_id`) REFERENCES `qa` (`q_id`) ON DELETE CASCADE;
 
 ALTER TABLE `q_reply` ADD FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`);

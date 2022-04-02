@@ -101,13 +101,6 @@ exports.list = async (req, res) => {
 exports.delete = async (req, res) => {
   const { idx } = req.query;
   try {
-    const countSql = `SELECT COUNT(qr_id) as qrQty FROM q_reply WHERE q_id = ${idx}`;
-    const [[{ qrQty }]] = await pool.execute(countSql);
-
-    if (qrQty > 0) {
-      const deleteReplySql = `DELETE FROM q_reply WHERE q_id = ${idx}`;
-      await pool.execute(deleteReplySql);
-    }
     const sql = `DELETE FROM qa WHERE q_id = ${idx}`;
     const [result] = await pool.execute(sql);
     res.send(result);
@@ -145,11 +138,10 @@ exports.editPost = async (req, res) => {
 };
 
 exports.replyWrite = async (req, res) => {
-  const { content, q_id, replyAuthor } = req.body;
+  const { content, q_id, u_id } = req.body;
   const conn = await pool.getConnection();
   const recordSql = `INSERT INTO q_reply(q_id,content,date,u_id) 
-                     VALUES(${q_id},'${content}',now(),
-                     (SELECT u_id FROM user WHERE userAlias = '${replyAuthor}'))`;
+                     VALUES(${q_id},'${content}',now(), ${u_id})`;
   const bringSql = `SELECT qr.qr_id, qr.q_id, qr.content,
                     DATE_FORMAT(qr.date, '%y-%m-%d %H:%i') as date,
                     user.userAlias
