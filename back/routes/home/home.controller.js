@@ -239,7 +239,6 @@ exports.search = async (req, res) => {
 
 exports.view = async (req, res) => {
   const { table, idx } = req.body;
-
   const imgTable = table === 'auction' ? 'au_img' : 's_img';
   const tagTable = table === 'auction' ? 'au_tag' : 's_tag';
   const imgIdx = table === 'auction' ? 'au_id' : 's_id';
@@ -258,13 +257,16 @@ exports.view = async (req, res) => {
                         auction.au_id AS au_id,
                         c_name, subject, auction.u_id,
                         FORMAT(price,0) AS price,
-                        content, how, location, likes, isSold,
+                        bid_mem,
+                        content, how, location, likes, isSold, userAlias AS winner,
                         DATE_FORMAT(startDate, '경매 시작일 %y-%m-%d %H시 %i분') AS date,
                         startDate,
                         DATEDIFF(startDate,now()) AS bidStart
                         FROM auction
                         JOIN category
                         ON auction.c_code = category.c_code
+                        LEFT JOIN user
+                        ON bid_mem = user.u_id
                         WHERE au_id = '${idx}'`;
 
   const imgSql = `SELECT * FROM ${imgTable} WHERE ${imgIdx}=${idx}`;
@@ -484,6 +486,27 @@ exports.category = async (req, res) => {
     res.send(result);
   } catch (err) {
     console.log(err);
+  } finally {
+    conn.release();
+  }
+};
+
+exports.chat = async (req, res) => {
+  const { chatMembers } = req.body;
+  const conn = await pool.getConnection();
+  const checkSql = `SELECT c_id FROM chat WHERE members='${chatMembers}'`;
+  const createSql = `INSERT INTO chat (members) VALUES ('${chatMembers}')`;
+  try {
+    const [[checkResult]] = await conn.query(checkSql);
+    if (checkResult) {
+      res.send({ chatRoom: checkResult.c_id });
+    } else {
+      const [createResult] = await conn.query(createSql);
+      res.send({ chatRoom: createResult.insertId });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('fail');
   } finally {
     conn.release();
   }
