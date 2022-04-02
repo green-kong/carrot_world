@@ -7,21 +7,20 @@ async function auth(req, res, next) {
   const token = req.cookies.Access_token;
   if (token === undefined) {
     res.send(
-      alertmove('http://localhost:3000/user/login', '로그인이 필요합니다')
+      alertmove('http://localhost:3000/admin/login', '로그인이 필요합니다')
     );
   } else {
     try {
       const payload = await decodePayload(token);
-      const url = 'http://localhost:4000/api/user/auth';
+      const url = 'http://localhost:4000/api/admin/auth';
       const body = { u_id: payload.u_id };
       const response = await axios.post(url, body);
       req.user = { ...response.data };
       next();
     } catch (err) {
-      console.log(err);
       res.clearCookie('Access_token');
       res.send(
-        alertmove('http://localhost:3000/user/login', '로그인을 다시 해주세요')
+        alertmove('http://localhost:3000/admin/login', '로그인을 다시 해주세요')
       );
     }
   }

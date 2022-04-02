@@ -7,14 +7,14 @@
 {% block content %}
 <div id="content">
   <div id="login_section">
-    <form action="/admin" method="post">
+    <form action="http://localhost:4000/api/admin/login" method="post">
       <div id="id_div">
-        <label for="userid">아이디</label>
-        <input type="text" name="userid" id="userid" />
+        <label for="userEmail">아이디</label>
+        <input type="text" name="userEmail" id="userEmail" />
       </div>
       <div id="pw_div">
-        <label for="userpw">비밀번호</label>
-        <input type="password" name="userpw" id="userpw" />
+        <label for="userPW">비밀번호</label>
+        <input type="password" name="userPW" id="userPW" />
       </div>
       <button type="submit" id="login_button">로그인</button>
     </form>
