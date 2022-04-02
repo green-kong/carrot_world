@@ -39,36 +39,18 @@
             <th>찜</th>
             <th>등록일</th>
           </tr>
+          {% for like in likeResult %}
           <tr>
-            <td>일반거래</td>
-            <td>강아지 산책용 하네스 팝니다</td>
-            <td><i class="far fa-heart"></i>26</td>
-            <td>03-22</td>
+            <td>{{like.tableName}}</td>
+            <td>
+              <a href="/home#view/{{like.table}}/{{like.idx}}"
+                >{{like.subject}}</a
+              >
+            </td>
+            <td><i class="far fa-heart"></i>{{like.likes}}</td>
+            <td>{{like.date}}</td>
           </tr>
-          <tr>
-            <td>경매</td>
-            <td>행거</td>
-            <td><i class="far fa-heart"></i>18</td>
-            <td>03-19</td>
-          </tr>
-          <tr>
-            <td>일반거래</td>
-            <td>에어프라이ㅓ</td>
-            <td><i class="far fa-heart"></i>16</td>
-            <td>03-22</td>
-          </tr>
-          <tr>
-            <td>일반거래</td>
-            <td>강아지 산책용 하네스 팝니다</td>
-            <td><i class="far fa-heart"></i>26</td>
-            <td>03-22</td>
-          </tr>
-          <tr>
-            <td>일반거래</td>
-            <td>강아지 산책용 하네스 팝니다</td>
-            <td><i class="far fa-heart"></i>26</td>
-            <td>03-22</td>
-          </tr>
+          {% endfor %}
         </table>
       </div>
       <div id="popular_category" class="statistic_box">

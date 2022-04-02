@@ -6,4 +6,6 @@ const router = express.Router();
 
 router.post('/graph', statControll.graph);
 
+router.post('/main', statControll.main);
+
 module.exports = router;

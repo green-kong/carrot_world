@@ -2,8 +2,6 @@
   const START_COLOR = 90;
   const END_COLOR = 20;
 
-  const colorList = [];
-
   const context = document.getElementById('myChart').getContext('2d');
 
   const url = 'http://localhost:4000/api/statistics/graph';
@@ -16,8 +14,7 @@
     const avg = (START_COLOR - END_COLOR) / (t.length - 1);
     return `hsl(269, 89%, ${START_COLOR - avg * i}%)`;
   });
-  // 269/89
-  console.log(colors);
+
   const data = {
     labels,
     datasets: [

@@ -50,3 +50,42 @@ exports.graph = async (req, res) => {
     conn.release();
   }
 };
+
+exports.main = async (req, res) => {
+  const sellLikeSql = `SELECT s_id, subject, likes , 
+                      DATE_FORMAT(date,'%y-%m-%d') AS date
+                      FROM sell_board
+                      ORDER BY likes DESC
+                      LIMIT 5`;
+  const auLikeSql = `SELECT au_id, subject, likes , 
+                    DATE_FORMAT(date,'%y-%m-%d') AS date
+                    FROM auction
+                    ORDER BY likes DESC
+                    LIMIT 5`;
+  const conn = await pool.getConnection();
+  try {
+    const [sLikeResult] = await conn.query(sellLikeSql);
+    const [auLikeResult] = await conn.query(auLikeSql);
+    const likeResult = [...sLikeResult, ...auLikeResult]
+      .sort((a, b) => b.likes - a.likes)
+      .filter((_, i) => i < 5)
+      .map((v) => {
+        const tmp = Object.keys(v)[0];
+        const table = tmp === 'au_id' ? 'auction' : 'sell_board';
+        const tableName = tmp === 'au_id' ? '경매' : '중고거래';
+        v.table = table;
+        v.tableName = tableName;
+        const newObj = {
+          idx: v.au_id || v.s_id,
+          ...v,
+        };
+        return newObj;
+      });
+    res.send(likeResult);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('fail');
+  } finally {
+    conn.release();
+  }
+};
