@@ -66,7 +66,6 @@ exports.list = async (req, res) => {
   try {
     const { page } = req.query;
     const upperData = page * 10 - 10;
-    console.log(upperData);
     const countSql = `SELECT count(q_id) as totalQty FROM qa`;
     const [[{ totalQty }]] = await pool.execute(countSql);
     if (upperData < 0) {

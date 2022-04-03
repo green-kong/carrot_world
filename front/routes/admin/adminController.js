@@ -21,8 +21,13 @@ exports.statistics = async (req, res) => {
   });
 };
 
-exports.board = (req, res) => {
-  res.render('admin/board.html');
+exports.sell = async (req, res) => {
+  const url = 'http://localhost/api/admin/sell';
+  const body = { ...req.query };
+
+  const response = await axios.post(url, body);
+
+  res.render('admin/sell.html');
 };
 
 exports.user = (req, res) => {
