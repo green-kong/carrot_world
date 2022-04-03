@@ -1,5 +1,5 @@
 export default function clictCategory() {
-  const categoryList = document.querySelectorAll('.listname');
+  const categoryList = document.querySelectorAll('.category_list');
 
   categoryList.forEach((v) => {
     v.addEventListener('click', changeCategory);
