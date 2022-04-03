@@ -3,32 +3,34 @@
 {% block css %}
 <link rel="stylesheet" href="/css/qa/write.css" />
 {% endblock %}
-<!--  -->
+{% block js %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script defer src="/js/qa/edit.js"></script>
+{% endblock %}
 {% block content %}
 <div id="board_top">1:1 게시판</div>
-<form action="/board/write" method="POST" id="write_form">
+<form method="POST" id="write_form">
   <div id="subject_container">
     <div class="write_column">제목</div>
     <div class="write_input_wrap">
-      <input type="text" name="subject" maxlength="32" value="질문 있습니다" />
+      <input type="text" name="subject" maxlength="32" value="{{editData.subject}}" />
     </div>
   </div>
   <div id="content_container">
     <div class="write_column">내용</div>
     <div class="write_input_wrap">
-      <textarea name="content" id="write_content" cols="30" rows="10">
-맥북을 샀는데 벽돌이 왔어요 어뜨카져</textarea
-      >
+      <textarea name="content" id="write_content" cols="30" rows="10">{{editData.content}}</textarea>
     </div>
   </div>
   <div id="author_container">
     <div class="write_column">작성자</div>
     <div class="write_input_wrap">
-      <input type="text" name="author" disabled id="author" value="kong" />
+      <input type="text" name="author" disabled id="author" value="{{editData.userAlias}}" />
     </div>
   </div>
   <div id="btn_container">
     <button type="submit" id="write_post_btn">수정 완료</button>
   </div>
+  <input type="hidden" id="q_id" value="{{editData.q_id}}">
 </form>
 {% endblock %}

@@ -84,13 +84,16 @@ CREATE TABLE `qa` (
   `u_id` INT NOT NULL,
   `subject` VARCHAR(64),
   `content` VARCHAR(255),
-  `date` timestamp NOT NULL
+  `date` timestamp NOT NULL,
+  `hit` INT DEFAULT 0
 );
 
 CREATE TABLE `q_reply` (
+  `qr_id` INT PRIMARY KEY AUTO_INCREMENT,
   `q_id` INT NOT NULL,
   `content` VARCHAR(64),
   `date` timestamp NOT NULL
+  `u_id` INT
 );
 
 CREATE TABLE `category` (
@@ -128,4 +131,6 @@ ALTER TABLE `au_tag` ADD FOREIGN KEY (`au_id`) REFERENCES `auction` (`au_id`) ON
 
 ALTER TABLE `qa` ADD FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`)ON DELETE CASCADE;
 
-ALTER TABLE `q_reply` ADD FOREIGN KEY (`q_id`) REFERENCES `qa` (`q_id`)ON DELETE CASCADE;
+ALTER TABLE `q_reply` ADD CONSTRAINT FOREIGN KEY (`q_id`) REFERENCES `qa` (`q_id`) ON DELETE CASCADE;
+
+ALTER TABLE `q_reply` ADD FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`);
