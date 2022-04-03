@@ -1,5 +1,7 @@
 const axios = require('axios');
 
+const adminDataMaker = require('../../utils/admin/amdinDataMaker.js');
+
 exports.login = (req, res) => {
   res.render('admin/login.html');
 };
@@ -20,9 +22,13 @@ exports.statistics = async (req, res) => {
     pointCollectorResult,
   });
 };
+exports.sell = async (req, res) => {
+  const { result, pageList, curPage, lastPage } = await adminDataMaker(
+    req,
+    'sell'
+  );
 
-exports.board = (req, res) => {
-  res.render('admin/board.html');
+  res.render('admin/sell.html', { result, pageList, curPage, lastPage });
 };
 
 exports.user = (req, res) => {

@@ -1,0 +1,75 @@
+{% extends "../template/_layout.html" %}
+<!--  -->
+{% block css %}
+<link rel="stylesheet" href="/css/admin/board.css" />
+{% endblock %}
+<!--  -->
+{% block js %} {% endblock %}
+<!--  -->
+{% block content %}
+<div id="content">
+  <div id="nav">
+    <ul>
+      <li><a href="/admin/statistics/">통계</a></li>
+      <li><a href="/admin/sell?page=1" class="clicked">중고거래 게시물</a></li>
+      <li><a href="/admin/auction?page=1/">경매 게시물</a></li>
+      <li><a href="/admin/user/">회원관리</a></li>
+    </ul>
+  </div>
+  <table>
+    <tr>
+      <th>거래유형</th>
+      <th>카테고리</th>
+      <th>거래방식</th>
+      <th>제목</th>
+      <th>판매가격/현재가격</th>
+      <th>찜</th>
+      <th>작성자</th>
+      <th>등록일</th>
+      <th>거래상태</th>
+      <th>수정</th>
+      <th>삭제</th>
+    </tr>
+    {% for post in result%}
+    <tr>
+      <td>중고거래</td>
+      <td>{{post.c_name}}</td>
+      <td>{{post.how}}</td>
+      <td>{{post.subject}}</td>
+      <td>{{post.price}}</td>
+      <td>{{post.likes}}</td>
+      <td>{{post.userAlias}}</td>
+      <td>{{post.date}}</td>
+      <td>{{post.isSold}}</td>
+      <td>
+        <a href="/home/sell/edit?idx={{post.s_id}}"
+          ><i class="fa-solid fa-pen-to-square"></i
+        ></a>
+      </td>
+      <td>
+        <a href="/home/sell/delete?idx={{post.s_id}}">
+          <i class="fas fa-trash-alt"></i>
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  <ul id="page_list">
+    {% if curPage != 1 %}
+    <li id="prevPage">&lt;</li>
+    <script src="/js/admin/movePrevpage.js"></script>
+    {% endif %}
+    <!--  -->
+    {% for page in pageList %}
+    <li>
+      <a href="http://localhost:3000/admin/sell?page={{page}}">{{page}}</a>
+    </li>
+    {% endfor %}
+    <!--  -->
+    {% if curPage != lastPage %}
+    <li id="nextPage">&gt;</li>
+    <script src="/js/admin/moveNextpage.js"></script>
+    {% endif %}
+  </ul>
+</div>
+{%endblock%}

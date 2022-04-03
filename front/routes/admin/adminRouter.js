@@ -8,7 +8,7 @@ router.get('/login', adminControll.login);
 
 router.get('/statistics', adminControll.statistics);
 
-router.get('/board', adminControll.board);
+router.get('/sell', adminControll.sell);
 
 router.get('/user', adminControll.user);
 
