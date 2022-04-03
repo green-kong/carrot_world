@@ -7,7 +7,10 @@ async function auth(req, res, next) {
   const token = req.cookies.Access_token;
   if (token === undefined) {
     res.send(
-      alertmove('http://localhost:3000/admin/login', '로그인이 필요합니다')
+      alertmove(
+        'http://localhost:3000/admin/login',
+        '관리자 로그인이 필요합니다'
+      )
     );
   } else {
     try {
@@ -20,7 +23,10 @@ async function auth(req, res, next) {
     } catch (err) {
       res.clearCookie('Access_token');
       res.send(
-        alertmove('http://localhost:3000/admin/login', '로그인을 다시 해주세요')
+        alertmove(
+          'http://localhost:3000/admin/login',
+          '관리자만 접근 가능합니다'
+        )
       );
     }
   }

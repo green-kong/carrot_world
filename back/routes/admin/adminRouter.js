@@ -8,7 +8,6 @@ const bcrypt = require('bcrypt');
 const { pool } = require('../../model/db/db.js');
 const alertmove = require('../../utils/user/alertmove.js');
 const { makeToken } = require('../../utils/user/jwt.js');
-const { nextTick } = require('process');
 
 router.post('/login', async (req, res) => {
   const { userEmail, userPW } = req.body;
@@ -17,8 +16,9 @@ router.post('/login', async (req, res) => {
   const sql2 = `SELECT * FROM user WHERE userEmail='${userEmail}' and isAdmin=1`;
   try {
     const [result] = await conn.query(sql);
-
+    // user/join으로 계정 만든 관리자 mysql에서 isAdmin = 1로 수정하고 그 수정한 계정에 대한 로그인 정보 받아오는 내용을 써야되는
     if (result.length === 0) {
+      // ID/PW 비교
       res.send(
         alertmove(
           'http://localhost:3000/admin/login',
@@ -31,7 +31,7 @@ router.post('/login', async (req, res) => {
         res.send(
           alertmove(
             'http://localhost:3000/admin/login',
-            '아이디와 비밀번호를 확인하세요'
+            '관리자만 접근 가능합니다.'
           )
         );
       } else {
@@ -40,6 +40,7 @@ router.post('/login', async (req, res) => {
           const payload = {
             u_id: result[0].u_id,
             userEmail: result[0].userEmail,
+            isAdmin: result2[0].isAdmin,
           };
           const token = makeToken(payload);
           res.cookie('Access_token', token, { maxAge: 1000 * 60 * 60 });
