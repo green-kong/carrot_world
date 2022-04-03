@@ -57,35 +57,15 @@
         <p>게시글이 많은 카테고리</p>
         <table class="statistic">
           <tr>
-            <th>거래방식</th>
             <th>카테고리</th>
             <th>등록된 게시글 수</th>
           </tr>
+          {% for pop in popCatResult %}
           <tr>
-            <td>일반거래</td>
-            <td>의류</td>
-            <td>137개</td>
+            <td>{{pop.category}}</td>
+            <td>{{pop.count}}</td>
           </tr>
-          <tr>
-            <td>경매</td>
-            <td>가구</td>
-            <td>124개</td>
-          </tr>
-          <tr>
-            <td>일반거래</td>
-            <td>의류</td>
-            <td>137개</td>
-          </tr>
-          <tr>
-            <td>일반거래</td>
-            <td>의류</td>
-            <td>137개</td>
-          </tr>
-          <tr>
-            <td>일반거래</td>
-            <td>의류</td>
-            <td>137개</td>
-          </tr>
+          {% endfor %}
         </table>
       </div>
     </div>
@@ -94,36 +74,20 @@
         <p>판매왕</p>
         <table class="statistic">
           <tr>
+            <th>유저 번호</th>
             <th>닉네임</th>
             <th>전체 판매글</th>
             <th>판매완료</th>
           </tr>
           <tbody>
+            {% for seller in topSellerResult %}
             <tr>
-              <td>kong</td>
-              <td>126</td>
-              <td>76</td>
+              <td>{{seller.u_id}}</td>
+              <td>{{seller.userAlias}}</td>
+              <td>{{seller.totalCount}}</td>
+              <td>{{seller.soldCount}}</td>
             </tr>
-            <tr>
-              <td>hwaseob</td>
-              <td>180</td>
-              <td>66</td>
-            </tr>
-            <tr>
-              <td>yeongjeong</td>
-              <td>70</td>
-              <td>58</td>
-            </tr>
-            <tr>
-              <td>donghun</td>
-              <td>50</td>
-              <td>49</td>
-            </tr>
-            <tr>
-              <td>ingoo</td>
-              <td>30</td>
-              <td>15</td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>
@@ -131,30 +95,18 @@
         <p>포인트 왕</p>
         <table class="statistic">
           <tr>
+            <th>유저번호</th>
             <th>닉네임</th>
             <th>포인트</th>
           </tr>
           <tbody>
+            {% for pointer in pointCollectorResult%}
             <tr>
-              <td>kong</td>
-              <td>126</td>
+              <td>{{pointer.u_id}}</td>
+              <td>{{pointer.userAlias}}</td>
+              <td>{{pointer.point}}</td>
             </tr>
-            <tr>
-              <td>hwaseob</td>
-              <td>66</td>
-            </tr>
-            <tr>
-              <td>yeongjeong</td>
-              <td>58</td>
-            </tr>
-            <tr>
-              <td>donghun</td>
-              <td>49</td>
-            </tr>
-            <tr>
-              <td>ingoo</td>
-              <td>15</td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>

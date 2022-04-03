@@ -9,9 +9,16 @@ exports.statistics = async (req, res) => {
 
   const response = await axios.post(url);
 
-  const { data: likeResult } = response;
+  const {
+    data: { likeResult, popCatResult, topSellerResult, pointCollectorResult },
+  } = response;
 
-  res.render('admin/statistics.html', { likeResult });
+  res.render('admin/statistics.html', {
+    likeResult,
+    popCatResult,
+    topSellerResult,
+    pointCollectorResult,
+  });
 };
 
 exports.board = (req, res) => {
