@@ -1,5 +1,7 @@
 const axios = require('axios');
 
+const adminDataMaker = require('../../utils/admin/amdinDataMaker.js');
+
 exports.login = (req, res) => {
   res.render('admin/login.html');
 };
@@ -20,15 +22,13 @@ exports.statistics = async (req, res) => {
     pointCollectorResult,
   });
 };
-
 exports.sell = async (req, res) => {
-  const url = 'http://localhost:4000/api/admin/sell';
-  const body = { ...req.query };
+  const { result, pageList, curPage, lastPage } = await adminDataMaker(
+    req,
+    'sell'
+  );
 
-  const response = await axios.post(url, body);
-  console.log(response.data);
-
-  res.render('admin/sell.html');
+  res.render('admin/sell.html', { result, pageList, curPage, lastPage });
 };
 
 exports.user = (req, res) => {

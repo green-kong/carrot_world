@@ -64,4 +64,18 @@ td {
 
 #page_list > li {
   margin-right: 20px;
+  cursor: pointer;
+}
+
+.fa-trash-alt:hover,
+.fa-pen-to-square:hover {
+  transition: 350ms;
+  transform: scale(1.1);
+  color: #8700c5;
+  font-weight: 600;
+}
+
+.clicked {
+  color: #8700c5;
+  font-weight: 600;
 }
