@@ -51,13 +51,14 @@
   height: 100%;
 }
 
-.chat_list li {
+.chat_link {
   border-bottom: solid 3px var(--background2);
   padding: 10px;
   box-sizing: border-box;
 }
-.chat_list li:hover {
+.chat_link:hover {
   background-color: var(--accent-color);
+  cursor: pointer;
 }
 
 .chat_link .chat_info {

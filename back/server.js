@@ -18,6 +18,7 @@ const io = require('socket.io')(server, {
 
 const router = require('./routes/index.js');
 require('./bidSocket.js')(io);
+require('./chatSocket.js')(io);
 
 app.use(cors(corsOpt));
 app.use(express.json());
