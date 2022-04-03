@@ -22,10 +22,11 @@ exports.statistics = async (req, res) => {
 };
 
 exports.sell = async (req, res) => {
-  const url = 'http://localhost/api/admin/sell';
+  const url = 'http://localhost:4000/api/admin/sell';
   const body = { ...req.query };
 
   const response = await axios.post(url, body);
+  console.log(response.data);
 
   res.render('admin/sell.html');
 };
