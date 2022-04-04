@@ -13,25 +13,25 @@
   <div id="list_view_wrap">
     <aside id="chat_list_wrap">
       <ul class="chat_list">
-        {% if chatResult.length > 0 %}
-        {% for c_id in chatResult %}
+        {% if chatList.length > 0 %}
+        {% for item in chatList %}
         <li class="chat_link">
           <div class="chat_info">
             <div class="thumbnail_wrap">
               <div class="thumbnail">
-                <input type="hidden" class="c_id" value="{{c_id}}">
-                <img src="{{userResult.profile}}" />
+                <input type="hidden" class="c_id" value="{{item.c_id}}">
+                <img src="{{item.thumbnail}}" />
               </div>
             </div>
             <div class="msg_wrap">
               <div class="name_data_wrap">
-                <input type="hidden" class="c_id" value="{{c_id}}">
-                <span class="name">이연정</span>
-                <span class="date">03-22</span>
+                <input type="hidden" class="c_id" value="{{item.c_id}}">
+                <span class="name">{{item.theOther}}</span>
+                <span class="date">{{item.lastDate}}</span>
               </div>
               <div class="text_wrap">
-                <input type="hidden" class="c_id" value="{{c_id}}">
-                <p class="msg">안녕하세요</p>
+                <input type="hidden" class="c_id" value="{{item.c_id}}">
+                <p class="msg">{{item.lastMsg}}</p>
                 <span class="msg_status">!</span>
               </div>
             </div>
