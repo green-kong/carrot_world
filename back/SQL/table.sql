@@ -95,7 +95,7 @@ CREATE TABLE `q_reply` (
 
 CREATE TABLE `category` (
   `c_code` VARCHAR(6) PRIMARY KEY NOT NULL,
-  `c_name` VARCHAR(16) NOT NULL
+  `c_name` VARCHAR(8) NOT NULL
 );
 
 CREATE TABLE `chat` (
@@ -112,6 +112,13 @@ CREATE TABLE `chat_log` (
   `dialog` VARCHAR(255) NOT NULL,
   `date` timestamp NOT NULL
 );
+
+INSERT INTO user (userEmail,userPW,isAdmin) VALUES ('admin','admin','1');
+
+INSERT INTO category (c_code,c_name) VALUES ('clo','의류');
+INSERT INTO category (c_code,c_name) VALUES ('fur','가전 & 가구');
+INSERT INTO category (c_code,c_name) VALUES ('pet','반려동물');
+INSERT INTO category (c_code,c_name) VALUES ('acc','잡화');
 
 ALTER TABLE `sell_board` ADD FOREIGN KEY (`c_code`) REFERENCES `category` (`c_code`) ON DELETE CASCADE;
 

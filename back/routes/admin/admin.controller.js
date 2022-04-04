@@ -29,7 +29,6 @@ exports.sell = async (req, res) => {
   }
 };
 
-
 exports.auction = async (req, res) => {
   const page = Number(req.body.page);
   const sql = `SELECT au_id, subject, user.userAlias, 
@@ -54,6 +53,8 @@ exports.auction = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).send('fail');
+  }
+};
 
 exports.login = async (req, res) => {
   const { userEmail, userPW } = req.body;
