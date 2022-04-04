@@ -4,7 +4,10 @@
 <link rel="stylesheet" href="/css/admin/board.css" />
 {% endblock %}
 <!--  -->
-{% block js %} {% endblock %}
+{% block js %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/js/admin/adminQaDel.js" defer></script>
+{% endblock %}
 <!--  -->
 {% block content %}
 <div id="content">
@@ -12,49 +15,33 @@
     <ul>
       <li><a href="/admin/statistics/">통계</a></li>
       <li><a href="/admin/sell?page=1">중고거래 게시물</a></li>
-      <li><a href="/admin/auction?page=1" class="clicked">경매 게시물</a></li>
-      <li><a href="/admin/qa?page=1">1:1문의</a></li>
+      <li><a href="/admin/auction?page=1">경매 게시물</a></li>
+      <li><a href="/admin/qa?page=1" class="clicked">1:1문의</a></li>
       <li><a href="/admin/user?page=1">회원관리</a></li>
     </ul>
   </div>
   <table>
     <tr>
-      <th>거래유형</th>
-      <th>카테고리</th>
-      <th>거래방식</th>
+      <th>글번호</th>
       <th>제목</th>
-      <th>가격</th>
-      <th>찜</th>
-      <th>작성자</th>
-      <th>등록일</th>
-      <th>경매시작일</th>
-      <th>낙찰자</th>
-      <th>거래상태</th>
-      <th>수정</th>
+      <th>글쓴이</th>
+      <th>조회수</th>
+      <th>댓글갯수</th>
+      <th>날짜</th>
       <th>삭제</th>
     </tr>
     {% for post in result%}
     <tr>
-      <td>경매</td>
-      <td>{{post.c_name}}</td>
-      <td>{{post.how}}</td>
-      <td><a href="/home#view/auction/{{post.au_id}}">{{post.subject}}</a></td>
-      <td>{{post.price}}</td>
-      <td>{{post.likes}}</td>
-      <td>{{post.userAlias}}</td>
-      <td>{{post.date}}</td>
-      <td>{{post.bidStart}}</td>
-      <td>{{post.bid_mem}}</td>
-      <td>{{post.isSold}}</td>
+      <td>{{post.q_id}}</td>
       <td>
-        <a href="/home/auction/edit?idx={{post.au_id}}"
-          ><i class="fa-solid fa-pen-to-square"></i
-        ></a>
+        <a href="/qa/view?idx={{post.q_id}}">{{post.subject}}</a>
       </td>
+      <td>{{post.userAlias}}</td>
+      <td>{{post.hit}}</td>
+      <td>{{post.replyCount}}</td>
+      <td>{{post.date}}</td>
       <td>
-        <a href="/home/auction/delete?idx={{post.au_id}}">
-          <i class="fas fa-trash-alt"></i>
-        </a>
+        <i class="fas fa-trash-alt" data-idx="{{post.q_id}}"></i>
       </td>
     </tr>
     {% endfor %}

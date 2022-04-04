@@ -48,3 +48,11 @@ exports.user = async (req, res) => {
   );
   res.render('admin/user.html', { result, pageList, curPage, lastPage });
 };
+
+exports.qa = async (req, res) => {
+  const { result, pageList, curPage, lastPage } = await adminDataMaker(
+    req,
+    'qa'
+  );
+  res.render('admin/qa.html', { result, pageList, curPage, lastPage });
+};

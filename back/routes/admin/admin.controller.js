@@ -175,3 +175,52 @@ exports.user = async (req, res) => {
     conn.release();
   }
 };
+
+exports.qa = async (req, res) => {
+  const page = Number(req.body.page);
+  const sql = `SELECT tmp.replyCount, subject, 
+              qa.q_id, DATE_FORMAT(qa.date,'%y-%m-%d') AS date,
+              hit, userAlias
+              FROM 
+                (
+                SELECT COUNT(*) AS replyCount, ANY_VALUE(q_id) AS q_id FROM q_reply GROUP BY u_id
+                ) tmp
+              RIGHT JOIN qa
+              ON qa.q_id=tmp.q_id
+              JOIN user
+              ON qa.u_id=user.u_id
+              `;
+  const countSql = `SELECT COUNT(*) AS total 
+                    FROM qa`;
+  const conn = await pool.getConnection();
+  try {
+    const [tmp] = await conn.query(sql);
+    const [[countResult]] = await conn.query(countSql);
+    const result = tmp.map((v) => {
+      const obj = { ...v };
+      obj.replyCount = v.replyCount === null ? 0 : v.replyCount;
+      return obj;
+    });
+    res.send({ result, countResult });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('fail');
+  } finally {
+    conn.release();
+  }
+};
+
+exports.qaDel = async (req, res) => {
+  const { idx } = req.body;
+  const delSql = `DELETE FROM qa WHERE q_id=${idx}`;
+  const conn = await pool.getConnection();
+  try {
+    await conn.query(delSql);
+    res.send('deleted');
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('fail');
+  } finally {
+    conn.release();
+  }
+};

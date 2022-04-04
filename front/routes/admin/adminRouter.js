@@ -15,4 +15,6 @@ router.get('/auction', adminControll.auction);
 
 router.get('/user', auth, adminControll.user);
 
+router.get('/qa', adminControll.qa);
+
 module.exports = router;
