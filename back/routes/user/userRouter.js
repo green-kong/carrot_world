@@ -28,22 +28,25 @@ router.post('/login', async (req, res) => {
     } else {
       const encodedPassword = result[0].userPW;
       console.log(encodedPassword, 'encoded');
-      bcrypt.compare(userPW, encodedPassword, (err, same) => {
-        if (err) {
-          console.log(err, 'err');
-        } else {
-          console.log(same, 'same');
-        }
-      });
-      const payload = {
-        u_id: result[0].u_id,
-        userEmail: result[0].userEmail,
-      };
-      const token = makeToken(payload);
-      res.cookie('Access_token', token, { maxAge: 1000 * 60 * 60 });
-      res.send(
-        alertmove('http://localhost:3000/home', '로그인에 성공하였습니다.')
-      );
+      const passwordCheck = bcrypt.compare(userPW, encodedPassword);
+      if (passwordCheck) {
+        const payload = {
+          u_id: result[0].u_id,
+          userEmail: result[0].userEmail,
+        };
+        const token = makeToken(payload);
+        res.cookie('Access_token', token, { maxAge: 1000 * 60 * 60 });
+        res.send(
+          alertmove('http://localhost:3000/home', '로그인에 성공하였습니다.')
+        );
+      } else {
+        res.send(
+          alertmove(
+            'http://localhost:3000/user/login',
+            '아이디와 비밀번호를 확인하세요.'
+          )
+        );
+      }
     }
   } catch (err) {
     console.log(err);
