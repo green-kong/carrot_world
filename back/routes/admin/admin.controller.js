@@ -224,3 +224,48 @@ exports.qaDel = async (req, res) => {
     conn.release();
   }
 };
+
+exports.auDel = async (req, res) => {
+  const { idx } = req.body;
+  const delSql = `DELETE FROM auction WHERE au_id=${idx}`;
+  const conn = await pool.getConnection();
+  try {
+    await conn.query(delSql);
+    res.send('deleted');
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('fail');
+  } finally {
+    conn.release();
+  }
+};
+
+exports.sellDel = async (req, res) => {
+  const { idx } = req.body;
+  const delSql = `DELETE FROM sell_board WHERE s_id=${idx}`;
+  const conn = await pool.getConnection();
+  try {
+    await conn.query(delSql);
+    res.send('deleted');
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('fail');
+  } finally {
+    conn.release();
+  }
+};
+
+exports.userDel = async (req, res) => {
+  const { idx } = req.body;
+  const delSql = `DELETE FROM user WHERE u_id=${idx}`;
+  const conn = await pool.getConnection();
+  try {
+    await conn.query(delSql);
+    res.send('deleted');
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('fail');
+  } finally {
+    conn.release();
+  }
+};

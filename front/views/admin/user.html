@@ -4,7 +4,10 @@
 <link rel="stylesheet" href="/css/admin/board.css" />
 {% endblock %}
 <!--  -->
-{% block js %} {% endblock %}
+{% block js %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/js/admin/adminUserDel.js" defer></script>
+{% endblock %}
 <!--  -->
 {% block content %}
 <div id="content">
@@ -27,7 +30,7 @@
       <th>판매게시글</th>
       <th>판매진행중</th>
       <th>판매완료</th>
-      <th>수정</th>
+      <th>탈퇴</th>
     </tr>
     {% for post in result%}
     <tr>
@@ -40,9 +43,7 @@
       <td>{{post.soldCount}}</td>
       <td>{{post.sellingCount}}</td>
       <td>
-        <a href="/home/admin/edit?idx={{post.u_id}}"
-          ><i class="fa-solid fa-pen-to-square"></i
-        ></a>
+        <i class="fas fa-trash-alt" data-idx="{{post.u_id}}"></i>
       </td>
     </tr>
     {% endfor %}

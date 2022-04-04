@@ -20,4 +20,10 @@ router.post('/qa', adminControll.qa);
 
 router.post('/qaDel', adminControll.qaDel);
 
+router.post('/auDel', adminControll.auDel);
+
+router.post('/sellDel', adminControll.sellDel);
+
+router.post('/userDel', adminControll.userDel);
+
 module.exports = router;

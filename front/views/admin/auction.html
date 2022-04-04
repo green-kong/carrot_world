@@ -4,7 +4,10 @@
 <link rel="stylesheet" href="/css/admin/board.css" />
 {% endblock %}
 <!--  -->
-{% block js %} {% endblock %}
+{% block js %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/js/admin/adminAuDel.js" defer></script>
+{% endblock %}
 <!--  -->
 {% block content %}
 <div id="content">
@@ -30,7 +33,6 @@
       <th>경매시작일</th>
       <th>낙찰자</th>
       <th>거래상태</th>
-      <th>수정</th>
       <th>삭제</th>
     </tr>
     {% for post in result%}
@@ -47,14 +49,7 @@
       <td>{{post.bid_mem}}</td>
       <td>{{post.isSold}}</td>
       <td>
-        <a href="/home/auction/edit?idx={{post.au_id}}"
-          ><i class="fa-solid fa-pen-to-square"></i
-        ></a>
-      </td>
-      <td>
-        <a href="/home/auction/delete?idx={{post.au_id}}">
-          <i class="fas fa-trash-alt"></i>
-        </a>
+        <i class="fas fa-trash-alt" data-idx="{{post.au_id}}"></i>
       </td>
     </tr>
     {% endfor %}
