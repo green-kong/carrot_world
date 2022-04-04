@@ -21,12 +21,20 @@ export default async function drawTag() {
     let listResult;
     if (table === 'auction') {
       listResult = response.data.reduce((acc, cur) => {
+        let bidStart;
+        if (cur.bidStart === 0) {
+          bidStart = '경매시작 D-day';
+        } else if (cur.bidStart > 0) {
+          bidStart = `경매시작 D-${cur.bidStart}`;
+        } else if (cur.bidStart < 0) {
+          bidStart = '경매종료';
+        }
         return (
           acc +
           bidItems
             .replace('{au_id}', cur.au_id)
             .replace('{img}', cur.img)
-            .replace('{bidStart}', cur.bidStart)
+            .replace('{bidStart}', bidStart)
             .replace('{subject}', cur.subject)
             .replace('{price}', cur.price)
             .replace('{date}', cur.date)

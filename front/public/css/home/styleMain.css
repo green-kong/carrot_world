@@ -174,11 +174,11 @@ a {
   color: #4d47c3;
 }
 
-#sell_board {
+.category_wrap {
   padding-top: 30px;
 }
 
-#sell_category {
+.category_title {
   display: flex;
   align-items: center;
   width: 100px;
@@ -191,6 +191,7 @@ a {
 }
 
 .listname {
+  display: block;
   padding: 7px 25%;
   font-size: 18px;
   color: gray;

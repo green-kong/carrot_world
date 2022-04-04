@@ -3,59 +3,59 @@
 {% block css %}
 <link rel="stylesheet" href="/css/qa/view.css" />
 {% endblock %}
-<!--  -->
+{% block js %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script defer src="/js/qa/reply.js"></script>
+{% endblock %}
 {% block content %}
 <div id="board_top">1:1 게시판</div>
 <div id="content">
   <div id="title">
-    <p>질문있습니다.</p>
-    <span>kong</span>
-    <span>22-03-24</span>
-    <span>조회수 1</span>
+    <p>{{qaData.subject}}</p>
+    <span>{{qaData.userAlias}}</span>
+    <span>{{qaData.date}}</span>
+    <span>조회수 {{qaData.hit}}</span>
   </div>
-  <div id="main_content">맥북 구매했는데 벽돌이 왔어요 어뜨케 하죠?</div>
+  <div id="main_content">{{qaData.content}}</div>
   <div id="btn_container">
     <a href="/qa/list">글목록</a>
     <div id="right_btn_container">
-      <a href="/qa/edit/">수정하기</a>
-      <a href="/qa/delete">삭제하기</a>
+      <a href="/qa/edit?idx={{qaData.q_id}}">수정하기</a>
+      <a href="/qa/delete?idx={{qaData.q_id}}">삭제하기</a>
     </div>
   </div>
 </div>
 <div id="reply_container">
   <div id="reply_input">
     <div id="sub_con_input">
-      <input type="hidden" id="linkedPosting" value="{{result._id}}" />
-      <input type="text" id="reply_author" value="운영자" readonly />
-      <textarea
-        name="replyContent"
-        id="reply_content"
-        cols="30"
-        rows="10"
-        maxlength="120"
-      ></textarea>
+      <input type="hidden" id="linkedPosting" value="{{qaData.q_id}}" />
+      <input type="text" id="reply_author" value="{{userAlias}}" readonly />
+      <input type="hidden" id="u_id" value="{{u_id}}">
+      <textarea name="replyContent" id="reply_content" cols="30" rows="10" maxlength="120"></textarea>
     </div>
     <button id="reply_btn">댓글등록</button>
   </div>
   <div id="reply_list_header">
     <p id="reply_title">댓글</p>
-    <p id="reply_count">1개</p>
+    <p id="reply_count">{{replyData.length}}개</p>
   </div>
   <div id="reply_wrap">
     <ul class="reply_list">
-      <li>
-        <span>운영자</span>
-        <span>22-03-24</span>
-        <div>확인 후 연락 드리겠습니다</div>
-        <span class="reply_edit_btn reply_btn">
-          <input type="hidden" value="{{reply._id}}" />
+      {% for item in replyData %}
+      <li data-id="{{item.qr_id}}">
+        <span class="user_alias">{{item.userAlias}}</span>
+        <span class="reply_date">{{item.date}}</span>
+        <div>{{item.content}}</div>
+        <span class="reply_edit_btn reply_btn" data-id="{{item.qr_id}}">
+          <input type="hidden" value="{{item.qr_id}}" />
           수정
         </span>
-        <span class="reply_del_btn reply_btn">
+        <span class="reply_del_btn reply_btn" data-id="{{item.qr_id}}">
           삭제
-          <input type="hidden" value="{{reply._id}}" />
+          <input type="hidden" value="{{item.qr_id}}" />
         </span>
       </li>
+      {% endfor %}
     </ul>
   </div>
 </div>

@@ -9,7 +9,7 @@ router.get('/login', unauth, adminControll.login);
 
 router.get('/statistics', auth, adminControll.statistics);
 
-router.get('/board', auth, adminControll.board);
+router.get('/sell', adminControll.sell);
 
 router.get('/user', auth, adminControll.user);
 

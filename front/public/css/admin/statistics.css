@@ -1,3 +1,8 @@
+#content_container {
+  width: 1200px;
+  margin: 0 auto;
+}
+
 #nav > ul {
   height: 100%;
   display: flex;
@@ -30,13 +35,19 @@
   margin-bottom: 30px;
 }
 
+#category_activity > p {
+  font-size: 22px;
+  font-weight: 700;
+  padding-bottom: 6px;
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
 #graph {
   margin: 0 auto;
   margin-top: 20px;
-  width: 1350px;
-  height: 350px;
-  border-left: 1px solid #cbcbcb;
-  border-bottom: 1px solid #cbcbcb;
+  width: 90%;
 }
 
 #mid_content {

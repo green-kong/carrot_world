@@ -3,6 +3,7 @@ import drawLike from './drawLike.js';
 import { clickHandler } from '../auctionSocket.js';
 import startTimer from '../bidTimer.js';
 import viewSlide from '../viewSlide.js';
+import contactToSeller from '../contactToSeller.js';
 
 export default async function drawView() {
   const [, table, idx] = window.location.hash.replace('#', '').split('/');
@@ -13,7 +14,6 @@ export default async function drawView() {
   const response = await axios.post(url, body);
   if (response.status === 200) {
     const { imgList, itemResult, tagList, recList } = response.data;
-
     const contentFrame = document.querySelector('#content_frame');
 
     const viewTemp = document.querySelector('#view_template').innerHTML;
@@ -41,7 +41,7 @@ export default async function drawView() {
     let recResult = '연관된 물품이 없습니다.';
     let result;
     if (table === 'sell_board') {
-      if (recList !== undefined) {
+      if (recList !== undefined && recList.length !== 0) {
         recResult = recList.reduce((acc, cur) => {
           return (
             acc +
@@ -55,6 +55,7 @@ export default async function drawView() {
         }, '');
       }
       result = viewTemp
+        .replace('{author}', itemResult.u_id)
         .replace('{infoList}', sellInfo)
         .replace('{imgList}', imgResult)
         .replace('{subject}', itemResult.subject)
@@ -68,7 +69,7 @@ export default async function drawView() {
         .replace('{c_name}', itemResult.c_name)
         .replace('{recommendList}', recResult);
     } else {
-      if (recList !== undefined) {
+      if (recList !== undefined && recList.length !== 0) {
         recResult = recList.reduce((acc, cur) => {
           return (
             acc +
@@ -81,7 +82,7 @@ export default async function drawView() {
           );
         }, '');
       }
-      // itemResult.bidStart;
+
       let bidStart;
       if (itemResult.bidStart === 0) {
         bidStart = 'D-day';
@@ -91,7 +92,10 @@ export default async function drawView() {
         bidStart = `D-${itemResult.bidStart}`;
       }
 
+      const winner = itemResult.winner === null ? '' : itemResult.winner;
+
       result = viewTemp
+        .replace('{author}', itemResult.u_id)
         .replace('{infoList}', bidInfo)
         .replace('{imgList}', imgResult)
         .replace('{subject}', itemResult.subject)
@@ -105,7 +109,9 @@ export default async function drawView() {
         .replace('{c_name}', itemResult.c_name)
         .replace('{recommendList}', recResult)
         .replace('{startDate}', itemResult.startDate)
-        .replace('{bidStart}', bidStart);
+        .replace('{bidStart}', bidStart)
+        .replace('{bid_mem}', itemResult.bid_mem)
+        .replace('{winner}', winner);
     }
     contentFrame.innerHTML = result;
     const bidBtn = document.querySelector('.bid_btn');
@@ -132,9 +138,18 @@ export default async function drawView() {
           clickHandler();
         });
       } else {
-        bidBtn.addEventListener('click', () => {
-          alert('경매가 진행 중이지 않습니다.');
-        });
+        const bidBtn = document.querySelector('.bid_btn');
+        const winner = document.querySelector('#winner_idx').value;
+        const loginUser = document.querySelector('#u_id').value;
+        if (winner === loginUser) {
+          bidBtn.classList.remove('bid_btn');
+          bidBtn.classList.add('contact_btn');
+          bidBtn.innerHTML = '1:1 연락';
+        } else {
+          bidBtn.addEventListener('click', () => {
+            alert('경매가 진행 중이지 않습니다.');
+          });
+        }
       }
     }
   }
@@ -142,4 +157,5 @@ export default async function drawView() {
   activeLike();
   drawLike();
   viewSlide();
+  contactToSeller();
 }

@@ -83,4 +83,8 @@ router.post('/auth', async (req, res) => {
   }
 });
 
+const adminControll = require('./admin.controller.js');
+
+router.post('/sell', adminControll.sell);
+
 module.exports = router;

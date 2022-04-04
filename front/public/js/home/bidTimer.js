@@ -1,6 +1,6 @@
 const FULL_DASH_ARRAY = 283;
-const WARNING_THRESHOLD = 30;
-const ALERT_THRESHOLD = 10;
+const WARNING_THRESHOLD = 150;
+const ALERT_THRESHOLD = 60;
 
 const COLOR_CODES = {
   info: {
@@ -74,8 +74,9 @@ function setRemainingPathColor(timeLeft) {
 }
 
 function calculateTimeFraction() {
-  const rawTimeFraction = timeLeft / TIME_LIMIT;
-  return rawTimeFraction - (1 - rawTimeFraction) / TIME_LIMIT;
+  const duration = 300;
+  const rawTimeFraction = timeLeft / duration;
+  return rawTimeFraction - (1 - rawTimeFraction) / duration;
 }
 
 function setCircleDasharray() {
