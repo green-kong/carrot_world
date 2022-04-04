@@ -3,63 +3,53 @@ const { pool } = require('./model/db/db.js');
 const chatSocket = (io) => {
   const chat = io.of('/chat');
 
-  const connectCb = (socket) => {
+  chat.on('connection', (socket) => {
     socket.on('joinRoom', (chatRoom) => {
       const c_id = chatRoom;
       socket.join(c_id);
+      console.log(c_id, '번 방 참여');
 
       socket.on('disconnect', () => {
+        console.log(c_id, '번 방 나감');
         socket.leave(c_id);
       });
 
       socket.on('message', async (msg) => {
         console.log('message received:', msg);
-        const { author, data } = msg;
+        const { author, data, c_id } = msg;
         const conn = await pool.getConnection();
-        const recordSql = `INSERT INTO chat_log(c_id, u_id, dialog, date) 
-                          VALUES(${c_id}, ${author}, '${data}', now())`;
-        const bringSql = `SELECT *
-                          FROM chat_log
+        const chatLogSql = `INSERT INTO chat_log(c_id, u_id, dialog, date) 
+                          VALUES(${c_id}, ${author},'${data}', now())`;
+        const chatUpdateSql = `UPDATE chat 
+                              SET lastDate = now(), lastMsg = '${data}' 
+                              WHERE c_id = ${c_id}`;
+        const bringSql = `SELECT c.c_id, c.u_id, u.u_img, c.dialog, c.date 
+                          FROM chat_log c 
+                          JOIN user u 
+                          ON u.u_id = c.u_id 
                           WHERE c_id = ${c_id}
-                          ORDER BY date ASC `;
-        await conn.query(recordSql);
-        const [result] = await conn.query(bringSql);
-        const latestMsg = await result[result.length - 1];
-        chat.to(c_id).emit('send', latestMsg);
+                          ORDER BY date DESC LIMIT 1`;
+        try {
+          await conn.query(chatLogSql);
+          await conn.execute(chatUpdateSql);
+          const [result] = await conn.query(bringSql);
+          const latestMsg = await result[result.length - 1];
+          console.log('가장 최근 메시지', latestMsg);
+          chat.to(c_id).emit('send', latestMsg);
+        } catch (err) {
+          console.log(err);
+        } finally {
+          conn.release();
+        }
       });
     });
-
-    // socket.on('chatList', async (chatData) => {
-    //   const { c_id, loginUser } = chatData;
-    //   console.log(chatData);
-    //   const chatList = c_id.split(',');
-    //   const conn = await pool.getConnection();
-    //   try {
-    //     let chatLog = [];
-    //     for (let i = 0; i < chatList.length; i++) {
-    //       const sql = `SELECT c.c_id, (SELECT userAlias From user WHERE u_id = cl.u_id) as userAlias, cl.dialog, DATE_FORMAT(cl.date, '%m-%d %H:%i:%s') as date FROM chat c JOIN chat_log cl ON c.c_id = cl.c_id WHERE c.c_id=${chatList[i]} ORDER BY date DESC LIMIT 1 `;
-    //       const [[result]] = await conn.query(sql);
-    //       console.log(result);
-    //       chatLog.push(result);
-    //     }
-    //     console.log(chatLog);
-
-    //     chat.emit('chatList_back', chatLog);
-    //   } catch (err) {
-    //     console.log(err.message);
-    //   } finally {
-    //     conn.release();
-    //   }
-    // });
-  };
+  });
 
   // const closeCb = () => {
   //   console.log('채팅나감');
   // };
 
   // socket.on('disconnect', closeCb);
-
-  chat.on('connection', connectCb);
 };
 
 module.exports = chatSocket;

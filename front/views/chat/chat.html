@@ -6,7 +6,7 @@
 <!--  -->
 {% block content %}
 {% block js %}
-<script type="module" src="/js/chat/chat.js"></script>
+<script defer type="module" src="/js/chat/chat.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 {% endblock %}
 <div id="main_container">
@@ -49,52 +49,37 @@
     </aside>
     <section id="chat_room_wrap">
       <article id="chat_view">
-        <div class="sender_msg_wrap">
-          <div class="profile_wrap">
-            <div class="profile">
-              <img src="{{userResult.profile}}" />
-            </div>
-          </div>
-          <p class="sender_msg">안녕하세여</p>
-        </div>
-        <div class="my_msg_wrap">
-          <p class="my_msg">네, 안녕하세여</p>
-        </div>
-        <div class="sender_msg_wrap">
-          <div class="profile_wrap">
-            <div class="profile">
-              <img src="{{userResult.profile}}" />
-            </div>
-          </div>
-          <p class="sender_msg">
-            긴글이 써지면 아래로 떨어지게 커지면 되는데 왜 안되는거야
-            허허허허허허허 동해물과 백두산이 마르고 닳도록 어쩌고 저쩌고
-            하느님이 보우어쩌고 저쩌고 하하하ㅏ하하하하ㅏㅏ 긴글이 써지면 이렇게
-            아래로 떨어지게 커지면 됩니다. 동해물과 백두산이 마르고 닳도록
-            어쩌고 저쩌고 하느님이 보우어쩌고 저쩌고 하하하ㅏ하하하하ㅏㅏ
-          </p>
-        </div>
-        <div class="my_msg_wrap">
-          <p class="my_msg">메롱</p>
-        </div>
-        <div class="sender_msg_wrap">
-          <div class="profile_wrap">
-            <div class="profile">
-              <img src="{{userResult.profile}}" />
-            </div>
-          </div>
-          <p class="sender_msg">신고합니다</p>
-        </div>
+        <!-- other's msg template -->
+        <!-- my msg template -->
       </article>
       <footer id="chat_input">
         <form method="post" action="" id="chat_write_form">
           <input type="text" name="input_text" id="text_input" />
           <button type="submit" id="msg_send_btn">전송</button>
         </form>
-        <input type="hidden" id="u_id" value="{{userResult.u_id}}">
+        <input type="hidden" id="u_id" value="{{u_id}}">
 
       </footer>
     </section>
   </div>
 </div>
+<!-- other's msg template -->
+<template id="otherMsg">
+  <div class="sender_msg_wrap">
+    <div class="profile_wrap">
+      <div class="profile">
+        <img src="{img}" />
+      </div>
+    </div>
+    <p class="sender_msg">
+      {dialog}
+    </p>
+  </div>
+</template>
+<!-- my msg template -->
+<template id="myMsg">
+  <div class="my_msg_wrap">
+    <p class="my_msg">{dialog}</p>
+  </div>
+</template>
 {% endblock %}

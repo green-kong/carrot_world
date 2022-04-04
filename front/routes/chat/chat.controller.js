@@ -11,10 +11,14 @@ exports.chat = async (req, res) => {
     const { data } = response;
     data.forEach((v) => {
       if (v.thumbnail === null) v.thumbnail = `/img/carrotForNull.png`;
-      if (v.lastDate === null) v.lastDate = `no date`;
-      if (v.lastMsg === null) v.lastMsg = `내용 없음`;
+      if (v.lastDate === null) {
+        v.lastDate = `no date`;
+      } else {
+        v.lastDate = v.lastDate.split(' ')[0];
+      }
+      if (v.lastMsg === null) v.lastMsg = `대화 내용 없음`;
     });
-    res.render('chat/chat.html', { chatList: data });
+    res.render('chat/chat.html', { chatList: data, u_id });
   } catch (err) {
     console.log(err.message);
   }
