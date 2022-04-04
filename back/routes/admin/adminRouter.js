@@ -20,4 +20,6 @@ router.post('/qa', adminControll.qa);
 
 router.post('/qaDel', adminControll.qaDel);
 
+router.post('/auDel', adminControll.auDel);
+
 module.exports = router;
