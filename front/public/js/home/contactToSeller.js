@@ -5,9 +5,8 @@ async function contactBtnHandler() {
     alert('자기 자신과의 대화라니... 많이 외로우신가요..?');
     return;
   }
-  const tmpArr = [buyer, seller].sort((a, b) => a - b);
 
-  const chatMembers = tmpArr.join(',');
+  const chatMembers = [seller, buyer].sort((a, b) => a - b);
 
   const url = 'http://localhost:4000/api/home/chat';
   const body = { chatMembers };
