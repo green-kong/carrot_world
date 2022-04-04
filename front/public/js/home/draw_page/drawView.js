@@ -125,7 +125,6 @@ export default async function drawView() {
         startDate.getHours(),
         startDate.getMinutes() + 5
       );
-
       if (startDate < now && now < endTime) {
         const secDiff = Math.floor((endTime.getTime() - now.getTime()) / 1000);
         const timerId = startTimer(secDiff);
