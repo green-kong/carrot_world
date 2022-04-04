@@ -6,7 +6,10 @@ function unauth(req, res, next) {
     next();
   } else {
     res.send(
-      alertmove('http://localhost:3000/admin/board', '이미 로그인 되어있습니다')
+      alertmove(
+        'http://localhost:3000/admin/statistics',
+        '이미 로그인 되어있습니다'
+      )
     );
   }
 }
