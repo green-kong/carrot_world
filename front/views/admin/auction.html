@@ -60,7 +60,7 @@
   </table>
   <ul id="page_list">
     {% if curPage != 1 %}
-    <li id="prevPage" onclick="movePrevPage('sell')">&lt;</li>
+    <li id="prevPage" onclick="movePrevPage('auction')">&lt;</li>
     <script src="/js/admin/movePrevpage.js"></script>
     {% endif %}
     <!--  -->
@@ -71,7 +71,7 @@
     {% endfor %}
     <!--  -->
     {% if curPage != lastPage %}
-    <li id="nextPage" onclick="moveNextPage('sell')">&gt;</li>
+    <li id="nextPage" onclick="moveNextPage('auction')">&gt;</li>
     <script src="/js/admin/moveNextpage.js"></script>
     {% endif %}
   </ul>
