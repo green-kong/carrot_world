@@ -1,16 +1,19 @@
-{% extends '../template/_layout.html' %}
+{% extends "../template/_layout.html" %}
 <!--  -->
 {% block css %}
-<link rel="stylesheet" href="/css/admin/user.css" />
+<link rel="stylesheet" href="/css/admin/board.css" />
 {% endblock %}
+<!--  -->
+{% block js %} {% endblock %}
 <!--  -->
 {% block content %}
 <div id="content">
   <div id="nav">
     <ul>
       <li><a href="/admin/statistics/">통계</a></li>
-      <li><a href="/admin/board/">게시판관리</a></li>
-      <li><a href="/admin/user/">회원관리</a></li>
+      <li><a href="/admin/sell?page=1">중고거래 게시물</a></li>
+      <li><a href="/admin/auction?page=1">경매 게시물</a></li>
+      <li><a href="/admin/user?page=1" class="clicked">회원관리</a></li>
     </ul>
   </div>
   <table>
@@ -25,123 +28,40 @@
       <th>판매완료</th>
       <th>수정</th>
     </tr>
+    {% for post in result%}
     <tr>
-      <td>kong1234</td>
-      <td>로컬</td>
-      <td>큰완두콩</td>
-      <td>ahdjd5@gmail.com</td>
-      <td>010-7749-8300</td>
-      <td>125</td>
-      <td>110</td>
-      <td>15</td>
-      <td><i class="fas fa-user-edit"></i></td>
+      <td>{{post.userEmail}}</td>
+      <td>미구현</td>
+      <td>{{post.userAlias}}</td>
+      <td>{{post.userEmail}}</td>
+      <td>{{post.userMobile}}</td>
+      <td>{{post.totalCount}}</td>
+      <td>{{post.soldCount}}</td>
+      <td>{{post.sellingCount}}</td>
+      <td>
+        <a href="/home/admin/edit?idx={{post.u_id}}"
+          ><i class="fa-solid fa-pen-to-square"></i
+        ></a>
+      </td>
     </tr>
-    <tr>
-      <td>kong1234</td>
-      <td>로컬</td>
-      <td>큰완두콩</td>
-      <td>ahdjd5@gmail.com</td>
-      <td>010-7749-8300</td>
-      <td>125</td>
-      <td>110</td>
-      <td>15</td>
-      <td><i class="fas fa-user-edit"></i></td>
-    </tr>
-    <tr>
-      <td>kong1234</td>
-      <td>로컬</td>
-      <td>큰완두콩</td>
-      <td>ahdjd5@gmail.com</td>
-      <td>010-7749-8300</td>
-      <td>125</td>
-      <td>110</td>
-      <td>15</td>
-      <td><i class="fas fa-user-edit"></i></td>
-    </tr>
-    <tr>
-      <td>kong1234</td>
-      <td>로컬</td>
-      <td>큰완두콩</td>
-      <td>ahdjd5@gmail.com</td>
-      <td>010-7749-8300</td>
-      <td>125</td>
-      <td>110</td>
-      <td>15</td>
-      <td><i class="fas fa-user-edit"></i></td>
-    </tr>
-    <tr>
-      <td>kong1234</td>
-      <td>로컬</td>
-      <td>큰완두콩</td>
-      <td>ahdjd5@gmail.com</td>
-      <td>010-7749-8300</td>
-      <td>125</td>
-      <td>110</td>
-      <td>15</td>
-      <td><i class="fas fa-user-edit"></i></td>
-    </tr>
-    <tr>
-      <td>kong1234</td>
-      <td>로컬</td>
-      <td>큰완두콩</td>
-      <td>ahdjd5@gmail.com</td>
-      <td>010-7749-8300</td>
-      <td>125</td>
-      <td>110</td>
-      <td>15</td>
-      <td><i class="fas fa-user-edit"></i></td>
-    </tr>
-    <tr>
-      <td>kong1234</td>
-      <td>로컬</td>
-      <td>큰완두콩</td>
-      <td>ahdjd5@gmail.com</td>
-      <td>010-7749-8300</td>
-      <td>125</td>
-      <td>110</td>
-      <td>15</td>
-      <td><i class="fas fa-user-edit"></i></td>
-    </tr>
-    <tr>
-      <td>kong1234</td>
-      <td>로컬</td>
-      <td>큰완두콩</td>
-      <td>ahdjd5@gmail.com</td>
-      <td>010-7749-8300</td>
-      <td>125</td>
-      <td>110</td>
-      <td>15</td>
-      <td><i class="fas fa-user-edit"></i></td>
-    </tr>
-    <tr>
-      <td>kong1234</td>
-      <td>로컬</td>
-      <td>큰완두콩</td>
-      <td>ahdjd5@gmail.com</td>
-      <td>010-7749-8300</td>
-      <td>125</td>
-      <td>110</td>
-      <td>15</td>
-      <td><i class="fas fa-user-edit"></i></td>
-    </tr>
-    <tr>
-      <td>kong1234</td>
-      <td>로컬</td>
-      <td>큰완두콩</td>
-      <td>ahdjd5@gmail.com</td>
-      <td>010-7749-8300</td>
-      <td>125</td>
-      <td>110</td>
-      <td>15</td>
-      <td><i class="fas fa-user-edit"></i></td>
-    </tr>
+    {% endfor %}
   </table>
   <ul id="page_list">
-    <li><a href="">1</a></li>
-    <li><a href="">2</a></li>
-    <li><a href="">3</a></li>
-    <li><a href="">4</a></li>
-    <li><a href="">5</a></li>
+    {% if curPage != 1 %}
+    <li id="prevPage" onclick="movePrevPage('user')">&lt;</li>
+    <script src="/js/admin/movePrevpage.js"></script>
+    {% endif %}
+    <!--  -->
+    {% for page in pageList %}
+    <li>
+      <a href="http://localhost:3000/admin/user?page={{page}}">{{page}}</a>
+    </li>
+    {% endfor %}
+    <!--  -->
+    {% if curPage != lastPage %}
+    <li id="nextPage" onclick="moveNextPage('user')">&gt;</li>
+    <script src="/js/admin/moveNextpage.js"></script>
+    {% endif %}
   </ul>
 </div>
-{% endblock %}
+{%endblock%}

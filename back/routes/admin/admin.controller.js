@@ -53,6 +53,8 @@ exports.auction = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).send('fail');
+  } finally {
+    conn.release();
   }
 };
 
@@ -126,6 +128,49 @@ exports.auth = async (req, res) => {
     res.send(result);
   } catch (err) {
     console.log(err);
+  } finally {
+    conn.release();
+  }
+};
+
+exports.user = async (req, res) => {
+  const page = Number(req.body.page);
+  const sql = `SELECT user.u_id ,
+              ANY_VALUE(userAlias) AS userAlias, 
+              ANY_VALUE(userEmail) AS userEmail,
+              ANY_VALUE(userMobile) AS userMobile,
+              SUM(tmp.total) AS totalCount, SUM(tmp.sold) AS soldCount
+              FROM
+                (
+                SELECT u_id,COUNT(*) AS total, COUNT(CASE WHEN isSold=1 THEN 1 END) AS sold FROM auction GROUP BY u_id
+                UNION ALL
+                SELECT u_id,COUNT(*) AS total, COUNT(CASE WHEN isSold=1 THEN 1 END) AS sold FROM sell_board GROUP BY u_id
+                )tmp
+              RIGHT JOIN user
+              ON tmp.u_id = user.u_id
+              GROUP BY u_id
+              LIMIT ${(page - 1) * 10},10`;
+  const countSql = `SELECT COUNT(*) AS total 
+                    FROM sell_board`;
+  const conn = await pool.getConnection();
+  try {
+    const [[countResult]] = await conn.query(countSql);
+    const [tmp] = await conn.query(sql);
+    const result = tmp.map((v) => {
+      const obj = { ...v };
+      obj.u_id = v.u_id;
+      obj.userAlias = v.userAlias || '없음';
+      obj.userMobile = v.userMobile || '없음';
+      obj.totalCount = v.totalCount || '없음';
+      obj.soldCount = v.soldCount || '없음';
+      obj.sellingCount =
+        v.totalCount === null ? '없음' : v.totalCount - v.soldCount;
+      return obj;
+    });
+    res.send({ result, countResult });
+  } catch (err) {
+    console.log(err);
+    res.send(500).send('fail');
   } finally {
     conn.release();
   }
