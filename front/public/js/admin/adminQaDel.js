@@ -14,6 +14,8 @@ async function adminQaDel(e) {
   window.location.href = `http://localhost:3000/admin/qa?page=${page}`;
 }
 
-const delBtn = document.querySelector('.fa-trash-alt');
+const delBtn = document.querySelectorAll('.fa-trash-alt');
 
-delBtn.addEventListener('click', adminQaDel);
+delBtn.forEach((v) => {
+  v.addEventListener('click', adminSellDel);
+});

@@ -22,4 +22,6 @@ router.post('/qaDel', adminControll.qaDel);
 
 router.post('/auDel', adminControll.auDel);
 
+router.post('/sellDel', adminControll.sellDel);
+
 module.exports = router;
