@@ -11,19 +11,19 @@ const chatList = document.querySelector('.c_id');
 
 socket.emit('joinRoom', chatRoom);
 
-if (chatList === null) {
-  console.log('no chatList');
-} else {
-  const chatData = {
-    c_id: chatList.value,
-    loginUser: uId,
-  };
-  socket.emit('chatList', chatData);
-}
+// if (chatList === null) {
+//   console.log('no chatList');
+// } else {
+//   const chatData = {
+//     c_id: chatList.value,
+//     loginUser: uId,
+//   };
+//   socket.emit('chatList', chatData);
+// }
 
-socket.on('chatList_back', (result) => {
-  console.log(result);
-});
+// socket.on('chatList_back', (result) => {
+//   console.log(result);
+// });
 
 msgForm.onsubmit = (e) => {
   e.preventDefault();
