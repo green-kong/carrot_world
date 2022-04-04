@@ -10,6 +10,8 @@ router.get('/statistics', adminControll.statistics);
 
 router.get('/sell', adminControll.sell);
 
+router.get('/auction', adminControll.auction);
+
 router.get('/user', adminControll.user);
 
 module.exports = router;

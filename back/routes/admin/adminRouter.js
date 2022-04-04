@@ -6,4 +6,6 @@ const router = express.Router();
 
 router.post('/sell', adminControll.sell);
 
+router.post('/auction', adminControll.auction);
+
 module.exports = router;
