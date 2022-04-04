@@ -16,4 +16,8 @@ router.post('/auction', adminControll.auction);
 
 router.post('/user', adminControll.user);
 
+router.post('/qa', adminControll.qa);
+
+router.post('/qaDel', adminControll.qaDel);
+
 module.exports = router;
