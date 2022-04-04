@@ -1,8 +1,14 @@
+require('dotenv').config();
+
 const express = require('express');
+
+const router = express.Router();
 
 const adminControll = require('./admin.controller.js');
 
-const router = express.Router();
+router.post('/login', adminControll.login);
+
+router.post('/auth', adminControll.auth);
 
 router.post('/sell', adminControll.sell);
 

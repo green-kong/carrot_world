@@ -1,5 +1,5 @@
-CREATE DATABASE carrot_world
-USE carrot_world
+CREATE DATABASE carrot_world2;
+USE carrot_world2;
 
 alter database carrot_world default character set UTF8;
 
@@ -11,6 +11,8 @@ CREATE TABLE `user` (
   `userAlias` VARCHAR(32),
   `userMobile` VARCHAR(13),
   `point` INT DEFAULT 0,
+  `isAdmin` TINYINT(1) DEFAULT 0,
+  `u_img` VARCHAR(255),
   PRIMARY KEY(u_id)
 );
 
@@ -24,7 +26,6 @@ CREATE TABLE `sell_board` (
   `how` TINYINT(1),
   `location` VARCHAR(32),
   `likes` INT DEFAULT 0,
-  `report` INT DEFAULT 0,
   `isSold` TINYINT(1),
   `date` timestamp NOT NULL
 );
@@ -35,11 +36,6 @@ CREATE TABLE `s_tag` (
 );
 
 CREATE TABLE `s_likes` (
-  `u_id` INT,
-  `s_id` INT
-);
-
-CREATE TABLE `s_report` (
   `u_id` INT,
   `s_id` INT
 );
@@ -58,10 +54,11 @@ CREATE TABLE `auction` (
   `content` VARCHAR(255) NOT NULL,
   `how` TINYINT(1),
   `location` VARCHAR(32),
-  `like` INT DEFAULT 0,
+  `likes` INT DEFAULT 0,
   `date` timestamp NOT NULL,
   `startDate` timestamp NOT NULL,
-  `isSold` TINYINT(1) NOT NULL DEFAULT 0
+  `isSold` TINYINT(1) NOT NULL DEFAULT 0,
+  `bid_mem` INT
 );
 
 CREATE TABLE `au_likes` (
@@ -92,13 +89,28 @@ CREATE TABLE `q_reply` (
   `qr_id` INT PRIMARY KEY AUTO_INCREMENT,
   `q_id` INT NOT NULL,
   `content` VARCHAR(64),
-  `date` timestamp NOT NULL
+  `date` timestamp NOT NULL,
   `u_id` INT
 );
 
 CREATE TABLE `category` (
   `c_code` VARCHAR(6) PRIMARY KEY NOT NULL,
   `c_name` VARCHAR(16) NOT NULL
+);
+
+CREATE TABLE `chat` (
+  `c_id` INT PRIMARY KEY AUTO_INCREMENT,
+  `mem1` INT NOT NULL,
+  `mem2` INT NOT NULL,
+  `lastDate` timestamp,
+  `lastMsg` VARCHAR(255)
+);
+
+CREATE TABLE `chat_log` (
+  `c_id` INT NOT NULL,
+  `u_id` INT NOT NULL,
+  `dialog` VARCHAR(255) NOT NULL,
+  `date` timestamp NOT NULL
 );
 
 ALTER TABLE `sell_board` ADD FOREIGN KEY (`c_code`) REFERENCES `category` (`c_code`) ON DELETE CASCADE;
@@ -110,10 +122,6 @@ ALTER TABLE `s_tag` ADD FOREIGN KEY (`s_id`) REFERENCES `sell_board` (`s_id`) ON
 ALTER TABLE `s_likes` ADD FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`) ON DELETE CASCADE;
 
 ALTER TABLE `s_likes` ADD FOREIGN KEY (`s_id`) REFERENCES `sell_board` (`s_id`) ON DELETE CASCADE;
-
-ALTER TABLE `s_report` ADD FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`) ON DELETE CASCADE;
-
-ALTER TABLE `s_report` ADD FOREIGN KEY (`s_id`) REFERENCES `sell_board` (`s_id`) ON DELETE CASCADE;
 
 ALTER TABLE `s_img` ADD FOREIGN KEY (`s_id`) REFERENCES `sell_board` (`s_id`) ON DELETE CASCADE;
 
@@ -133,4 +141,12 @@ ALTER TABLE `qa` ADD FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`)ON DELETE CA
 
 ALTER TABLE `q_reply` ADD CONSTRAINT FOREIGN KEY (`q_id`) REFERENCES `qa` (`q_id`) ON DELETE CASCADE;
 
-ALTER TABLE `q_reply` ADD FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`);
+ALTER TABLE `q_reply` ADD FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`) ON DELETE CASCADE;
+
+ALTER TABLE `auction` ADD FOREIGN KEY (`bid_mem`) REFERENCES `user` (`u_id`) ON DELETE CASCADE;
+
+ALTER TABLE `chat` ADD FOREIGN KEY (`mem1`) REFERENCES `user` (`u_id`) ON DELETE CASCADE;
+
+ALTER TABLE `chat` ADD FOREIGN KEY (`mem2`) REFERENCES `user` (`u_id`) ON DELETE CASCADE;
+
+ALTER TABLE `chat_log` ADD FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`) ON DELETE CASCADE;
