@@ -16,37 +16,28 @@ router.post('/login', async (req, res) => {
   const sql2 = `SELECT * FROM user WHERE userEmail='${userEmail}' and isAdmin=1`;
   try {
     const [result] = await conn.query(sql);
-    // user/join으로 계정 만든 관리자 mysql에서 isAdmin = 1로 수정하고 그 수정한 계정에 대한 로그인 정보 받아오는 내용을 써야되는
     if (result.length === 0) {
-      // ID/PW 비교
-      res.send(
-        alertmove(
-          'http://localhost:3000/admin/login',
-          '아이디와 비밀번호를 확인하세요.'
-        )
-      );
-    } else {
       const [result2] = await conn.query(sql2);
       if (result2.length === 0) {
         res.send(
           alertmove(
             'http://localhost:3000/admin/login',
-            '관리자만 접근 가능합니다.'
+            '아이디와 비밀번호를 확인하세요.'
           )
         );
       } else {
-        const pwCheck = bcrypt.compare(userPW, result2[0].userPW);
-        if (pwCheck) {
+        const pwResult = await bcrypt.compare(userPW, result2[0].userPW);
+        console.log(pwResult);
+        if (pwResult) {
           const payload = {
-            u_id: result[0].u_id,
-            userEmail: result[0].userEmail,
-            isAdmin: result2[0].isAdmin,
+            u_id: result2[0].u_id,
+            useEmail: result2[0].userEmail,
           };
           const token = makeToken(payload);
           res.cookie('Access_token', token, { maxAge: 1000 * 60 * 60 });
           res.send(
             alertmove(
-              'http://localhost:3000/admin/board',
+              'http://localhost:3000/admin/statistics',
               '관리자님 환영합니다'
             )
           );
@@ -59,20 +50,26 @@ router.post('/login', async (req, res) => {
           );
         }
       }
+    } else {
+      const payload = {
+        u_id: result[0].u_id,
+        useEmail: result[0].userEmail,
+      };
+      const token = makeToken(payload);
+      res.cookie('Access_token', token, { maxAge: 1000 * 60 * 60 });
+      res.send(
+        alertmove(
+          'http://localhost:3000/admin/statistics',
+          '관리자님 환영합니다'
+        )
+      );
     }
   } catch (err) {
     console.log(err);
-    res.send(
-      alertmove(
-        'http://localhost:3000/admin/login',
-        '잠시 후에 다시 시도해주세요.'
-      )
-    );
   } finally {
     conn.release();
   }
 });
-
 router.post('/auth', async (req, res) => {
   const { u_id } = req.body;
   const conn = await pool.getConnection();
