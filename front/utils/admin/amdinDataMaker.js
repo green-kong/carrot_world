@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 async function adminDataMaker(req, table) {
   const { page: curPage } = req.query;
   const url = `http://localhost:4000/api/admin/${table}`;
@@ -27,13 +29,8 @@ async function adminDataMaker(req, table) {
       }
       pageList.push(pageCalc);
     }
-    console.log(result);
     return { result, pageList, curPage, lastPage };
   }
 }
-
-exports.user = (req, res) => {
-  res.render('admin/user.html');
-};
 
 module.exports = adminDataMaker;

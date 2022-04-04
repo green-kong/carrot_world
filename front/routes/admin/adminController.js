@@ -22,6 +22,7 @@ exports.statistics = async (req, res) => {
     pointCollectorResult,
   });
 };
+
 exports.sell = async (req, res) => {
   const { result, pageList, curPage, lastPage } = await adminDataMaker(
     req,
@@ -29,6 +30,15 @@ exports.sell = async (req, res) => {
   );
 
   res.render('admin/sell.html', { result, pageList, curPage, lastPage });
+};
+
+exports.auction = async (req, res) => {
+  const { result, pageList, curPage, lastPage } = await adminDataMaker(
+    req,
+    'auction'
+  );
+
+  res.render('admin/auction.html', { result, pageList, curPage, lastPage });
 };
 
 exports.user = (req, res) => {

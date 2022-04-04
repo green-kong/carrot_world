@@ -12,7 +12,7 @@
     <ul>
       <li><a href="/admin/statistics/">통계</a></li>
       <li><a href="/admin/sell?page=1" class="clicked">중고거래 게시물</a></li>
-      <li><a href="/admin/auction?page=1/">경매 게시물</a></li>
+      <li><a href="/admin/auction?page=1">경매 게시물</a></li>
       <li><a href="/admin/user/">회원관리</a></li>
     </ul>
   </div>
@@ -56,7 +56,7 @@
   </table>
   <ul id="page_list">
     {% if curPage != 1 %}
-    <li id="prevPage">&lt;</li>
+    <li id="prevPage" onclick="movePrevPage('auction')">&lt;</li>
     <script src="/js/admin/movePrevpage.js"></script>
     {% endif %}
     <!--  -->
@@ -67,7 +67,7 @@
     {% endfor %}
     <!--  -->
     {% if curPage != lastPage %}
-    <li id="nextPage">&gt;</li>
+    <li id="nextPage" onclick="moveNextPage('auction')">&gt;</li>
     <script src="/js/admin/moveNextpage.js"></script>
     {% endif %}
   </ul>

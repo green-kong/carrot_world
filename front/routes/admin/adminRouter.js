@@ -11,6 +11,8 @@ router.get('/statistics', auth, adminControll.statistics);
 
 router.get('/sell', adminControll.sell);
 
+router.get('/auction', adminControll.auction);
+
 router.get('/user', auth, adminControll.user);
 
 module.exports = router;
