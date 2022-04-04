@@ -105,3 +105,8 @@ th:last-child,
 td:last-child {
   text-align: right;
 }
+
+.clicked {
+  color: #8700c5;
+  font-weight: 600;
+}

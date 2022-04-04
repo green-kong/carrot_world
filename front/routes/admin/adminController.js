@@ -41,6 +41,10 @@ exports.auction = async (req, res) => {
   res.render('admin/auction.html', { result, pageList, curPage, lastPage });
 };
 
-exports.user = (req, res) => {
-  res.render('admin/user.html');
+exports.user = async (req, res) => {
+  const { result, pageList, curPage, lastPage } = await adminDataMaker(
+    req,
+    'user'
+  );
+  res.render('admin/user.html', { result, pageList, curPage, lastPage });
 };
