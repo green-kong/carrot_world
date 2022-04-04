@@ -254,3 +254,18 @@ exports.sellDel = async (req, res) => {
     conn.release();
   }
 };
+
+exports.userDel = async (req, res) => {
+  const { idx } = req.body;
+  const delSql = `DELETE FROM user WHERE u_id=${idx}`;
+  const conn = await pool.getConnection();
+  try {
+    await conn.query(delSql);
+    res.send('deleted');
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('fail');
+  } finally {
+    conn.release();
+  }
+};

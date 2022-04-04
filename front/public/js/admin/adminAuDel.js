@@ -1,4 +1,4 @@
-async function adminQaDel(e) {
+async function adminAuDel(e) {
   const page = window.location.search.split('=')[1];
   const { idx } = e.target.dataset;
   const url = 'http://localhost:4000/api/admin/auDel';
@@ -17,5 +17,5 @@ async function adminQaDel(e) {
 const delBtn = document.querySelectorAll('.fa-trash-alt');
 
 delBtn.forEach((v) => {
-  v.addEventListener('click', adminSellDel);
+  v.addEventListener('click', adminAuDel);
 });

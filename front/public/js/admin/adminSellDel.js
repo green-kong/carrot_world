@@ -7,7 +7,7 @@ async function adminSellDel(e) {
   const response = await axios.post(url, body);
 
   if (response.status === 200) {
-    alert('해당 문의 글이 삭제 되었습니다.');
+    alert('해당 중고개래 판매글이 삭제 되었습니다.');
   } else {
     alert('잠시후 다시 시도해주세요');
   }

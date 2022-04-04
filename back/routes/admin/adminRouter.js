@@ -24,4 +24,6 @@ router.post('/auDel', adminControll.auDel);
 
 router.post('/sellDel', adminControll.sellDel);
 
+router.post('/userDel', adminControll.userDel);
+
 module.exports = router;
