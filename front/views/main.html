@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/main.css" type="text/css" />
   <script defer src="/js/main.js"></script>
-  <title>Let's sell beyond the trade</title>
+  <title>Welcome to Carrot World</title>
 </head>
 
 <body>
@@ -19,7 +19,7 @@
     </ul>
   </header>
   <div class="section" id="section1">
-    <span><img src="/img/main/image 15.png"></span>
+    <span><img src="/img/main/mainBigLogo.png"></span>
     <h2>
       <span class="title">Let's</span>
       <span class="subtitle">Beyond the trade</span>
@@ -27,50 +27,98 @@
   </div>
   <div class="section" id="section2">
     <h2 class="sell_title">중고거래</h2>
-    <span class="sell_subtitle sub_text">
-      나의 애물단지가 누군가에겐 잇템<br>
-      오늘 저녁은 치킨이닭!
-    </span>
+    <span class="sell_subtitle sub_text">나의 애물단지가 누군가에겐 잇템 </span>
+    <span class="sell_subtitle sub_text">오늘 저녁은 치킨이닭! </span>
     <div class="sell_bg">
-      <img src="/img/main/중고거래 이미지.png" id="sell_people">
-      <span><img src="/img/main/책상.png" id="desk"></span>
+      <img src="/img/main/sell.png" id="sell_people">
+      <img src="/img/main/desk.png" id="desk">
     </div>
-    </h2>
+    <span class="copyright">
+      벡터 출처 : jcomp - kr.freepick.com
+    </span>
   </div>
   <div class="section" id="section3">
-    <h2 class="auc_title">경매</h2>
-    <span class="auc_subtitle sub_text">
-      5분간 진행되는 치열한 경매<br>
-      경매의 열기를 그대로!<br>
-      어쩌면 오늘 득템할지도??
+    <div class="auc_text">
+      <h2 class="auc_title">경매</h2>
+      <span class="auc_subtitle sub_text">5분간 진행되는 치열한 경매 </span>
+      <span class="auc_subtitle sub_text">경매의 열기를 그대로! </span>
+      <span class="auc_subtitle sub_text">어쩌면 오늘 득템할지도?? </span>
+    </div>
+    <div class="auc_bg">
+      <img src="/img/main/auc.png" id="auc_people">
+    </div>
+    <span class="copyright">
+      벡터 출처 : jcomp - kr.freepick.com
     </span>
   </div>
   <div class="section" id="section4">
-    <h2 class="chat_title">실시간 채팅</h2>
-    <span class="chat_subtitle sub_text">
-      실시간으로 다른 사람과 소통하세요.<br>
-      혹시 아나요?<br>
-      거래를 넘어 새로운 인연이 될지.
+    <div class="chat_text">
+      <h2 class="chat_title">실시간 채팅</h2>
+      <span class="chat_subtitle sub_text">실시간으로 다른 사람과 소통하세요.</span>
+      <span class="chat_subtitle sub_text">혹시 아나요? </span>
+      <span class="chat_subtitle sub_text"> 거래를 넘어 새로운 인연이 될지.</span>
+    </div>
+    <div class="chat_bg">
+      <img src="/img/main/chat.png" id="chat_people">
+    </div>
+    <span class="copyright">
+      벡터 출처 : jcomp - kr.freepick.com
     </span>
   </div>
   <div class="section" id="section5">
-    <h2>Sign in</h2>
-    <form method="post" action="http://localhost:4000/api/user/login">
-      <input type="text" id="userEmail" name="userEmail" placeholder="이메일">
-      <input type="password" id="userPW" name="userPW" placeholder="비밀번호">
-      <a href="#">아직 회원이 아니신가요?</a>
-      <button type="submit">로그인</button>
+    <form method="post" action="http://localhost:4000/api/user/login" class="formBox">
+      <h2>Sign in</h2>
+      <input type="text" id="userEmail" name="userEmail" placeholder="이메일" class="inputBox">
+      <input type="password" id="userPW" name="userPW" placeholder="비밀번호" class="inputBox">
+      <span class="join_tag">아직 회원이 아니신가요?</span>
+      <button type="submit" class="submitBtn">로그인</button>
+      <div class="sns_group">
+        <p class="sns_login">간편하게 SNS 로그인</p>
+        <a href="#"><img src="/img/main/naver.png" class="sns_icon"></a>
+        <a href="#"><img src="/img/main/kakao.png" class="sns_icon"></a>
+        <a href="#"><img src="/img/main/google.png" class="sns_icon"></a>
+      </div>
     </form>
-    <p class="sns_login">간편하게 SNS 로그인</p>
-    <div>
-      <img src="">
-      <img src="">
-      <img src="">
+    <div class="login_bg">
+      <img src="/img/main/forLoginJoin.png" id="login_people">
     </div>
+    <span class="copyright">
+      벡터 출처 : jcomp - kr.freepick.com
+    </span>
   </div>
   <div class="section" id="section6">
-
+    <form method="post" action="http://localhost:4000/api/user/join" class='join_form'>
+      <h2>Sign Up</h2>
+      <ul>
+        <li>
+          <input type="text" id="userEmail" name="userEmail" maxlength="64" class="join_input" placeholder="이메일">
+          <input type="button" id="idCheckButton" value="중복체크">
+          <p id="emailMsg"></p>
+        </li>
+        <li>
+          <input type="password" id="userPW" name="userPW" maxlength="16" class="join_input" placeholder="비밀번호">
+        </li>
+        <li>
+          <input type="password" id="userPWCheck" name="userPWCheck" maxlength="16" class="join_input"
+            placeholder="비밀번호 확인">
+        </li>
+        <li>
+          <input type="text" id="userAlias" name="userAlias" maxlength="8" class="join_input" placeholder="닉네임">
+        </li>
+        <li>
+          <input type="text" id="userMobile" name="userMobile" maxlength="13" class="join_input" placeholder="핸드폰 번호">
+        </li>
+      </ul>
+      <button type="submit" class="submitBtn">회원가입</button>
+    </form>
+    <div class="login_bg">
+      <img src="/img/main/forLoginJoin.png" id="login_people">
+    </div>
+    <span class="copyright">
+      벡터 출처 : jcomp - kr.freepick.com
+    </span>
   </div>
+
 </body>
 
 </html>
