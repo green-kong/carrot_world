@@ -44,7 +44,13 @@
   <ul id="profile_tab">
     <li class="selected" data-tapname="sell">판매상품</li>
     <li data-tapname="auction">경매상품</li>
-    <li data-tapname="likes">찜목록</li>
+    <li
+      data-tapname="likes"
+      data-slike="{{slikeResult}}"
+      data-aulike="{{aulikeResult}}"
+    >
+      찜목록
+    </li>
     <li data-tapname="qa">1:1 문의글</li>
   </ul>
   <div id="selected_data">
@@ -101,6 +107,16 @@
   {tbody}
 </template>
 
+<template id="qa_column_tem">
+  <tr>
+    <th>글번호</th>
+    <th>제목</th>
+    <th>날짜</th>
+    <th>조회수</th>
+  </tr>
+  {tbody}
+</template>
+
 <template id="sell_data_tem">
   <tr>
     <td>
@@ -121,6 +137,29 @@
     <td>{sell.date}</td>
     <td>{sell.startDate}</td>
     <td>{sell.isSold}</td>
+  </tr>
+</template>
+
+<template id="like_data_tem">
+  <tr>
+    <td>{category}</td>
+    <td>
+      <a href="/home#view/{table}/{sell.s_id}">{sell.subject}</a>
+    </td>
+    <td>{sell.price}</td>
+    <td>{sell.date}</td>
+    <td>{sell.isSold}</td>
+  </tr>
+</template>
+
+<template id="qa_data_tem">
+  <tr>
+    <td>{q_id}</td>
+    <td>
+      <a href="/qa/view?idx={q_id}">{sell.subject}</a>
+    </td>
+    <td>{sell.date}</td>
+    <td>{hit}</td>
   </tr>
 </template>
 {% endblock %}
