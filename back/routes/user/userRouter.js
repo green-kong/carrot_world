@@ -20,7 +20,7 @@ router.post('/profile/check', userControll.profile);
 
 router.post('/profile/sell', userControll.sell);
 
-// router.post('/profile/auction', userControll.auction);
+router.post('/profile/auction', userControll.auction);
 
 // router.post('/profile/likes', userControll.likes);
 

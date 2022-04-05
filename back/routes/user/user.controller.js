@@ -182,3 +182,21 @@ exports.sell = async (req, res) => {
     conn.release();
   }
 };
+
+exports.auction = async (req, res) => {
+  const { u_id } = req.body;
+  const sql = `SELECT au_id, subject, FORMAT(price,0) AS price,
+              DATE_FORMAT(date,'%y-%m-%d')AS date, isSold,
+              DATE_FORMAT(startDate, '%y-%m-%d')AS startDate
+              FROM auction
+              WHERE u_id=${u_id}`;
+  const conn = await pool.getConnection();
+  try {
+    const [auResult] = await conn.query(sql);
+    res.send(auResult);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    conn.release();
+  }
+};
