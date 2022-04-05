@@ -247,7 +247,7 @@ exports.view = async (req, res) => {
                         sell_board.s_id AS s_id,
                         c_name, subject, sell_board.u_id,
                         FORMAT(price,0) AS price,
-                        content, how, location, likes, report, isSold,
+                        content, how, location, likes, isSold,
                         DATE_FORMAT(date,'%y-%m-%d') AS date
                         FROM sell_board
                         JOIN category
