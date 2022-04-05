@@ -269,3 +269,29 @@ exports.userDel = async (req, res) => {
     conn.release();
   }
 };
+
+exports.createCat = async (req, res) => {
+  const { code, name } = req.body;
+
+  const sql = `INSERT INTO category (c_code,c_name) VALUES ('${code}','${name}')`;
+  const codeCheckSql = `SELECT * FROM category WHERE c_code='${code}'`;
+  const nameCheckSql = `SELECT * FROM category WHERE c_name='${name}'`;
+  const conn = await pool.getConnection();
+  try {
+    const [codeResult] = await conn.query(codeCheckSql);
+    const [nameResult] = await conn.query(nameCheckSql);
+    if (codeResult.length > 0) {
+      throw new Error('이미존재하는 카테고리 코드 입니다.');
+    }
+    if (nameResult.length > 0) {
+      throw new Error('이미존재하는 카테고리 이름 입니다.');
+    }
+    await conn.query(sql);
+    res.send('success');
+  } catch (err) {
+    res.status(202).send(err.message);
+    console.log(err);
+  } finally {
+    conn.release();
+  }
+};
