@@ -30,6 +30,7 @@
       <th>판매게시글</th>
       <th>판매진행중</th>
       <th>판매완료</th>
+      <th>수정</th>
       <th>탈퇴</th>
     </tr>
     {% for post in result%}
@@ -42,6 +43,9 @@
       <td>{{post.totalCount}}</td>
       <td>{{post.soldCount}}</td>
       <td>{{post.sellingCount}}</td>
+      <td>
+        <i class="fas fa-user-pen" data-idx="{{post.u_id}}"></i>
+      </td>
       <td>
         <i class="fas fa-trash-alt" data-idx="{{post.u_id}}"></i>
       </td>

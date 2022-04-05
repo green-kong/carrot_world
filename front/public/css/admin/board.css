@@ -67,10 +67,12 @@ td {
   cursor: pointer;
 }
 
-.fa-trash-alt {
+.fa-trash-alt,
+.fa-user-pen {
   cursor: pointer;
 }
 
+.fa-user-pen:hover,
 .fa-trash-alt:hover,
 .fa-pen-to-square:hover {
   transition: 350ms;
