@@ -15,15 +15,18 @@ chatGroup.forEach((v) => {
 
 async function openChat(e) {
   const chat_id = e.target.parentNode.querySelector('.c_id').value;
+  const curChatId = window.location.hash.replace('#', '');
   const otherTemp = document.querySelector('#otherMsg').innerHTML;
   const myTemp = document.querySelector('#myMsg').innerHTML;
+
   try {
+    socket.emit('leaveRoom', curChatId);
+
     window.location.hash = `${chat_id}`;
     socket.emit('joinRoom', chat_id);
     const url = `http://localhost:4000/api/chat/renderChat`;
     const body = { chat_id };
     const response = await axios.post(url, body);
-    console.log(response.data);
 
     const msg = response.data.reduce((acc, cur) => {
       if (Number(uId) !== cur.u_id) {
@@ -37,6 +40,20 @@ async function openChat(e) {
     }, '');
     msgList.innerHTML = msg;
     msgList.scrollTop = msgList.scrollHeight;
+
+    e.target.closest('.chat_link').classList.add('clicked');
+
+    const clickedList = document.querySelector('.clicked');
+    clickedList.removeEventListener('click', openChat);
+
+    chatGroup.forEach((v) => {
+      v.addEventListener('click', openChat);
+    });
+
+    const link = document.querySelectorAll('.chat_link');
+    // link.forEach((v) => {
+    //   v.classList.remove('clicked');
+    // });
   } catch (err) {
     console.log(err.message);
   }
@@ -59,7 +76,7 @@ msgForm.onsubmit = (e) => {
 };
 
 socket.on('send', (latestMsg) => {
-  const { dialog, u_id: author, u_img } = latestMsg;
+  const { c_id, dialog, u_id: author, u_img } = latestMsg;
   const msgList = document.getElementById('chat_view');
   if (Number(uId) !== Number(author)) {
     makeMsg(u_img, dialog);
@@ -67,6 +84,16 @@ socket.on('send', (latestMsg) => {
     makeMyMsg(dialog);
   }
   msgList.scrollTop = msgList.scrollHeight;
+});
+
+socket.on('update', (latestMsg) => {
+  const msgOnList = document.querySelectorAll('.msg');
+  const { c_id, dialog } = latestMsg;
+  msgOnList.forEach((v) => {
+    if (Number(v.previousElementSibling.value) === c_id) {
+      v.innerHTML = dialog;
+    }
+  });
 });
 
 function makeMsg(u_img, dialog) {

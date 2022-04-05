@@ -56,9 +56,14 @@
   padding: 10px;
   box-sizing: border-box;
 }
+
 .chat_link:hover {
   background-color: var(--accent-color);
   cursor: pointer;
+}
+
+.clicked {
+  background-color: var(--accent-color);
 }
 
 .chat_link .chat_info {

@@ -15,7 +15,7 @@
       <ul class="chat_list">
         {% if chatList.length > 0 %}
         {% for item in chatList %}
-        <li class="chat_link">
+        <li class="chat_link" data-id="{{item.c_id}}">
           <div class="chat_info">
             <div class="thumbnail_wrap">
               <div class="thumbnail">
@@ -48,6 +48,7 @@
     </aside>
     <section id="chat_room_wrap">
       <article id="chat_view">
+        <span>채팅 목록을 눌러주세요</span>
         <!-- other's msg template -->
         <!-- my msg template -->
       </article>
