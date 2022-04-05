@@ -47,5 +47,30 @@ async function delCat(e) {
   }
 }
 
+async function editCat(e) {
+  e.preventDefault();
+
+  const code = e.target.querySelector('#edit_c_code');
+  const name = e.target.querySelector('#edit_c_name');
+
+  if (name.value === '') {
+    alert('내용을 입력해주세요');
+    return;
+  }
+
+  const url = 'http://localhost:4000/api/admin/editCat';
+  const body = { code: code.value, name: name.value };
+
+  const response = await axios.post(url, body);
+
+  if (response.status === 200) {
+    alert(`카테고리 이름이 ${name.value}(으)로 변경 되었습니다.`);
+    window.location.href = 'http://localhost:3000/admin/statistics';
+  } else {
+    alert(response.data);
+  }
+}
+
 createFrm.addEventListener('submit', createCat);
 delFrm.addEventListener('submit', delCat);
+editFrm.addEventListener('submit', editCat);

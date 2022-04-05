@@ -92,7 +92,7 @@
             <p>카테고리 이름 변경</p>
           </li>
           <li>
-            <select name="edit_origin_cat" id="">
+            <select name="edit_origin_cat" id="edit_c_code">
               {% for category in categoryList%}
               <option value="{{category.c_code}}">{{category.c_name}}</option>
               {% endfor %}
@@ -103,8 +103,8 @@
               type="text"
               id="edit_c_name"
               name="c_name"
-              placeholder="한글 최대 4 글자"
-              maxlength="4"
+              placeholder="한글 최대 5 글자"
+              maxlength="5"
             />
           </li>
           <li>

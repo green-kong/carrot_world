@@ -322,3 +322,20 @@ exports.delCat = async (req, res) => {
     conn.release();
   }
 };
+
+exports.editCat = async (req, res) => {
+  const { code, name } = req.body;
+
+  const updateSql = `UPDATE category SET c_name ='${name}' WHERE c_code='${code}'`;
+
+  const conn = await pool.getConnection();
+  try {
+    await conn.query(updateSql);
+    res.send('success');
+  } catch (err) {
+    console.log(err);
+    res.status(202).send(err.message);
+  } finally {
+    conn.release();
+  }
+};
