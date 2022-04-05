@@ -11,10 +11,11 @@ const chatSocket = (io) => {
 
       socket.on('leaveRoom', (curChatId) => {
         socket.leave(curChatId);
+        console.log('소켓룸즈', socket.rooms);
         console.log(curChatId, '방 나감');
       });
 
-      socket.on('message', async (msg) => {
+      socket.once('message', async (msg) => {
         console.log('message received:', msg);
         const { author, data, c_id } = msg;
         const conn = await pool.getConnection();
@@ -54,7 +55,7 @@ const chatSocket = (io) => {
   //   console.log('채팅나감');
   // };
 
-  // socket.on('disconnect', closeCb);
+  // chat.on('disconnect', closeCb);
 };
 
 module.exports = chatSocket;

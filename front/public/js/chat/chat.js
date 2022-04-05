@@ -4,7 +4,7 @@ let socket;
 
 socket = io(`http://localhost:4000/chat`);
 
-const chatGroup = document.querySelectorAll('.chat_list');
+const chatGroup = document.querySelectorAll('.chat_link');
 const msgForm = document.getElementById('chat_write_form');
 const uId = document.querySelector('#u_id').value;
 const msgList = document.getElementById('chat_view');
@@ -41,19 +41,23 @@ async function openChat(e) {
     msgList.innerHTML = msg;
     msgList.scrollTop = msgList.scrollHeight;
 
-    e.target.closest('.chat_link').classList.add('clicked');
+    const prevClicked = document.querySelector('.clicked');
 
-    const clickedList = document.querySelector('.clicked');
-    clickedList.removeEventListener('click', openChat);
+    const prevIndex = [...chatGroup].indexOf(prevClicked);
+    console.log(prevIndex);
+
+    if (prevIndex !== -1) {
+      chatGroup[prevIndex].addEventListener('click', openChat);
+    }
 
     chatGroup.forEach((v) => {
-      v.addEventListener('click', openChat);
+      v.classList.remove('clicked');
     });
 
-    const link = document.querySelectorAll('.chat_link');
-    // link.forEach((v) => {
-    //   v.classList.remove('clicked');
-    // });
+    e.target.closest('.chat_link').classList.add('clicked');
+
+    const index = [...chatGroup].indexOf(e.target.closest('.chat_link'));
+    chatGroup[index].removeEventListener('click', openChat);
   } catch (err) {
     console.log(err.message);
   }
