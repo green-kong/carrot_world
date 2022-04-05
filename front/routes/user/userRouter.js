@@ -7,7 +7,6 @@ const auth = require('../../middlewares/user/auth.js');
 const router = express.Router();
 
 const unauth = require('../../middlewares/user/unauth.js');
-const alertmove = require('../../utils/user/alertmove.js');
 
 function loginMiddleware(req, res) {
   res.render('user/login.html');
@@ -15,20 +14,12 @@ function loginMiddleware(req, res) {
 
 router.get('/login', unauth, loginMiddleware);
 
-router.get('/join', (req, res) => {
-  res.render('user/join.html');
-});
+router.get('/join', userControll.join);
 
-router.get('/logout', (req, res) => {
-  res.clearCookie('Access_token');
-  res.send(alertmove('http://localhost:3000', '로그아웃 되었습니다.'));
-});
+router.get('/logout', userControll.join);
 
 router.get('/profile', auth, userControll.profile);
 
-router.get('/profile/edit', auth, (req, res) => {
-  const { userEmail, userAlias, userMobile } = req.user.userResult;
-  res.render('user/edit.html', { userEmail, userAlias, userMobile });
-});
+router.get('/profile/edit', auth, userControll.profileEdit);
 
 module.exports = router;
