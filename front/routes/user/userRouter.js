@@ -16,7 +16,7 @@ router.get('/login', unauth, loginMiddleware);
 
 router.get('/join', userControll.join);
 
-router.get('/logout', userControll.join);
+router.get('/logout', userControll.logout);
 
 router.get('/profile', auth, userControll.profile);
 

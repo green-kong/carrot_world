@@ -66,6 +66,7 @@ exports.main = async (req, res) => {
                             FROM user
                             ORDER BY point DESC
                             LIMIT 5`;
+
   const conn = await pool.getConnection();
   try {
     const [categoryList] = await conn.query(categorySql);
@@ -111,6 +112,7 @@ exports.main = async (req, res) => {
 
     const [pointCollectorResult] = await conn.query(pointCollectorSql);
     res.send({
+      categoryList,
       likeResult,
       popCatResult,
       topSellerResult,

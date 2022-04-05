@@ -26,4 +26,12 @@ router.post('/sellDel', adminControll.sellDel);
 
 router.post('/userDel', adminControll.userDel);
 
+router.post('/createCat', adminControll.createCat);
+
+router.post('/delCat', adminControll.delCat);
+
+router.post('/editCat', adminControll.editCat);
+
+router.post('/changeCat', adminControll.changeCat);
+
 module.exports = router;
