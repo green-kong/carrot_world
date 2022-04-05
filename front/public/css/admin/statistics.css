@@ -110,3 +110,56 @@ td:last-child {
   color: #8700c5;
   font-weight: 600;
 }
+
+#category_title {
+  font-size: 20px;
+  font-weight: 600;
+  padding-bottom: 6px;
+  box-sizing: border-box;
+  width: 100%;
+  border-bottom: 3px solid black;
+  margin-bottom: 5px;
+}
+
+#category {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px auto 30px;
+  margin-bottom: 30px;
+  margin-top: 15px;
+  width: 1100px;
+}
+
+.form_list > li {
+  margin-bottom: 5px;
+}
+
+.form_list > li > p {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.form_list > li > input,
+.form_list > li > select {
+  width: 180px;
+  height: 25px;
+  box-sizing: border-box;
+}
+
+.form_list > li > button {
+  border: 1px solid #4d47c3;
+  background-color: #4d47c3;
+  color: #fff;
+  width: 180px;
+  border: none;
+  border-radius: 5px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.form_list > li > button:hover {
+  color: #4d47c3;
+  background-color: #fff;
+  border: 2px solid #4d47c3;
+}
