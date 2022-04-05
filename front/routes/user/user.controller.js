@@ -3,7 +3,10 @@ const axios = require('axios');
 
 exports.profile = async (req, res) => {
   const { u_id, userEmail, userAlias, userMobile } = req.user.userResult;
+
   const url = 'http://localhost:4000/api/user/profile/check';
+  const sellUrl = 'http://localhost:4000/api/user/profile/sell';
+
   const body = { u_id };
 
   const response = await axios.post(url, body);
@@ -13,6 +16,9 @@ exports.profile = async (req, res) => {
       likeResult: { totalLikes },
     },
   } = response;
+
+  const sellResponse = await axios.post(sellUrl, body);
+  const { data: sellResult } = sellResponse;
   res.render('user/profile.html', {
     userEmail,
     userAlias,
@@ -20,6 +26,7 @@ exports.profile = async (req, res) => {
     auData,
     sellData,
     totalLikes,
+    sellResult,
   });
 };
 

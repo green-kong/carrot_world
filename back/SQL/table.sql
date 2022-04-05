@@ -34,7 +34,7 @@ CREATE TABLE `sell_board` (
   `how` TINYINT(1),
   `location` VARCHAR(32),
   `likes` INT DEFAULT 0,
-  `isSold` TINYINT(1),
+  `isSold` TINYINT(1) NOT NULL DEFAULT 0,
   `date` timestamp NOT NULL
 );
 

@@ -3,6 +3,7 @@ const { pool } = require('../../model/db/db.js');
 const alertmove = require('../../utils/user/alertmove.js');
 const { makeToken } = require('../../utils/user/jwt.js');
 const auth = require('../../../front/middlewares/user/auth.js');
+const { query } = require('express');
 
 exports.login = async (req, res) => {
   const { userEmail, userPW } = req.body;
@@ -161,6 +162,23 @@ exports.profile = async (req, res) => {
     const [result] = await conn.query(sql);
     const [[likeResult]] = await conn.query(likeSql);
     res.send({ result, likeResult });
+  } catch (err) {
+    console.log(err);
+  } finally {
+    conn.release();
+  }
+};
+
+exports.sell = async (req, res) => {
+  const { u_id } = req.body;
+  const sql = `SELECT s_id, subject, FORMAT(price,0) AS price, 
+              DATE_FORMAT(date,'%y-%m-%d')AS date, isSold
+              FROM sell_board
+              WHERE u_id=${u_id}`;
+  const conn = await pool.getConnection();
+  try {
+    const [sellResult] = await conn.query(sql);
+    res.send(sellResult);
   } catch (err) {
     console.log(err);
   } finally {

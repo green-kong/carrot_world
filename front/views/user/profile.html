@@ -4,6 +4,10 @@
 <link rel="stylesheet" href="/css/user/profile.css" />
 {% endblock %}
 <!--  -->
+{% block js %}
+<script src="/js/user/profile.js"></script>
+{% endblock %}
+<!--  -->
 {% block content %}
 <div id="user_info">
   <div id="profile_img">
@@ -49,48 +53,16 @@
         <th>날짜</th>
         <th>판매여부</th>
       </tr>
+      {% for sell in sellResult %}
       <tr>
-        <td>강아지 산책용 하네스 팝니다ㄴ</td>
-        <td>10,000원</td>
-        <td>22-03-14</td>
-        <td>O</td>
+        <td>
+          <a href="/home#view/sell_board/{{sell.s_id}}">{{sell.subject}}</a>
+        </td>
+        <td>{{sell.subject}}</td>
+        <td>{{sell.date}}</td>
+        <td>{{sell.isSold}}</td>
       </tr>
-      <tr>
-        <td>강아지 산책용 하네스 팝니다ㄴ</td>
-        <td>10,000원</td>
-        <td>22-03-14</td>
-        <td>O</td>
-      </tr>
-      <tr>
-        <td>강아지 산책용 하네스 팝니다ㄴ</td>
-        <td>10,000원</td>
-        <td>22-03-14</td>
-        <td>O</td>
-      </tr>
-      <tr>
-        <td>강아지 산책용 하네스 팝니다ㄴ</td>
-        <td>10,000원</td>
-        <td>22-03-14</td>
-        <td>O</td>
-      </tr>
-      <tr>
-        <td>강아지 산책용 하네스 팝니다ㄴ</td>
-        <td>10,000원</td>
-        <td>22-03-14</td>
-        <td>O</td>
-      </tr>
-      <tr>
-        <td>강아지 산책용 하네스 팝니다ㄴ</td>
-        <td>10,000원</td>
-        <td>22-03-14</td>
-        <td>O</td>
-      </tr>
-      <tr>
-        <td>강아지 산책용 하네스 팝니다ㄴ</td>
-        <td>10,000원</td>
-        <td>22-03-14</td>
-        <td>O</td>
-      </tr>
+      {% endfor %}
     </table>
   </div>
 </div>
