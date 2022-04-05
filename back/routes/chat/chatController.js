@@ -18,7 +18,8 @@ exports.chat = async (req, res) => {
                       ON mem1 = u1.u_id 
                       JOIN user u2 
                       ON mem2 = u2.u_id 
-                      WHERE chat.c_id IN (${chatList})`;
+                      WHERE chat.c_id IN (${chatList})
+                      ORDER BY lastDate ASC`;
     if (chatList === undefined) throw new Error('no chat list');
     const [result] = await conn.query(bringSql);
     response = result.map((v) => {

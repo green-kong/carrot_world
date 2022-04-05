@@ -9,9 +9,9 @@ const chatSocket = (io) => {
       socket.join(c_id);
       console.log(c_id, '번 방 참여');
 
-      socket.on('disconnect', () => {
-        console.log(c_id, '번 방 나감');
-        socket.leave(c_id);
+      socket.on('leaveRoom', (curChatId) => {
+        socket.leave(curChatId);
+        console.log(curChatId, '방 나감');
       });
 
       socket.on('message', async (msg) => {
@@ -36,11 +36,16 @@ const chatSocket = (io) => {
           const latestMsg = await result[result.length - 1];
           console.log('가장 최근 메시지', latestMsg);
           chat.to(c_id).emit('send', latestMsg);
+          chat.emit('update', latestMsg);
         } catch (err) {
           console.log(err);
         } finally {
           conn.release();
         }
+      });
+      socket.on('disconnect', () => {
+        console.log(c_id, '번 방 나감');
+        socket.leave(c_id);
       });
     });
   });
