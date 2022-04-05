@@ -28,4 +28,6 @@ router.post('/userDel', adminControll.userDel);
 
 router.post('/createCat', adminControll.createCat);
 
+router.post('/delCat', adminControll.delCat);
+
 module.exports = router;

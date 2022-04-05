@@ -29,4 +29,23 @@ async function createCat(e) {
   }
 }
 
+async function delCat(e) {
+  e.preventDefault();
+
+  const name = e.target.querySelector('#del_c_name');
+
+  const url = 'http://localhost:4000/api/admin/delCat';
+  const body = { code: name.value };
+
+  const response = await axios.post(url, body);
+
+  if (response.status === 200) {
+    alert(`${name.value} 카테고리가 삭제 되었습니다.`);
+    window.location.href = 'http://localhost:3000/admin/statistics';
+  } else {
+    alert(response.data);
+  }
+}
+
 createFrm.addEventListener('submit', createCat);
+delFrm.addEventListener('submit', delCat);

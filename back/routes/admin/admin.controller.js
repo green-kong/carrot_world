@@ -295,3 +295,30 @@ exports.createCat = async (req, res) => {
     conn.release();
   }
 };
+
+exports.delCat = async (req, res) => {
+  const { code } = req.body;
+  const checkSql = `SELECT SUM(count) AS total 
+                    FROM
+                      (
+                      SELECT COUNT(*) AS count FROM auction WHERE c_code='${code}'
+                      UNION
+                      SELECT COUNT(*) AS count FROM sell_board WHERE c_code='${code}'
+                      ) cnt`;
+  const delSql = `DELETE FROM category WHERE c_code='${code}'`;
+  const conn = await pool.getConnection();
+  try {
+    const [[{ total }]] = await conn.query(checkSql);
+    if (total > 0) {
+      throw new Error('해당 카테고리의 글을 모두 옮긴 후 가능합니다.');
+    }
+
+    await conn.query(delSql);
+    res.send('success');
+  } catch (err) {
+    console.log(err);
+    res.status(202).send(err.message);
+  } finally {
+    conn.release();
+  }
+};
