@@ -269,3 +269,19 @@ exports.userDel = async (req, res) => {
     conn.release();
   }
 };
+
+exports.userProfile = async (req, res) => {
+  const { idx } = req.body;
+  const sql = `SELECT * FROM user
+              WHERE u_id='${idx}'`;
+  const conn = await pool.getConnection();
+  try {
+    const [[result]] = await conn.query(sql);
+    res.send(result);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('실패했습니다.');
+  } finally {
+    conn.release();
+  }
+};

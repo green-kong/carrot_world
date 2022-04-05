@@ -26,4 +26,6 @@ router.post('/sellDel', adminControll.sellDel);
 
 router.post('/userDel', adminControll.userDel);
 
+router.post('/userProfile', adminControll.userProfile);
+
 module.exports = router;

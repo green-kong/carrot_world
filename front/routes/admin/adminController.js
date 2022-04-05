@@ -1,4 +1,5 @@
 const axios = require('axios');
+const { hasUncaughtExceptionCaptureCallback } = require('process');
 
 const adminDataMaker = require('../../utils/admin/amdinDataMaker.js');
 
@@ -55,4 +56,12 @@ exports.qa = async (req, res) => {
     'qa'
   );
   res.render('admin/qa.html', { result, pageList, curPage, lastPage });
+};
+
+exports.userProfile = async (req, res) => {
+  const { idx } = req.query;
+  const url = 'http://localhost:4000/api/admin/userProfile';
+  const response = await axios.post(url, { idx });
+  const { data } = response;
+  res.render('admin/userprofile.html', data);
 };
