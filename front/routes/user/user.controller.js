@@ -2,5 +2,7 @@
 // const alertmove = require('../../../back/utils/user/alertmove.js');
 
 exports.profile = (req, res) => {
-  res.render('user/profile.html');
+  const { userEmail, userAlias, userMobile } = req.user.userResult;
+
+  res.render('user/profile.html', { userEmail, userAlias, userMobile });
 };
