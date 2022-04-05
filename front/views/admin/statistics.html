@@ -70,14 +70,18 @@
           <li>
             <select name="change_origin_cat" id="origin_cat">
               {% for category in categoryList%}
-              <option value="{{category.c_code}}">{{category.c_name}}</option>
+              <option value="{{category.c_code}}" class="origin_name">
+                {{category.c_name}}
+              </option>
               {% endfor %}
             </select>
           </li>
           <li>
             <select name="change_changed_cat" id="changed_cat">
               {% for category in categoryList%}
-              <option value="{{category.c_code}}">{{category.c_name}}</option>
+              <option value="{{category.c_code}}" class="changed_name">
+                {{category.c_name}}
+              </option>
               {% endfor %}
             </select>
           </li>

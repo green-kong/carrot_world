@@ -32,4 +32,6 @@ router.post('/delCat', adminControll.delCat);
 
 router.post('/editCat', adminControll.editCat);
 
+router.post('/changeCat', adminControll.changeCat);
+
 module.exports = router;

@@ -339,3 +339,21 @@ exports.editCat = async (req, res) => {
     conn.release();
   }
 };
+
+exports.changeCat = async (req, res) => {
+  const { prevCode, newCode } = req.body;
+  const auctionChange = `UPDATE auction SET c_code='${newCode}' WHERE c_code='${prevCode}'`;
+  const sellChange = `UPDATE sell_board SET c_code='${newCode}' WHERE c_code='${prevCode}'`;
+
+  const conn = await pool.getConnection();
+  try {
+    await conn.query(auctionChange);
+    await conn.query(sellChange);
+    res.send('success');
+  } catch (err) {
+    console.log(err);
+    res.status(202).send('fail');
+  } finally {
+    conn.release();
+  }
+};
