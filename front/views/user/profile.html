@@ -5,7 +5,8 @@
 {% endblock %}
 <!--  -->
 {% block js %}
-<script src="/js/user/profile.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/js/user/profile.js" defer></script>
 {% endblock %}
 <!--  -->
 {% block content %}
@@ -21,6 +22,7 @@
       </a>
     </div>
     <ul id="info_list">
+      <input type="hidden" id="userIdx" value="{{u_id}}" />
       <li><i class="fa-solid fa-envelope"></i>이메일 : {{userEmail}}</li>
       <li><i class="fa-solid fa-user"></i>닉네임 : {{userAlias}}</li>
       <li><i class="fa-solid fa-phone"></i>전화번호 : {{userMobile}}</li>
@@ -39,14 +41,14 @@
   </div>
 </div>
 <div id="list">
-  <ul>
-    <li class="selected">판매상품</li>
-    <li>경매상품</li>
-    <li>찜목록</li>
-    <li>1:1 문의글</li>
+  <ul id="profile_tab">
+    <li class="selected" data-tapname="sell">판매상품</li>
+    <li data-tapname="auction">경매상품</li>
+    <li data-tapname="likes">찜목록</li>
+    <li data-tapname="qa">1:1 문의글</li>
   </ul>
   <div id="selected_data">
-    <table>
+    <table id="tab_table">
       <tr>
         <th>제목</th>
         <th>가격</th>
@@ -58,7 +60,7 @@
         <td>
           <a href="/home#view/sell_board/{{sell.s_id}}">{{sell.subject}}</a>
         </td>
-        <td>{{sell.subject}}</td>
+        <td>{{sell.price}}</td>
         <td>{{sell.date}}</td>
         <td>{{sell.isSold}}</td>
       </tr>
@@ -66,4 +68,25 @@
     </table>
   </div>
 </div>
+
+<template id="sell_column_tem">
+  <tr>
+    <th>제목</th>
+    <th>가격</th>
+    <th>날짜</th>
+    <th>판매여부</th>
+  </tr>
+  {tbody}
+</template>
+
+<template id="sell_data_tem">
+  <tr>
+    <td>
+      <a href="/home#view/sell_board/{sell.s_id}">{sell.subject}</a>
+    </td>
+    <td>{sell.price}</td>
+    <td>{sell.date}</td>
+    <td>{sell.isSold}</td>
+  </tr>
+</template>
 {% endblock %}

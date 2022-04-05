@@ -20,6 +20,7 @@ exports.profile = async (req, res) => {
   const sellResponse = await axios.post(sellUrl, body);
   const { data: sellResult } = sellResponse;
   res.render('user/profile.html', {
+    u_id,
     userEmail,
     userAlias,
     userMobile,
