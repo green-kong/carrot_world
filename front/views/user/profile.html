@@ -12,17 +12,25 @@
   <div id="txt_info">
     <div id="info_title">
       <p>내 프로필</p>
-      <a href="http://localhost:3000/user/profile/edit" id="profile_edit_btn"> 정보수정 </a>
+      <a href="http://localhost:3000/user/profile/edit" id="profile_edit_btn">
+        정보수정
+      </a>
     </div>
     <ul id="info_list">
       <li><i class="fa-solid fa-envelope"></i>이메일 : {{userEmail}}</li>
       <li><i class="fa-solid fa-user"></i>닉네임 : {{userAlias}}</li>
       <li><i class="fa-solid fa-phone"></i>전화번호 : {{userMobile}}</li>
-      <li><i class="fa-solid fa-box"></i>판매중상품 : 18개</li>
-      <li><i class="fa-solid fa-cart-plus"></i>판매된상품 : 16개</li>
-      <li><i class="fa-solid fa-box"></i>게시중 경매 : 1개</li>
-      <li><i class="fa-solid fa-cart-plus"></i>완료된 경매 : 2개</li>
-      <li><i class="fa-regular fa-heart"></i>찜 눌린 횟수 : 10개</li>
+      <li><i class="fa-solid fa-box"></i>판매중상품 : {{sellData.Cnt}}개</li>
+      <li>
+        <i class="fa-solid fa-cart-plus"></i>판매된상품 : {{sellData.SoldCnt}}개
+      </li>
+      <li><i class="fa-solid fa-box"></i>게시중 경매 : {{auData.Cnt}}개</li>
+      <li>
+        <i class="fa-solid fa-cart-plus"></i>완료된 경매 : {{auData.SoldCnt}}개
+      </li>
+      <li>
+        <i class="fa-regular fa-heart"></i>찜 눌린 횟수 : {{totalLikes}}회
+      </li>
     </ul>
   </div>
 </div>

@@ -16,4 +16,6 @@ router.post('/join', userControll.join);
 
 router.post('/profile/edit', userControll.profileEdit);
 
+router.post('/profile/check', userControll.profile);
+
 module.exports = router;

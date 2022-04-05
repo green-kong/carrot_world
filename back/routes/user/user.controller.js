@@ -133,3 +133,37 @@ exports.profileEdit = async (req, res) => {
     conn.release();
   }
 };
+
+exports.profile = async (req, res) => {
+  const { u_id } = req.body;
+  const sql = `SELECT 'au'as 'table',u_id, COUNT(*) AS Cnt,
+                COUNT(CASE WHEN isSold='1' THEN '1' END) AS SoldCnt
+                FROM auction
+                WHERE u_id=${u_id}
+                UNION ALL
+                SELECT 'sell'as 'table',u_id, COUNT(*) AS Cnt,
+                COUNT(CASE WHEN isSold='1' THEN '1' END) AS SoldCnt
+                FROM sell_board
+                WHERE u_id=${u_id}
+                `;
+  const likeSql = `SELECT SUM(tmp.likes)AS totalLikes
+                  FROM(
+                    SELECT SUM(likes) AS likes
+                    FROM sell_board
+                    WHERE u_id=${u_id}
+                    UNION ALL
+                    SELECT SUM(likes) AS likes
+                    FROM auction
+                    WHERE u_id=${u_id}
+                  )tmp`;
+  const conn = await pool.getConnection();
+  try {
+    const [result] = await conn.query(sql);
+    const [[likeResult]] = await conn.query(likeSql);
+    res.send({ result, likeResult });
+  } catch (err) {
+    console.log(err);
+  } finally {
+    conn.release();
+  }
+};

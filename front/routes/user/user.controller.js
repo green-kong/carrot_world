@@ -1,9 +1,26 @@
 const alertmove = require('../../utils/user/alertmove.js');
+const axios = require('axios');
 
-exports.profile = (req, res) => {
-  const { userEmail, userAlias, userMobile } = req.user.userResult;
+exports.profile = async (req, res) => {
+  const { u_id, userEmail, userAlias, userMobile } = req.user.userResult;
+  const url = 'http://localhost:4000/api/user/profile/check';
+  const body = { u_id };
 
-  res.render('user/profile.html', { userEmail, userAlias, userMobile });
+  const response = await axios.post(url, body);
+  const {
+    data: {
+      result: [auData, sellData],
+      likeResult: { totalLikes },
+    },
+  } = response;
+  res.render('user/profile.html', {
+    userEmail,
+    userAlias,
+    userMobile,
+    auData,
+    sellData,
+    totalLikes,
+  });
 };
 
 exports.join = (req, res) => {
