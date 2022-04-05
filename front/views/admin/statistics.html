@@ -31,6 +31,104 @@
         <canvas id="myChart"></canvas>
       </div>
     </div>
+    <p id="category_title">카테고리</p>
+    <div id="category">
+      <form action="" id="create_cat">
+        <ul class="form_list">
+          <li>
+            <p>카테고리 생성</p>
+          </li>
+          <li>
+            <input
+              type="text"
+              id="create_c_code"
+              placeholder="영문 3 글자"
+              maxlength="3"
+              name="c_code"
+            />
+          </li>
+          <li>
+            <input
+              type="text"
+              id="create_c_name"
+              name="c_name"
+              placeholder="한글 최대 4 글자"
+              maxlength="4"
+            />
+          </li>
+          <li>
+            <button type="submit">카테고리 생성</button>
+          </li>
+        </ul>
+      </form>
+      <form action="" id="change_cat">
+        <ul class="form_list">
+          <li>
+            <p>카테고리 옮기기</p>
+          </li>
+          <li>
+            <select name="change_origin_cat" id="origin_cat">
+              {% for category in categoryList%}
+              <option value="{{c_code}}">{{c_name}}</option>
+              {% endfor %}
+            </select>
+          </li>
+          <li>
+            <select name="change_changed_cat" id="changed_cat">
+              {% for category in categoryList%}
+              <option value="{{c_code}}">{{c_name}}</option>
+              {% endfor %}
+            </select>
+          </li>
+          <li>
+            <button type="submit">옮기기</button>
+          </li>
+        </ul>
+      </form>
+      <form action="" id="edit_cat">
+        <ul class="form_list">
+          <li>
+            <p>카테고리 이름 변경</p>
+          </li>
+          <li>
+            <select name="edit_origin_cat" id="">
+              {% for category in categoryList%}
+              <option value="{{c_name}}"></option>
+              {% endfor %}
+            </select>
+          </li>
+          <li>
+            <input
+              type="text"
+              id="edit_c_name"
+              name="c_name"
+              placeholder="한글 최대 4 글자"
+              maxlength="4"
+            />
+          </li>
+          <li>
+            <button type="submit">변경</button>
+          </li>
+        </ul>
+      </form>
+      <form action="" id="del_cat">
+        <ul class="form_list">
+          <li>
+            <p>카테고리 삭제</p>
+          </li>
+          <li>
+            <select name="c_name" id="del_c_name">
+              {% for category in categoryList%}
+              <option value="c_name"></option>
+              {% endfor %}
+            </select>
+          </li>
+          <li>
+            <button type="submit">삭제</button>
+          </li>
+        </ul>
+      </form>
+    </div>
     <div id="mid_content">
       <div id="popular_posting" class="statistic_box">
         <p>찜 많은 판매 글</p>
