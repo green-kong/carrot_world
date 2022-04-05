@@ -1,6 +1,19 @@
-// const { pool } = require('../../../back/model/db/db.js');
-// const alertmove = require('../../../back/utils/user/alertmove.js');
+const alertmove = require('../../utils/user/alertmove.js');
 
 exports.profile = (req, res) => {
   res.render('user/profile.html');
+};
+
+exports.join = (req, res) => {
+  res.render('user/join.html');
+};
+
+exports.logout = (req, res) => {
+  res.clearCookie('Access_token');
+  res.send(alertmove('http://localhost:3000', '로그아웃 되었습니다.'));
+};
+
+exports.profileEdit = (req, res) => {
+  const { userEmail, userAlias, userMobile } = req.user.userResult;
+  res.render('user/edit.html', { userEmail, userAlias, userMobile });
 };
