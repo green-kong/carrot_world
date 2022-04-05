@@ -3,8 +3,6 @@ const changeFrm = document.querySelector('#change_cat');
 const editFrm = document.querySelector('#edit_cat');
 const delFrm = document.querySelector('#del_cat');
 
-console.log(changeFrm);
-
 async function createCat(e) {
   e.preventDefault();
 

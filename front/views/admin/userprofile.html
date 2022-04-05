@@ -1,12 +1,11 @@
 {% extends "../template/_layout.html"%}
 <!--  -->
 {% block css %}
-<link rel="stylesheet" href="/css/user/edit.css" />
+<link rel="stylesheet" href="/css/admin/userprofile.css" />
 {% endblock %}
 <!--  -->
 {% block js %}
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script type="text/javascript" src="/js/user/quit.js" defer></script>
 {% endblock %}
 <!--  -->
 
@@ -14,9 +13,16 @@
 <div id="profileEdit">
   <form method="post" action="http://localhost:4000/api/user/profile/edit">
     <div id="title" name="title">
-      내 정보 수정
+      회원 정보 수정
     </div>
     <ul id="boxTool">
+      <li class="infoBox">
+        <label for="selectUser">권한설정</label>
+        <select id="selectUser" name="selectUser">
+          <option id="user">일반사용자</option>
+          <option id="admin">관리자</option>
+        </select>
+      </li>
       <li class="infoBox">
         <label for="userEmail">이메일</label>
         <input type="text" id="userEmail" name="userEmail" maxlength="64" value="{{userEmail}}" readonly>
@@ -28,12 +34,12 @@
       </li>
       <li class="infoBox">
         <label for="userPW">비밀번호</label>
-        <input type="password" id="userPW" name="userPW" maxlength="20" minlength="8" placeholder="8~20 자로 입력하세요">
+        <input type="password" id="userPW" name="userPW" maxlength="16" placeholder="영문, 숫자, 특수문자를 조합하여 8~20자">
       </li>
       <li class="infoBox">
         <label for="userPWCheck">비밀번호확인</label>
-        <input type="password" id="userPWCheck" name="userPWCheck" maxlength="20" minlength="8"
-          placeholder="8~20 자로 입력하세요">
+        <input type="password" id="userPWCheck" name="userPWCheck" maxlength="16"
+          placeholder="영문, 숫자, 특수문자를 조합하여 8~20자">
       </li>
       <li class="infoBox">
         <label for=" userAlias">닉네임</label>
@@ -44,17 +50,9 @@
         <input type="text" id="userMobile" name="userMobile" value="{{userMobile}}" maxlength="13">
       </li>
       </li>
-      <li class="infoBox">
-        <label for="Picture">프로필사진</label>
-        <input type="file" id="picture" name="picture" accept="image/jpeg, image/png, image/jpg">
-      </li>
-
     </ul>
     <button type="submit" id="userUpdate">수정완료</button>
     <button type="button" id="quit_btn">탈퇴하기</button>
+    <!--  -->
 
-  </form>
-</div>
-<!--  -->
-
-{% endblock %}
+    {% endblock %}

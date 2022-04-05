@@ -493,9 +493,11 @@ exports.category = async (req, res) => {
 
 exports.chat = async (req, res) => {
   const { chatMembers } = req.body;
+  const [mem1, mem2] = chatMembers;
+  console.log(mem1, mem2);
   const conn = await pool.getConnection();
-  const checkSql = `SELECT c_id FROM chat WHERE members='${chatMembers}'`;
-  const createSql = `INSERT INTO chat (members) VALUES ('${chatMembers}')`;
+  const checkSql = `SELECT c_id FROM chat WHERE mem1=${mem1} AND mem2=${mem2}`;
+  const createSql = `INSERT INTO chat (mem1,mem2) VALUES (${mem1},${mem2})`;
   try {
     const [[checkResult]] = await conn.query(checkSql);
     if (checkResult) {

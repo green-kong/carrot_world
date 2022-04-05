@@ -13,7 +13,7 @@ router.use('/admin', adminRouter);
 
 router.use('/qa', auth, qaRouter);
 
-router.use('/chat', chatRouter);
+router.use('/chat', auth, chatRouter);
 
 router.use('/home', homeRouter);
 
