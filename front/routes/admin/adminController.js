@@ -56,3 +56,7 @@ exports.qa = async (req, res) => {
   );
   res.render('admin/qa.html', { result, pageList, curPage, lastPage });
 };
+
+exports.userProfile = async (req, res) => {
+  res.render('admin/userprofile.html');
+};
