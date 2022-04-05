@@ -59,7 +59,7 @@ exports.auth = async (req, res) => {
   const sql = `SELECT * FROM user WHERE u_id='${u_id}'`;
   const slikeSql = `SELECT * FROM s_likes WHERE u_id='${u_id}'`;
   const aulikeSql = `SELECT * FROM au_likes WHERE u_id='${u_id}'`;
-  const chatSql = 'SELECT * FROM chat';
+  const chatSql = `SELECT c_id, mem1, mem2 FROM chat WHERE mem1 =${u_id} OR mem2=${u_id}`;
   try {
     const [[userResult]] = await conn.query(sql);
     const [slikeTmp] = await conn.query(slikeSql);
@@ -69,10 +69,7 @@ exports.auth = async (req, res) => {
     const [chatTmp] = await conn.query(chatSql);
     const chatResult = [];
     chatTmp.forEach((v) => {
-      v.members.split(',');
-      if (v.members.includes(u_id)) {
-        chatResult.push(v.c_id);
-      }
+      chatResult.push(v.c_id);
     });
     const result = { userResult, slikeResult, aulikeResult, chatResult };
     res.send(result);
