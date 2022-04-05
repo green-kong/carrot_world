@@ -3,6 +3,10 @@ const axios = require('axios');
 
 exports.profile = async (req, res) => {
   const { u_id, userEmail, userAlias, userMobile } = req.user.userResult;
+  const slikeResult = req.user.slikeResult.join(',');
+  const aulikeResult = req.user.aulikeResult.join(',');
+  console.log(slikeResult);
+  console.log(aulikeResult);
 
   const url = 'http://localhost:4000/api/user/profile/check';
   const sellUrl = 'http://localhost:4000/api/user/profile/sell';
@@ -28,6 +32,8 @@ exports.profile = async (req, res) => {
     sellData,
     totalLikes,
     sellResult,
+    slikeResult,
+    aulikeResult,
   });
 };
 
