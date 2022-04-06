@@ -2,10 +2,15 @@ const axios = require('axios');
 const alertmove = require('../../utils/user/alertmove.js');
 
 exports.home = (req, res) => {
-  const { userResult, totalCount, slikeResult, aulikeResult } = req.user;
+  const {
+    userResult,
+    totalCount: { totalCnt },
+    slikeResult,
+    aulikeResult,
+  } = req.user;
   res.render('home/home.html', {
     userResult,
-    totalCount,
+    totalCnt,
     slikeResult,
     aulikeResult,
   });

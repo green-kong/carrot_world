@@ -52,6 +52,16 @@ exports.auth = async (req, res) => {
   const slikeSql = `SELECT * FROM s_likes WHERE u_id='${u_id}'`;
   const aulikeSql = `SELECT * FROM au_likes WHERE u_id='${u_id}'`;
   const chatSql = `SELECT c_id, mem1, mem2 FROM chat WHERE mem1 =${u_id} OR mem2=${u_id}`;
+  const countSql = `SELECT SUM(tmp.cnt) AS totalCnt
+                    FROM (
+                      SELECT COUNT(*) AS cnt
+                      FROM sell_board
+                      WHERE u_id=${u_id}
+                      UNION ALL
+                      SELECT COUNT(*) AS cnt
+                      FROM auction
+                      WHERE u_id=${u_id}
+                      )tmp`;
   try {
     const [[userResult]] = await conn.query(sql);
     const [slikeTmp] = await conn.query(slikeSql);
@@ -59,6 +69,7 @@ exports.auth = async (req, res) => {
     const [aulikeTmp] = await conn.query(aulikeSql);
     const aulikeResult = aulikeTmp.map((v) => v.au_id);
     const [chatTmp] = await conn.query(chatSql);
+    const [[totalCount]] = await conn.query(countSql);
     const chatResult = [];
     chatTmp.forEach((v) => {
       chatResult.push(v.c_id);
@@ -66,7 +77,13 @@ exports.auth = async (req, res) => {
     if (userResult.u_img === null) {
       userResult.u_img = 'http://localhost:3000/img/carrot_profile.jpeg';
     }
-    const result = { userResult, slikeResult, aulikeResult, chatResult };
+    const result = {
+      userResult,
+      slikeResult,
+      aulikeResult,
+      chatResult,
+      totalCount,
+    };
     res.send(result);
   } catch (err) {
     console.log(err);
