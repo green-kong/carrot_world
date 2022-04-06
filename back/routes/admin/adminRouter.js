@@ -26,6 +26,8 @@ router.post('/sellDel', adminControll.sellDel);
 
 router.post('/userDel', adminControll.userDel);
 
+router.post('/userProfile', adminControll.userProfile);
+
 router.post('/createCat', adminControll.createCat);
 
 router.post('/delCat', adminControll.delCat);

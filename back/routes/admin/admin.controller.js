@@ -270,6 +270,21 @@ exports.userDel = async (req, res) => {
   }
 };
 
+exports.userProfile = async (req, res) => {
+  const { idx } = req.body;
+  const sql = `SELECT * FROM user
+              WHERE u_id='${idx}'`;
+  const conn = await pool.getConnection();
+  try {
+    const [[result]] = await conn.query(sql);
+    res.send(result);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('실패했습니다.');
+  } finally{
+    conn.release();
+  }  
+    
 exports.createCat = async (req, res) => {
   const { code, name } = req.body;
 
