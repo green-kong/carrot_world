@@ -89,18 +89,23 @@ exports.quit = async (req, res) => {
 };
 
 exports.join = async (req, res) => {
-  const { userEmail, userPW, userAlias, userMobile } = req.body;
+  const { userEmail, userPW, userAlias, userMobile, u_img } = req.body;
   const conn = await pool.getConnection();
   const encryptedPW = await bcrypt.hash(userPW, 10);
-  const sql = `INSERT INTO user (userEmail, userPW, userAlias, userMobile) 
-  VALUES ('${userEmail}', '${encryptedPW}', '${userAlias}', '${userMobile}')`;
-  await conn.query(sql);
-  res.send(
-    alertmove(
-      'http://localhost:3000/',
-      `${userAlias}님 회원가입을 축하합니다. 로그인을 해주세요`
-    )
-  );
+  const sql = `INSERT INTO user (userEmail, userPW, userAlias, userMobile, u_img) 
+  VALUES ('${userEmail}', '${encryptedPW}', '${userAlias}', '${userMobile}', '${u_img}')`;
+  try {
+    const [result] = await conn.query(sql);
+    const response = {
+      rows: result.affectedRows,
+    };
+    res.send(response);
+  } catch (err) {
+    res.status(500).send('Join error');
+    console.log(err.message);
+  } finally {
+    conn.release();
+  }
 };
 
 exports.profileEdit = async (req, res) => {

@@ -38,7 +38,6 @@ joinForm.addEventListener('submit', async (e) => {
     emailMsg.innerHTML = `이메일 형식이 올바르지 않습니다.`;
     emailMsg.style.color = 'red';
   } else {
-    console.log('hi');
     const url = `http://localhost:4000/api/user/idCheck`;
     const body = { userEmail: userEmail.value };
     const response = await axios.post(url, body);
@@ -94,22 +93,28 @@ joinForm.addEventListener('submit', async (e) => {
     signedMobile = userMobile.value;
   }
 
-  const data = {
-    userEmail: signedEmail,
-    userPW: signedPw,
-    userAlias: signedNick,
-    userMobile: signedMobile,
-    u_img: userProfile.value,
-  };
+  if (signedEmail && signedPw && signedNick && signedMobile) {
+    const joinUrl = `http://localhost:4000/api/user/join`;
 
-  console.log(data);
+    const signedBody = {
+      userEmail: signedEmail,
+      userPW: signedPw,
+      userAlias: signedNick,
+      userMobile: signedMobile,
+      u_img: userProfile.value,
+    };
+    const response = await axios.post(joinUrl, signedBody);
+    console.log(response);
+    const { rows } = response.data;
 
-  const joinUrl = `http://localhost:4000/api/user/join`;
-  const signedBody = data;
-
-  const response = await axios.post(joinUrl, signedBody);
-
-  console.log(response);
+    if (rows === 1) {
+      alert(`${signedNick}님 회원가입을 축하합니다. 로그인을 해주세요`);
+      window.location.href = 'http://localhost:3000/';
+    } else {
+      alert(`잠시 후 다시 시도해주세요`);
+      window.location.href = 'http://localhost:3000/';
+    }
+  }
 });
 
 const autoHyphen = (target) => {

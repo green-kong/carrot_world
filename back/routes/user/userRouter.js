@@ -14,7 +14,7 @@ router.post('/auth', userControll.auth);
 
 router.post('/quit', userControll.quit);
 
-router.post('/join', upload.single('profileImg'), userControll.join);
+router.post('/join', upload.single('userProfile'), userControll.join);
 
 router.post('/idCheck', userControll.idCheck);
 
