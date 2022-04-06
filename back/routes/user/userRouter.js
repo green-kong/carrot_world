@@ -4,6 +4,8 @@ const express = require('express');
 
 const router = express.Router();
 
+const { upload } = require('../../utils/multer/multer.js');
+
 const userControll = require('./user.controller.js');
 
 router.post('/login', userControll.login);
@@ -14,7 +16,11 @@ router.post('/quit', userControll.quit);
 
 router.post('/join', userControll.join);
 
-router.post('/profile/edit', userControll.profileEdit);
+router.post(
+  '/profile/edit',
+  upload.single('picture'),
+  userControll.profileEdit
+);
 
 router.post('/profile/check', userControll.profile);
 

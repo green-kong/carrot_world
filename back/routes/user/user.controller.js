@@ -110,10 +110,17 @@ exports.join = async (req, res) => {
 
 exports.profileEdit = async (req, res) => {
   const { userEmail, userAlias, userMobile } = req.body;
-  const conn = await pool.getConnection();
-  const sql = `UPDATE user 
+  let sql = `UPDATE user
                SET userEmail='${userEmail}', userAlias='${userAlias}', userMobile='${userMobile}'
                WHERE userEmail='${userEmail}'`;
+  if (req.file) {
+    const { filename } = req.file;
+    sql = `UPDATE user
+               SET u_img='http://localhost:4000/upload/${filename}',userEmail='${userEmail}', userAlias='${userAlias}', userMobile='${userMobile}'
+               WHERE userEmail='${userEmail}'`;
+  }
+  const conn = await pool.getConnection();
+
   try {
     await conn.query(sql);
     res.send(
