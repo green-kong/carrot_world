@@ -281,10 +281,11 @@ exports.userProfile = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).send('실패했습니다.');
-  } finally{
+  } finally {
     conn.release();
-  }  
-    
+  }
+};
+
 exports.createCat = async (req, res) => {
   const { code, name } = req.body;
 
