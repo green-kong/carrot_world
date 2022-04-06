@@ -102,7 +102,7 @@ exports.join = async (req, res) => {
   await conn.query(sql);
   res.send(
     alertmove(
-      'http://localhost:3000/user/login',
+      'http://localhost:3000',
       `${userAlias}님 회원가입을 축하합니다. 로그인을 해주세요`
     )
   );
