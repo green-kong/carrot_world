@@ -13,6 +13,7 @@
       crossorigin="anonymous"
     ></script>
   </head>
+
   <body>
     <div id="wrap">
       <div id="header">
@@ -39,7 +40,7 @@
           <div id="profile_box">
             <div id="user_profile">
               <ul id="profile_img_box">
-                <img src="/img/home/profile.PNG" id="profile_img" />
+                <img src="{{userResult.u_img}}" id="profile_img" />
               </ul>
               <ul id="profile_rightbox">
                 <li id="call_user">{{userResult.userAlias}} 님</li>
@@ -57,7 +58,9 @@
                 <li id="sell_item">판매중인 물품 : {{totalCount}}개</li>
                 <li id="new_chat"><a href="/chat">채팅 바로 가기</a></li>
               </ul>
-              <a href="/user/logout"><li id="user_logout">로그아웃</li></a>
+              <a href="/user/logout">
+                <li id="user_logout">로그아웃</li>
+              </a>
             </ul>
           </div>
           <div class="category_wrap">

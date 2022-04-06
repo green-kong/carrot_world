@@ -24,7 +24,7 @@ body {
 
 #boxTool {
   width: 500px;
-  height: 700px;
+  height: 630px;
   display: flex;
   flex-wrap: wrap;
   font-size: 18px;
@@ -124,26 +124,7 @@ body {
   border-radius: 8px;
 }
 
-#quit_btn {
-  display: block;
-  font-size: 18px;
-  padding-left: 20px;
-  width: 525px;
-  height: 55px;
-  margin: 15px 0;
-  background-color: #c24947;
-  border: solid 2px #c24947;
-  color: #f0efff;
-  border-radius: 8px;
-}
-
 #userUpdate:hover {
   background-color: #f0efff;
   color: #4d47c3;
-}
-
-#quit_btn:hover {
-  background-color: #f0efff;
-  color: #c24947;
-  border: solid 2px #c24947;
 }

@@ -11,7 +11,7 @@
 
 {% block content %}
 <div id="profileEdit">
-  <form method="post" action="http://localhost:4000/api/user/profile/edit">
+  <form method="post" action="http://localhost:4000/api/admin/userEdit">
     <div id="title" name="title">
       회원 정보 수정
     </div>
@@ -19,8 +19,13 @@
       <li class="infoBox">
         <label for="selectUser">권한설정</label>
         <select id="selectUser" name="selectUser">
-          <option id="user">일반사용자</option>
-          <option id="admin">관리자</option>
+          {% if isAdmin === 0 %}
+          <option id="user" name='user' value="{{0}}" selected>일반사용자</option>
+          <option id="admin" name='admin' value="{{1}}">관리자</option>
+          {% else %}
+          <option id="user" name='user' value="{{0}}">일반사용자</option>
+          <option id="admin" name='admin' value="{{1}}" selected>관리자</option>
+          {% endif%}
         </select>
       </li>
       <li class="infoBox">
@@ -33,15 +38,6 @@
         </select>
       </li>
       <li class="infoBox">
-        <label for="userPW">비밀번호</label>
-        <input type="password" id="userPW" name="userPW" maxlength="16" placeholder="영문, 숫자, 특수문자를 조합하여 8~20자">
-      </li>
-      <li class="infoBox">
-        <label for="userPWCheck">비밀번호확인</label>
-        <input type="password" id="userPWCheck" name="userPWCheck" maxlength="16"
-          placeholder="영문, 숫자, 특수문자를 조합하여 8~20자">
-      </li>
-      <li class="infoBox">
         <label for=" userAlias">닉네임</label>
         <input type="text" id="userAlias" name="userAlias" value="{{userAlias}}" maxlength="8">
       </li>
@@ -52,7 +48,6 @@
       </li>
     </ul>
     <button type="submit" id="userUpdate">수정완료</button>
-    <button type="button" id="quit_btn">탈퇴하기</button>
     <!--  -->
 
     {% endblock %}

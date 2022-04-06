@@ -12,6 +12,14 @@
   width: 300px;
   border-radius: 50%;
   background-color: grey;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#img {
+  width: 320px;
 }
 
 #txt_info {

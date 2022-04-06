@@ -13,12 +13,12 @@ exports.login = async (req, res) => {
 
     if (result.length === 0) {
       res.send(
-        alertmove('http://localhost:3000/', '아이디와 비밀번호를 확인하세요.')
+        alertmove('http://localhost:3000', '아이디와 비밀번호를 확인하세요.')
       );
     } else {
       const encodedPassword = result[0].userPW;
       console.log(encodedPassword, 'encoded');
-      const passwordCheck = bcrypt.compare(userPW, encodedPassword);
+      const passwordCheck = await bcrypt.compare(userPW, encodedPassword);
       if (passwordCheck) {
         const payload = {
           u_id: result[0].u_id,
@@ -31,7 +31,7 @@ exports.login = async (req, res) => {
         );
       } else {
         res.send(
-          alertmove('http://localhost:3000/', '아이디와 비밀번호를 확인하세요.')
+          alertmove('http://localhost:3000', '아이디와 비밀번호를 확인하세요.')
         );
       }
     }
@@ -63,6 +63,9 @@ exports.auth = async (req, res) => {
     chatTmp.forEach((v) => {
       chatResult.push(v.c_id);
     });
+    if (userResult.u_img === null) {
+      userResult.u_img = 'http://localhost:3000/img/carrot_profile.jpeg';
+    }
     const result = { userResult, slikeResult, aulikeResult, chatResult };
     res.send(result);
   } catch (err) {
@@ -207,6 +210,7 @@ exports.likes = async (req, res) => {
               s_id AS idx, DATE_FORMAT(date,'%y-%m-%d') AS date,
               isSold
               FROM sell_board
+              WHERE s_id IN (${slike})
               UNION ALL
               SELECT '경매' AS category,
               'auction' AS 'table',
@@ -214,6 +218,7 @@ exports.likes = async (req, res) => {
               au_id AS idx, DATE_FORMAT(date,'%y-%m-%d') AS date,
               isSold
               FROM auction
+              WHERE s_id IN (${aulike})
               `;
 
   const conn = await pool.getConnection();

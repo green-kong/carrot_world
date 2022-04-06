@@ -17,5 +17,8 @@ router.get('/user', auth, adminControll.user);
 
 router.get('/qa', adminControll.qa);
 
-router.get('/userprofile', adminControll.userProfile);
+router.get('/userProfile', auth, adminControll.userProfile);
+
+router.get('/userEdit', adminControll.userEdit);
+
 module.exports = router;

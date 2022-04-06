@@ -14,6 +14,8 @@ const adminRouter = require('./admin/adminRouter.js');
 
 const chatRouter = require('./chat/chatRouter.js');
 
+const authRouter = require('./auth/auth.js');
+
 router.use('/home', homeRouter);
 
 router.use('/user', userRouter);
@@ -25,5 +27,7 @@ router.use('/qa', qaRouter);
 router.use('/admin', adminRouter);
 
 router.use('/chat', chatRouter);
+
+router.use('/auth', authRouter);
 
 module.exports = router;
