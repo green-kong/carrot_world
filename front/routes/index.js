@@ -8,8 +8,9 @@ const userRouter = require('./user/userRouter.js');
 
 const router = express.Router();
 const auth = require('../middlewares/user/auth.js');
+const unauth = require('../middlewares/user/unauth.js');
 
-router.get('/', (req, res) => {
+router.get('/', unauth, (req, res) => {
   res.render('main.html');
 });
 
