@@ -12,10 +12,17 @@ exports.statistics = async (req, res) => {
   const response = await axios.post(url);
 
   const {
-    data: { likeResult, popCatResult, topSellerResult, pointCollectorResult },
+    data: {
+      likeResult,
+      popCatResult,
+      topSellerResult,
+      pointCollectorResult,
+      categoryList,
+    },
   } = response;
 
   res.render('admin/statistics.html', {
+    categoryList,
     likeResult,
     popCatResult,
     topSellerResult,

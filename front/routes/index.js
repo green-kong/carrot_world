@@ -9,11 +9,15 @@ const userRouter = require('./user/userRouter.js');
 const router = express.Router();
 const auth = require('../middlewares/user/auth.js');
 
+router.get('/', (req, res) => {
+  res.render('main.html');
+});
+
 router.use('/admin', adminRouter);
 
 router.use('/qa', auth, qaRouter);
 
-router.use('/chat', chatRouter);
+router.use('/chat', auth, chatRouter);
 
 router.use('/home', homeRouter);
 

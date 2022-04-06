@@ -16,6 +16,14 @@ CREATE TABLE `user` (
   PRIMARY KEY(u_id)
 );
 
+CREATE TABLE `u_img` (
+  `u_id` INT NOT NULL,
+  `img` VARCHAR(255) NOT NULL
+);
+
+ALTER TABLE `u_img` ADD CONSTRAINT FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`) ON DELETE CASCADE;
+
+
 CREATE TABLE `sell_board` (
   `s_id` INT PRIMARY KEY AUTO_INCREMENT,
   `c_code` VARCHAR(6) NOT NULL,
@@ -26,7 +34,7 @@ CREATE TABLE `sell_board` (
   `how` TINYINT(1),
   `location` VARCHAR(32),
   `likes` INT DEFAULT 0,
-  `isSold` TINYINT(1),
+  `isSold` TINYINT(1) NOT NULL DEFAULT 0,
   `date` timestamp NOT NULL
 );
 
@@ -122,13 +130,11 @@ INSERT INTO category (c_code,c_name) VALUES ('acc','잡화');
 
 ALTER TABLE `sell_board` ADD FOREIGN KEY (`c_code`) REFERENCES `category` (`c_code`) ON DELETE CASCADE;
 
-ALTER TABLE `sell_board` ADD FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`) ON DELETE CASCADE; 
+ALTER TABLE `s_tag` ADD CONSTRAINT FOREIGN KEY (`s_id`) REFERENCES `sell_board` (`s_id`) ON DELETE CASCADE;
 
-ALTER TABLE `s_tag` ADD FOREIGN KEY (`s_id`) REFERENCES `sell_board` (`s_id`) ON DELETE CASCADE;
+ALTER TABLE `s_likes` ADD CONSTRAINT FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`) ON DELETE CASCADE;
 
-ALTER TABLE `s_likes` ADD FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`) ON DELETE CASCADE;
-
-ALTER TABLE `s_likes` ADD FOREIGN KEY (`s_id`) REFERENCES `sell_board` (`s_id`) ON DELETE CASCADE;
+ALTER TABLE `s_likes` ADD CONSTRAINT FOREIGN KEY (`s_id`) REFERENCES `sell_board` (`s_id`) ON DELETE CASCADE;
 
 ALTER TABLE `s_img` ADD FOREIGN KEY (`s_id`) REFERENCES `sell_board` (`s_id`) ON DELETE CASCADE;
 

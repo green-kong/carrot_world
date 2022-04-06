@@ -1,0 +1,341 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+
+html {
+  overflow: hidden;
+}
+
+html,
+body {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  transition-duration: 0.3s;
+  font-family: 'Gowun Dodum', sans-serif;
+}
+
+* {
+  list-style: none;
+  text-decoration: none;
+}
+
+header {
+  position: fixed;
+  width: 98%;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  box-sizing: border-box;
+}
+
+header > ul {
+  display: flex;
+}
+
+#goJoin,
+#goLogin {
+  margin: 0 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.section {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  font-size: 0px;
+}
+
+#section1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+}
+
+#section1 > h2 {
+  font-size: 64px;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+}
+
+.title {
+  display: block;
+}
+
+.title-keyword {
+  margin-left: 20px;
+  padding-right: 4px;
+  border-right: 6px solid #333;
+}
+
+.subtitle {
+  background: linear-gradient(86.09deg, #f6914d 23.61%, #9fbf65 72.19%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#section2 {
+  background-color: #ffecd6;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.sell_title {
+  color: #f7924e;
+  font-weight: 800;
+  font-size: 35px;
+  margin-top: 100px;
+}
+
+.sub_text {
+  font-size: 22px;
+  text-align: center;
+  margin-top: 12px;
+}
+
+.sell_bg {
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+}
+
+#sell_people {
+  position: absolute;
+  bottom: 50px;
+  height: 80%;
+}
+
+#desk {
+  width: 100vw;
+}
+
+#section3 {
+  background-image: url('/img/main/bgForAuc.png');
+  background-repeat: no-repeat;
+  background-position: 0 250px;
+  background-size: contain;
+}
+
+.auc_bg {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+#auc_people {
+  position: absolute;
+  display: inline-block;
+  width: 55%;
+  left: 10%;
+  bottom: 10%;
+}
+
+.auc_text {
+  position: absolute;
+  top: 10%;
+  right: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.auc_title {
+  color: #44a3ff;
+  font-weight: 800;
+  font-size: 35px;
+}
+
+#section4 {
+  background-image: url('/img/main/bgForChat.png');
+  background-repeat: no-repeat;
+  background-position: 0 260px;
+  background-size: contain;
+}
+
+.chat_bg {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+#chat_people {
+  position: absolute;
+  display: inline-block;
+  width: 35%;
+  right: 15%;
+  bottom: 0px;
+}
+
+.chat_text {
+  position: absolute;
+  top: 20%;
+  left: 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.chat_title {
+  color: #8fad13;
+  font-weight: 800;
+  font-size: 35px;
+}
+
+#section5 {
+  background-image: url('/img/main/bgForLogin.png');
+  background-repeat: no-repeat;
+  background-position: 0 250px;
+  background-size: contain;
+}
+
+.login_bg {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+#login_people {
+  position: absolute;
+  display: inline-block;
+  width: 30%;
+  left: 10%;
+  bottom: 10%;
+}
+
+.formBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 15px;
+  width: 380px;
+  position: absolute;
+  top: 15%;
+  right: 25%;
+  z-index: 5;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.formBox,
+.join_form > h2 {
+  font-size: 30px;
+  font-family: 'Poppins', sans-serif;
+  margin: 10px 0 0 0;
+}
+
+.inputBox {
+  width: 100%;
+  height: 60px;
+  background-color: #f0efff;
+  margin-top: 25px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  font-family: 'Gowun Dodum', sans-serif;
+  padding-left: 14px;
+  box-sizing: border-box;
+}
+
+.inputBox::placeholder {
+  color: #a7a3ff;
+}
+
+.join_tag {
+  color: #b0b0b0;
+  align-self: flex-end;
+  margin-top: 10px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.submitBtn {
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
+  background-color: #4d47c3;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  font-family: 'Gowun Dodum', sans-serif;
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 3px 5px 10px rgba(77, 71, 195, 0.4);
+}
+
+.sns_group {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.sns_login {
+  color: #888888;
+  font-size: 14px;
+}
+
+.sns_icon {
+  width: 40px;
+  margin: 0 10px;
+}
+
+#section6 {
+  background-image: url('/img/main/bgForLogin.png');
+  background-repeat: no-repeat;
+  background-position: 0 250px;
+  background-size: contain;
+}
+
+.join_form {
+  font-size: 15px;
+  width: 400px;
+  position: absolute;
+  top: 10%;
+  right: 20%;
+  z-index: 5;
+  text-align: center;
+}
+
+.join_form > ul {
+  padding: 0;
+}
+
+.join_input {
+  width: 100%;
+  height: 50px;
+  background-color: #f0efff;
+  margin-top: 20px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  font-family: 'Gowun Dodum', sans-serif;
+  padding-left: 14px;
+  box-sizing: border-box;
+}
+
+.join_input::placeholder {
+  color: #a7a3ff;
+}
+
+.copyright {
+  position: absolute;
+  font-size: 12px;
+  bottom: 10px;
+  left: 15px;
+  color: #888888;
+  font-family: 'Poppins', sans-serif;
+}

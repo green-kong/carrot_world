@@ -3,6 +3,7 @@ const { pool } = require('../../model/db/db.js');
 const alertmove = require('../../utils/user/alertmove.js');
 const { makeToken } = require('../../utils/user/jwt.js');
 const auth = require('../../../front/middlewares/user/auth.js');
+const { query } = require('express');
 
 exports.login = async (req, res) => {
   const { userEmail, userPW } = req.body;
@@ -58,7 +59,7 @@ exports.auth = async (req, res) => {
   const sql = `SELECT * FROM user WHERE u_id='${u_id}'`;
   const slikeSql = `SELECT * FROM s_likes WHERE u_id='${u_id}'`;
   const aulikeSql = `SELECT * FROM au_likes WHERE u_id='${u_id}'`;
-  const chatSql = 'SELECT * FROM chat';
+  const chatSql = `SELECT c_id, mem1, mem2 FROM chat WHERE mem1 =${u_id} OR mem2=${u_id}`;
   try {
     const [[userResult]] = await conn.query(sql);
     const [slikeTmp] = await conn.query(slikeSql);
@@ -68,10 +69,7 @@ exports.auth = async (req, res) => {
     const [chatTmp] = await conn.query(chatSql);
     const chatResult = [];
     chatTmp.forEach((v) => {
-      v.members.split(',');
-      if (v.members.includes(u_id)) {
-        chatResult.push(v.c_id);
-      }
+      chatResult.push(v.c_id);
     });
     const result = { userResult, slikeResult, aulikeResult, chatResult };
     res.send(result);
@@ -127,6 +125,121 @@ exports.profileEdit = async (req, res) => {
         '회원정보 수정이 완료되었습니다.'
       )
     );
+  } catch (err) {
+    console.log(err);
+  } finally {
+    conn.release();
+  }
+};
+
+exports.profile = async (req, res) => {
+  const { u_id } = req.body;
+  const sql = `SELECT 'au'as 'table',u_id, COUNT(*) AS Cnt,
+                COUNT(CASE WHEN isSold='1' THEN '1' END) AS SoldCnt
+                FROM auction
+                WHERE u_id=${u_id}
+                UNION ALL
+                SELECT 'sell'as 'table',u_id, COUNT(*) AS Cnt,
+                COUNT(CASE WHEN isSold='1' THEN '1' END) AS SoldCnt
+                FROM sell_board
+                WHERE u_id=${u_id}
+                `;
+  const likeSql = `SELECT SUM(tmp.likes)AS totalLikes
+                  FROM(
+                    SELECT SUM(likes) AS likes
+                    FROM sell_board
+                    WHERE u_id=${u_id}
+                    UNION ALL
+                    SELECT SUM(likes) AS likes
+                    FROM auction
+                    WHERE u_id=${u_id}
+                  )tmp`;
+  const conn = await pool.getConnection();
+  try {
+    const [result] = await conn.query(sql);
+    const [[likeResult]] = await conn.query(likeSql);
+    res.send({ result, likeResult });
+  } catch (err) {
+    console.log(err);
+  } finally {
+    conn.release();
+  }
+};
+
+exports.sell = async (req, res) => {
+  const { u_id } = req.body;
+  const sql = `SELECT s_id, subject, FORMAT(price,0) AS price, 
+              DATE_FORMAT(date,'%y-%m-%d')AS date, isSold
+              FROM sell_board
+              WHERE u_id=${u_id}`;
+  const conn = await pool.getConnection();
+  try {
+    const [sellResult] = await conn.query(sql);
+    res.send(sellResult);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    conn.release();
+  }
+};
+
+exports.auction = async (req, res) => {
+  const { u_id } = req.body;
+  const sql = `SELECT au_id, subject, FORMAT(price,0) AS price,
+              DATE_FORMAT(date,'%y-%m-%d')AS date, isSold,
+              DATE_FORMAT(startDate, '%y-%m-%d')AS startDate
+              FROM auction
+              WHERE u_id=${u_id}`;
+  const conn = await pool.getConnection();
+  try {
+    const [auResult] = await conn.query(sql);
+    res.send(auResult);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    conn.release();
+  }
+};
+
+exports.likes = async (req, res) => {
+  const { slike, aulike } = req.body;
+  const sql = `SELECT '중고거래' AS category,
+              'sell_board' AS 'table',
+              subject, FORMAT(price,0)AS price,
+              s_id AS idx, DATE_FORMAT(date,'%y-%m-%d') AS date,
+              isSold
+              FROM sell_board
+              UNION ALL
+              SELECT '경매' AS category,
+              'auction' AS 'table',
+              subject, FORMAT(price,0)AS price,
+              au_id AS idx, DATE_FORMAT(date,'%y-%m-%d') AS date,
+              isSold
+              FROM auction
+              `;
+
+  const conn = await pool.getConnection();
+  try {
+    const [likeResult] = await conn.query(sql);
+    res.send(likeResult);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    conn.release();
+  }
+};
+
+exports.qa = async (req, res) => {
+  const { u_id } = req.body;
+  const sql = `SELECT subject, q_id,
+              DATE_FORMAT(date,'%y-%m-%d') AS date,
+              hit
+              FROM qa
+              WHERE u_id= ${u_id} `;
+  const conn = await pool.getConnection();
+  try {
+    const [qaList] = await conn.query(sql);
+    res.send(qaList);
   } catch (err) {
     console.log(err);
   } finally {

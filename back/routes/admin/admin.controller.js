@@ -281,6 +281,93 @@ exports.userProfile = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).send('실패했습니다.');
+  } finally{
+    conn.release();
+  }  
+    
+exports.createCat = async (req, res) => {
+  const { code, name } = req.body;
+
+  const sql = `INSERT INTO category (c_code,c_name) VALUES ('${code}','${name}')`;
+  const codeCheckSql = `SELECT * FROM category WHERE c_code='${code}'`;
+  const nameCheckSql = `SELECT * FROM category WHERE c_name='${name}'`;
+  const conn = await pool.getConnection();
+  try {
+    const [codeResult] = await conn.query(codeCheckSql);
+    const [nameResult] = await conn.query(nameCheckSql);
+    if (codeResult.length > 0) {
+      throw new Error('이미존재하는 카테고리 코드 입니다.');
+    }
+    if (nameResult.length > 0) {
+      throw new Error('이미존재하는 카테고리 이름 입니다.');
+    }
+    await conn.query(sql);
+    res.send('success');
+  } catch (err) {
+    res.status(202).send(err.message);
+    console.log(err);
+  } finally {
+    conn.release();
+  }
+};
+
+exports.delCat = async (req, res) => {
+  const { code } = req.body;
+  const checkSql = `SELECT SUM(count) AS total 
+                    FROM
+                      (
+                      SELECT COUNT(*) AS count FROM auction WHERE c_code='${code}'
+                      UNION
+                      SELECT COUNT(*) AS count FROM sell_board WHERE c_code='${code}'
+                      ) cnt`;
+  const delSql = `DELETE FROM category WHERE c_code='${code}'`;
+  const conn = await pool.getConnection();
+  try {
+    const [[{ total }]] = await conn.query(checkSql);
+    if (total > 0) {
+      throw new Error('해당 카테고리의 글을 모두 옮긴 후 가능합니다.');
+    }
+
+    await conn.query(delSql);
+    res.send('success');
+  } catch (err) {
+    console.log(err);
+    res.status(202).send(err.message);
+  } finally {
+    conn.release();
+  }
+};
+
+exports.editCat = async (req, res) => {
+  const { code, name } = req.body;
+
+  const updateSql = `UPDATE category SET c_name ='${name}' WHERE c_code='${code}'`;
+
+  const conn = await pool.getConnection();
+  try {
+    await conn.query(updateSql);
+    res.send('success');
+  } catch (err) {
+    console.log(err);
+    res.status(202).send(err.message);
+  } finally {
+    conn.release();
+  }
+};
+
+exports.changeCat = async (req, res) => {
+  const { prevCode, newCode } = req.body;
+  const auctionChange = `UPDATE auction SET c_code='${newCode}' WHERE c_code='${prevCode}'`;
+  const sellChange = `UPDATE sell_board SET c_code='${newCode}' WHERE c_code='${prevCode}'`;
+
+  const conn = await pool.getConnection();
+  try {
+    await conn.query(auctionChange);
+    await conn.query(sellChange);
+    res.send('success');
+  } catch (err) {
+    console.log(err);
+    res.status(202).send('fail');
   } finally {
     conn.release();
   }
