@@ -36,4 +36,6 @@ router.post('/editCat', adminControll.editCat);
 
 router.post('/changeCat', adminControll.changeCat);
 
+router.post('/userEdit', adminControll.userEdit);
+
 module.exports = router;

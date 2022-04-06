@@ -373,3 +373,26 @@ exports.changeCat = async (req, res) => {
     conn.release();
   }
 };
+
+exports.userEdit = async (req, res) => {
+  const { idx, selectUser, userAlias, userMobile } = req.body;
+  const conn = await pool.getConnection();
+  const sql = `UPDATE user 
+              SET isAdmin='${selectUser}',
+              userAlias='${userAlias}',
+              userMobile='${userMobile}'
+              WHERE u_id='${idx}'`;
+  try {
+    await conn.query(sql);
+    res.send(
+      alertmove(
+        'http://localhost:3000/admin/user?page=1',
+        '정보수정이 완료되었습니다.'
+      )
+    );
+  } catch (err) {
+    console.log(err);
+  } finally {
+    conn.release();
+  }
+};

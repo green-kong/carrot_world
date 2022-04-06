@@ -19,4 +19,6 @@ router.get('/qa', adminControll.qa);
 
 router.get('/userProfile', auth, adminControll.userProfile);
 
+router.get('/userEdit', adminControll.userEdit);
+
 module.exports = router;
