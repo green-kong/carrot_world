@@ -1,5 +1,4 @@
 const axios = require('axios');
-const { hasUncaughtExceptionCaptureCallback } = require('process');
 
 const adminDataMaker = require('../../utils/admin/amdinDataMaker.js');
 
