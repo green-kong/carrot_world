@@ -71,6 +71,9 @@ exports.auth = async (req, res) => {
     chatTmp.forEach((v) => {
       chatResult.push(v.c_id);
     });
+    if (userResult.u_img === null) {
+      userResult.u_img = 'http://localhost:3000/img/carrot_profile.jpeg';
+    }
     const result = { userResult, slikeResult, aulikeResult, chatResult };
     res.send(result);
   } catch (err) {
