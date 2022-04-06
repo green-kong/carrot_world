@@ -8,6 +8,7 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript" src="/js/user/quit.js" defer></script>
 <script type="text/javascript" src="/js/user/edit.js" defer></script>
+<script type="text/javascript" src="/js/user/editformcheck.js" defer></script>
 {% endblock %}
 <!--  -->
 
@@ -17,6 +18,7 @@
     method="post"
     action="http://localhost:4000/api/user/profile/edit"
     enctype="multipart/form-data"
+    id="edit_frm"
   >
     <div id="title" name="title">내 정보 수정</div>
     <ul id="boxTool">
@@ -37,7 +39,7 @@
           type="text"
           id="howJoin"
           name="howJoin"
-          value="가입경로"
+          value="{{provider}}"
           readonly
         />
       </li>
@@ -51,6 +53,7 @@
           minlength="8"
           placeholder="8~20 자로 입력하세요"
         />
+        <span id="pwSpan"></span>
       </li>
       <li class="infoBox">
         <label for="userPWCheck">비밀번호확인</label>
@@ -73,6 +76,7 @@
           maxlength="8"
         />
       </li>
+      <span id="aliasSpan"></span>
       <li class="infoBox">
         <label for="userMobile">핸드폰번호</label>
         <input
@@ -83,14 +87,19 @@
           maxlength="13"
         />
       </li>
+      <span id="mobileSpan"></span>
       <li class="fileBox">
         <p id="searchName">파일찾기</p>
         <div id="searchWrap">
           <label id="searchFile" for="picture">파일찾기</label>
-          <input type="file" id="picture" name="picture" accept="image/jpeg, image/png, image/jpg">
-          <input class="upload_name" placeholder="프로필 사진" readonly>
+          <input
+            type="file"
+            id="picture"
+            name="picture"
+            accept="image/jpeg, image/png, image/jpg"
+          />
+          <input class="upload_name" placeholder="프로필 사진" readonly />
         </div>
-
       </li>
     </ul>
     <button type="submit" id="userUpdate">수정완료</button>
