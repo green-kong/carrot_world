@@ -20,7 +20,7 @@ exports.login = async (req, res) => {
     } else {
       const encodedPassword = result[0].userPW;
       console.log(encodedPassword, 'encoded');
-      const passwordCheck = bcrypt.compare(userPW, encodedPassword);
+      const passwordCheck = await bcrypt.compare(userPW, encodedPassword);
       if (passwordCheck) {
         const payload = {
           u_id: result[0].u_id,
@@ -102,7 +102,7 @@ exports.join = async (req, res) => {
   await conn.query(sql);
   res.send(
     alertmove(
-      'http://localhost:3000/user/login',
+      'http://localhost:3000',
       `${userAlias}님 회원가입을 축하합니다. 로그인을 해주세요`
     )
   );

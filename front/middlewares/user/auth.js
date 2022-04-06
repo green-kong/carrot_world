@@ -6,9 +6,7 @@ const { decodePayload } = require('../../../back/utils/user/jwt.js');
 async function auth(req, res, next) {
   const token = req.cookies.Access_token;
   if (token === undefined) {
-    res.send(
-      alertmove('http://localhost:3000/user/login', '로그인이 필요합니다')
-    );
+    res.send(alertmove('http://localhost:3000', '로그인이 필요합니다'));
   } else {
     try {
       const payload = await decodePayload(token);
@@ -20,9 +18,7 @@ async function auth(req, res, next) {
     } catch (err) {
       console.log(err);
       res.clearCookie('Access_token');
-      res.send(
-        alertmove('http://localhost:3000/user/login', '로그인을 다시 해주세요')
-      );
+      res.send(alertmove('http://localhost:3000', '로그인을 다시 해주세요'));
     }
   }
 }
