@@ -7,6 +7,7 @@
 {% block js %}
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript" src="/js/user/quit.js" defer></script>
+<script type="text/javascript" src="/js/user/edit.js" defer></script>
 {% endblock %}
 <!--  -->
 
@@ -82,14 +83,14 @@
           maxlength="13"
         />
       </li>
-      <li class="infoBox">
-        <label for="Picture">프로필사진</label>
-        <input
-          type="file"
-          id="picture"
-          name="picture"
-          accept="image/jpeg, image/png, image/jpg"
-        />
+      <li class="fileBox">
+        <p id="searchName">파일찾기</p>
+        <div id="searchWrap">
+          <label id="searchFile" for="picture">파일찾기</label>
+          <input type="file" id="picture" name="picture" accept="image/jpeg, image/png, image/jpg">
+          <input class="upload_name" placeholder="프로필 사진" readonly>
+        </div>
+
       </li>
     </ul>
     <button type="submit" id="userUpdate">수정완료</button>
