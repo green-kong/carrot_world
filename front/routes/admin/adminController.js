@@ -73,9 +73,9 @@ exports.userProfile = async (req, res) => {
 };
 
 exports.userEdit = (req, res) => {
-  const { idx, selectUser, userAlias, userMobile } = req.body;
+  const { userEmail, selectUser, userAlias, userMobile } = req.body;
   res.render('admin/user.html', {
-    idx,
+    userEmail,
     selectUser,
     userAlias,
     userMobile,
