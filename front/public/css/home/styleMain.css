@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+
 * {
   margin: 0;
   padding: 0;
+  font-family: 'Gowun Dodum', sans-serif;
 }
 
 button {
@@ -53,13 +56,14 @@ a {
 
 #header > #search_bar > #search {
   width: 690px;
-  height: 33px;
+  height: 45px;
   background: #dddddd;
   border: 1px solid #ffffff;
   border-radius: 26px;
   font-size: 20px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0 20px;
   box-sizing: border-box;
 }
@@ -87,12 +91,13 @@ a {
   height: 48px;
   font-size: 20px;
   font-weight: 400;
-  line-height: 48px;
+  line-height: 40px;
   color: #ffffff;
   background: #4d47c3;
   box-sizing: border-box;
   border: 3px #4d47c3 solid;
   border-radius: 19px;
+  align-items: center;
   text-align: center;
 }
 
@@ -110,7 +115,6 @@ a {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
   width: 15%;
   height: 800px;
 }
@@ -169,7 +173,9 @@ a {
   border-radius: 8px;
   padding: 2px 2px 4px 2px;
   width: 150px;
-  height: 20px;
+  height: 21px;
+  line-height: 23px;
+  align-items: center;
   text-align: center;
   color: #4d47c3;
 }
@@ -183,6 +189,7 @@ a {
   align-items: center;
   width: 100px;
   padding: 16px 40px;
+  margin-bottom: 15px;
   background: #a7a3ff;
   border-radius: 0px 1000px 1000px 0px;
   font-size: 18px;
@@ -192,7 +199,7 @@ a {
 
 .listname {
   display: block;
-  padding: 7px 25%;
+  padding: 7px 20%;
   font-size: 18px;
   color: gray;
   cursor: pointer;
