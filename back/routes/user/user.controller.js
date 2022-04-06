@@ -15,10 +15,7 @@ exports.login = async (req, res) => {
 
     if (result.length === 0) {
       res.send(
-        alertmove(
-          'http://localhost:3000/user/login',
-          '아이디와 비밀번호를 확인하세요.'
-        )
+        alertmove('http://localhost:3000', '아이디와 비밀번호를 확인하세요.')
       );
     } else {
       const encodedPassword = result[0].userPW;
@@ -36,10 +33,7 @@ exports.login = async (req, res) => {
         );
       } else {
         res.send(
-          alertmove(
-            'http://localhost:3000/user/login',
-            '아이디와 비밀번호를 확인하세요.'
-          )
+          alertmove('http://localhost:3000', '아이디와 비밀번호를 확인하세요.')
         );
       }
     }
