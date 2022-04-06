@@ -2,8 +2,6 @@ const bcrypt = require('bcrypt');
 const { pool } = require('../../model/db/db.js');
 const alertmove = require('../../utils/user/alertmove.js');
 const { makeToken } = require('../../utils/user/jwt.js');
-const auth = require('../../../front/middlewares/user/auth.js');
-const { query } = require('express');
 
 exports.login = async (req, res) => {
   const { userEmail, userPW } = req.body;
@@ -95,17 +93,23 @@ exports.quit = async (req, res) => {
 
 exports.join = async (req, res) => {
   const { userEmail, userPW, userAlias, userMobile } = req.body;
+  const { originalname } = req.file;
   const conn = await pool.getConnection();
   const encryptedPW = await bcrypt.hash(userPW, 10);
-  const sql = `INSERT INTO user (userEmail, userPW, userAlias, userMobile) 
-  VALUES ('${userEmail}', '${encryptedPW}', '${userAlias}', '${userMobile}')`;
-  await conn.query(sql);
-  res.send(
-    alertmove(
-      'http://localhost:3000',
-      `${userAlias}님 회원가입을 축하합니다. 로그인을 해주세요`
-    )
-  );
+  const sql = `INSERT INTO user (userEmail, userPW, userAlias, userMobile, u_img) 
+  VALUES ('${userEmail}', '${encryptedPW}', '${userAlias}', '${userMobile}', 'http://localhost:4000/upload/${originalname}')`;
+  try {
+    const [result] = await conn.query(sql);
+    const response = {
+      rows: result.affectedRows,
+    };
+    res.send(response);
+  } catch (err) {
+    res.status(500).send('Join error');
+    console.log(err);
+  } finally {
+    conn.release();
+  }
 };
 
 exports.profileEdit = async (req, res) => {
@@ -239,6 +243,34 @@ exports.qa = async (req, res) => {
   try {
     const [qaList] = await conn.query(sql);
     res.send(qaList);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    conn.release();
+  }
+};
+
+exports.idCheck = async (req, res) => {
+  const { userEmail } = req.body;
+  console.log(userEmail);
+  const conn = await pool.getConnection();
+
+  const sql = `SELECT userEmail FROM user WHERE userEmail = '${userEmail}'`;
+  let response;
+  try {
+    const [result] = await conn.query(sql);
+    if (result.length === 0) {
+      response = {
+        isJoined: 0,
+        checkedEmail: userEmail,
+      };
+    } else {
+      response = {
+        isJoined: 1,
+      };
+    }
+    console.log(response);
+    res.send(response);
   } catch (err) {
     console.log(err);
   } finally {

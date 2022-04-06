@@ -261,6 +261,7 @@ header > ul {
   margin-top: 10px;
   font-size: 13px;
   cursor: pointer;
+  font-family: 'Gowun Dodum', sans-serif;
 }
 
 .submitBtn {
@@ -285,6 +286,7 @@ header > ul {
 .sns_login {
   color: #888888;
   font-size: 14px;
+  font-family: 'Gowun Dodum', sans-serif;
 }
 
 .sns_icon {
@@ -338,4 +340,61 @@ header > ul {
   left: 15px;
   color: #888888;
   font-family: 'Poppins', sans-serif;
+}
+
+.filebox {
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  font-family: 'Gowun Dodum', sans-serif;
+  display: flex;
+  justify-content: space-between;
+}
+
+.filebox .upload_name {
+  display: inline-block;
+  background-color: #f0efff;
+  width: 68%;
+  vertical-align: middle;
+  border: none;
+  padding-left: 14px;
+  border-radius: 5px;
+  font-family: 'Gowun Dodum', sans-serif;
+}
+
+.upload_name:focus {
+  outline: none;
+}
+
+.filebox input::placeholder {
+  color: #a7a3ff;
+  font-size: 15px;
+}
+
+.filebox label {
+  width: 25%;
+  height: 100%;
+  line-height: 50px;
+  background-color: #c3c0f3;
+  cursor: pointer;
+  border-radius: 5px;
+  z-index: 10;
+}
+
+.filebox input[type='file'] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+}
+
+.join_form p {
+  margin: 5px 0 0 0;
+  text-align: start;
 }

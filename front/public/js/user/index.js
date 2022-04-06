@@ -1,2 +1,2 @@
-import idcheck from './idcheck.js';
+import idcheck from './formCheck.js';
 idcheck();
