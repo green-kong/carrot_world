@@ -209,6 +209,7 @@ exports.likes = async (req, res) => {
               s_id AS idx, DATE_FORMAT(date,'%y-%m-%d') AS date,
               isSold
               FROM sell_board
+              WHERE s_id IN (${slike})
               UNION ALL
               SELECT '경매' AS category,
               'auction' AS 'table',
@@ -216,6 +217,7 @@ exports.likes = async (req, res) => {
               au_id AS idx, DATE_FORMAT(date,'%y-%m-%d') AS date,
               isSold
               FROM auction
+              WHERE s_id IN (${aulike})
               `;
 
   const conn = await pool.getConnection();

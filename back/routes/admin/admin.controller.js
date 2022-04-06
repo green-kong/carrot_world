@@ -151,7 +151,7 @@ exports.user = async (req, res) => {
               GROUP BY u_id
               LIMIT ${(page - 1) * 10},10`;
   const countSql = `SELECT COUNT(*) AS total 
-                    FROM sell_board`;
+                    FROM user`;
   const conn = await pool.getConnection();
   try {
     const [[countResult]] = await conn.query(countSql);
@@ -285,6 +285,7 @@ exports.userProfile = async (req, res) => {
     conn.release();
   }
 };
+
 exports.createCat = async (req, res) => {
   const { code, name } = req.body;
 
@@ -368,6 +369,29 @@ exports.changeCat = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(202).send('fail');
+  } finally {
+    conn.release();
+  }
+};
+
+exports.userEdit = async (req, res) => {
+  const { idx, selectUser, userAlias, userMobile } = req.body;
+  const conn = await pool.getConnection();
+  const sql = `UPDATE user 
+              SET isAdmin='${selectUser}',
+              userAlias='${userAlias}',
+              userMobile='${userMobile}'
+              WHERE u_id='${idx}'`;
+  try {
+    await conn.query(sql);
+    res.send(
+      alertmove(
+        'http://localhost:3000/admin/user?page=1',
+        '정보수정이 완료되었습니다.'
+      )
+    );
+  } catch (err) {
+    console.log(err);
   } finally {
     conn.release();
   }
