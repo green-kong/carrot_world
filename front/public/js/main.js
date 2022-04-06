@@ -1,16 +1,24 @@
 const section = document.querySelectorAll('.section');
 const sectionQty = section.length;
 
+let isWheelActive = false;
+
 section.forEach((v, i) =>
   v.addEventListener(
     'mousewheel',
     (e) => {
       e.preventDefault();
+
+      if (isWheelActive) return;
+
+      isWheelActive = true;
+
       let delta = 0;
       if (e.wheelDelta) {
         delta = e.wheelDelta / 150;
         console.log('휠무브', delta);
       } else if (e.detail) delta = -e.detail / 3;
+
       let moveTop = window.scrollY;
       let sectionNum = section[i];
 
@@ -38,6 +46,10 @@ section.forEach((v, i) =>
         console.log('얼마나 수직으로 스크롤됐나', moveTop);
       }
       window.scrollTo({ top: moveTop, left: 0, behavior: 'smooth' });
+
+      setTimeout(() => {
+        isWheelActive = false;
+      }, 500);
     },
     { passive: false }
   )
