@@ -18,7 +18,11 @@ router.post('/join', upload.single('userProfile'), userControll.join);
 
 router.post('/idCheck', userControll.idCheck);
 
-router.post('/profile/edit', userControll.profileEdit);
+router.post(
+  '/profile/edit',
+  upload.single('picture'),
+  userControll.profileEdit
+);
 
 router.post('/profile/check', userControll.profile);
 
