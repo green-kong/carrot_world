@@ -6,8 +6,6 @@ const { upload } = require('../../utils/multer/multer.js');
 
 const router = express.Router();
 
-const { upload } = require('../../utils/multer/multer.js');
-
 const userControll = require('./user.controller.js');
 
 router.post('/login', userControll.login);
