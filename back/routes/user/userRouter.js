@@ -6,6 +6,8 @@ const { upload } = require('../../utils/multer/multer.js');
 
 const router = express.Router();
 
+const { upload } = require('../../utils/multer/multer.js');
+
 const userControll = require('./user.controller.js');
 
 router.post('/login', userControll.login);
@@ -18,7 +20,11 @@ router.post('/join', upload.single('userProfile'), userControll.join);
 
 router.post('/idCheck', userControll.idCheck);
 
-router.post('/profile/edit', userControll.profileEdit);
+router.post(
+  '/profile/edit',
+  upload.single('picture'),
+  userControll.profileEdit
+);
 
 router.post('/profile/check', userControll.profile);
 
