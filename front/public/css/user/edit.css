@@ -214,3 +214,9 @@ body {
   color: #c24947;
   border: solid 2px #c24947;
 }
+
+span {
+  font-size: 14px;
+  font-weight: 400;
+  color: red;
+}
