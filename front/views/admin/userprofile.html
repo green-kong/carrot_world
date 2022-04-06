@@ -19,8 +19,13 @@
       <li class="infoBox">
         <label for="selectUser">권한설정</label>
         <select id="selectUser" name="selectUser">
-          <option id="user" name='user' value="0">일반사용자</option>
-          <option id="admin" name='admin' value="1">관리자</option>
+          {% if isAdmin === 0 %}
+          <option id="user" name='user' value="{{0}}" selected>일반사용자</option>
+          <option id="admin" name='admin' value="{{1}}">관리자</option>
+          {% else %}
+          <option id="user" name='user' value="{{0}}">일반사용자</option>
+          <option id="admin" name='admin' value="{{1}}" selected>관리자</option>
+          {% endif%}
         </select>
       </li>
       <li class="infoBox">
