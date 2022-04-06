@@ -71,3 +71,13 @@ exports.userProfile = async (req, res) => {
   const { data } = response;
   res.render('admin/userprofile.html', data);
 };
+
+exports.userEdit = (req, res) => {
+  const { userEmail, selectUser, userAlias, userMobile } = req.body;
+  res.render('admin/user.html', {
+    userEmail,
+    selectUser,
+    userAlias,
+    userMobile,
+  });
+};

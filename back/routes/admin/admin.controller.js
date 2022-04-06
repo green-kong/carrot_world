@@ -281,10 +281,11 @@ exports.userProfile = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).send('실패했습니다.');
-  } finally{
+  } finally {
     conn.release();
-  }  
-    
+  }
+};
+
 exports.createCat = async (req, res) => {
   const { code, name } = req.body;
 
@@ -368,6 +369,29 @@ exports.changeCat = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(202).send('fail');
+  } finally {
+    conn.release();
+  }
+};
+
+exports.userEdit = async (req, res) => {
+  const { userEmail, selectUser, userAlias, userMobile } = req.body;
+  const conn = await pool.getConnection();
+  const sql = `UPDATE user 
+              SET isAdmin='${selectUser}',
+              userAlias='${userAlias}',
+              userMobile='${userMobile}'
+              WHERE userEmail='${userEmail}'`;
+  try {
+    await conn.query(sql);
+    res.send(
+      alertmove(
+        'http://localhost:3000/admin/user?page=1',
+        '정보수정이 완료되었습니다.'
+      )
+    );
+  } catch (err) {
+    console.log(err);
   } finally {
     conn.release();
   }
