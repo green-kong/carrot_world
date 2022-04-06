@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/main.css" type="text/css" />
   <script defer src="/js/main.js"></script>
+  <script defer src="/js/user/formCheck.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <title>Welcome to Carrot World</title>
 </head>
 
@@ -33,9 +35,9 @@
       <img src="/img/main/sell.png" id="sell_people">
       <img src="/img/main/desk.png" id="desk">
     </div>
-    <span class="copyright">
+    <a href="kr.freepick.com" class="copyright">
       벡터 출처 : jcomp - kr.freepick.com
-    </span>
+    </a>
   </div>
   <div class="section" id="section3">
     <div class="auc_text">
@@ -47,9 +49,9 @@
     <div class="auc_bg">
       <img src="/img/main/auc.png" id="auc_people">
     </div>
-    <span class="copyright">
+    <a href="kr.freepick.com" class="copyright">
       벡터 출처 : jcomp - kr.freepick.com
-    </span>
+    </a>
   </div>
   <div class="section" id="section4">
     <div class="chat_text">
@@ -61,9 +63,9 @@
     <div class="chat_bg">
       <img src="/img/main/chat.png" id="chat_people">
     </div>
-    <span class="copyright">
+    <a href="kr.freepick.com" class="copyright">
       벡터 출처 : jcomp - kr.freepick.com
-    </span>
+    </a>
   </div>
   <div class="section" id="section5">
     <form method="post" action="http://localhost:4000/api/user/login" class="formBox">
@@ -82,41 +84,50 @@
     <div class="login_bg">
       <img src="/img/main/forLoginJoin.png" id="login_people">
     </div>
-    <span class="copyright">
+    <a href="kr.freepick.com" class="copyright">
       벡터 출처 : jcomp - kr.freepick.com
-    </span>
+    </a>
   </div>
   <div class="section" id="section6">
-    <form method="post" action="http://localhost:4000/api/user/join" class='join_form'>
+    <form method="post" action="http://localhost:4000/api/user/join" class='join_form' enctype="multipart/form-data">
       <h2>Sign Up</h2>
       <ul>
         <li>
-          <input type="text" id="userEmail" name="userEmail" maxlength="64" class="join_input" placeholder="이메일">
-          <input type="button" id="idCheckButton" value="중복체크">
+          <input type="text" id="userEmail_join" name="userEmail" maxlength="64" class="join_input" placeholder="이메일">
           <p id="emailMsg"></p>
         </li>
         <li>
-          <input type="password" id="userPW" name="userPW" maxlength="16" class="join_input" placeholder="비밀번호">
+          <input type="password" id="userPW_join" name="userPW" maxlength="16" class="join_input" placeholder="비밀번호">
+          <p id="pwMsg"></p>
         </li>
         <li>
           <input type="password" id="userPWCheck" name="userPWCheck" maxlength="16" class="join_input"
             placeholder="비밀번호 확인">
+          <p id="pwCheckMsg"></p>
         </li>
         <li>
           <input type="text" id="userAlias" name="userAlias" maxlength="8" class="join_input" placeholder="닉네임">
+          <p id="nickMsg"></p>
         </li>
         <li>
-          <input type="text" id="userMobile" name="userMobile" maxlength="13" class="join_input" placeholder="핸드폰 번호">
+          <input type="text" id="userMobile" name="userMobile" maxlength="13" class="join_input" placeholder="핸드폰 번호"
+            oninput='autoHyphen(this)'>
+          <p id="phoneMsg"></p>
+        </li>
+        <li class="filebox">
+          <label for="userProfile">파일찾기</label>
+          <input type="file" id="userProfile" name="userProfile" accept="image/jpeg, image/png, image/jpg">
+          <input class="upload_name" placeholder="프로필 사진">
         </li>
       </ul>
-      <button type="submit" class="submitBtn">회원가입</button>
+      <button type="submit" id="joinBtn" class="submitBtn">회원가입</button>
     </form>
     <div class="login_bg">
       <img src="/img/main/forLoginJoin.png" id="login_people">
     </div>
-    <span class="copyright">
+    <a href="http://kr.freepick.com" class="copyright">
       벡터 출처 : jcomp - kr.freepick.com
-    </span>
+    </a>
   </div>
 
 </body>

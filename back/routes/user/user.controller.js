@@ -2,8 +2,6 @@ const bcrypt = require('bcrypt');
 const { pool } = require('../../model/db/db.js');
 const alertmove = require('../../utils/user/alertmove.js');
 const { makeToken } = require('../../utils/user/jwt.js');
-const auth = require('../../../front/middlewares/user/auth.js');
-const { query } = require('express');
 
 exports.login = async (req, res) => {
   const { userEmail, userPW } = req.body;
@@ -15,10 +13,7 @@ exports.login = async (req, res) => {
 
     if (result.length === 0) {
       res.send(
-        alertmove(
-          'http://localhost:3000/user/login',
-          '아이디와 비밀번호를 확인하세요.'
-        )
+        alertmove('http://localhost:3000/', '아이디와 비밀번호를 확인하세요.')
       );
     } else {
       const encodedPassword = result[0].userPW;
@@ -36,10 +31,7 @@ exports.login = async (req, res) => {
         );
       } else {
         res.send(
-          alertmove(
-            'http://localhost:3000/user/login',
-            '아이디와 비밀번호를 확인하세요.'
-          )
+          alertmove('http://localhost:3000/', '아이디와 비밀번호를 확인하세요.')
         );
       }
     }
@@ -105,7 +97,7 @@ exports.join = async (req, res) => {
   await conn.query(sql);
   res.send(
     alertmove(
-      'http://localhost:3000/user/login',
+      'http://localhost:3000/',
       `${userAlias}님 회원가입을 축하합니다. 로그인을 해주세요`
     )
   );
@@ -240,6 +232,34 @@ exports.qa = async (req, res) => {
   try {
     const [qaList] = await conn.query(sql);
     res.send(qaList);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    conn.release();
+  }
+};
+
+exports.idCheck = async (req, res) => {
+  const { userEmail } = req.body;
+  console.log(userEmail);
+  const conn = await pool.getConnection();
+
+  const sql = `SELECT userEmail FROM user WHERE userEmail = '${userEmail}'`;
+  let response;
+  try {
+    const [result] = await conn.query(sql);
+    if (result.length === 0) {
+      response = {
+        isJoined: 0,
+        checkedEmail: userEmail,
+      };
+    } else {
+      response = {
+        isJoined: 1,
+      };
+    }
+    console.log(response);
+    res.send(response);
   } catch (err) {
     console.log(err);
   } finally {

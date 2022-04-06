@@ -2,6 +2,8 @@ require('dotenv').config();
 
 const express = require('express');
 
+const { upload } = require('../../utils/multer/multer.js');
+
 const router = express.Router();
 
 const userControll = require('./user.controller.js');
@@ -12,7 +14,9 @@ router.post('/auth', userControll.auth);
 
 router.post('/quit', userControll.quit);
 
-router.post('/join', userControll.join);
+router.post('/join', upload.single('profileImg'), userControll.join);
+
+router.post('/idCheck', userControll.idCheck);
 
 router.post('/profile/edit', userControll.profileEdit);
 
