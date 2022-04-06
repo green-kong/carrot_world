@@ -151,7 +151,7 @@ exports.user = async (req, res) => {
               GROUP BY u_id
               LIMIT ${(page - 1) * 10},10`;
   const countSql = `SELECT COUNT(*) AS total 
-                    FROM sell_board`;
+                    FROM user`;
   const conn = await pool.getConnection();
   try {
     const [[countResult]] = await conn.query(countSql);
@@ -281,10 +281,11 @@ exports.userProfile = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).send('실패했습니다.');
-  } finally{
+  } finally {
     conn.release();
-  }  
-    
+  }
+};
+
 exports.createCat = async (req, res) => {
   const { code, name } = req.body;
 
