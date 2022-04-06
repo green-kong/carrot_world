@@ -375,13 +375,13 @@ exports.changeCat = async (req, res) => {
 };
 
 exports.userEdit = async (req, res) => {
-  const { userEmail, selectUser, userAlias, userMobile } = req.body;
+  const { idx, selectUser, userAlias, userMobile } = req.body;
   const conn = await pool.getConnection();
   const sql = `UPDATE user 
               SET isAdmin='${selectUser}',
               userAlias='${userAlias}',
               userMobile='${userMobile}'
-              WHERE userEmail='${userEmail}'`;
+              WHERE u_id='${idx}'`;
   try {
     await conn.query(sql);
     res.send(
