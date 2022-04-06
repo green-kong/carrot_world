@@ -103,8 +103,16 @@ joinForm.addEventListener('submit', async (e) => {
       userMobile: signedMobile,
       u_img: userProfile.value,
     };
-    const response = await axios.post(joinUrl, signedBody);
-    console.log(response);
+
+    let formData = new FormData();
+
+    formData.append('userEmail', signedEmail);
+    formData.append('userPW', signedPw);
+    formData.append('userAlias', signedNick);
+    formData.append('userMobile', signedMobile);
+    formData.append('userProfile', userProfile.files[0]);
+    console.log(userProfile.files);
+    const response = await axios.post(joinUrl, formData);
     const { rows } = response.data;
 
     if (rows === 1) {

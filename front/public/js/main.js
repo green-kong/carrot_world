@@ -15,7 +15,7 @@ section.forEach((v, i) =>
 
       let delta = 0;
       if (e.wheelDelta) {
-        delta = e.wheelDelta / 150;
+        delta = e.wheelDelta / 130;
         console.log('휠무브', delta);
       } else if (e.detail) delta = -e.detail / 3;
 

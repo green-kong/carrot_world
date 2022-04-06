@@ -89,11 +89,12 @@ exports.quit = async (req, res) => {
 };
 
 exports.join = async (req, res) => {
-  const { userEmail, userPW, userAlias, userMobile, u_img } = req.body;
+  const { userEmail, userPW, userAlias, userMobile } = req.body;
+  const { originalname } = req.file;
   const conn = await pool.getConnection();
   const encryptedPW = await bcrypt.hash(userPW, 10);
   const sql = `INSERT INTO user (userEmail, userPW, userAlias, userMobile, u_img) 
-  VALUES ('${userEmail}', '${encryptedPW}', '${userAlias}', '${userMobile}', '${u_img}')`;
+  VALUES ('${userEmail}', '${encryptedPW}', '${userAlias}', '${userMobile}', 'http://localhost:4000/upload/${originalname}')`;
   try {
     const [result] = await conn.query(sql);
     const response = {
@@ -102,7 +103,7 @@ exports.join = async (req, res) => {
     res.send(response);
   } catch (err) {
     res.status(500).send('Join error');
-    console.log(err.message);
+    console.log(err);
   } finally {
     conn.release();
   }
