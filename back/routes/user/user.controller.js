@@ -20,7 +20,7 @@ exports.login = async (req, res) => {
     } else {
       const encodedPassword = result[0].userPW;
       console.log(encodedPassword, 'encoded');
-      const passwordCheck = bcrypt.compare(userPW, encodedPassword);
+      const passwordCheck = await bcrypt.compare(userPW, encodedPassword);
       if (passwordCheck) {
         const payload = {
           u_id: result[0].u_id,
