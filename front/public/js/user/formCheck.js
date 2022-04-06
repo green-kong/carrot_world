@@ -96,14 +96,6 @@ joinForm.addEventListener('submit', async (e) => {
   if (signedEmail && signedPw && signedNick && signedMobile) {
     const joinUrl = `http://localhost:4000/api/user/join`;
 
-    const signedBody = {
-      userEmail: signedEmail,
-      userPW: signedPw,
-      userAlias: signedNick,
-      userMobile: signedMobile,
-      u_img: userProfile.value,
-    };
-
     let formData = new FormData();
 
     formData.append('userEmail', signedEmail);
@@ -111,7 +103,6 @@ joinForm.addEventListener('submit', async (e) => {
     formData.append('userAlias', signedNick);
     formData.append('userMobile', signedMobile);
     formData.append('userProfile', userProfile.files[0]);
-    console.log(userProfile.files);
     const response = await axios.post(joinUrl, formData);
     const { rows } = response.data;
 
