@@ -2,7 +2,7 @@ const alertmove = require('../../utils/user/alertmove.js');
 const axios = require('axios');
 
 exports.profile = async (req, res) => {
-  const { u_id, userEmail, userAlias, userMobile } = req.user.userResult;
+  const { u_id, userEmail, userAlias, userMobile, u_img } = req.user.userResult;
   const slikeResult = req.user.slikeResult.join(',');
   const aulikeResult = req.user.aulikeResult.join(',');
   console.log(slikeResult);
@@ -34,6 +34,7 @@ exports.profile = async (req, res) => {
     sellResult,
     slikeResult,
     aulikeResult,
+    u_img,
   });
 };
 

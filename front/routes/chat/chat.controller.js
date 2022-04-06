@@ -10,7 +10,7 @@ exports.chat = async (req, res) => {
     console.log(response.data);
     const { data } = response;
     data.forEach((v) => {
-      if (v.thumbnail === null) v.thumbnail = `/img/carrotForNull.png`;
+      if (v.thumbnail === null) v.thumbnail = `/img/carrot_profile.jpeg`;
       if (v.lastDate === null) {
         v.lastDate = `no date`;
       } else {
