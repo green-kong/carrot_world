@@ -49,7 +49,7 @@ section.forEach((v, i) =>
 
       setTimeout(() => {
         isWheelActive = false;
-      }, 500);
+      }, 1400);
     },
     { passive: false }
   )
