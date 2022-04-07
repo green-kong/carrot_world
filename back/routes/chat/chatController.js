@@ -59,3 +59,17 @@ exports.renderChat = async (req, res) => {
     conn.release();
   }
 };
+
+exports.validChat = async (req, res) => {
+  const { c_id, author } = req.body;
+  const sql = `SELECT c_id FROM chat WHERE mem1 = ${author} OR mem2 = ${author}`;
+  const conn = await pool.getConnection();
+  try {
+    const [result] = await conn.query(sql);
+    console.log(result);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    conn.release();
+  }
+};
