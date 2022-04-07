@@ -165,12 +165,14 @@ exports.profileEdit = async (req, res) => {
 
 exports.profile = async (req, res) => {
   const { u_id } = req.body;
-  const sql = `SELECT 'au'as 'table',u_id, COUNT(*) AS Cnt,
+  const sql = `SELECT 'au'as 'table',u_id, 
+                COUNT(CASE WHEN isSold='0' THEN '1' END) AS Cnt,
                 COUNT(CASE WHEN isSold='1' THEN '1' END) AS SoldCnt
                 FROM auction
                 WHERE u_id=${u_id}
                 UNION ALL
-                SELECT 'sell'as 'table',u_id, COUNT(*) AS Cnt,
+                SELECT 'sell'as 'table',u_id, 
+                COUNT(CASE WHEN isSold='0' THEN '1' END) AS Cnt,
                 COUNT(CASE WHEN isSold='1' THEN '1' END) AS SoldCnt
                 FROM sell_board
                 WHERE u_id=${u_id}
@@ -233,7 +235,9 @@ exports.auction = async (req, res) => {
 };
 
 exports.likes = async (req, res) => {
-  const { slike, aulike } = req.body;
+  const slike = !req.body.slike.length || req.body.slike;
+  const aulike = !req.body.aulike.length || req.body.aulike;
+
   const sql = `SELECT '중고거래' AS category,
               'sell_board' AS 'table',
               subject, FORMAT(price,0)AS price,
