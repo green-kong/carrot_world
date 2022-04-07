@@ -76,15 +76,9 @@
       <button type="submit" class="submitBtn">로그인</button>
       <div class="sns_group">
         <p class="sns_login">간편하게 SNS 로그인</p>
-          <a href="http://localhost:4000/api/auth/naver"
-            ><img src="/img/main/naver.png" class="sns_icon"
-          /></a>
-          <a href="http://localhost:4000/api/auth/kakao"
-            ><img src="/img/main/kakao.png" class="sns_icon"
-          /></a>
-          <a href="http://localhost:4000/api/auth/google"
-            ><img src="/img/main/google.png" class="sns_icon"
-          /></a>
+        <a href="http://localhost:4000/api/auth/naver"><img src="/img/main/naver.png" class="sns_icon" /></a>
+        <a href="http://localhost:4000/api/auth/kakao"><img src="/img/main/kakao.png" class="sns_icon" /></a>
+        <a href="http://localhost:4000/api/auth/google"><img src="/img/main/google.png" class="sns_icon" /></a>
       </div>
     </form>
     <div class="login_bg">
@@ -123,8 +117,21 @@
         <li class="filebox">
           <label for="userProfile">파일찾기</label>
           <input type="file" id="userProfile" name="userProfile" accept="image/jpeg, image/png, image/jpg">
-          <input class="upload_name" placeholder="프로필 사진">
+          <input class="upload_name" placeholder="프로필 사진" readonly>
         </li>
+        <li class="isAgree">
+          <input type="checkbox" id="isAgree_use">
+          <label for="isAgree_use">
+            이용 약관에 동의합니다. (필수)
+          </label>
+        </li>
+        <li class="isAgree">
+          <input type="checkbox" id="isAgree_personal">
+          <label for="isAgree_personal">
+            개인정보 수집 및 이용에 동의합니다. (필수)
+          </label>
+        </li>
+        <p id="agreeMsg"></p>
       </ul>
       <button type="submit" id="joinBtn" class="submitBtn">회원가입</button>
     </form>
