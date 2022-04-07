@@ -235,7 +235,9 @@ exports.auction = async (req, res) => {
 };
 
 exports.likes = async (req, res) => {
-  const { slike, aulike } = req.body;
+  const slike = !req.body.slike.length || req.body.slike;
+  const aulike = !req.body.aulike.length || req.body.aulike;
+
   const sql = `SELECT '중고거래' AS category,
               'sell_board' AS 'table',
               subject, FORMAT(price,0)AS price,
