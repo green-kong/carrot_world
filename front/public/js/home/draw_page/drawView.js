@@ -16,6 +16,11 @@ export default async function drawView() {
     const { imgList, itemResult, tagList, recList } = response.data;
     const contentFrame = document.querySelector('#content_frame');
 
+    if (itemResult.how) {
+      itemResult.how = '직거래';
+    } else {
+      itemResult.how = '택배거래';
+    }
     const viewTemp = document.querySelector('#view_template').innerHTML;
     const viewImgTemp = document.querySelector('#view_img_template').innerHTML;
     const viewTagTemp = document.querySelector('#view_tag_template').innerHTML;
@@ -37,7 +42,7 @@ export default async function drawView() {
         acc + viewTagTemp.replace(/{tag}/g, cur.tag).replace('{table}', table)
       );
     }, '');
-
+    console.log(itemResult);
     let recResult = '연관된 물품이 없습니다.';
     let result;
     if (table === 'sell_board') {

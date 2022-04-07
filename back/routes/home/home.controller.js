@@ -55,6 +55,7 @@ exports.write = async (req, res) => {
     tag,
     bidHour,
     bidMin,
+    how,
   } = req.body;
   console.log(req.body);
   const tagList = tag
@@ -74,9 +75,9 @@ exports.write = async (req, res) => {
     if (dealWay === 'sell') {
       boardtype = 's';
       sql = `INSERT INTO sell_board(
-             c_code,subject,u_id,price,content,location,date
+             c_code,subject,u_id,price,content,location,how,date
              )VALUES(
-             ?,?,?,?,?,?,now()
+             ?,?,?,?,?,?,?,now()
              )`;
       prepare = [
         productType,
@@ -85,6 +86,7 @@ exports.write = async (req, res) => {
         dealPrice,
         productDetail,
         dealZone,
+        how,
       ];
     } else {
       const date = new Date();
@@ -96,9 +98,9 @@ exports.write = async (req, res) => {
       console.log(y, m, d, bidHour, bidMin);
       boardtype = 'au';
       sql = `INSERT INTO auction(
-             c_code,subject,u_id,price,content,location,startDate,date
+             c_code,subject,u_id,price,content,location,startDate,how,date
              )VALUES(
-             ?,?,?,?,?,?,?,now()
+             ?,?,?,?,?,?,?,?,now()
              )`;
       prepare = [
         productType,
@@ -108,6 +110,7 @@ exports.write = async (req, res) => {
         productDetail,
         dealZone,
         bidStart,
+        how,
       ];
     }
     const [result] = await conn.query(sql, prepare);
