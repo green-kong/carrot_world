@@ -6,7 +6,7 @@
 <!--  -->
 {% block js %}
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="/js/user/profile.js" defer></script>
+<script src="/js/user/profile.js" type="module" defer></script>
 {% endblock %}
 <!--  -->
 {% block content %}
@@ -60,6 +60,7 @@
         <th>가격</th>
         <th>날짜</th>
         <th>판매여부</th>
+        <th>삭제</th>
       </tr>
       {% for sell in sellResult %}
       <tr>
@@ -68,7 +69,29 @@
         </td>
         <td>{{sell.price}}</td>
         <td>{{sell.date}}</td>
-        <td>{{sell.isSold}}</td>
+        <td>
+          <select name="isSold" id="isSold">
+            {% if sell.isSold==1 %}
+            <option value="1" selected>판매완료</option>
+            <option value="0">판매 중</option>
+            {% else %}
+            <option value="1">판매완료</option>
+            <option value="0" selected>판매 중</option>
+            {% endif %}
+          </select>
+          <i
+            class="fa-solid fa-pen-to-square isSoldBtn"
+            data-idx="{{sell.s_id}}"
+            data-table="sell_board"
+          ></i>
+        </td>
+        <td>
+          <i
+            class="delBtn fa-solid fa-trash"
+            data-idx="{{sell.s_id}}"
+            data-table="sell_board"
+          ></i>
+        </td>
       </tr>
       {% endfor %}
     </table>
@@ -81,6 +104,7 @@
     <th>가격</th>
     <th>날짜</th>
     <th>판매여부</th>
+    <th>삭제</th>
   </tr>
   {tbody}
 </template>
@@ -92,6 +116,7 @@
     <th>날짜</th>
     <th>경매시작일</th>
     <th>판매여부</th>
+    <th>삭제</th>
   </tr>
   {tbody}
 </template>
@@ -124,7 +149,23 @@
     </td>
     <td>{sell.price}</td>
     <td>{sell.date}</td>
-    <td>{sell.isSold}</td>
+    <td>
+      <select name="isSold" id="isSold">
+        {options}
+      </select>
+      <i
+        class="fa-solid fa-pen-to-square isSoldBtn"
+        data-idx="{sell.s_id}"
+        data-table="sell_board"
+      ></i>
+    </td>
+    <td>
+      <i
+        class="fa-solid fa-trash delBtn"
+        data-idx="{sell.s_id}"
+        data-table="sell_board"
+      ></i>
+    </td>
   </tr>
 </template>
 
@@ -136,7 +177,23 @@
     <td>{sell.price}</td>
     <td>{sell.date}</td>
     <td>{sell.startDate}</td>
-    <td>{sell.isSold}</td>
+    <td>
+      <select name="isSold" id="isSold">
+        {options}
+      </select>
+      <i
+        class="fa-solid fa-pen-to-square isSoldBtn"
+        data-idx="{sell.s_id}"
+        data-table="auction"
+      ></i>
+    </td>
+    <td>
+      <i
+        class="fa-solid fa-trash delBtn"
+        data-idx="{sell.s_id}"
+        data-table="auction"
+      ></i>
+    </td>
   </tr>
 </template>
 
@@ -150,6 +207,7 @@
     <td>{sell.date}</td>
     <td>{sell.isSold}</td>
   </tr>
+  <script src="/js/user/profileEditDel.js"></script>
 </template>
 
 <template id="qa_data_tem">
@@ -161,5 +219,15 @@
     <td>{sell.date}</td>
     <td>{hit}</td>
   </tr>
+</template>
+
+<template id="isSoldOpt">
+  <option value="1" selected>판매완료</option>
+  <option value="0">판매 중</option>
+</template>
+
+<template id="sellingOpt">
+  <option value="1">판매완료</option>
+  <option value="0" selected>판매 중</option>
 </template>
 {% endblock %}

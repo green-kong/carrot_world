@@ -248,7 +248,7 @@ exports.likes = async (req, res) => {
               au_id AS idx, DATE_FORMAT(date,'%y-%m-%d') AS date,
               isSold
               FROM auction
-              WHERE s_id IN (${aulike})
+              WHERE au_id IN (${aulike})
               `;
 
   const conn = await pool.getConnection();

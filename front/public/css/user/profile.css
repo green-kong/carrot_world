@@ -167,3 +167,27 @@ td {
 td:last-child {
   text-align: center;
 }
+
+#isSold {
+  height: 25px;
+}
+
+.fa-pen-to-square {
+  transition: 350ms;
+  cursor: pointer;
+}
+
+.fa-pen-to-square:hover {
+  color: #b640ce;
+  transform: scale(1.1);
+}
+
+.fa-trash {
+  cursor: pointer;
+  transition: 350ms;
+}
+
+.fa-trash:hover {
+  color: red;
+  transform: scale(1.1);
+}

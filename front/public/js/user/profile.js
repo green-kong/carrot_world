@@ -1,3 +1,7 @@
+import btnActive from './profileEditDel.js';
+
+btnActive();
+
 const tabs = document.querySelector('#profile_tab');
 const u_id = document.querySelector('#userIdx').value;
 const tabTable = document.querySelector('#tab_table');
@@ -11,20 +15,29 @@ async function getSell() {
   const sellCol = document.querySelector('#sell_column_tem').innerHTML;
   const sellDataTem = document.querySelector('#sell_data_tem').innerHTML;
 
+  const soldOpt = document.querySelector('#isSoldOpt').innerHTML;
+  const sellingOpt = document.querySelector('#sellingOpt').innerHTML;
+
   const sellDataList = data.reduce((acc, cur) => {
+    if (cur.isSold) {
+      cur.isSold = soldOpt;
+    } else {
+      cur.isSold = sellingOpt;
+    }
     return (
       acc +
       sellDataTem
-        .replace('{sell.s_id}', cur.s_id)
+        .replace(/{sell.s_id}/g, cur.s_id)
         .replace('{sell.subject}', cur.subject)
         .replace('{sell.price}', cur.price)
-        .replace('{sell.isSold}', cur.isSold)
+        .replace('{options}', cur.isSold)
         .replace('{sell.date}', cur.date)
     );
   }, '');
 
   const result = sellCol.replace('{tbody}', sellDataList);
   tabTable.innerHTML = result;
+  btnActive();
 }
 
 async function getAu() {
@@ -37,14 +50,22 @@ async function getAu() {
   const auCol = document.querySelector('#au_column_tem').innerHTML;
   const auDataTem = document.querySelector('#au_data_tem').innerHTML;
 
+  const soldOpt = document.querySelector('#isSoldOpt').innerHTML;
+  const sellingOpt = document.querySelector('#sellingOpt').innerHTML;
+
   const auDataList = data.reduce((acc, cur) => {
+    if (cur.isSold) {
+      cur.isSold = soldOpt;
+    } else {
+      cur.isSold = sellingOpt;
+    }
     return (
       acc +
       auDataTem
-        .replace('{sell.s_id}', cur.au_id)
+        .replace(/{sell.s_id}/g, cur.au_id)
         .replace('{sell.subject}', cur.subject)
         .replace('{sell.price}', cur.price)
-        .replace('{sell.isSold}', cur.isSold)
+        .replace('{options}', cur.isSold)
         .replace('{sell.date}', cur.date)
         .replace('{sell.startDate}', cur.startDate)
     );
@@ -52,6 +73,7 @@ async function getAu() {
 
   const result = auCol.replace('{tbody}', auDataList);
   tabTable.innerHTML = result;
+  btnActive();
 }
 
 async function getLikes(slike, aulike) {

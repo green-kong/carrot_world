@@ -24,4 +24,8 @@ router.post('/category', homeControll.category);
 
 router.post('/chat', homeControll.chat);
 
+router.post('/edit', homeControll.edit);
+
+router.post('/del', homeControll.del);
+
 module.exports = router;
