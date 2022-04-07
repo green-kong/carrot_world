@@ -63,10 +63,11 @@ label {
   margin-bottom: 8px;
 }
 
-#userid {
+#userEmail {
   width: 390px;
   height: 40px;
   border: 1px solid #aaaaaa;
+  padding-left: 15px;
 }
 
 #pw_div {
@@ -75,10 +76,11 @@ label {
   margin-bottom: 15px;
 }
 
-#userpw {
+#userPW {
   width: 390px;
   height: 40px;
   border: 1px solid #aaaaaa;
+  padding-left: 15px;
 }
 
 #login_button {
