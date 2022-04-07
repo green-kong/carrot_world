@@ -36,7 +36,7 @@
     {% for post in result%}
     <tr>
       <td>{{post.userEmail}}</td>
-      <td>미구현</td>
+      <td>{{post.provider}}</td>
       <td>{{post.userAlias}}</td>
       <td>{{post.userEmail}}</td>
       <td>{{post.userMobile}}</td>
@@ -44,7 +44,9 @@
       <td>{{post.soldCount}}</td>
       <td>{{post.sellingCount}}</td>
       <td>
-        <a href="http://localhost:3000/admin/userprofile?idx={{post.u_id}}"><i class="fas fa-user-pen"></i></a>
+        <a href="http://localhost:3000/admin/userprofile?idx={{post.u_id}}"
+          ><i class="fas fa-user-pen"></i
+        ></a>
       </td>
       <td>
         <i class="fas fa-trash-alt" data-idx="{{post.u_id}}"></i>

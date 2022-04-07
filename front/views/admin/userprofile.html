@@ -12,45 +12,76 @@
 
 {% block content %}
 <div id="profileEdit">
-  <form method="post" action="http://localhost:4000/api/admin/userEdit">
-    <div id="title" name="title">
-      회원 정보 수정
-    </div>
+  <form
+    method="post"
+    action="http://localhost:4000/api/admin/userEdit"
+    enctype="multipart/form-data"
+  >
+    <div id="title" name="title">회원 정보 수정</div>
     <ul id="boxTool">
       <li class="infoBox">
         <label for="selectUser">권한설정</label>
         <select id="selectUser" name="selectUser">
           {% if isAdmin === 0 %}
-          <option id="user" name='user' value="{{0}}" selected>일반사용자</option>
-          <option id="admin" name='admin' value="{{1}}">관리자</option>
+          <option id="user" name="user" value="0" selected>일반사용자</option>
+          <option id="admin" name="admin" value="1">관리자</option>
           {% else %}
-          <option id="user" name='user' value="{{0}}">일반사용자</option>
-          <option id="admin" name='admin' value="{{1}}" selected>관리자</option>
+          <option id="user" name="user" value="0">일반사용자</option>
+          <option id="admin" name="admin" value="1" selected>관리자</option>
           {% endif%}
         </select>
       </li>
       <li class="infoBox">
         <label for="userEmail">이메일</label>
-        <input type="text" id="userEmail" name="userEmail" maxlength="64" value="{{userEmail}}" readonly>
+        <input
+          type="text"
+          id="userEmail"
+          name="userEmail"
+          maxlength="64"
+          value="{{userEmail}}"
+          readonly
+        />
       </li>
       <li class="infoBox">
         <label for="howJoin">가입경로</label>
-        <input type="text" id="howJoin" name="howJoin" value="가입경로" readonly>
-        </select>
+        <input
+          type="text"
+          id="howJoin"
+          name="howJoin"
+          value="{{provider}}"
+          readonly
+        />
       </li>
       <li class="infoBox">
         <label for=" userAlias">닉네임</label>
-        <input type="text" id="userAlias" name="userAlias" value="{{userAlias}}" maxlength="8">
+        <input
+          type="text"
+          id="userAlias"
+          name="userAlias"
+          value="{{userAlias}}"
+          maxlength="8"
+        />
       </li>
       <li class="infoBox">
         <label for="userMobile">핸드폰번호</label>
-        <input type="text" id="userMobile" name="userMobile" value="{{userMobile}}" maxlength="13">
+        <input
+          type="text"
+          id="userMobile"
+          name="userMobile"
+          value="{{userMobile}}"
+          maxlength="13"
+        />
       </li>
       <li class="fileBox">
         <p id="searchName">파일찾기</p>
         <div id="searchWrap">
           <label id="searchFile" for="picture">파일찾기</label>
-          <input type="file" id="picture" name="picture" accept="image/jpeg, image/png, image/jpg" />
+          <input
+            type="file"
+            id="picture"
+            name="picture"
+            accept="image/jpeg, image/png, image/jpg"
+          />
           <input class="upload_name" placeholder="프로필 사진" readonly />
         </div>
       </li>
@@ -59,3 +90,5 @@
     <!--  -->
 
     {% endblock %}
+  </form>
+</div>

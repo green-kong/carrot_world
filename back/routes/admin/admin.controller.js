@@ -139,6 +139,7 @@ exports.user = async (req, res) => {
               ANY_VALUE(userAlias) AS userAlias, 
               ANY_VALUE(userEmail) AS userEmail,
               ANY_VALUE(userMobile) AS userMobile,
+              ANY_VALUE(provider) AS provider,
               SUM(tmp.total) AS totalCount, SUM(tmp.sold) AS soldCount
               FROM
                 (
@@ -376,12 +377,21 @@ exports.changeCat = async (req, res) => {
 
 exports.userEdit = async (req, res) => {
   const { userEmail, selectUser, userAlias, userMobile } = req.body;
-  const conn = await pool.getConnection();
-  const sql = `UPDATE user 
+  let sql = `UPDATE user 
               SET isAdmin='${selectUser}',
               userAlias='${userAlias}',
               userMobile='${userMobile}'
               WHERE userEmail='${userEmail}'`;
+  if (req.file) {
+    const { filename } = req.file;
+    sql = `UPDATE user 
+          SET isAdmin='${selectUser}',
+          userAlias='${userAlias}',
+          userMobile='${userMobile}',
+          u_img='http://localhost:4000/upload/${filename}'
+          WHERE userEmail='${userEmail}'`;
+  }
+  const conn = await pool.getConnection();
   try {
     await conn.query(sql);
     res.send(

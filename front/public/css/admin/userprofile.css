@@ -107,7 +107,7 @@ body {
   padding-left: 20px;
   width: 500px;
   height: 55px;
-  margin: 10px 0 50px 0;
+  margin: 10px 0 0 0;
   border: solid 1px rgb(206, 206, 206);
   border-radius: 8px;
 }
@@ -154,7 +154,7 @@ body {
 
 #searchName {
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 10px;
 }
 
