@@ -14,7 +14,21 @@ exports.chat = async (req, res) => {
       if (v.lastDate === null) {
         v.lastDate = `no date`;
       } else {
-        v.lastDate = v.lastDate.split(' ')[0];
+        const latestYear = new Date(v.lastDate).getFullYear();
+        const latestDate = new Date(v.lastDate).getDate();
+        const latestMonth = new Date(v.lastDate).getMonth();
+
+        let dateForRender;
+        if (
+          latestYear === new Date().getFullYear() &&
+          latestMonth === new Date().getMonth() &&
+          latestDate === new Date().getDate()
+        ) {
+          dateForRender = v.lastDate.split(' ')[1].substr(0, 5);
+        } else {
+          dateForRender = v.lastDate.split(' ')[0].substr(2, 8);
+        }
+        v.lastDate = dateForRender;
       }
       if (v.lastMsg === null) v.lastMsg = `대화 내용 없음`;
     });

@@ -92,12 +92,39 @@ socket.on('send', (latestMsg) => {
 
 socket.on('update', (latestMsg) => {
   const msgOnList = document.querySelectorAll('.msg');
-  const { c_id, dialog } = latestMsg;
+  const dateOnList = document.querySelectorAll('.date');
+  const { c_id, dialog, date } = latestMsg;
+  const latestYear = new Date(date).getFullYear();
+  const latestDate = new Date(date).getDate();
+  const latestMonth = new Date(date).getMonth();
+
+  let dateForRender;
+  if (
+    latestYear === new Date().getFullYear() &&
+    latestMonth === new Date().getMonth() &&
+    latestDate === new Date().getDate()
+  ) {
+    dateForRender = date.split(' ')[1].substr(0, 5);
+  } else {
+    dateForRender = date.split(' ')[0].substr(2, 8);
+  }
+
   msgOnList.forEach((v) => {
     if (Number(v.previousElementSibling.value) === c_id) {
       v.innerHTML = dialog;
     }
   });
+  dateOnList.forEach((v) => {
+    if (
+      Number(v.previousElementSibling.previousElementSibling.value) === c_id
+    ) {
+      v.innerHTML = dateForRender;
+    }
+  });
+});
+
+socket.on('notValid', (errMsg) => {
+  alert(errMsg);
 });
 
 function makeMsg(u_img, dialog) {

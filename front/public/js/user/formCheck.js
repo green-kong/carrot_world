@@ -119,7 +119,10 @@ joinForm.addEventListener('submit', async (e) => {
 
     if (rows === 1) {
       alert(`${signedNick}님 회원가입을 축하합니다. 로그인을 해주세요`);
-      window.location.href = 'http://localhost:3000/';
+      const loginPage = document.querySelector('#section5');
+      const loginPosition =
+        window.pageYOffset + loginPage.getBoundingClientRect().top;
+      window.scrollTo({ top: loginPosition, left: 0, behavior: 'smooth' });
     } else {
       alert(`잠시 후 다시 시도해주세요`);
       window.location.href = 'http://localhost:3000/';
