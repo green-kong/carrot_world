@@ -18,7 +18,6 @@ async function openChat(e) {
   const curChatId = window.location.hash.replace('#', '');
   const otherTemp = document.querySelector('#otherMsg').innerHTML;
   const myTemp = document.querySelector('#myMsg').innerHTML;
-  console.log(uId);
 
   try {
     socket.emit('leaveRoom', curChatId);
