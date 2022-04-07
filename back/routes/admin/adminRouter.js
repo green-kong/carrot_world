@@ -2,6 +2,8 @@ require('dotenv').config();
 
 const express = require('express');
 
+const { upload } = require('../../utils/multer/multer.js');
+
 const router = express.Router();
 
 const adminControll = require('./admin.controller.js');
@@ -36,6 +38,6 @@ router.post('/editCat', adminControll.editCat);
 
 router.post('/changeCat', adminControll.changeCat);
 
-router.post('/userEdit', adminControll.userEdit);
+router.post('/userEdit', upload.single('picture'), adminControll.userEdit);
 
 module.exports = router;
