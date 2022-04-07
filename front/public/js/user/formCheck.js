@@ -53,7 +53,7 @@ joinForm.addEventListener('submit', async (e) => {
   }
 
   const pwReg = new RegExp(
-    /^(?=.*[a-zA-z])(?=.*[0-9])(?!.*[^a-zA-z0-9]).{5,20}$/
+    /^(?=.*[a-zA-z])(?=.*[0-9])(?!.*[^a-zA-z0-9]).{8,20}$/
   );
 
   if (!pwReg.test(userPW.value)) {
@@ -83,7 +83,7 @@ joinForm.addEventListener('submit', async (e) => {
     signedNick = userAlias.value;
   }
 
-  const mobileReg = new RegExp(/^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/);
+  const mobileReg = new RegExp(/^010-([0-9]{4})-([0-9]{4})$/);
   if (!mobileReg.test(userMobile.value)) {
     phoneMsg.innerHTML = `핸드폰 번호가 올바르지 않습니다.`;
     phoneMsg.style.color = `red`;
