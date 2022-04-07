@@ -516,3 +516,44 @@ exports.chat = async (req, res) => {
     conn.release();
   }
 };
+
+exports.edit = async (req, res) => {
+  const { idx, table, value } = req.body;
+  let sql;
+  if (table === 'sell_board') {
+    sql = `UPDATE ${table} SET isSold=${value} WHERE s_id=${idx}`;
+  } else {
+    sql = `UPDATE ${table} SET isSold=${value} WHERE au_id=${idx}`;
+  }
+
+  const conn = await pool.getConnection();
+  try {
+    await conn.query(sql);
+    res.send('success');
+  } catch (err) {
+    console.log(err);
+    res.status(204).send('fail');
+  } finally {
+    conn.release();
+  }
+};
+
+exports.del = async (req, res) => {
+  let sql;
+  const { idx, table } = req.body;
+  const conn = await pool.getConnection();
+  if (table === 'sell_board') {
+    sql = `DELETE FROM ${table} WHERE s_id =${idx}`;
+  } else {
+    sql = `DELETE FROM ${table} WHERE au_id =${idx}`;
+  }
+
+  try {
+    await conn.query(sql);
+    res.send('success');
+  } catch (err) {
+    res.status(204).send('fail');
+  } finally {
+    conn.release();
+  }
+};
