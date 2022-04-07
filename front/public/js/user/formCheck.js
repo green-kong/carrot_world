@@ -4,12 +4,15 @@ const pwMsg = document.querySelector('#pwMsg');
 const pwCheckMsg = document.querySelector('#pwCheckMsg');
 const nickMsg = document.querySelector('#nickMsg');
 const phoneMsg = document.querySelector('#phoneMsg');
+const agreeMsg = document.querySelector('#agreeMsg');
 
 const userEmail = joinForm.querySelector('#userEmail_join');
 const userPW = joinForm.querySelector('#userPW_join');
 const userPWCheck = joinForm.querySelector('#userPWCheck');
 const userAlias = joinForm.querySelector('#userAlias');
 const userMobile = joinForm.querySelector('#userMobile');
+const agreeUse = joinForm.querySelector('#isAgree_use');
+const agreePersonal = joinForm.querySelector('#isAgree_personal');
 
 const userProfile = document.querySelector('#userProfile');
 const uploadName = document.querySelector('.upload_name');
@@ -30,6 +33,7 @@ joinForm.addEventListener('submit', async (e) => {
   let signedPw;
   let signedNick;
   let signedMobile;
+  let isAgree;
 
   if (userEmail.value === '') {
     emailMsg.innerHTML = `필수 정보입니다.`;
@@ -53,7 +57,7 @@ joinForm.addEventListener('submit', async (e) => {
   }
 
   const pwReg = new RegExp(
-    /^(?=.*[a-zA-z])(?=.*[0-9])(?!.*[^a-zA-z0-9]).{5,20}$/
+    /^(?=.*[a-zA-z])(?=.*[0-9])(?!.*[^a-zA-z0-9]).{8,20}$/
   );
 
   if (!pwReg.test(userPW.value)) {
@@ -83,7 +87,7 @@ joinForm.addEventListener('submit', async (e) => {
     signedNick = userAlias.value;
   }
 
-  const mobileReg = new RegExp(/^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/);
+  const mobileReg = new RegExp(/^010-([0-9]{4})-([0-9]{4})$/);
   if (!mobileReg.test(userMobile.value)) {
     phoneMsg.innerHTML = `핸드폰 번호가 올바르지 않습니다.`;
     phoneMsg.style.color = `red`;
@@ -93,7 +97,14 @@ joinForm.addEventListener('submit', async (e) => {
     signedMobile = userMobile.value;
   }
 
-  if (signedEmail && signedPw && signedNick && signedMobile) {
+  if (agreeUse.checked && agreePersonal.checked) {
+    isAgree = true;
+  } else {
+    agreeMsg.innerHTML = `이용약관 및 개인정보 수집에 동의해주세요`;
+    agreeMsg.style.color = `red`;
+  }
+
+  if (signedEmail && signedPw && signedNick && signedMobile && isAgree) {
     const joinUrl = `http://localhost:4000/api/user/join`;
 
     let formData = new FormData();
