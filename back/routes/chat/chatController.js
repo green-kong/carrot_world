@@ -11,7 +11,7 @@ exports.chat = async (req, res) => {
                       u2.userAlias AS mem2Alias,
                       u1.u_img AS mem1Img,
                       u2.u_img AS mem2Img,
-                      DATE_FORMAT(chat.lastDate,'%y-%m-%d %H:%i:%s') as lastDate, 
+                      DATE_FORMAT(chat.lastDate,'%Y-%m-%d %H:%i:%s') as lastDate, 
                       chat.lastMsg 
                       FROM chat 
                       JOIN user u1 

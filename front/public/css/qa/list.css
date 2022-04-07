@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+
+body {
+  font-family: 'Gowun Dodum', sans-serif;
+}
 #board_top {
   text-align: center;
   line-height: 300px;

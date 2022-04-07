@@ -28,38 +28,45 @@ a {
 #header {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   width: 100%;
   height: 100px;
-  background: #ffffff;
+  margin: 10px 0;
 }
 
 #header > #logo {
-  padding: 15px 0 0 15px;
+  padding: 15px 0 15px 15px;
 }
 
 #header > #search_bar {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   width: 85%;
   height: 100%;
 }
 
 #header > #search_bar > #search_category {
-  width: 105px;
-  height: 37px;
+  width: 150px;
+  height: 50px;
   text-align: center;
   font-size: 18px;
-  border: 1px solid #bababa;
+  border: 1px solid #cccccc;
+  margin-left: 30px;
+  border-radius: 5px;
+}
+
+#search_category:focus {
+  outline: none;
 }
 
 #header > #search_bar > #search {
-  width: 690px;
-  height: 45px;
-  background: #dddddd;
+  width: 780px;
+  height: 50px;
+  background: #f2f1f6;
   border: 1px solid #ffffff;
-  border-radius: 26px;
+  border-radius: 5px;
   font-size: 20px;
   display: flex;
   justify-content: space-between;
@@ -69,7 +76,7 @@ a {
 }
 
 #search > input {
-  background-color: #dddddd;
+  background-color: #f2f1f6;
   border: none;
   height: 30px;
   width: 600px;
@@ -87,28 +94,29 @@ a {
 }
 
 #sell_register {
-  width: 224px;
-  height: 48px;
+  width: 200px;
+  height: 50px;
   font-size: 20px;
-  font-weight: 400;
-  line-height: 40px;
+  font-weight: 500;
+  line-height: 45px;
   color: #ffffff;
   background: #4d47c3;
   box-sizing: border-box;
-  border: 3px #4d47c3 solid;
-  border-radius: 19px;
+  border: 1px #4d47c3 solid;
+  border-radius: 5px;
   align-items: center;
   text-align: center;
+  box-shadow: 2px 5px 5px #c9c6f8;
 }
 
 #sell_register:hover {
-  border: 3px #4d47c3 solid;
-  color: #4d47c3;
-  background-color: #ffffff;
+  color: orange;
 }
 
 #container {
   display: flex;
+  border-radius: 10px 30px 0px 0px;
+  background-color: #efeefc;
 }
 
 #side_bar {
@@ -121,11 +129,12 @@ a {
 
 #side_bar > #profile_box {
   padding: 10px;
-  margin: 10px;
   box-sizing: border-box;
   width: 180px;
-  background: #f2f1f6;
+  background: #f9f8ff;
   border-radius: 8px;
+  align-self: center;
+  margin-top: 10px;
 }
 
 #call_user {
@@ -169,7 +178,7 @@ a {
 }
 
 #user_logout {
-  background: #a7a3ff;
+  background: #dcdae2a1;
   border-radius: 8px;
   padding: 2px 2px 4px 2px;
   width: 150px;
@@ -177,7 +186,9 @@ a {
   line-height: 23px;
   align-items: center;
   text-align: center;
-  color: #4d47c3;
+  color: rgba(22, 21, 21, 0.901);
+  box-shadow: 3px 2px 5px rgba(137, 137, 149, 0.4);
+  font-weight: 800;
 }
 
 .category_wrap {
@@ -190,18 +201,19 @@ a {
   width: 100px;
   padding: 16px 40px;
   margin-bottom: 15px;
-  background: #a7a3ff;
+  background: #d1cefc;
   border-radius: 0px 1000px 1000px 0px;
   font-size: 18px;
   font-weight: 600;
   color: #4d47c3;
+  box-shadow: 3px 5px 10px rgba(103, 96, 222, 0.4);
 }
 
 .listname {
   display: block;
   padding: 7px 20%;
   font-size: 18px;
-  color: gray;
+  color: rgba(22, 21, 21, 0.901);
   cursor: pointer;
 }
 
@@ -217,7 +229,6 @@ a {
 #bid_category {
   display: flex;
   flex-direction: row;
-
   align-items: center;
   width: 100px;
   padding: 16px 40px;
@@ -233,7 +244,7 @@ a {
   box-sizing: border-box;
   width: 85%;
   background: #f2f1f6;
-  border-radius: 30px 30px 0px 0px;
+  border-radius: 0px 20px 0px 0px;
   min-height: calc(100vh - 100px);
 }
 
@@ -320,7 +331,7 @@ a {
   box-sizing: border-box;
   font-size: 25px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .rank {
@@ -343,4 +354,8 @@ a {
   box-sizing: border-box;
   background: rgba(0, 0, 0, 0.4);
   color: white;
+}
+
+.category_title i {
+  padding-right: 10px;
 }

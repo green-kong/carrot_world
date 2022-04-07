@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+
 :root {
   --text1-color: #575757;
   --textSub-color: #c4c4c4;
@@ -10,9 +12,12 @@
   --alert-color: rgb(243, 53, 6);
 }
 
+body {
+  font-family: 'Gowun Dodum', sans-serif;
+}
 #main_container {
   width: 100%;
-  height: 800px;
+  height: calc(100vh - 150px);
 }
 
 #list_view_wrap {
@@ -31,6 +36,7 @@
   background-color: var(--background1);
   height: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 #chat_list_wrap::-webkit-scrollbar {
@@ -54,6 +60,7 @@
 .chat_link {
   border-bottom: solid 3px var(--background2);
   padding: 10px;
+  height: 115px;
   box-sizing: border-box;
 }
 
@@ -68,6 +75,7 @@
 
 .chat_link .chat_info {
   display: flex;
+  height: 100%;
 }
 
 .thumbnail_wrap {
@@ -108,7 +116,7 @@
 
 .name_data_wrap > .date {
   font-size: 14px;
-  margin-bottom: 3px;
+  margin: 0 14px 3px 0;
   color: var(--text1-color);
 }
 
@@ -119,6 +127,7 @@
   align-items: flex-start;
   padding: 5px 8px;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 #chat_view {
@@ -234,6 +243,7 @@
   box-sizing: border-box;
   border-radius: 30px 0px 30px 30px;
   color: var(--background1);
+  word-break: break-word;
 }
 
 #chat_view > p {
@@ -248,4 +258,11 @@
   position: absolute;
   right: 0px;
   bottom: 0px;
+}
+
+.msg {
+  width: 95%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: keep-all;
 }

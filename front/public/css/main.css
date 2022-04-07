@@ -162,8 +162,7 @@ header > ul {
 #section4 {
   background-image: url('/img/main/bgForChat.png');
   background-repeat: no-repeat;
-  background-position: 0 260px;
-  background-size: contain;
+  background-size: cover;
 }
 
 .chat_bg {

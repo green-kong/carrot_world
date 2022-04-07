@@ -19,7 +19,7 @@ const chatSocket = (io) => {
       const chatUpdateSql = `UPDATE chat 
                               SET lastDate = now(), lastMsg = '${data}' 
                               WHERE c_id = ${chatId}`;
-      const bringSql = `SELECT c.c_id, c.u_id, u.u_img, c.dialog, c.date 
+      const bringSql = `SELECT c.c_id, c.u_id, u.u_img, c.dialog, DATE_FORMAT(c.date, '%Y-%m-%d %H:%i:%s') as date
                           FROM chat_log c 
                           JOIN user u 
                           ON u.u_id = c.u_id 

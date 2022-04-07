@@ -26,16 +26,22 @@ section.forEach((v, i) =>
       if (delta < 0) {
         // 마지막 섹션전까지
         if (sectionNum !== section[sectionQty - 2]) {
-          moveTop += sectionNum.nextElementSibling.getBoundingClientRect().top;
+          try {
+            moveTop +=
+              sectionNum.nextElementSibling.getBoundingClientRect().top;
+            if (sectionNum.nextElementSibling === null) {
+              throw new Error();
+            }
+          } catch (err) {
+            console.log(err);
+          }
         } else if (section[sectionQty - 2]) {
           // 로긴 페이지에서 더 안내려가게 막아주기
-          moveTop +=
-            sectionNum.previousElementSibling.getBoundingClientRect().top;
+          moveTop += sectionNum.getBoundingClientRect().top;
         } else {
           return;
         }
         console.log('얼마나 수직으로 스크롤됐나', moveTop);
-
         // 올라갈때
       } else {
         if (sectionNum !== 0) {

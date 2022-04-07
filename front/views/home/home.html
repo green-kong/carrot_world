@@ -1,104 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/home/styleMain.css" type="text/css" />
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script type="module" src="/js/home/index.js" defer></script>
-    <script
-      src="https://kit.fontawesome.com/cbc296ae57.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
 
-  <body>
-    <div id="wrap">
-      <div id="header">
-        <h1 id="logo">
-          <a href="/home#main/"
-            ><img src="/img/home/Logo.png" style="width: 160px; height: 80px"
-          /></a>
-        </h1>
-        <div id="search_bar">
-          <select id="search_category" placeholder="전체">
-            <option value="all">전체</option>
-            <option value="sell">중고거래</option>
-            <option value="auction">경매</option>
-          </select>
-          <div id="search">
-            <input type="text" autocomplete="off" id="search_input" />
-            <span id="search_btn"></span>
-          </div>
-          <a id="sell_register" href="/home/write">판매물품 등록</a>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/home/styleMain.css" type="text/css" />
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="module" src="/js/home/index.js" defer></script>
+  <script src="https://kit.fontawesome.com/cbc296ae57.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div id="wrap">
+    <div id="header">
+      <h1 id="logo">
+        <a href="/home#main/"><img src="/img/home/Logo.png" style="width: 160px; height: 80px" /></a>
+      </h1>
+      <div id="search_bar">
+        <select id="search_category" placeholder="전체">
+          <option value="all">전체</option>
+          <option value="sell">중고거래</option>
+          <option value="auction">경매</option>
+        </select>
+        <div id="search">
+          <input type="text" autocomplete="off" id="search_input" />
+          <span id="search_btn"></span>
         </div>
-      </div>
-      <div id="container">
-        <div id="side_bar">
-          <div id="profile_box">
-            <div id="user_profile">
-              <ul id="profile_img_box">
-                <img src="{{userResult.u_img}}" id="profile_img" />
-              </ul>
-              <ul id="profile_rightbox">
-                <li id="call_user">{{userResult.userAlias}} 님</li>
-                <li id="show_profile">
-                  <a href="/user/profile">내 정보 보기</a>
-                </li>
-              </ul>
-            </div>
-            <ul id="profile_centerbox">
-              <input type="hidden" value="{{userResult.u_id}}" id="u_id" />
-              <input type="hidden" value="{{aulikeResult}}" id="au_likes" />
-              <input type="hidden" value="{{slikeResult}}" id="s_likes" />
-              <li id="my_point">Point : {{userResult.point}} pt</li>
-              <ul>
-                <li id="sell_item">판매중인 물품 : {{totalCnt}}개</li>
-                <li id="new_chat"><a href="/chat">채팅 바로 가기</a></li>
-              </ul>
-              <a href="/user/logout">
-                <li id="user_logout">로그아웃</li>
-              </a>
-            </ul>
-          </div>
-          <div class="category_wrap">
-            <p class="category_title">
-              <img
-                src="/img/home/category_img1.png"
-                style="width: 25px; height: auto"
-              />중고거래
-            </p>
-            <ul id="sell_list" data-way="sell"></ul>
-          </div>
-          <div class="category_wrap">
-            <p class="category_title">
-              <img
-                src="/img/home/category_img1.png"
-                style="width: 25px; height: auto"
-              />경매
-            </p>
-            <ul id="bid_list" data-way="bid"></ul>
-          </div>
-          <div class="category_wrap">
-            <p class="category_title">
-              <img
-                src="/img/home/category_img1.png"
-                style="width: 25px; height: auto"
-              />고객센터
-            </p>
-            <ul id="client_list" data-way="bid">
-              <a class="listname" href="/qa/list">1:1 문의</a>
-            </ul>
-          </div>
-        </div>
-        <div id="content">
-          <div id="content_frame"></div>
-        </div>
+        <a id="sell_register" href="/home/write">판매물품 등록</a>
       </div>
     </div>
-  </body>
+    <div id="container">
+      <div id="side_bar">
+        <div id="profile_box">
+          <div id="user_profile">
+            <ul id="profile_img_box">
+              <img src="{{userResult.u_img}}" id="profile_img" />
+            </ul>
+            <ul id="profile_rightbox">
+              <li id="call_user">{{userResult.userAlias}} 님</li>
+              <li id="show_profile">
+                <a href="/user/profile">내 정보 보기</a>
+              </li>
+            </ul>
+          </div>
+          <ul id="profile_centerbox">
+            <input type="hidden" value="{{userResult.u_id}}" id="u_id" />
+            <input type="hidden" value="{{aulikeResult}}" id="au_likes" />
+            <input type="hidden" value="{{slikeResult}}" id="s_likes" />
+            <li id="my_point">Point : {{userResult.point}} pt</li>
+            <ul>
+              <li id="sell_item">판매중인 물품 : {{totalCnt}}개</li>
+              <li id="new_chat"><a href="/chat">채팅 바로 가기</a></li>
+            </ul>
+            <a href="/user/logout">
+              <li id="user_logout">로그아웃</li>
+            </a>
+          </ul>
+        </div>
+        <div class="category_wrap">
+          <p class="category_title">
+            <i class="fa-solid fa-circle-chevron-down"></i>중고거래
+          </p>
+
+          <ul id="sell_list" data-way="sell"></ul>
+        </div>
+        <div class="category_wrap">
+          <p class="category_title">
+            <i class="fa-solid fa-circle-chevron-down"></i>경매
+          </p>
+          <ul id="bid_list" data-way="bid"></ul>
+        </div>
+        <div class="category_wrap">
+          <p class="category_title">
+            <i class="fa-solid fa-circle-chevron-down"></i>고객센터
+          </p>
+          <ul id="client_list" data-way="bid">
+            <a class="listname" href="/qa/list">1:1 문의</a>
+          </ul>
+        </div>
+      </div>
+      <div id="content">
+        <div id="content_frame"></div>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>
 
 <!-- category template -->
@@ -327,19 +316,9 @@
       <span class="price_num">{price}</span>
       <span>원</span>
       <div class="bid_info">
-        <label for="bid_input" class="label"
-          ><i class="fa-solid fa-money-bill-1-wave"></i>입찰금액</label
-        >
-        <input
-          type="text"
-          id="bid_input"
-          class="bid_input"
-          name="bid_input"
-          placeholder="입찰가 입력 후 버튼 클릭"
-        />
-        <span class="label"
-          ><i class="fa-solid fa-medal"></i>최고금액 입찰자</span
-        >
+        <label for="bid_input" class="label"><i class="fa-solid fa-money-bill-1-wave"></i>입찰금액</label>
+        <input type="text" id="bid_input" class="bid_input" name="bid_input" placeholder="입찰가 입력 후 버튼 클릭" />
+        <span class="label"><i class="fa-solid fa-medal"></i>최고금액 입찰자</span>
         <span class="bid_name">{winner}</span>
         <input type="hidden" value="{bid_mem}" id="winner_idx" />
       </div>
@@ -354,29 +333,15 @@
     <div class="detail">
       <ul class="detail_content detail_time">
         <div class="bid-timer">
-          <svg
-            class="bid-timer__svg"
-            viewBox="0 0 100 100"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg class="bid-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
             <g class="bid-timer__circle">
-              <circle
-                class="bid-timer__path-elapsed"
-                cx="50"
-                cy="50"
-                r="45"
-              ></circle>
-              <path
-                id="bid-timer-path-remaining"
-                stroke-dasharray="283"
-                class="bid-timer__path-remaining green"
-                d="
+              <circle class="bid-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
+              <path id="bid-timer-path-remaining" stroke-dasharray="283" class="bid-timer__path-remaining green" d="
           M 50, 50
           m -45, 0
           a 45,45 0 1,0 90,0
           a 45,45 0 1,0 -90,0
-        "
-              ></path>
+        "></path>
             </g>
           </svg>
           <span id="bid-timer-label" class="bid-timer__label">{bidStart}</span>
