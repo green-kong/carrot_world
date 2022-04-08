@@ -44,7 +44,6 @@ async function openChat(e) {
     const prevClicked = document.querySelector('.clicked');
 
     const prevIndex = [...chatGroup].indexOf(prevClicked);
-    console.log(prevIndex);
 
     if (prevIndex !== -1) {
       chatGroup[prevIndex].addEventListener('click', openChat);
