@@ -205,3 +205,7 @@ body {
   background-color: #f0efff;
   color: #4d47c3;
 }
+
+span {
+  color: red;
+}
