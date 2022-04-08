@@ -37,8 +37,6 @@ export default function btnActive() {
 
   if (isSoldBtn.length !== 0) {
     isSoldBtn.forEach((v) => {
-      console.log('hello');
-
       v.addEventListener('click', isSoldClick);
     });
   }

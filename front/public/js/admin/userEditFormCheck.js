@@ -4,7 +4,6 @@ let aliasPass = false;
 let mobilePass = false;
 
 function aliasCheck() {
-  console.log('check');
   const alias = document.querySelector('#userAlias').value;
   const aliasMsg = document.querySelector('#aliasSpan');
   if (alias === '') {
@@ -19,7 +18,6 @@ function mobileCheck() {
   const mobile = document.querySelector('#userMobile').value;
   const mobileMsg = document.querySelector('#mobileSpan');
   const mobileReg = /^010-([0-9]{4})-([0-9]{4})$/;
-  console.log(mobileReg.test(mobile));
 
   if (mobile === '') {
     mobileMsg.innerHTML = '핸드폰 번호를 입력해 주세요';
