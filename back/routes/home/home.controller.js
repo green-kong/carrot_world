@@ -57,7 +57,6 @@ exports.write = async (req, res) => {
     bidMin,
     how,
   } = req.body;
-  console.log(req.body);
   const tagList = tag
     .replace(/(\s*)/g, '')
     .split('#')
@@ -95,7 +94,6 @@ exports.write = async (req, res) => {
       const m = date.getMonth();
       const d = date.getDate();
       const bidStart = new Date(y, m, d, bidHour, bidMin);
-      console.log(y, m, d, bidHour, bidMin);
       boardtype = 'au';
       sql = `INSERT INTO auction(
              c_code,subject,u_id,price,content,location,startDate,how,date
@@ -497,7 +495,6 @@ exports.category = async (req, res) => {
 exports.chat = async (req, res) => {
   const { chatMembers } = req.body;
   const [mem1, mem2] = chatMembers;
-  console.log(mem1, mem2);
   const conn = await pool.getConnection();
   const checkSql = `SELECT c_id FROM chat WHERE mem1=${mem1} AND mem2=${mem2}`;
   const createSql = `INSERT INTO chat (mem1,mem2) VALUES (${mem1},${mem2})`;
