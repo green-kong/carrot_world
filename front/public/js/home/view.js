@@ -1,6 +1,8 @@
 const moveView = (e) => {
   const target = e.target.closest('.ranking_list');
-
+  if (!target) {
+    return;
+  }
   const table = target.querySelector('.table').value;
   const idx = target.querySelector('.idx').value;
 
