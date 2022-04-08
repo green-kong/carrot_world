@@ -46,6 +46,13 @@ exports.logout = (req, res) => {
 };
 
 exports.profileEdit = (req, res) => {
-  const { userEmail, userAlias, userMobile, provider } = req.user.userResult;
-  res.render('user/edit.html', { userEmail, userAlias, userMobile, provider });
+  const { userEmail, userAlias, userMobile, provider, u_id } =
+    req.user.userResult;
+  res.render('user/edit.html', {
+    u_id,
+    userEmail,
+    userAlias,
+    userMobile,
+    provider,
+  });
 };
