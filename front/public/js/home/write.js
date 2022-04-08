@@ -38,13 +38,10 @@ function makeThumbnail(input) {
   }
 }
 
-function uploadDragenter() {
-  console.log('dragenter');
-}
+function uploadDragenter() {}
 
 function uploadDragover(e) {
   e.preventDefault();
-  console.log('dragover');
   imgUploadBox.classList.add('green');
 }
 

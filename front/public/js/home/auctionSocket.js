@@ -8,9 +8,7 @@ export default function auctionSocket() {
     return;
   }
   socket = io('http://localhost:4000/bid');
-  socket.on('connect', () => {
-    console.log('client socket 연결', socket.id);
-  });
+  socket.on('connect', () => {});
 
   socket.emit('idx', idx);
 

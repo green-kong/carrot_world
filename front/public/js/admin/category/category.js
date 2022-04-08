@@ -18,7 +18,6 @@ async function createCat(e) {
   const body = { code: code.value, name: name.value };
 
   const response = await axios.post(url, body);
-  console.log(response);
   if (response.status === 200) {
     alert(
       `카테고리가 추가 되었습니다. c_code : ${code.value}, 카테고리이름 : ${name.value} `
@@ -82,8 +81,6 @@ async function changeCat(e) {
   const changedName = e.target.querySelector(
     '#changed_cat>option:checked'
   ).text;
-
-  console.log(prevName, changedName);
 
   const url = 'http://localhost:4000/api/admin/changeCat';
   const body = { prevCode, newCode };

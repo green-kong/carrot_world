@@ -17,7 +17,6 @@ exports.login = async (req, res) => {
       );
     } else {
       const encodedPassword = result[0].userPW;
-      console.log(encodedPassword, 'encoded');
       const passwordCheck = await bcrypt.compare(userPW, encodedPassword);
       if (passwordCheck) {
         const payload = {
@@ -286,7 +285,6 @@ exports.qa = async (req, res) => {
 
 exports.idCheck = async (req, res) => {
   const { userEmail } = req.body;
-  console.log(userEmail);
   const conn = await pool.getConnection();
 
   const sql = `SELECT userEmail FROM user WHERE userEmail = '${userEmail}'`;
@@ -303,7 +301,6 @@ exports.idCheck = async (req, res) => {
         isJoined: 1,
       };
     }
-    console.log(response);
     res.send(response);
   } catch (err) {
     console.log(err);

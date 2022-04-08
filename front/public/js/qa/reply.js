@@ -21,7 +21,6 @@ async function addReply(e) {
     const { record } = response.data;
     const latest = record[record.length - 1];
     const { qr_id, date, userAlias } = latest;
-    console.log(latest);
     if (response.data.rows === 1 && response.status === 200) {
       const itemLi = document.createElement('li');
       itemLi.setAttribute('data-id', qr_id);
