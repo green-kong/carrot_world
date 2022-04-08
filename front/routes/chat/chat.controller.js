@@ -7,7 +7,6 @@ exports.chat = async (req, res) => {
   const url = `http://localhost:4000/api/chat`;
   try {
     const response = await axios.post(url, body);
-    console.log(response.data);
     const { data } = response;
     data.forEach((v) => {
       if (v.thumbnail === null) v.thumbnail = `/img/carrot_profile.jpeg`;
