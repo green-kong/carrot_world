@@ -16,7 +16,6 @@ section.forEach((v, i) =>
       let delta = 0;
       if (e.wheelDelta) {
         delta = e.wheelDelta / 130;
-        console.log('휠무브', delta);
       } else if (e.detail) delta = -e.detail / 3;
 
       let moveTop = window.scrollY;
@@ -41,7 +40,6 @@ section.forEach((v, i) =>
         } else {
           return;
         }
-        console.log('얼마나 수직으로 스크롤됐나', moveTop);
         // 올라갈때
       } else {
         if (sectionNum !== 0) {
@@ -49,7 +47,6 @@ section.forEach((v, i) =>
           moveTop +=
             sectionNum.previousElementSibling.getBoundingClientRect().top;
         }
-        console.log('얼마나 수직으로 스크롤됐나', moveTop);
       }
       window.scrollTo({ top: moveTop, left: 0, behavior: 'smooth' });
 
