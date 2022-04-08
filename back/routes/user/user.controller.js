@@ -93,10 +93,10 @@ exports.auth = async (req, res) => {
 };
 
 exports.quit = async (req, res) => {
-  const { userEmail } = req.body;
+  const { idx } = req.body;
   const conn = await pool.getConnection();
   const sql = `DELETE FROM user
-                  WHERE userEmail='${userEmail}'`;
+                  WHERE u_id='${idx}'`;
   try {
     await conn.query(sql);
     res.send('Success');
@@ -136,15 +136,15 @@ exports.join = async (req, res) => {
 };
 
 exports.profileEdit = async (req, res) => {
-  const { userEmail, userAlias, userMobile } = req.body;
+  const { userEmail, userAlias, userMobile, u_id } = req.body;
   let sql = `UPDATE user
                SET userEmail='${userEmail}', userAlias='${userAlias}', userMobile='${userMobile}'
-               WHERE userEmail='${userEmail}'`;
+               WHERE u_id='${u_id}'`;
   if (req.file) {
     const { filename } = req.file;
     sql = `UPDATE user
                SET u_img='http://localhost:4000/upload/${filename}',userEmail='${userEmail}', userAlias='${userAlias}', userMobile='${userMobile}'
-               WHERE userEmail='${userEmail}'`;
+               WHERE u_id='${u_id}'`;
   }
   const conn = await pool.getConnection();
 
