@@ -92,10 +92,10 @@ exports.auth = async (req, res) => {
 };
 
 exports.quit = async (req, res) => {
-  const { userEmail } = req.body;
+  const { idx } = req.body;
   const conn = await pool.getConnection();
   const sql = `DELETE FROM user
-                  WHERE userEmail='${userEmail}'`;
+                  WHERE u_id='${idx}'`;
   try {
     await conn.query(sql);
     res.send('Success');

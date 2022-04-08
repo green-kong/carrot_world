@@ -1,11 +1,12 @@
 const userEmail = document.querySelector('#userEmail').value;
+const idx = document.querySelector('#idx').value;
 
 const quitBtn = document.querySelector('#quit_btn');
 quitBtn.addEventListener('click', userQuit);
 
 async function userQuit() {
   const url = 'http://localhost:4000/api/user/quit';
-  const body = { userEmail };
+  const body = { userEmail, idx };
   const response = await axios.post(url, body);
   if (response.status !== 200) {
     alert('잠시 후에 다시 시도해주세요');
