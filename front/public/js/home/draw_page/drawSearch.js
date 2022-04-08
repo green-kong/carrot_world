@@ -83,7 +83,6 @@ export default async function drawSearch() {
         .replace('{itemList}', auction);
     } else if (way === 'sell') {
       const { sellList } = response.data;
-      console.log(sellList);
       const sell = sellList.reduce((acc, cur) => {
         return (
           acc +

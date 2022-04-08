@@ -42,7 +42,6 @@ export default async function drawView() {
         acc + viewTagTemp.replace(/{tag}/g, cur.tag).replace('{table}', table)
       );
     }, '');
-    console.log(itemResult);
     let recResult = '연관된 물품이 없습니다.';
     let result;
     if (table === 'sell_board') {
