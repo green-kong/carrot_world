@@ -8,12 +8,7 @@
 <script src="/js/home/write.js" defer></script>
 {% endblock %} {% block content %}
 <section>
-  <form
-    method="post"
-    action="http://localhost:4000/api/home/write"
-    enctype="multipart/form-data"
-    id="write_form"
-  >
+  <form method="post" action="http://localhost:4000/api/home/write" enctype="multipart/form-data" id="write_form">
     <input type="hidden" value="{{userIdx}}" name="userIdx" />
     <div id="subject_container">
       <span>제목</span>
@@ -91,13 +86,7 @@
     <div id="option2_container">
       <div id="deal_price_wrap">
         <span>가격(경매 시 시작 입찰가)</span>
-        <input
-          type="text"
-          name="dealPrice"
-          id="deal_price"
-          maxlength="8"
-          required
-        />
+        <input type="text" name="dealPrice" id="deal_price" maxlength="8" required />
       </div>
       <div id="deal_zone_wrap">
         <span>희망거래 지역</span>
@@ -106,27 +95,18 @@
     </div>
     <div id="content_container">
       <p>제품 설명</p>
-      <textarea
-        name="productDetail"
-        rows="30"
-        placeholder="빠르고 정확한 거래를 위해 자세하게 적어주세요"
-        required
-      ></textarea>
+      <textarea name="productDetail" rows="30" placeholder="빠르고 정확한 거래를 위해 자세하게 적어주세요" required></textarea>
     </div>
     <div id="img_container">
-      <p>제품 이미지(최대 5개)</p>
+      <p>제품 이미지(최대 5개)
+        <span>
+          <i class="fa-solid fa-arrow-up-from-bracket"></i>
+          파일 선택 클릭 또는 드래그로 이미지 첨부
+        </span>
+      </p>
       <div id="img_upload_box">
-        <input
-          type="file"
-          name="productImg"
-          id="img_upload_btn"
-          onchange="makeThumbnail(this)"
-          accept="image/png, image/jpeg, image/jpg"
-          multiple
-          required
-        />
-        <p><i class="fa-solid fa-arrow-up-from-bracket"></i></p>
-        <p>클릭 또는 드래그로 이미지첨부</p>
+        <input type="file" name="productImg" id="img_upload_btn" onchange="makeThumbnail(this)"
+          accept="image/png, image/jpeg, image/jpg" multiple required />
         <div id="preview_list">
           <div class="preview_img">미리보기</div>
           <div class="preview_img">미리보기</div>
@@ -138,13 +118,7 @@
     </div>
     <div id="tag_container">
       <p>해쉬태그(최대 5개)</p>
-      <input
-        type="text"
-        name="tag"
-        id="hash_tag"
-        placeholder="#예시#해시#태그#입력"
-        required
-      />
+      <input type="text" name="tag" id="hash_tag" placeholder="#예시#해시#태그#입력" required />
     </div>
     <div id="btn_container">
       <button type="submit" id="write_post_btn">판매물품 등록</button>
