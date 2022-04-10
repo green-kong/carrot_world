@@ -39,9 +39,8 @@
 
 <br/>
 
-<img src="https://user-images.githubusercontent.com/69417234/162584929-5360c632-3af1-4fac-a1c3-a2101b89dd88.png">
+<img src="https://user-images.githubusercontent.com/69417234/162613313-ef0f71c7-709d-4104-b227-6ace0315a6cf.png">
 
-<br/>  
 <br/>
 
 ## 🐎 Flow chart
