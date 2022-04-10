@@ -32,6 +32,10 @@
 
 ## 🎥 시연 영상
 
+[![carrot_world_thumb](https://user-images.githubusercontent.com/96301958/162624524-0d85d321-3c92-44f4-a8f4-b6e648c7edce.gif)](https://www.youtube.com/watch?v=TUSVB7_jibI)
+
+위 이미지를 클릭하면 시연영상으로 이동합니다.
+
 <br/>  
 <br/>
 
